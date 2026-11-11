@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VibrantMart Admin Portal | Manage Products & Categories</title>
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Outfit"', 'sans-serif'],
+          },
+          colors: {
+            primary: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              600: '#1d4ed8',
+              700: '#1e40af',
+              800: '#1e3a8a',
+            },
+            accent: '#059669',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
+
+  <!-- TOP HEADER -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-700 to-emerald-600 text-white flex items-center justify-center font-extrabold text-lg shadow">
+          <i class="fa-solid fa-store"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-display font-black text-xl text-slate-900 tracking-tight">Vibrant<span class="text-blue-700">Mart</span></span>
+            <span class="bg-blue-50 text-blue-700 text-[10px] font-extrabold px-2 py-0.5 rounded-full border border-blue-200">Merchant Portal</span>
+          </div>
+          <p class="text-xs text-slate-500">Live Inventory & Category Management</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="index.html" target="_blank" class="hidden sm:inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-blue-700 px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 transition-colors">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Storefront Kholo
+        </a>
+        <button onclick="exportDataJson()" class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 hover:bg-emerald-100 px-3.5 py-2 rounded-xl transition-all shadow-xs">
+          <i class="fa-solid fa-download"></i> Backup Download
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN WRAPPER -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full flex flex-col md:flex-row gap-6">
+
+    <!-- SIDE NAVIGATION TABS -->
+    <aside class="w-full md:w-64 shrink-0 space-y-4">
+      <div class="bg-white p-3 rounded-2xl border border-slate-200 shadow-xs space-y-1">
+        <button onclick="switchTab('products')" id="nav-products" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-bold text-xs bg-blue-700 text-white shadow-sm transition-all">
+          <i class="fa-solid fa-box text-sm"></i>
+          <span class="flex-1 text-left">Products Management</span>
+          <span id="badgeProductsCount" class="bg-white/20 text-white px-2 py-0.5 rounded-full text-[10px]">8</span>
+        </button>
+        <button onclick="switchTab('categories')" id="nav-categories" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-bold text-xs text-slate-600 hover:bg-slate-100 transition-all">
+          <i class="fa-solid fa-layer-group text-sm text-slate-400"></i>
+          <span class="flex-1 text-left">Category Manager</span>
+          <span id="badgeCategoriesCount" class="bg-slate-100 text-slate-700 px-2 py-0.5 rounded-full text-[10px]">5</span>
+        </button>
+      </div>
+
+      <!-- Quick Summary Card -->
+      <div class="bg-gradient-to-br from-blue-700 to-indigo-800 text-white p-4 rounded-2xl shadow-md space-y-3">
+        <div class="flex items-center justify-between text-xs text-blue-200 font-semibold">
+          <span>Admin Status</span>
+          <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Auto-Saved</span>
+        </div>
+        <div>
+          <div class="text-2xl font-black font-display" id="totalInventoryValue">Rs. 0</div>
+          <div class="text-[11px] text-blue-100">Total Active Products Value</div>
+        </div>
+        <p class="text-[11px] text-blue-100 leading-relaxed border-t border-white/15 pt-2">
+          Jo bhi cheez aap yahan add ya delete karenge wo browser memory me save ho jayegi.
+        </p>
+      </div>
+    </aside>
+
+    <!-- CONTENT DISPLAY AREA -->
+    <main class="flex-1 min-w-0">
+
+      <!-- TAB 1: PRODUCTS TAB -->
+      <section id="tab-products" class="space-y-6">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-4 rounded-2xl border border-slate-200 shadow-xs">
+          <div>
+            <h2 class="text-lg font-black font-display text-slate-900">Aapke Products Ki List</h2>
+            <p class="text-xs text-slate-500">Naye products add karein, unki price set karein aur pictures link karein.</p>
+          </div>
+          <button onclick="openProductModal()" class="w-full sm:w-auto px-4 py-2.5 bg-blue-700 hover:bg-blue-800 text-white text-xs font-bold rounded-xl shadow flex items-center justify-center gap-2 transition-all">
+            <i class="fa-solid fa-circle-plus"></i> Naya Product Add Karein
+          </button>
+        </div>
+
+        <!-- Filter Pills by Category -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-1" id="categoryFilterBar"></div>
+
+        <!-- Products Table -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-600">
+              <thead class="bg-slate-50 text-[11px] uppercase tracking-wider text-slate-400 font-bold border-b border-slate-200">
+                <tr>
+                  <th class="py-3 px-4">Product Info</th>
+                  <th class="py-3 px-4">Category</th>
+                  <th class="py-3 px-4">Price (PKR)</th>
+                  <th class="py-3 px-4">Old Price</th>
+                  <th class="py-3 px-4 text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody id="productsTableBody" class="divide-y divide-slate-100"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: CATEGORIES TAB -->
+      <section id="tab-categories" class="hidden space-y-6">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          
+          <!-- Add Category Form -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-4">
+            <div>
+              <h3 class="font-extrabold text-sm font-display text-slate-900 flex items-center gap-2">
+                <i class="fa-solid fa-plus-circle text-blue-700"></i> Nayi Category Banayein
+              </h3>
+              <p class="text-xs text-slate-500 mt-0.5">Jaise ke: Winter Shawls, Handbags, Toys etc.</p>
+            </div>
+
+            <form onsubmit="handleCreateCategory(event)" class="space-y-3">
+              <div>
+                <label class="block text-[11px] font-bold text-slate-700 mb-1">Category Ka Naam *</label>
+                <input 
+                  type="text" 
+                  id="catNameInput" 
+                  placeholder="e.g. Winter Shawls" 
+                  required
+                  class="w-full text-xs px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-blue-700 outline-none"
+                />
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold text-slate-700 mb-1">Category Code / Key (English Chotay Haroof) *</label>
+                <input 
+                  type="text" 
+                  id="catKeyInput" 
+                  placeholder="e.g. shawls ya winterwear" 
+                  required
+                  class="w-full text-xs px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-blue-700 outline-none"
+                />
+                <span class="text-[10px] text-slate-400">Yeh code products ko is category se jorta hai.</span>
+              </div>
+
+              <button type="submit" class="w-full py-2.5 bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs rounded-xl shadow transition-all flex items-center justify-center gap-2">
+                <i class="fa-solid fa-folder-plus"></i> Category Save Karein
+              </button>
+            </form>
+          </div>
+
+          <!-- Existing Categories List -->
+          <div class="lg:col-span-2 bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <h3 class="font-extrabold text-sm font-display text-slate-900">Mojooda Categories</h3>
+                <p class="text-xs text-slate-500">In categories me aapke products divide hotay hain.</p>
+              </div>
+              <span id="activeCategoriesCountBadge" class="bg-blue-50 text-blue-700 text-xs font-bold px-2.5 py-1 rounded-full">5 Categories</span>
+            </div>
+
+            <div id="categoriesListContainer" class="space-y-2.5"></div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ADD / EDIT PRODUCT MODAL -->
+  <div id="productModal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden">
+      
+      <div class="p-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+        <h3 id="modalHeading" class="font-extrabold text-sm font-display text-slate-900 flex items-center gap-2">
+          <i class="fa-solid fa-box text-blue-700"></i> Naya Product Add Karein
+        </h3>
+        <button onclick="closeProductModal()" class="w-8 h-8 rounded-full bg-slate-200 text-slate-600 hover:bg-slate-300 flex items-center justify-center font-bold text-sm">
+          &times;
+        </button>
+      </div>
+
+      <form onsubmit="handleSaveProduct(event)" class="p-5 space-y-3.5">
+        <input type="hidden" id="editProductId" value="" />
+
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 mb-1">Product Ka Naam *</label>
+          <input 
+            type="text" 
+            id="pTitle" 
+            placeholder="e.g. Pure Cotton Kurta ya Knitted Baby Booties" 
+            required
+            class="w-full text-xs px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-blue-700 outline-none"
+          />
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-[11px] font-bold text-slate-700 mb-1">Category Chunein *</label>
+            <select id="pCategory" class="w-full text-xs px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-blue-700 outline-none"></select>
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-slate-700 mb-1">Sale Badge (Optional)</label>
+            <input 
+              type="text" 
+              id="pBadge" 
+              placeholder="e.g. Bestseller, 100% Cotton, New" 
+              class="w-full text-xs px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-blue-700 outline-none"
+            />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-[11px] font-bold text-slate-700 mb-1">Selling Price (Rs.) *</label>
+            <input 
+              type="number" 
+              id="pPrice" 
+              placeholder="e.g. 1850" 
+              required
+              class="w-full text-xs px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-blue-700 outline-none"
+            />
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-slate-700 mb-1">Kati Hui / Old Price (Rs.)</label>
+            <input 
+              type="number" 
+              id="pOldPrice" 
+              placeholder="e.g. 2400 (Optional)" 
+              class="w-full text-xs px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-blue-700 outline-none"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 mb-1">Image URL (Tasweer Ka Link) *</label>
+          <input 
+            type="url" 
+            id="pImage" 
+            placeholder="https://images.unsplash.com/... ya aapka direct picture link" 
+            required
+            class="w-full text-xs px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-blue-700 outline-none"
+          />
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 mb-1">Mukhtasir Description (Tafseel)</label>
+          <textarea 
+            id="pDesc" 
+            rows="2" 
+            placeholder="Product ke fabric, size ya quality ki thori si wazahat..." 
+            class="w-full text-xs px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-blue-700 outline-none"
+          ></textarea>
+        </div>
+
+        <div class="pt-2 flex items-center justify-end gap-2 border-t border-slate-100">
+          <button type="button" onclick="closeProductModal()" class="px-4 py-2 text-xs font-bold text-slate-500 hover:bg-slate-100 rounded-xl">Cancel</button>
+          <button type="submit" class="px-5 py-2 text-xs font-bold bg-blue-700 hover:bg-blue-800 text-white rounded-xl shadow">Save Kar Dein</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC ENGINE -->
+  <script>
+    const defaultCategories = [
+      { key: "babyshoes", label: "Baby & Kids Shoes" },
+      { key: "garments", label: "Clothes & Garments" },
+      { key: "bedsheets", label: "Luxury Bedsheets" },
+      { key: "homedecor", label: "Home Living" },
+      { key: "sale", label: "Clearance Sale" }
+    ];
+
+    const defaultProducts = [
+      {
+        id: "p1",
+        title: "Handmade Sheep Baby Shoes – Soft, Cute & Cozy",
+        category: "babyshoes",
+        categoryLabel: "Baby Shoes",
+        price: 1500,
+        oldPrice: 1999,
+        image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800&auto=format&fit=crop&q=80",
+        badge: "Bestseller",
+        description: "Handcrafted pre-walker soft knitted sheep booties with breathable fleece lining."
+      },
+      {
+        id: "p2",
+        title: "Soft Sole Toddler Animal Moccasins",
+        category: "babyshoes",
+        categoryLabel: "Baby Shoes",
+        price: 1850,
+        oldPrice: 2200,
+        image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=800&auto=format&fit=crop&q=80",
+        badge: "Pediatrician Safe",
+        description: "Flexible non-skid rubberized soft-sole shoes designed for early walkers."
+      },
+      {
+        id: "p3",
+        title: "Premium Combed Bio-Washed Cotton Crew Tee",
+        category: "garments",
+        categoryLabel: "Clothes",
+        price: 1399,
+        oldPrice: 1799,
+        image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800&auto=format&fit=crop&q=80",
+        badge: "100% Cotton",
+        description: "210 GSM heavy-grade bio-washed combed cotton t-shirt."
+      },
+      {
+        id: "p4",
+        title: "Hotel Luxury 400TC Egyptian Cotton Bedsheet Set",
+        category: "bedsheets",
+        categoryLabel: "Bedsheets",
+        price: 3899,
+        oldPrice: 5200,
+        image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=800&auto=format&fit=crop&q=80",
+        badge: "Luxury Satin",
+        description: "Set includes 1 King flat sheet and 2 matching pillowcases."
+      }
+    ];
+
+    let currentTab = 'products';
+    let selectedFilterCategory = 'all';
+    let categories = [];
+    let products = [];
+
+    document.addEventListener("DOMContentLoaded", () => {
+      loadState();
+      renderAll();
+    });
+
+    function loadState() {
+      try {
+        const savedCats = localStorage.getItem("vm_admin_categories");
+        categories = savedCats ? JSON.parse(savedCats) : defaultCategories;
+        const savedProds = localStorage.getItem("vm_admin_products");
+        products = savedProds ? JSON.parse(savedProds) : defaultProducts;
+      } catch(e) {
+        categories = defaultCategories;
+        products = defaultProducts;
+      }
+    }
+
+    function saveState() {
+      localStorage.setItem("vm_admin_categories", JSON.stringify(categories));
+      localStorage.setItem("vm_admin_products", JSON.stringify(products));
+      localStorage.setItem("vm_custom_catalog", JSON.stringify(products));
+    }
+
+    function renderAll() {
+      renderCategoryFilters();
+      renderProductsTable();
+      renderCategoriesList();
+      populateCategoryDropdown();
+      updateStats();
+    }
+
+    function switchTab(tab) {
+      currentTab = tab;
+      const navProducts = document.getElementById("nav-products");
+      const navCategories = document.getElementById("nav-categories");
+      const tabProducts = document.getElementById("tab-products");
+      const tabCategories = document.getElementById("tab-categories");
+
+      if (tab === 'products') {
+        navProducts.className = "w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-bold text-xs bg-blue-700 text-white shadow-sm transition-all";
+        navCategories.className = "w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-bold text-xs text-slate-600 hover:bg-slate-100 transition-all";
+        tabProducts.classList.remove("hidden");
+        tabCategories.classList.add("hidden");
+      } else {
+        navCategories.className = "w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-bold text-xs bg-blue-700 text-white shadow-sm transition-all";
+        navProducts.className = "w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-bold text-xs text-slate-600 hover:bg-slate-100 transition-all";
+        tabCategories.classList.remove("hidden");
+        tabProducts.classList.add("hidden");
+      }
+    }
+
+    function updateStats() {
+      document.getElementById("badgeProductsCount").innerText = products.length;
+      document.getElementById("badgeCategoriesCount").innerText = categories.length;
+      document.getElementById("activeCategoriesCountBadge").innerText = `${categories.length} Categories`;
+      
+      const totalVal = products.reduce((acc, p) => acc + Number(p.price || 0), 0);
+      document.getElementById("totalInventoryValue").innerText = `Rs. ${totalVal.toLocaleString()}`;
+    }
+
+    function renderCategoryFilters() {
+      const container = document.getElementById("categoryFilterBar");
+      let html = `
+        <button onclick="setFilter('all')" class="px-3.5 py-1.5 rounded-full text-xs font-bold transition-all whitespace-nowrap ${selectedFilterCategory === 'all' ? 'bg-blue-700 text-white shadow' : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'}">
+          All Products (${products.length})
+        </button>
+      `;
+
+      categories.forEach(cat => {
+        const count = products.filter(p => p.category === cat.key).length;
+        const active = selectedFilterCategory === cat.key;
+        html += `
+          <button onclick="setFilter('${cat.key}')" class="px-3.5 py-1.5 rounded-full text-xs font-bold transition-all whitespace-nowrap ${active ? 'bg-blue-700 text-white shadow' : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'}">
+            ${cat.label} (${count})
+          </button>
+        `;
+      });
+      container.innerHTML = html;
+    }
+
+    function setFilter(catKey) {
+      selectedFilterCategory = catKey;
+      renderCategoryFilters();
+      renderProductsTable();
+    }
+
+    function renderProductsTable() {
+      const tbody = document.getElementById("productsTableBody");
+      const filtered = selectedFilterCategory === 'all' ? products : products.filter(p => p.category === selectedFilterCategory);
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="5" class="py-8 text-center text-slate-400">
+              <i class="fa-solid fa-box-open text-3xl mb-2"></i>
+              <p class="font-semibold text-xs">Is category me abhi koi product nahi hai.</p>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(item => `
+        <tr class="hover:bg-slate-50/80 transition-colors">
+          <td class="py-3 px-4 flex items-center gap-3">
+            <img src="${item.image}" alt="${item.title}" class="w-12 h-12 rounded-xl object-cover border border-slate-200 bg-white" onerror="this.src='https://placehold.co/100x100?text=No+Image'" />
+            <div class="min-w-0 max-w-xs">
+              <div class="font-bold text-slate-900 truncate">${item.title}</div>
+              ${item.badge ? `<span class="inline-block bg-blue-50 text-blue-700 text-[10px] font-bold px-2 py-0.2 rounded mt-0.5">${item.badge}</span>` : ''}
+            </div>
+          </td>
+          <td class="py-3 px-4">
+            <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-1 rounded-md text-[11px]">${item.categoryLabel || item.category}</span>
+          </td>
+          <td class="py-3 px-4 font-black text-slate-900">
+            Rs. ${Number(item.price).toLocaleString()}
+          </td>
+          <td class="py-3 px-4 text-slate-400 line-through">
+            ${item.oldPrice ? `Rs. ${Number(item.oldPrice).toLocaleString()}` : '—'}
+          </td>
+          <td class="py-3 px-4 text-center">
+            <button onclick="editProduct('${item.id}')" class="p-1.5 text-blue-600 hover:text-blue-800 rounded-lg hover:bg-blue-50 text-xs font-bold mr-1">
+              <i class="fa-solid fa-pen-to-square"></i> Edit
+            </button>
+            <button onclick="deleteProduct('${item.id}')" class="p-1.5 text-rose-500 hover:text-rose-700 rounded-lg hover:bg-rose-50 text-xs font-bold">
+              <i class="fa-solid fa-trash-can"></i> Delete
+            </button>
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    function renderCategoriesList() {
+      const container = document.getElementById("categoriesListContainer");
+      container.innerHTML = categories.map((cat, idx) => {
+        const prodCount = products.filter(p => p.category === cat.key).length;
+        return `
+          <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200">
+            <div class="flex items-center gap-3">
+              <span class="w-6 h-6 rounded-lg bg-blue-100 text-blue-700 font-bold text-xs flex items-center justify-center">${idx + 1}</span>
+              <div>
+                <h4 class="font-bold text-xs text-slate-900">${cat.label}</h4>
+                <div class="text-[10px] text-slate-400 font-mono">key: "${cat.key}"</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-xs text-slate-500 font-semibold">${prodCount} products</span>
+              <button onclick="deleteCategory('${cat.key}')" class="text-rose-500 hover:text-rose-700 p-1 text-xs font-bold" title="Delete Category">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function populateCategoryDropdown() {
+      const select = document.getElementById("pCategory");
+      select.innerHTML = categories.map(cat => `
+        <option value="${cat.key}">${cat.label}</option>
+      `).join("");
+    }
+
+    function openProductModal() {
+      document.getElementById("editProductId").value = "";
+      document.getElementById("modalHeading").innerText = "Naya Product Add Karein";
+      document.getElementById("pTitle").value = "";
+      document.getElementById("pPrice").value = "";
+      document.getElementById("pOldPrice").value = "";
+      document.getElementById("pImage").value = "";
+      document.getElementById("pBadge").value = "";
+      document.getElementById("pDesc").value = "";
+      document.getElementById("productModal").classList.remove("hidden");
+    }
+
+    function closeProductModal() {
+      document.getElementById("productModal").classList.add("hidden");
+    }
+
+    function handleSaveProduct(e) {
+      e.preventDefault();
+      const editId = document.getElementById("editProductId").value;
+      const title = document.getElementById("pTitle").value.trim();
+      const catKey = document.getElementById("pCategory").value;
+      const price = Number(document.getElementById("pPrice").value);
+      const oldPrice = document.getElementById("pOldPrice").value ? Number(document.getElementById("pOldPrice").value) : null;
+      const image = document.getElementById("pImage").value.trim();
+      const badge = document.getElementById("pBadge").value.trim();
+      const desc = document.getElementById("pDesc").value.trim();
+
+      const matchedCat = categories.find(c => c.key === catKey);
+      const catLabel = matchedCat ? matchedCat.label : catKey;
+
+      if (editId) {
+        const item = products.find(p => p.id === editId);
+        if (item) {
+          item.title = title;
+          item.category = catKey;
+          item.categoryLabel = catLabel;
+          item.price = price;
+          item.oldPrice = oldPrice;
+          item.image = image;
+          item.badge = badge;
+          item.description = desc;
+        }
+      } else {
+        const newProd = {
+          id: "p_" + Date.now(),
+          title: title,
+          category: catKey,
+          categoryLabel: catLabel,
+          price: price,
+          oldPrice: oldPrice,
+          image: image,
+          badge: badge,
+          description: desc
+        };
+        products.unshift(newProd);
+      }
+
+      saveState();
+      renderAll();
+      closeProductModal();
+    }
+
+    function editProduct(id) {
+      const item = products.find(p => p.id === id);
+      if (!item) return;
+
+      document.getElementById("editProductId").value = item.id;
+      document.getElementById("modalHeading").innerText = "Product Edit Karein";
+      document.getElementById("pTitle").value = item.title;
+      document.getElementById("pCategory").value = item.category;
+      document.getElementById("pPrice").value = item.price;
+      document.getElementById("pOldPrice").value = item.oldPrice || "";
+      document.getElementById("pImage").value = item.image;
+      document.getElementById("pBadge").value = item.badge || "";
+      document.getElementById("pDesc").value = item.description || "";
+
+      document.getElementById("productModal").classList.remove("hidden");
+    }
+
+    function deleteProduct(id) {
+      if (confirm("Kya aap waqayi is product ko delete karna chahte hain?")) {
+        products = products.filter(p => p.id !== id);
+        saveState();
+        renderAll();
+      }
+    }
+
+    function handleCreateCategory(e) {
+      e.preventDefault();
+      const label = document.getElementById("catNameInput").value.trim();
+      let key = document.getElementById("catKeyInput").value.trim().toLowerCase().replace(/\s+/g, '-');
+
+      if (!label || !key) return;
+
+      if (categories.some(c => c.key === key)) {
+        alert("Yeh category key pehle se mojood hai! Koi naya naam chunein.");
+        return;
+      }
+
+      categories.push({ key, label });
+      saveState();
+      renderAll();
+
+      document.getElementById("catNameInput").value = "";
+      document.getElementById("catKeyInput").value = "";
+      alert(`"${label}" category kamyabi se ban gayi! Ab aap isme product add kar sakte hain.`);
+    }
+
+    function deleteCategory(catKey) {
+      if (confirm(`Kya aap "${catKey}" category ko delete karna chahte hain?`)) {
+        categories = categories.filter(c => c.key !== catKey);
+        saveState();
+        renderAll();
+      }
+    }
+
+    function exportDataJson() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify({ categories, products }, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", "vibrantmart_catalog_backup.json");
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+    }
+  </script>
+</body>
+</html>
