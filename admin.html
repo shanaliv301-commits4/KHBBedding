@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VibrantMart Admin Portal | Manage Products & Categories</title>
+  <title>VibrantMart Admin Portal | Cloud Supabase Inventory & Orders</title>
   
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -35,6 +35,9 @@
       }
     }
   </script>
+
+  <!-- Supabase Official JS SDK Client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
 
@@ -48,18 +51,20 @@
         <div>
           <div class="flex items-center gap-2">
             <span class="font-display font-black text-xl text-slate-900 tracking-tight">Vibrant<span class="text-blue-700">Mart</span></span>
-            <span class="bg-blue-50 text-blue-700 text-[10px] font-extrabold px-2 py-0.5 rounded-full border border-blue-200">Merchant Portal</span>
+            <span id="cloudStatusBadge" class="bg-emerald-50 text-emerald-700 text-[10px] font-extrabold px-2 py-0.5 rounded-full border border-emerald-200 flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Cloud Live
+            </span>
           </div>
-          <p class="text-xs text-slate-500">Live Inventory & Category Management</p>
+          <p class="text-xs text-slate-500">Supabase Cloud Database & Inventory Portal</p>
         </div>
       </div>
 
       <div class="flex items-center gap-3">
-        <a href="index.html" target="_blank" class="hidden sm:inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-blue-700 px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 transition-colors">
-          <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Storefront Kholo
+        <a href="index.html" target="_blank" class="hidden sm:inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-blue-700 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 transition-colors">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> Storefront Kholo
         </a>
-        <button onclick="exportDataJson()" class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 hover:bg-emerald-100 px-3.5 py-2 rounded-xl transition-all shadow-xs">
-          <i class="fa-solid fa-download"></i> Backup Download
+        <button onclick="fetchAllData()" class="inline-flex items-center gap-1.5 text-xs font-bold text-blue-700 bg-blue-50 border border-blue-200 hover:bg-blue-100 px-3.5 py-2 rounded-xl transition-all shadow-xs">
+          <i class="fa-solid fa-rotate"></i> Refresh Sync
         </button>
       </div>
     </div>
@@ -74,27 +79,32 @@
         <button onclick="switchTab('products')" id="nav-products" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-bold text-xs bg-blue-700 text-white shadow-sm transition-all">
           <i class="fa-solid fa-box text-sm"></i>
           <span class="flex-1 text-left">Products Management</span>
-          <span id="badgeProductsCount" class="bg-white/20 text-white px-2 py-0.5 rounded-full text-[10px]">8</span>
+          <span id="badgeProductsCount" class="bg-white/20 text-white px-2 py-0.5 rounded-full text-[10px]">0</span>
         </button>
         <button onclick="switchTab('categories')" id="nav-categories" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-bold text-xs text-slate-600 hover:bg-slate-100 transition-all">
           <i class="fa-solid fa-layer-group text-sm text-slate-400"></i>
           <span class="flex-1 text-left">Category Manager</span>
-          <span id="badgeCategoriesCount" class="bg-slate-100 text-slate-700 px-2 py-0.5 rounded-full text-[10px]">5</span>
+          <span id="badgeCategoriesCount" class="bg-slate-100 text-slate-700 px-2 py-0.5 rounded-full text-[10px]">0</span>
+        </button>
+        <button onclick="switchTab('orders')" id="nav-orders" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-bold text-xs text-slate-600 hover:bg-slate-100 transition-all">
+          <i class="fa-solid fa-cart-flatbed text-sm text-slate-400"></i>
+          <span class="flex-1 text-left">Customer Orders</span>
+          <span id="badgeOrdersCount" class="bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full text-[10px]">0</span>
         </button>
       </div>
 
-      <!-- Quick Summary Card -->
+      <!-- Cloud Sync Summary Card -->
       <div class="bg-gradient-to-br from-blue-700 to-indigo-800 text-white p-4 rounded-2xl shadow-md space-y-3">
         <div class="flex items-center justify-between text-xs text-blue-200 font-semibold">
-          <span>Admin Status</span>
-          <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Auto-Saved</span>
+          <span>Database Engine</span>
+          <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> Supabase Connected</span>
         </div>
         <div>
           <div class="text-2xl font-black font-display" id="totalInventoryValue">Rs. 0</div>
-          <div class="text-[11px] text-blue-100">Total Active Products Value</div>
+          <div class="text-[11px] text-blue-100">Active Inventory Valuation</div>
         </div>
         <p class="text-[11px] text-blue-100 leading-relaxed border-t border-white/15 pt-2">
-          Jo bhi cheez aap yahan add ya delete karenge wo browser memory me save ho jayegi.
+          Jo bhi product ya category aap yahan tabdeel karenge wo direct aapke live Supabase server par sync ho jayegi.
         </p>
       </div>
     </aside>
@@ -107,7 +117,7 @@
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-4 rounded-2xl border border-slate-200 shadow-xs">
           <div>
             <h2 class="text-lg font-black font-display text-slate-900">Aapke Products Ki List</h2>
-            <p class="text-xs text-slate-500">Naye products add karein, unki price set karein aur pictures link karein.</p>
+            <p class="text-xs text-slate-500">Naye products add karein, unki price set karein aur cloud database se link karein.</p>
           </div>
           <button onclick="openProductModal()" class="w-full sm:w-auto px-4 py-2.5 bg-blue-700 hover:bg-blue-800 text-white text-xs font-bold rounded-xl shadow flex items-center justify-center gap-2 transition-all">
             <i class="fa-solid fa-circle-plus"></i> Naya Product Add Karein
@@ -130,7 +140,14 @@
                   <th class="py-3 px-4 text-center">Action</th>
                 </tr>
               </thead>
-              <tbody id="productsTableBody" class="divide-y divide-slate-100"></tbody>
+              <tbody id="productsTableBody" class="divide-y divide-slate-100">
+                <tr>
+                  <td colspan="5" class="py-8 text-center text-slate-400">
+                    <i class="fa-solid fa-circle-notch fa-spin text-2xl mb-2 text-blue-600"></i>
+                    <p class="font-semibold text-xs">Supabase cloud se products load ho rahe hain...</p>
+                  </td>
+                </tr>
+              </tbody>
             </table>
           </div>
         </div>
@@ -146,7 +163,7 @@
               <h3 class="font-extrabold text-sm font-display text-slate-900 flex items-center gap-2">
                 <i class="fa-solid fa-plus-circle text-blue-700"></i> Nayi Category Banayein
               </h3>
-              <p class="text-xs text-slate-500 mt-0.5">Jaise ke: Winter Shawls, Handbags, Toys etc.</p>
+              <p class="text-xs text-slate-500 mt-0.5">Jaise ke: Winter Shawls, Kids Wear, Handbags etc.</p>
             </div>
 
             <form onsubmit="handleCreateCategory(event)" class="space-y-3">
@@ -173,8 +190,8 @@
                 <span class="text-[10px] text-slate-400">Yeh code products ko is category se jorta hai.</span>
               </div>
 
-              <button type="submit" class="w-full py-2.5 bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs rounded-xl shadow transition-all flex items-center justify-center gap-2">
-                <i class="fa-solid fa-folder-plus"></i> Category Save Karein
+              <button type="submit" id="saveCatBtn" class="w-full py-2.5 bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs rounded-xl shadow transition-all flex items-center justify-center gap-2">
+                <i class="fa-solid fa-folder-plus"></i> Category Cloud Par Save Karein
               </button>
             </form>
           </div>
@@ -184,14 +201,50 @@
             <div class="flex items-center justify-between">
               <div>
                 <h3 class="font-extrabold text-sm font-display text-slate-900">Mojooda Categories</h3>
-                <p class="text-xs text-slate-500">In categories me aapke products divide hotay hain.</p>
+                <p class="text-xs text-slate-500">In categories mein aapke products display hotay hain.</p>
               </div>
-              <span id="activeCategoriesCountBadge" class="bg-blue-50 text-blue-700 text-xs font-bold px-2.5 py-1 rounded-full">5 Categories</span>
+              <span id="activeCategoriesCountBadge" class="bg-blue-50 text-blue-700 text-xs font-bold px-2.5 py-1 rounded-full">0 Categories</span>
             </div>
 
             <div id="categoriesListContainer" class="space-y-2.5"></div>
           </div>
 
+        </div>
+      </section>
+
+      <!-- TAB 3: CUSTOMER ORDERS TAB -->
+      <section id="tab-orders" class="hidden space-y-6">
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs flex items-center justify-between">
+          <div>
+            <h2 class="text-lg font-black font-display text-slate-900">Customer Orders Record</h2>
+            <p class="text-xs text-slate-500">Customer ke place kiye huway tamam orders jo Supabase mein direct save huway.</p>
+          </div>
+          <button onclick="fetchOrders()" class="text-xs font-bold text-blue-700 bg-blue-50 px-3 py-1.5 rounded-xl border border-blue-200 hover:bg-blue-100">
+            <i class="fa-solid fa-arrows-rotate"></i> Orders Refresh
+          </button>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-600">
+              <thead class="bg-slate-50 text-[11px] uppercase tracking-wider text-slate-400 font-bold border-b border-slate-200">
+                <tr>
+                  <th class="py-3 px-4">Order ID & Date</th>
+                  <th class="py-3 px-4">Customer Details</th>
+                  <th class="py-3 px-4">Ordered Items</th>
+                  <th class="py-3 px-4">Total Amount</th>
+                  <th class="py-3 px-4 text-center">Status</th>
+                </tr>
+              </thead>
+              <tbody id="ordersTableBody" class="divide-y divide-slate-100">
+                <tr>
+                  <td colspan="5" class="py-8 text-center text-slate-400">
+                    <p class="font-semibold text-xs">Orders load ho rahe hain...</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
 
@@ -268,7 +321,7 @@
           <input 
             type="url" 
             id="pImage" 
-            placeholder="https://images.unsplash.com/... ya aapka direct picture link" 
+            placeholder="https://images.unsplash.com/... ya aapka picture link" 
             required
             class="w-full text-xs px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-blue-700 outline-none"
           />
@@ -286,15 +339,26 @@
 
         <div class="pt-2 flex items-center justify-end gap-2 border-t border-slate-100">
           <button type="button" onclick="closeProductModal()" class="px-4 py-2 text-xs font-bold text-slate-500 hover:bg-slate-100 rounded-xl">Cancel</button>
-          <button type="submit" class="px-5 py-2 text-xs font-bold bg-blue-700 hover:bg-blue-800 text-white rounded-xl shadow">Save Kar Dein</button>
+          <button type="submit" id="saveProdBtn" class="px-5 py-2 text-xs font-bold bg-blue-700 hover:bg-blue-800 text-white rounded-xl shadow flex items-center gap-1.5">
+            <span>Cloud Par Save Karein</span>
+          </button>
         </div>
       </form>
     </div>
   </div>
 
-  <!-- JAVASCRIPT LOGIC ENGINE -->
+  <!-- JAVASCRIPT LOGIC ENGINE (SUPABASE CONNECTED) -->
   <script>
-    const defaultCategories = [
+    // ==========================================
+    // 1. AAPKI SUPABASE CLOUD KEYS
+    // ==========================================
+    const SUPABASE_URL = "https://yyapzlhdnyduonrekiwe.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5YXB6bGhkbnlkdW9ucmVraXdlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQzODA3MDYsImV4cCI6MjEwOTk1NjcwNn0.YMdQBz0h9sekPQV-crgmRHrGl96RfNj0xymXD6r4rBE";
+
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // Fallbacks agar internet ya table error ho
+    const fallbackCategories = [
       { key: "babyshoes", label: "Baby & Kids Shoes" },
       { key: "garments", label: "Clothes & Garments" },
       { key: "bedsheets", label: "Luxury Bedsheets" },
@@ -302,81 +366,77 @@
       { key: "sale", label: "Clearance Sale" }
     ];
 
-    const defaultProducts = [
-      {
-        id: "p1",
-        title: "Handmade Sheep Baby Shoes – Soft, Cute & Cozy",
-        category: "babyshoes",
-        categoryLabel: "Baby Shoes",
-        price: 1500,
-        oldPrice: 1999,
-        image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800&auto=format&fit=crop&q=80",
-        badge: "Bestseller",
-        description: "Handcrafted pre-walker soft knitted sheep booties with breathable fleece lining."
-      },
-      {
-        id: "p2",
-        title: "Soft Sole Toddler Animal Moccasins",
-        category: "babyshoes",
-        categoryLabel: "Baby Shoes",
-        price: 1850,
-        oldPrice: 2200,
-        image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=800&auto=format&fit=crop&q=80",
-        badge: "Pediatrician Safe",
-        description: "Flexible non-skid rubberized soft-sole shoes designed for early walkers."
-      },
-      {
-        id: "p3",
-        title: "Premium Combed Bio-Washed Cotton Crew Tee",
-        category: "garments",
-        categoryLabel: "Clothes",
-        price: 1399,
-        oldPrice: 1799,
-        image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800&auto=format&fit=crop&q=80",
-        badge: "100% Cotton",
-        description: "210 GSM heavy-grade bio-washed combed cotton t-shirt."
-      },
-      {
-        id: "p4",
-        title: "Hotel Luxury 400TC Egyptian Cotton Bedsheet Set",
-        category: "bedsheets",
-        categoryLabel: "Bedsheets",
-        price: 3899,
-        oldPrice: 5200,
-        image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=800&auto=format&fit=crop&q=80",
-        badge: "Luxury Satin",
-        description: "Set includes 1 King flat sheet and 2 matching pillowcases."
-      }
-    ];
-
     let currentTab = 'products';
     let selectedFilterCategory = 'all';
     let categories = [];
     let products = [];
+    let orders = [];
 
     document.addEventListener("DOMContentLoaded", () => {
-      loadState();
-      renderAll();
+      fetchAllData();
     });
 
-    function loadState() {
+    // ==========================================
+    // 2. FETCH DATA FROM SUPABASE
+    // ==========================================
+    async function fetchAllData() {
+      await fetchCategories();
+      await fetchProducts();
+      await fetchOrders();
+      renderAll();
+    }
+
+    async function fetchCategories() {
       try {
-        const savedCats = localStorage.getItem("vm_admin_categories");
-        categories = savedCats ? JSON.parse(savedCats) : defaultCategories;
-        const savedProds = localStorage.getItem("vm_admin_products");
-        products = savedProds ? JSON.parse(savedProds) : defaultProducts;
-      } catch(e) {
-        categories = defaultCategories;
-        products = defaultProducts;
+        const { data, error } = await supabaseClient
+          .from('categories')
+          .select('*')
+          .order('id', { ascending: true });
+
+        if (error || !data || data.length === 0) {
+          categories = fallbackCategories;
+        } else {
+          categories = data;
+        }
+      } catch (err) {
+        categories = fallbackCategories;
       }
     }
 
-    function saveState() {
-      localStorage.setItem("vm_admin_categories", JSON.stringify(categories));
-      localStorage.setItem("vm_admin_products", JSON.stringify(products));
-      localStorage.setItem("vm_custom_catalog", JSON.stringify(products));
+    async function fetchProducts() {
+      try {
+        const { data, error } = await supabaseClient
+          .from('products')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        if (!error && data) {
+          products = data;
+        }
+      } catch (err) {
+        console.error("Products fetch error:", err);
+      }
     }
 
+    async function fetchOrders() {
+      try {
+        const { data, error } = await supabaseClient
+          .from('orders')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        if (!error && data) {
+          orders = data;
+          renderOrdersTable();
+        }
+      } catch (err) {
+        console.error("Orders fetch error:", err);
+      }
+    }
+
+    // ==========================================
+    // 3. UI RENDERING LOGIC
+    // ==========================================
     function renderAll() {
       renderCategoryFilters();
       renderProductsTable();
@@ -389,25 +449,40 @@
       currentTab = tab;
       const navProducts = document.getElementById("nav-products");
       const navCategories = document.getElementById("nav-categories");
+      const navOrders = document.getElementById("nav-orders");
+
       const tabProducts = document.getElementById("tab-products");
       const tabCategories = document.getElementById("tab-categories");
+      const tabOrders = document.getElementById("tab-orders");
+
+      const activeClass = "w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-bold text-xs bg-blue-700 text-white shadow-sm transition-all";
+      const inactiveClass = "w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-bold text-xs text-slate-600 hover:bg-slate-100 transition-all";
+
+      tabProducts.classList.add("hidden");
+      tabCategories.classList.add("hidden");
+      tabOrders.classList.add("hidden");
+
+      navProducts.className = inactiveClass;
+      navCategories.className = inactiveClass;
+      navOrders.className = inactiveClass;
 
       if (tab === 'products') {
-        navProducts.className = "w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-bold text-xs bg-blue-700 text-white shadow-sm transition-all";
-        navCategories.className = "w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-bold text-xs text-slate-600 hover:bg-slate-100 transition-all";
         tabProducts.classList.remove("hidden");
-        tabCategories.classList.add("hidden");
-      } else {
-        navCategories.className = "w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-bold text-xs bg-blue-700 text-white shadow-sm transition-all";
-        navProducts.className = "w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-bold text-xs text-slate-600 hover:bg-slate-100 transition-all";
+        navProducts.className = activeClass;
+      } else if (tab === 'categories') {
         tabCategories.classList.remove("hidden");
-        tabProducts.classList.add("hidden");
+        navCategories.className = activeClass;
+      } else if (tab === 'orders') {
+        tabOrders.classList.remove("hidden");
+        navOrders.className = activeClass;
+        fetchOrders();
       }
     }
 
     function updateStats() {
       document.getElementById("badgeProductsCount").innerText = products.length;
       document.getElementById("badgeCategoriesCount").innerText = categories.length;
+      document.getElementById("badgeOrdersCount").innerText = orders.length;
       document.getElementById("activeCategoriesCountBadge").innerText = `${categories.length} Categories`;
       
       const totalVal = products.reduce((acc, p) => acc + Number(p.price || 0), 0);
@@ -449,7 +524,7 @@
           <tr>
             <td colspan="5" class="py-8 text-center text-slate-400">
               <i class="fa-solid fa-box-open text-3xl mb-2"></i>
-              <p class="font-semibold text-xs">Is category me abhi koi product nahi hai.</p>
+              <p class="font-semibold text-xs">Is category mein koi product nahi mila.</p>
             </td>
           </tr>
         `;
@@ -466,13 +541,13 @@
             </div>
           </td>
           <td class="py-3 px-4">
-            <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-1 rounded-md text-[11px]">${item.categoryLabel || item.category}</span>
+            <span class="bg-slate-100 text-slate-700 font-semibold px-2 py-1 rounded-md text-[11px]">${item.category_label || item.categoryLabel || item.category}</span>
           </td>
           <td class="py-3 px-4 font-black text-slate-900">
             Rs. ${Number(item.price).toLocaleString()}
           </td>
           <td class="py-3 px-4 text-slate-400 line-through">
-            ${item.oldPrice ? `Rs. ${Number(item.oldPrice).toLocaleString()}` : '—'}
+            ${(item.old_price || item.oldPrice) ? `Rs. ${Number(item.old_price || item.oldPrice).toLocaleString()}` : '—'}
           </td>
           <td class="py-3 px-4 text-center">
             <button onclick="editProduct('${item.id}')" class="p-1.5 text-blue-600 hover:text-blue-800 rounded-lg hover:bg-blue-50 text-xs font-bold mr-1">
@@ -510,6 +585,46 @@
       }).join("");
     }
 
+    function renderOrdersTable() {
+      const tbody = document.getElementById("ordersTableBody");
+      if (orders.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="5" class="py-8 text-center text-slate-400">
+              <i class="fa-solid fa-receipt text-3xl mb-2"></i>
+              <p class="font-semibold text-xs">Abhi tak koi customer order place nahi hua.</p>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = orders.map(ord => `
+        <tr class="hover:bg-slate-50/80 transition-colors">
+          <td class="py-3 px-4">
+            <div class="font-mono font-bold text-blue-700">${ord.id}</div>
+            <div class="text-[10px] text-slate-400">${new Date(ord.created_at).toLocaleDateString()}</div>
+          </td>
+          <td class="py-3 px-4">
+            <div class="font-bold text-slate-900">${ord.customer_name}</div>
+            <div class="text-[11px] text-slate-500">${ord.customer_phone}</div>
+            <div class="text-[10px] text-slate-400 truncate max-w-xs">${ord.customer_address}, ${ord.customer_city}</div>
+          </td>
+          <td class="py-3 px-4 text-slate-700 font-medium">
+            <div class="max-w-xs whitespace-pre-line text-[11px]">${ord.ordered_items}</div>
+          </td>
+          <td class="py-3 px-4 font-black text-slate-900">
+            Rs. ${Number(ord.grand_total).toLocaleString()}
+          </td>
+          <td class="py-3 px-4 text-center">
+            <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold px-2.5 py-1 rounded-full">
+              ${ord.status || 'Pending'}
+            </span>
+          </td>
+        </tr>
+      `).join("");
+    }
+
     function populateCategoryDropdown() {
       const select = document.getElementById("pCategory");
       select.innerHTML = categories.map(cat => `
@@ -517,6 +632,9 @@
       `).join("");
     }
 
+    // ==========================================
+    // 4. ADD & EDIT PRODUCT LOGIC (SUPABASE)
+    // ==========================================
     function openProductModal() {
       document.getElementById("editProductId").value = "";
       document.getElementById("modalHeading").innerText = "Naya Product Add Karein";
@@ -533,50 +651,55 @@
       document.getElementById("productModal").classList.add("hidden");
     }
 
-    function handleSaveProduct(e) {
+    async function handleSaveProduct(e) {
       e.preventDefault();
+      const saveBtn = document.getElementById("saveProdBtn");
+      saveBtn.disabled = true;
+      saveBtn.innerText = "Saving to Supabase...";
+
       const editId = document.getElementById("editProductId").value;
       const title = document.getElementById("pTitle").value.trim();
       const catKey = document.getElementById("pCategory").value;
       const price = Number(document.getElementById("pPrice").value);
       const oldPrice = document.getElementById("pOldPrice").value ? Number(document.getElementById("pOldPrice").value) : null;
       const image = document.getElementById("pImage").value.trim();
-      const badge = document.getElementById("pBadge").value.trim();
+      const badge = document.getElementById("pBadge").value.trim() || 'Verified';
       const desc = document.getElementById("pDesc").value.trim();
 
       const matchedCat = categories.find(c => c.key === catKey);
       const catLabel = matchedCat ? matchedCat.label : catKey;
 
-      if (editId) {
-        const item = products.find(p => p.id === editId);
-        if (item) {
-          item.title = title;
-          item.category = catKey;
-          item.categoryLabel = catLabel;
-          item.price = price;
-          item.oldPrice = oldPrice;
-          item.image = image;
-          item.badge = badge;
-          item.description = desc;
-        }
-      } else {
-        const newProd = {
-          id: "p_" + Date.now(),
-          title: title,
-          category: catKey,
-          categoryLabel: catLabel,
-          price: price,
-          oldPrice: oldPrice,
-          image: image,
-          badge: badge,
-          description: desc
-        };
-        products.unshift(newProd);
-      }
+      const productPayload = {
+        id: editId ? editId : "p_" + Date.now(),
+        title: title,
+        category: catKey,
+        category_label: catLabel,
+        price: price,
+        old_price: oldPrice,
+        image: image,
+        badge: badge,
+        description: desc
+      };
 
-      saveState();
-      renderAll();
-      closeProductModal();
+      try {
+        const { error } = await supabaseClient
+          .from('products')
+          .upsert([productPayload]);
+
+        if (error) {
+          alert("Supabase Error: " + error.message);
+        } else {
+          alert("Product cloud database mein kamyabi se save ho gaya!");
+          await fetchProducts();
+          renderAll();
+          closeProductModal();
+        }
+      } catch (err) {
+        alert("Network Error: " + err.message);
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.innerText = "Cloud Par Save Karein";
+      }
     }
 
     function editProduct(id) {
@@ -588,7 +711,7 @@
       document.getElementById("pTitle").value = item.title;
       document.getElementById("pCategory").value = item.category;
       document.getElementById("pPrice").value = item.price;
-      document.getElementById("pOldPrice").value = item.oldPrice || "";
+      document.getElementById("pOldPrice").value = item.old_price || item.oldPrice || "";
       document.getElementById("pImage").value = item.image;
       document.getElementById("pBadge").value = item.badge || "";
       document.getElementById("pDesc").value = item.description || "";
@@ -596,51 +719,87 @@
       document.getElementById("productModal").classList.remove("hidden");
     }
 
-    function deleteProduct(id) {
-      if (confirm("Kya aap waqayi is product ko delete karna chahte hain?")) {
-        products = products.filter(p => p.id !== id);
-        saveState();
-        renderAll();
+    async function deleteProduct(id) {
+      if (confirm("Kya aap waqayi is product ko cloud database se delete karna chahte hain?")) {
+        try {
+          const { error } = await supabaseClient
+            .from('products')
+            .delete()
+            .eq('id', id);
+
+          if (error) {
+            alert("Delete Error: " + error.message);
+          } else {
+            products = products.filter(p => p.id !== id);
+            renderAll();
+          }
+        } catch (err) {
+          alert("Error: " + err.message);
+        }
       }
     }
 
-    function handleCreateCategory(e) {
+    // ==========================================
+    // 5. CATEGORY ACTIONS (SUPABASE)
+    // ==========================================
+    async function handleCreateCategory(e) {
       e.preventDefault();
+      const saveBtn = document.getElementById("saveCatBtn");
+      saveBtn.disabled = true;
+      saveBtn.innerText = "Saving...";
+
       const label = document.getElementById("catNameInput").value.trim();
       let key = document.getElementById("catKeyInput").value.trim().toLowerCase().replace(/\s+/g, '-');
 
       if (!label || !key) return;
 
       if (categories.some(c => c.key === key)) {
-        alert("Yeh category key pehle se mojood hai! Koi naya naam chunein.");
+        alert("Yeh category key pehle se mojood hai! Koi naya naam likhein.");
+        saveBtn.disabled = false;
+        saveBtn.innerText = "Category Cloud Par Save Karein";
         return;
       }
 
-      categories.push({ key, label });
-      saveState();
-      renderAll();
+      try {
+        const { error } = await supabaseClient
+          .from('categories')
+          .insert([{ key, label }]);
 
-      document.getElementById("catNameInput").value = "";
-      document.getElementById("catKeyInput").value = "";
-      alert(`"${label}" category kamyabi se ban gayi! Ab aap isme product add kar sakte hain.`);
-    }
-
-    function deleteCategory(catKey) {
-      if (confirm(`Kya aap "${catKey}" category ko delete karna chahte hain?`)) {
-        categories = categories.filter(c => c.key !== catKey);
-        saveState();
-        renderAll();
+        if (error) {
+          alert("Category Error: " + error.message);
+        } else {
+          alert(`"${label}" category Supabase mein save ho gayi!`);
+          document.getElementById("catNameInput").value = "";
+          document.getElementById("catKeyInput").value = "";
+          await fetchCategories();
+          renderAll();
+        }
+      } catch (err) {
+        alert("Network Error: " + err.message);
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.innerText = "Category Cloud Par Save Karein";
       }
     }
 
-    function exportDataJson() {
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify({ categories, products }, null, 2));
-      const downloadAnchor = document.createElement('a');
-      downloadAnchor.setAttribute("href", dataStr);
-      downloadAnchor.setAttribute("download", "vibrantmart_catalog_backup.json");
-      document.body.appendChild(downloadAnchor);
-      downloadAnchor.click();
-      downloadAnchor.remove();
+    async function deleteCategory(catKey) {
+      if (confirm(`Kya aap "${catKey}" category ko delete karna chahte hain?`)) {
+        try {
+          const { error } = await supabaseClient
+            .from('categories')
+            .delete()
+            .eq('key', catKey);
+
+          if (error) {
+            alert("Delete Error: " + error.message);
+          } else {
+            await fetchCategories();
+            renderAll();
+          }
+        } catch (err) {
+          alert("Error: " + err.message);
+        }
+      }
     }
   </script>
 </body>
