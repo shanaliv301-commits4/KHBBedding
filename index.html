@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="vibrant">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,33 +23,12 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
+      darkMode: 'class',
       theme: {
         extend: {
           fontFamily: {
             sans: ['"Plus Jakarta Sans"', 'sans-serif'],
             display: ['"Outfit"', 'sans-serif'],
-          },
-          colors: {
-            primary: {
-              50: '#eff6ff',
-              100: '#dbeafe',
-              200: '#bfdbfe',
-              500: '#3b82f6',
-              600: '#2563eb',
-              700: '#1d4ed8',
-              800: '#1e40af',
-              900: '#1e3a8a',
-            },
-            accent: {
-              500: '#10b981',
-              600: '#059669',
-              700: '#047857',
-            },
-            surface: {
-              bg: '#f8fafc',
-              card: '#ffffff',
-              border: '#e2e8f0',
-            }
           }
         }
       }
@@ -58,38 +37,332 @@
 
   <!-- Supabase Official JS SDK Client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Dynamic Theme, Live Wallpaper & Mascot Animations -->
+  <style>
+    /* Theme Variables */
+    :root, [data-theme="vibrant"] {
+      --bg-main: #f8fafc;
+      --card-bg: #ffffff;
+      --border-color: #e2e8f0;
+      --brand-primary: #1d4ed8;
+      --brand-hover: #1e40af;
+      --brand-light: #eff6ff;
+      --brand-text: #1d4ed8;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --nav-bg: #ffffff;
+      --badge-bg: #1d4ed8;
+      /* Dynamic Live Wallpaper Theme 1 */
+      --lw-base: #0f172a;
+      --lw-orb1: rgba(29, 78, 216, 0.85);
+      --lw-orb2: rgba(37, 99, 235, 0.7);
+      --lw-orb3: rgba(16, 185, 129, 0.45);
+      --lw-orb4: rgba(99, 102, 241, 0.6);
+    }
+
+    [data-theme="dark"] {
+      --bg-main: #0b1120;
+      --card-bg: #1e293b;
+      --border-color: #334155;
+      --brand-primary: #3b82f6;
+      --brand-hover: #60a5fa;
+      --brand-light: #1e293b;
+      --brand-text: #93c5fd;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --nav-bg: #0f172a;
+      --badge-bg: #2563eb;
+      /* Dynamic Live Wallpaper Dark Mode */
+      --lw-base: #030712;
+      --lw-orb1: rgba(30, 58, 138, 0.85);
+      --lw-orb2: rgba(88, 28, 135, 0.65);
+      --lw-orb3: rgba(14, 116, 144, 0.5);
+      --lw-orb4: rgba(37, 99, 235, 0.4);
+    }
+
+    [data-theme="royal"] {
+      --bg-main: #fffdf5;
+      --card-bg: #ffffff;
+      --border-color: #fde68a;
+      --brand-primary: #b45309;
+      --brand-hover: #92400e;
+      --brand-light: #fef3c7;
+      --brand-text: #b45309;
+      --text-main: #451a03;
+      --text-muted: #78350f;
+      --nav-bg: #fffbeb;
+      --badge-bg: #d97706;
+      /* Dynamic Live Wallpaper Gold/Royal KHM Bedding */
+      --lw-base: #291305;
+      --lw-orb1: rgba(180, 83, 9, 0.85);
+      --lw-orb2: rgba(217, 119, 6, 0.75);
+      --lw-orb3: rgba(161, 98, 7, 0.6);
+      --lw-orb4: rgba(251, 191, 36, 0.35);
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      transition: background-color 0.35s ease, color 0.35s ease;
+    }
+    .theme-card {
+      background-color: var(--card-bg);
+      border-color: var(--border-color);
+    }
+    .theme-nav {
+      background-color: var(--nav-bg);
+      border-color: var(--border-color);
+    }
+    .theme-primary-bg {
+      background-color: var(--brand-primary);
+    }
+    .theme-primary-hover:hover {
+      background-color: var(--brand-hover);
+    }
+    .theme-primary-text {
+      color: var(--brand-text);
+    }
+
+    /* ========================================================
+       LIVE WALLPAPER HERO ANIMATION ENGINE
+       ======================================================== */
+    .live-wallpaper-container {
+      position: relative;
+      background-color: var(--lw-base);
+      overflow: hidden;
+      isolation: isolate;
+      transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Animated Liquid Mesh Glow Orbs */
+    .lw-orb {
+      position: absolute;
+      border-radius: 9999px;
+      filter: blur(75px);
+      mix-blend-mode: screen;
+      pointer-events: none;
+      will-change: transform, opacity;
+      transition: background 0.6s ease;
+    }
+
+    .lw-orb-1 {
+      width: 480px;
+      height: 480px;
+      background: var(--lw-orb1);
+      top: -120px;
+      left: -80px;
+      animation: floatMorph1 16s infinite alternate ease-in-out;
+    }
+
+    .lw-orb-2 {
+      width: 520px;
+      height: 520px;
+      background: var(--lw-orb2);
+      bottom: -140px;
+      right: -80px;
+      animation: floatMorph2 20s infinite alternate-reverse ease-in-out;
+    }
+
+    .lw-orb-3 {
+      width: 360px;
+      height: 360px;
+      background: var(--lw-orb3);
+      top: 25%;
+      left: 45%;
+      animation: floatMorph3 14s infinite alternate ease-in-out;
+    }
+
+    .lw-orb-4 {
+      width: 420px;
+      height: 420px;
+      background: var(--lw-orb4);
+      bottom: -60px;
+      left: 15%;
+      animation: floatMorph4 18s infinite alternate-reverse ease-in-out;
+    }
+
+    /* Liquid Organic Float Keyframes */
+    @keyframes floatMorph1 {
+      0% { transform: translate(0px, 0px) scale(1) rotate(0deg); opacity: 0.85; }
+      50% { transform: translate(120px, 60px) scale(1.18) rotate(45deg); opacity: 0.95; }
+      100% { transform: translate(40px, 110px) scale(0.92) rotate(90deg); opacity: 0.75; }
+    }
+
+    @keyframes floatMorph2 {
+      0% { transform: translate(0px, 0px) scale(1) rotate(0deg); opacity: 0.8; }
+      50% { transform: translate(-100px, -70px) scale(1.22) rotate(-55deg); opacity: 0.95; }
+      100% { transform: translate(-40px, 50px) scale(0.88) rotate(-110deg); opacity: 0.7; }
+    }
+
+    @keyframes floatMorph3 {
+      0% { transform: translate(0px, 0px) scale(0.9); opacity: 0.6; }
+      50% { transform: translate(-80px, 70px) scale(1.25); opacity: 0.85; }
+      100% { transform: translate(60px, -50px) scale(1.05); opacity: 0.65; }
+    }
+
+    @keyframes floatMorph4 {
+      0% { transform: translate(0px, 0px) scale(1.05); opacity: 0.55; }
+      50% { transform: translate(90px, -80px) scale(1.2); opacity: 0.8; }
+      100% { transform: translate(-70px, -40px) scale(0.95); opacity: 0.5; }
+    }
+
+    /* Luminous Shimmer Canvas Grid Overlay */
+    .lw-grid-pattern {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+      background-size: 32px 32px;
+      mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    /* Floating Micro Light Particles */
+    .lw-particle {
+      position: absolute;
+      background: #ffffff;
+      border-radius: 9999px;
+      pointer-events: none;
+      box-shadow: 0 0 10px #ffffff, 0 0 20px #60a5fa;
+      animation: particleDrift 8s infinite ease-in-out;
+    }
+
+    @keyframes particleDrift {
+      0%, 100% { transform: translateY(0) scale(0.8); opacity: 0.3; }
+      50% { transform: translateY(-24px) scale(1.4); opacity: 0.9; }
+    }
+
+    /* Transparent Sleek Mascot Avatars Overlay */
+    #khmMascotOverlay {
+      pointer-events: none;
+      position: fixed;
+      bottom: 24px;
+      left: 0;
+      right: 0;
+      height: 120px;
+      z-index: 9999;
+      overflow: hidden;
+      display: none;
+    }
+
+    .mascot-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      backdrop-filter: blur(14px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      border: 1.5px solid rgba(255, 255, 255, 0.4);
+      position: relative;
+    }
+
+    @keyframes avatarFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    @keyframes avatarMicroDance {
+      0%, 100% { transform: translateY(0) rotate(-6deg) scale(1.05); }
+      50% { transform: translateY(-12px) rotate(6deg) scale(1.15); }
+    }
+
+    .animate-avatar-float {
+      animation: avatarFloat 2s infinite ease-in-out;
+    }
+    .animate-avatar-dance {
+      animation: avatarMicroDance 0.45s infinite ease-in-out;
+    }
+  </style>
 </head>
-<body class="bg-surface-bg text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-blue-600 selection:text-white">
+<body class="font-sans antialiased min-h-screen flex flex-col selection:bg-blue-600 selection:text-white">
+
+  <!-- ==================== MODERN SLEEK MASCOT AVATARS (EVERY 10 SECONDS) ==================== -->
+  <div id="khmMascotOverlay">
+    <!-- Left Mascot: Nova (Sleek Transparent Cyan) -->
+    <div id="mascotLeft" class="absolute bottom-3 flex items-center gap-2.5 transition-all duration-300 pointer-events-auto" style="left: -200px;">
+      <div id="mascotLeftBody" class="animate-avatar-float">
+        <div class="mascot-avatar bg-gradient-to-tr from-blue-600/70 via-cyan-500/80 to-white/40 text-white">
+          <i class="fa-solid fa-sparkles text-lg drop-shadow-md"></i>
+          <span class="absolute -top-1 -right-1 w-3 h-3 bg-emerald-400 rounded-full border-2 border-white animate-ping"></span>
+        </div>
+      </div>
+      <span class="text-[9px] font-black uppercase tracking-wider bg-slate-900/80 text-cyan-300 px-2 py-0.5 rounded-full backdrop-blur-md border border-cyan-500/30 shadow">Nova</span>
+      
+      <!-- Shared Note Token (KHM Bedding) -->
+      <div id="mascotNoteTag" class="hidden opacity-0 bg-white/95 dark:bg-slate-900/95 text-slate-900 dark:text-white px-3.5 py-2 rounded-2xl shadow-2xl border border-amber-300/60 backdrop-blur-md flex items-center gap-2.5 transition-all">
+        <div class="w-7 h-7 rounded-lg bg-amber-400/20 text-amber-500 flex items-center justify-center font-black text-xs">
+          <i class="fa-solid fa-bed"></i>
+        </div>
+        <div class="leading-tight">
+          <div class="text-[11px] font-black text-rose-600 font-display">Order Now KHM Bedding</div>
+          <div class="text-[9px] font-extrabold text-emerald-600 flex items-center gap-1">
+            <i class="fa-brands fa-whatsapp"></i> 03049141244 <span class="text-slate-400">• Rs. 350 COD</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Mascot: Lumi (Sleek Transparent Violet) -->
+    <div id="mascotRight" class="absolute bottom-3 flex items-center gap-2.5 transition-all duration-300 pointer-events-auto" style="right: -200px;">
+      <span class="text-[9px] font-black uppercase tracking-wider bg-slate-900/80 text-violet-300 px-2 py-0.5 rounded-full backdrop-blur-md border border-violet-500/30 shadow">Lumi</span>
+      <div id="mascotRightBody" class="animate-avatar-float">
+        <div class="mascot-avatar bg-gradient-to-tr from-indigo-600/70 via-fuchsia-500/80 to-white/40 text-white">
+          <i class="fa-solid fa-face-smile text-xl drop-shadow-md"></i>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- ==================== 1. TOP ANNOUNCEMENT BAR ==================== -->
-  <div class="bg-slate-900 text-slate-200 text-xs py-2 px-4 border-b border-slate-800">
+  <div class="bg-slate-950 text-slate-200 text-xs py-2 px-4 border-b border-slate-800">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 font-medium">
       <div class="flex items-center gap-2">
         <span class="bg-amber-400 text-slate-950 text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">Flat COD Rs. 350</span>
         <span>Nationwide Cash On Delivery All Over Pakistan</span>
+        <span class="hidden md:inline-flex items-center gap-1.5 text-[11px] text-emerald-400 font-bold ml-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Store Active: Fast Dispatch
+        </span>
       </div>
-      <div class="flex items-center gap-4 text-slate-300">
-        <a href="https://wa.me/923049141244" target="_blank" class="hover:text-emerald-400 transition-colors flex items-center gap-1.5 font-bold">
-          <i class="fa-brands fa-whatsapp text-emerald-400"></i> WhatsApp Support: +92 304 9141244
+      
+      <!-- Theme Switcher & WhatsApp Support -->
+      <div class="flex items-center gap-3 text-slate-300">
+        <!-- THEME BUTTONS -->
+        <div class="flex items-center gap-1 bg-slate-900 p-1 rounded-xl border border-slate-700/80">
+          <span class="text-[10px] font-bold text-slate-400 px-1 hidden sm:inline"><i class="fa-solid fa-palette text-amber-400"></i> Theme:</span>
+          <button onclick="setTheme('vibrant')" title="Modern Vibrant Blue" class="px-2 py-0.5 rounded-lg text-[11px] font-extrabold bg-blue-600 text-white transition-all">
+            Default
+          </button>
+          <button onclick="setTheme('dark')" title="Midnight Dark Mode" class="px-2 py-0.5 rounded-lg text-[11px] font-extrabold text-slate-300 hover:text-white hover:bg-slate-800 transition-all">
+            🌙 Dark
+          </button>
+          <button onclick="setTheme('royal')" title="Royal Amber & Bedding" class="px-2 py-0.5 rounded-lg text-[11px] font-extrabold text-amber-300 hover:text-white hover:bg-amber-900/50 transition-all">
+            👑 Gold
+          </button>
+        </div>
+
+        <a href="https://wa.me/923049141244" target="_blank" class="hover:text-emerald-400 transition-colors flex items-center gap-1.5 font-bold ml-1">
+          <i class="fa-brands fa-whatsapp text-emerald-400"></i> <span class="hidden sm:inline">WhatsApp:</span> +92 304 9141244
         </a>
       </div>
     </div>
   </div>
 
   <!-- ==================== 2. HEADER & NAVIGATION ==================== -->
-  <header class="bg-white border-b border-surface-border sticky top-0 z-40 shadow-xs">
+  <header class="theme-nav border-b sticky top-0 z-40 shadow-xs transition-colors">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between gap-4">
       
       <!-- Brand Logo -->
       <a href="index.html" class="flex items-center gap-2.5 shrink-0 group">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-700 to-emerald-600 text-white flex items-center justify-center font-extrabold text-xl shadow-md group-hover:scale-105 transition-transform">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-700 via-indigo-600 to-emerald-500 text-white flex items-center justify-center font-extrabold text-xl shadow-md group-hover:scale-105 transition-transform">
           <i class="fa-solid fa-bag-shopping"></i>
         </div>
         <div>
-          <span class="font-display font-black text-2xl text-slate-900 tracking-tight block leading-none">
-            Vibrant<span class="text-blue-700">Mart</span>
+          <span class="font-display font-black text-2xl tracking-tight block leading-none">
+            Vibrant<span class="text-blue-600 dark:text-blue-400">Mart</span>
           </span>
-          <span class="text-[10px] font-bold text-slate-400 tracking-widest uppercase">Lifestyle Retail</span>
+          <span class="text-[10px] font-bold text-slate-400 tracking-widest uppercase">Lifestyle Retail • KHM Bedding</span>
         </div>
       </a>
 
@@ -101,7 +374,7 @@
             id="searchInput" 
             oninput="handleSearch(this.value)"
             placeholder="Search baby shoes, cotton garments, luxury bedsheets..." 
-            class="w-full text-xs sm:text-sm pl-10 pr-4 py-2.5 bg-slate-100/90 rounded-full border border-transparent focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-100 outline-none transition-all"
+            class="w-full text-xs sm:text-sm pl-10 pr-4 py-2.5 rounded-full border border-slate-200 dark:border-slate-700 bg-slate-100/90 dark:bg-slate-800 focus:bg-white dark:focus:bg-slate-900 focus:ring-2 focus:ring-blue-100 outline-none transition-all text-slate-900 dark:text-white"
           />
           <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400 text-xs"></i>
         </div>
@@ -109,12 +382,21 @@
 
       <!-- Quick Actions (Admin Link & Cart Drawer Button) -->
       <div class="flex items-center gap-3">
-        <a href="admin.html" target="_blank" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 hover:text-blue-700 px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 transition-colors">
-          <i class="fa-solid fa-lock text-slate-400"></i> Admin Panel
+        <!-- Interactive Mascot Trigger -->
+        <button 
+          onclick="triggerMascotInteraction(true)" 
+          title="Play Live Mascot Animation"
+          class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-cyan-800 dark:text-cyan-300 bg-cyan-50 dark:bg-cyan-950/60 border border-cyan-200 dark:border-cyan-800 px-3 py-2 rounded-xl hover:bg-cyan-100 transition-colors"
+        >
+          <i class="fa-solid fa-sparkles text-cyan-600 animate-spin"></i> KHM Story
+        </button>
+
+        <a href="admin.html" target="_blank" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-blue-600 px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 transition-colors">
+          <i class="fa-solid fa-lock text-slate-400"></i> Admin
         </a>
         <button 
           onclick="toggleCartDrawer(true)"
-          class="relative bg-blue-700 hover:bg-blue-800 text-white px-4 py-2.5 rounded-full font-bold text-xs sm:text-sm flex items-center gap-2.5 shadow-md shadow-blue-700/20 active:scale-95 transition-all"
+          class="relative theme-primary-bg hover:opacity-90 text-white px-4 py-2.5 rounded-full font-bold text-xs sm:text-sm flex items-center gap-2.5 shadow-md shadow-blue-700/20 active:scale-95 transition-all"
         >
           <i class="fa-solid fa-basket-shopping"></i>
           <span>Bag</span>
@@ -125,7 +407,7 @@
     </div>
 
     <!-- Category Nav Bar -->
-    <div class="border-t border-slate-100 bg-white">
+    <div class="border-t border-slate-100 dark:border-slate-800">
       <div class="max-w-7xl mx-auto px-4 sm:px-6">
         <nav class="flex items-center gap-2 overflow-x-auto py-2.5 no-scrollbar" id="categoryNavContainer">
           <div class="text-xs text-slate-400 py-1 flex items-center gap-2">
@@ -136,60 +418,74 @@
     </div>
   </header>
 
-  <!-- ==================== 3. HERO BANNER ==================== -->
-  <section class="bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-950 text-white py-12 px-4 sm:px-6 relative overflow-hidden">
-    <div class="absolute -right-20 -top-20 w-96 h-96 rounded-full bg-blue-500/10 blur-3xl pointer-events-none"></div>
-    <div class="absolute -left-20 -bottom-20 w-96 h-96 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none"></div>
+  <!-- ==================== 3. FRONT HERO: DYNAMIC LIVE WALLPAPER ==================== -->
+  <section class="live-wallpaper-container text-white py-14 px-4 sm:px-6 relative">
+    
+    <!-- LIVING FLUID ORBS LAYER -->
+    <div class="lw-orb lw-orb-1"></div>
+    <div class="lw-orb lw-orb-2"></div>
+    <div class="lw-orb lw-orb-3"></div>
+    <div class="lw-orb lw-orb-4"></div>
 
+    <!-- GEOMETRIC SHIMMER PATTERN -->
+    <div class="lw-grid-pattern"></div>
+
+    <!-- FLOATING LIGHT PARTICLES -->
+    <div class="lw-particle" style="width: 4px; height: 4px; top: 20%; left: 18%; animation-delay: 0s;"></div>
+    <div class="lw-particle" style="width: 6px; height: 6px; top: 65%; left: 35%; animation-delay: 2.5s;"></div>
+    <div class="lw-particle" style="width: 5px; height: 5px; top: 30%; left: 75%; animation-delay: 1.2s;"></div>
+    <div class="lw-particle" style="width: 7px; height: 7px; top: 80%; left: 85%; animation-delay: 3.8s;"></div>
+
+    <!-- HERO FOREGROUND CONTENT -->
     <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
       
       <div class="lg:col-span-8 space-y-4 text-center lg:text-left">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-bold text-blue-200">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-bold text-blue-100">
           <i class="fa-solid fa-truck-fast text-amber-400"></i> Flat COD Rs. 350 Across All Pakistan
         </div>
-        <h1 class="text-3xl sm:text-5xl font-black font-display tracking-tight leading-tight">
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black font-display tracking-tight leading-tight drop-shadow-md">
           Elevate Your Family Comfort <br class="hidden sm:inline" />& Everyday Living
         </h1>
-        <p class="text-sm sm:text-base text-blue-100 max-w-2xl leading-relaxed">
-          Discover soft non-slip pre-walker baby shoes, 100% bio-washed combed cotton garments, and breathable hotel-grade luxury bedsheets. Fast doorstep shipping with direct WhatsApp ordering at <b class="text-white">03049141244</b>.
+        <p class="text-sm sm:text-base text-blue-100/90 max-w-2xl leading-relaxed drop-shadow-xs">
+          Discover soft non-slip pre-walker baby shoes, 100% bio-washed combed cotton garments, and breathable hotel-grade luxury bedsheets (Special: <b class="text-amber-300">Order Now KHM Bedding</b>). Fast doorstep shipping with direct WhatsApp ordering at <b class="text-white">03049141244</b>.
         </p>
         <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-2">
-          <a href="#catalog" class="px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-sm shadow-lg shadow-emerald-500/30 flex items-center gap-2 transition-all">
+          <a href="#catalog" class="px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-sm shadow-xl shadow-emerald-500/30 flex items-center gap-2 hover:-translate-y-0.5 transition-all">
             <i class="fa-solid fa-bag-shopping"></i> Explore All Items
           </a>
-          <a href="https://wa.me/923049141244" target="_blank" class="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm backdrop-blur-md border border-white/20 flex items-center gap-2 transition-all">
+          <a href="https://wa.me/923049141244" target="_blank" class="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm backdrop-blur-md border border-white/20 flex items-center gap-2 hover:-translate-y-0.5 transition-all">
             <i class="fa-brands fa-whatsapp text-emerald-400 text-lg"></i> WhatsApp: 03049141244
           </a>
         </div>
       </div>
 
-      <!-- Quick Trust Highlights -->
-      <div class="lg:col-span-4 bg-white/10 backdrop-blur-md border border-white/15 p-5 rounded-2xl space-y-3.5">
+      <!-- Quick Trust Highlights (Glassmorphism) -->
+      <div class="lg:col-span-4 bg-white/10 backdrop-blur-md border border-white/15 p-5 rounded-2xl space-y-3.5 shadow-2xl">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-300 flex items-center justify-center text-lg">
+          <div class="w-10 h-10 rounded-xl bg-blue-500/25 text-blue-300 flex items-center justify-center text-lg border border-blue-400/30">
             <i class="fa-solid fa-shield-heart"></i>
           </div>
           <div>
             <h4 class="font-extrabold text-sm">Pediatrician Safe</h4>
-            <p class="text-xs text-blue-200">Zero toxins, super soft shoe soles</p>
+            <p class="text-xs text-blue-100">Zero toxins, super soft shoe soles</p>
           </div>
         </div>
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center text-lg">
+          <div class="w-10 h-10 rounded-xl bg-emerald-500/25 text-emerald-300 flex items-center justify-center text-lg border border-emerald-400/30">
             <i class="fa-solid fa-truck-ramp-box"></i>
           </div>
           <div>
             <h4 class="font-extrabold text-sm">Doorstep Cash On Delivery</h4>
-            <p class="text-xs text-blue-200">Flat Rs. 350 to all cities in PK</p>
+            <p class="text-xs text-blue-100">Flat Rs. 350 to all cities in PK</p>
           </div>
         </div>
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center text-lg">
+          <div class="w-10 h-10 rounded-xl bg-amber-500/25 text-amber-300 flex items-center justify-center text-lg border border-amber-400/30">
             <i class="fa-solid fa-headset"></i>
           </div>
           <div>
             <h4 class="font-extrabold text-sm">WhatsApp 03049141244</h4>
-            <p class="text-xs text-blue-200">Instant real-time support & orders</p>
+            <p class="text-xs text-blue-100">Instant real-time support & orders</p>
           </div>
         </div>
       </div>
@@ -204,14 +500,14 @@
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
       <div>
         <div class="flex items-center gap-2">
-          <h2 class="text-2xl font-black font-display text-slate-900" id="currentSectionTitle">Featured Collections</h2>
+          <h2 class="text-2xl font-black font-display" id="currentSectionTitle">Featured Collections</h2>
           <span class="bg-blue-100 text-blue-800 text-xs font-extrabold px-2.5 py-0.5 rounded-full" id="productCountBadge">0 items</span>
         </div>
         <p class="text-xs text-slate-500 mt-1">Direct wholesaler pricing. Flat COD fee Rs. 350 added at checkout.</p>
       </div>
 
       <div class="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
-        <select id="sortSelect" onchange="handleSort(this.value)" class="text-xs font-bold text-slate-700 bg-white border border-slate-200 rounded-xl px-3 py-2 outline-none focus:border-blue-600">
+        <select id="sortSelect" onchange="handleSort(this.value)" class="text-xs font-bold theme-card border rounded-xl px-3 py-2 outline-none focus:border-blue-600">
           <option value="default">Featured First</option>
           <option value="price-low">Price: Low to High</option>
           <option value="price-high">Price: High to Low</option>
@@ -233,45 +529,45 @@
   </main>
 
   <!-- ==================== 5. TRUST BADGES STRIP ==================== -->
-  <section class="bg-white border-y border-surface-border py-8 px-4 sm:px-6">
+  <section class="theme-card border-y py-8 px-4 sm:px-6">
     <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       
-      <div class="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100">
+      <div class="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700">
         <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center text-xl shrink-0">
           <i class="fa-solid fa-truck-fast"></i>
         </div>
         <div>
-          <h4 class="font-bold text-sm text-slate-900">Fast 2–4 Day Shipping</h4>
+          <h4 class="font-bold text-sm">Fast 2–4 Day Shipping</h4>
           <p class="text-xs text-slate-500">All cities across Pakistan for flat Rs. 350 COD.</p>
         </div>
       </div>
 
-      <div class="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100">
+      <div class="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700">
         <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-xl shrink-0">
           <i class="fa-solid fa-certificate"></i>
         </div>
         <div>
-          <h4 class="font-bold text-sm text-slate-900">100% Certified Fabrics</h4>
+          <h4 class="font-bold text-sm">100% Certified Fabrics</h4>
           <p class="text-xs text-slate-500">Bio-washed cotton & pediatrician certified soles.</p>
         </div>
       </div>
 
-      <div class="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100">
+      <div class="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700">
         <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl shrink-0">
           <i class="fa-solid fa-rotate-left"></i>
         </div>
         <div>
-          <h4 class="font-bold text-sm text-slate-900">30-Day Easy Exchange</h4>
+          <h4 class="font-bold text-sm">30-Day Easy Exchange</h4>
           <p class="text-xs text-slate-500">Hassle-free size exchange and moneyback guarantee.</p>
         </div>
       </div>
 
-      <div class="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100">
+      <div class="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700">
         <div class="w-12 h-12 rounded-xl bg-violet-100 text-violet-700 flex items-center justify-center text-xl shrink-0">
           <i class="fa-brands fa-whatsapp text-emerald-600"></i>
         </div>
         <div>
-          <h4 class="font-bold text-sm text-slate-900">03049141244 WhatsApp</h4>
+          <h4 class="font-bold text-sm">03049141244 WhatsApp</h4>
           <p class="text-xs text-slate-500">Instant VIP ordering & customer care assistance.</p>
         </div>
       </div>
@@ -291,7 +587,7 @@
           <span class="font-display font-black text-xl text-white">Vibrant<span class="text-blue-500">Mart</span></span>
         </div>
         <p class="text-xs leading-relaxed">
-          Your trusted store for pediatrician-tested baby shoes, 100% bio-washed cotton clothes, and hotel-grade luxury bedsheets with flat Rs. 350 COD nationwide shipping.
+          Your trusted store for pediatrician-tested baby shoes, 100% bio-washed cotton clothes, and hotel-grade luxury bedsheets (KHM Bedding) with flat Rs. 350 COD nationwide shipping.
         </p>
       </div>
 
@@ -300,7 +596,7 @@
         <ul class="text-xs space-y-2">
           <li><a href="javascript:void(0)" onclick="selectCategory('babyshoes')" class="hover:text-white transition-colors">Baby & Kids Footwear</a></li>
           <li><a href="javascript:void(0)" onclick="selectCategory('garments')" class="hover:text-white transition-colors">Cotton Garments & Apparel</a></li>
-          <li><a href="javascript:void(0)" onclick="selectCategory('bedsheets')" class="hover:text-white transition-colors">Luxury Bedsheets</a></li>
+          <li><a href="javascript:void(0)" onclick="selectCategory('bedsheets')" class="hover:text-white transition-colors">Luxury Bedsheets (KHM)</a></li>
           <li><a href="javascript:void(0)" onclick="selectCategory('homedecor')" class="hover:text-white transition-colors">Home Living</a></li>
         </ul>
       </div>
@@ -326,39 +622,36 @@
     </div>
 
     <div class="max-w-7xl mx-auto pt-6 border-t border-slate-900 text-center text-xs text-slate-500">
-      &copy; 2026 VibrantMart Lifestyle Retail. All Rights Reserved. Connected with Supabase Cloud Database.
+      &copy; 2026 VibrantMart Lifestyle Retail & KHM Bedding. All Rights Reserved. Connected with Supabase Cloud Database.
     </div>
   </footer>
 
   <!-- ==================== 7. SHOPPING BAG & CHECKOUT SLIDE-OVER DRAWER ==================== -->
   <div id="cartDrawerBackdrop" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 transition-opacity" onclick="toggleCartDrawer(false)"></div>
 
-  <div id="cartDrawer" class="fixed right-0 top-0 bottom-0 w-full max-w-md bg-white z-50 shadow-2xl translate-x-full transition-transform duration-300 flex flex-col">
+  <div id="cartDrawer" class="fixed right-0 top-0 bottom-0 w-full max-w-md theme-card z-50 shadow-2xl translate-x-full transition-transform duration-300 flex flex-col">
     
     <!-- Drawer Header -->
-    <div class="p-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+    <div class="p-4 bg-slate-50 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
       <div class="flex items-center gap-2">
         <div class="w-8 h-8 rounded-lg bg-blue-700 text-white flex items-center justify-center font-bold text-sm">
           <i class="fa-solid fa-bag-shopping"></i>
         </div>
-        <h3 class="font-display font-black text-base text-slate-900">Shopping Bag & Checkout</h3>
+        <h3 class="font-display font-black text-base text-slate-900 dark:text-white">Shopping Bag & Checkout</h3>
       </div>
-      <button onclick="toggleCartDrawer(false)" class="w-8 h-8 rounded-full bg-slate-200 hover:bg-slate-300 text-slate-600 flex items-center justify-center font-bold text-sm transition-colors">
+      <button onclick="toggleCartDrawer(false)" class="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 text-slate-600 dark:text-slate-300 flex items-center justify-center font-bold text-sm transition-colors">
         &times;
       </button>
     </div>
 
     <!-- Drawer Body / Item List -->
-    <div class="flex-1 overflow-y-auto p-4 space-y-3" id="cartItemsContainer">
-      <!-- Items dynamically injected by JavaScript -->
-    </div>
+    <div class="flex-1 overflow-y-auto p-4 space-y-3" id="cartItemsContainer"></div>
 
     <!-- Drawer Checkout Form & Summary -->
-    <div class="p-4 bg-slate-50 border-t border-slate-200 space-y-3 shrink-0">
+    <div class="p-4 bg-slate-50 dark:bg-slate-800/80 border-t border-slate-200 dark:border-slate-700 space-y-3 shrink-0">
       
-      <!-- Customer Info Form -->
       <form id="checkoutForm" onsubmit="handlePlaceOrder(event)" class="space-y-2">
-        <div class="text-xs font-extrabold text-slate-700 flex items-center justify-between">
+        <div class="text-xs font-extrabold text-slate-700 dark:text-slate-300 flex items-center justify-between">
           <span><i class="fa-solid fa-user-pen text-blue-700"></i> Customer Shipping Details</span>
           <span class="text-[10px] text-emerald-600 font-bold">Sent to easicarts@gmail.com</span>
         </div>
@@ -368,7 +661,7 @@
           id="custName" 
           placeholder="Your Full Name *" 
           required 
-          class="w-full text-xs px-3 py-2 rounded-xl border border-slate-200 bg-white focus:border-blue-700 outline-none"
+          class="w-full text-xs px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white outline-none focus:border-blue-700"
         />
 
         <input 
@@ -376,7 +669,7 @@
           id="custPhone" 
           placeholder="WhatsApp / Phone Number *" 
           required 
-          class="w-full text-xs px-3 py-2 rounded-xl border border-slate-200 bg-white focus:border-blue-700 outline-none"
+          class="w-full text-xs px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white outline-none focus:border-blue-700"
         />
 
         <textarea 
@@ -384,7 +677,7 @@
           rows="2" 
           placeholder="Delivery Address & Landmark *" 
           required 
-          class="w-full text-xs px-3 py-2 rounded-xl border border-slate-200 bg-white focus:border-blue-700 outline-none"
+          class="w-full text-xs px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white outline-none focus:border-blue-700"
         ></textarea>
 
         <input 
@@ -392,22 +685,22 @@
           id="custCity" 
           placeholder="City (e.g. Lahore, Karachi, Islamabad) *" 
           required 
-          class="w-full text-xs px-3 py-2 rounded-xl border border-slate-200 bg-white focus:border-blue-700 outline-none"
+          class="w-full text-xs px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white outline-none focus:border-blue-700"
         />
 
         <!-- Price Breakdown with Rs. 350 COD -->
-        <div class="pt-2 border-t border-slate-200 space-y-1.5 text-xs text-slate-600">
+        <div class="pt-2 border-t border-slate-200 dark:border-slate-700 space-y-1.5 text-xs text-slate-600 dark:text-slate-400">
           <div class="flex justify-between">
             <span>Items Subtotal</span>
-            <span class="font-bold text-slate-900" id="cartSubtotalText">Rs. 0</span>
+            <span class="font-bold text-slate-900 dark:text-white" id="cartSubtotalText">Rs. 0</span>
           </div>
           <div class="flex justify-between">
             <span>Nationwide COD Shipping</span>
-            <span class="font-bold text-emerald-700" id="cartShippingText">Rs. 350</span>
+            <span class="font-bold text-emerald-700 dark:text-emerald-400" id="cartShippingText">Rs. 350</span>
           </div>
-          <div class="flex justify-between text-sm font-black text-slate-900 pt-1 border-t border-slate-200">
+          <div class="flex justify-between text-sm font-black text-slate-900 dark:text-white pt-1 border-t border-slate-200 dark:border-slate-700">
             <span>Total Payable (COD)</span>
-            <span class="text-blue-700" id="cartGrandTotalText">Rs. 350</span>
+            <span class="text-blue-700 dark:text-blue-400" id="cartGrandTotalText">Rs. 350</span>
           </div>
         </div>
 
@@ -426,30 +719,30 @@
 
   <!-- ==================== 8. QUICK VIEW PRODUCT MODAL ==================== -->
   <div id="quickViewModal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-    <div class="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col md:flex-row">
-      <button onclick="closeQuickView()" class="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-sm">
+    <div class="relative w-full max-w-2xl theme-card rounded-3xl shadow-2xl border overflow-hidden flex flex-col md:flex-row">
+      <button onclick="closeQuickView()" class="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 flex items-center justify-center font-bold text-sm">
         &times;
       </button>
 
-      <div class="md:w-1/2 bg-slate-50 p-6 flex items-center justify-center">
+      <div class="md:w-1/2 bg-slate-50 dark:bg-slate-800 p-6 flex items-center justify-center">
         <img id="qvImage" src="" alt="Product" class="max-h-72 object-contain rounded-2xl" />
       </div>
 
       <div class="md:w-1/2 p-6 flex flex-col justify-between space-y-4">
         <div>
-          <span id="qvBadge" class="inline-block bg-blue-50 text-blue-700 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider mb-2">Verified</span>
-          <h3 id="qvTitle" class="font-display font-black text-xl text-slate-900 leading-snug"></h3>
+          <span id="qvBadge" class="inline-block bg-blue-50 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider mb-2">Verified</span>
+          <h3 id="qvTitle" class="font-display font-black text-xl leading-snug"></h3>
           <p id="qvCategory" class="text-xs text-slate-400 font-semibold mt-1"></p>
 
           <div class="mt-3 flex items-baseline gap-2">
-            <span id="qvPrice" class="text-2xl font-black text-blue-700"></span>
+            <span id="qvPrice" class="text-2xl font-black text-blue-700 dark:text-blue-400"></span>
             <span id="qvOldPrice" class="text-sm text-slate-400 line-through"></span>
           </div>
 
-          <p id="qvDesc" class="text-xs text-slate-600 leading-relaxed mt-3"></p>
+          <p id="qvDesc" class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mt-3"></p>
         </div>
 
-        <div class="space-y-2 pt-4 border-t border-slate-100">
+        <div class="space-y-2 pt-4 border-t border-slate-100 dark:border-slate-800">
           <button id="qvAddBtn" class="w-full py-2.5 bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs rounded-xl shadow flex items-center justify-center gap-2">
             <i class="fa-solid fa-basket-shopping"></i> Add to Shopping Bag
           </button>
@@ -464,7 +757,7 @@
   <!-- ==================== 9. JAVASCRIPT & SUPABASE CLOUD CONNECTION ==================== -->
   <script>
     // ==========================================
-    // 1. AAPKI SUPABASE CLOUD KEYS
+    // 1. SUPABASE CLOUD KEYS
     // ==========================================
     const SUPABASE_URL = "https://yyapzlhdnyduonrekiwe.supabase.co";
     const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5YXB6bGhkbnlkdW9ucmVraXdlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQzODA3MDYsImV4cCI6MjEwOTk1NjcwNn0.YMdQBz0h9sekPQV-crgmRHrGl96RfNj0xymXD6r4rBE";
@@ -472,16 +765,16 @@
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     // Constant Store Configurations (Rs. 350 COD)
-    const SHIPPING_FEE = 350; // Rs. 350 Flat COD
+    const SHIPPING_FEE = 350; // Flat COD
     const STORE_WHATSAPP = "923049141244";
     const STORE_EMAIL = "easicarts@gmail.com";
 
-    // Fallback Initial Categories (agar cloud delay ho)
+    // Fallback Initial Categories
     const defaultCategories = [
       { key: "all", label: "All Collections", icon: "fa-border-all" },
       { key: "babyshoes", label: "Baby & Kids Shoes", icon: "fa-baby" },
       { key: "garments", label: "Clothes & Garments", icon: "fa-shirt" },
-      { key: "bedsheets", label: "Luxury Bedsheets", icon: "fa-bed" },
+      { key: "bedsheets", label: "Luxury Bedsheets (KHM)", icon: "fa-bed" },
       { key: "homedecor", label: "Home Living", icon: "fa-couch" },
       { key: "sale", label: "Clearance Sale", icon: "fa-fire" }
     ];
@@ -534,14 +827,14 @@
       },
       {
         id: "p5",
-        title: "Hotel Luxury 400TC Egyptian Cotton Bedsheet Set",
+        title: "Hotel Luxury 400TC Egyptian Cotton Bedsheet Set (KHM Bedding)",
         category: "bedsheets",
         category_label: "Bedsheets",
         price: 3899,
         old_price: 5200,
         image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=800&auto=format&fit=crop&q=80",
-        badge: "Luxury Satin",
-        description: "Experience five-star hotel comfort at home. Set includes 1 King flat sheet and 2 matching envelope pillowcases."
+        badge: "KHM Premium",
+        description: "Experience five-star hotel comfort at home. Set includes 1 King flat sheet and 2 matching envelope pillowcases by KHM Bedding."
       },
       {
         id: "p6",
@@ -586,20 +879,125 @@
     let sortMethod = 'default';
     let cart = [];
 
+    // ==========================================
+    // THEME SWITCHER
+    // ==========================================
+    function setTheme(themeName) {
+      document.documentElement.setAttribute('data-theme', themeName);
+      if (themeName === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+      try {
+        localStorage.setItem('vibrantmart_theme', themeName);
+      } catch (e) {}
+    }
+
+    function initTheme() {
+      try {
+        const savedTheme = localStorage.getItem('vibrantmart_theme') || 'vibrant';
+        setTheme(savedTheme);
+      } catch (e) {
+        setTheme('vibrant');
+      }
+    }
+
+    // ==========================================
+    // SLEEK MASCOT INTERACTION (EVERY 10 SECONDS)
+    // ==========================================
+    let isMascotActive = false;
+
+    function triggerMascotInteraction(force = false) {
+      if (isMascotActive && !force) return;
+      isMascotActive = true;
+
+      const overlay = document.getElementById("khmMascotOverlay");
+      const mLeft = document.getElementById("mascotLeft");
+      const mRight = document.getElementById("mascotRight");
+      const mLeftBody = document.getElementById("mascotLeftBody");
+      const mRightBody = document.getElementById("mascotRightBody");
+      const noteTag = document.getElementById("mascotNoteTag");
+
+      overlay.style.display = "block";
+
+      // Reset
+      mLeft.style.transition = "none";
+      mRight.style.transition = "none";
+      mLeft.style.left = "-200px";
+      mRight.style.right = "-200px";
+      mLeftBody.className = "animate-avatar-float";
+      mRightBody.className = "animate-avatar-float";
+      noteTag.classList.add("hidden");
+      noteTag.style.opacity = "0";
+
+      setTimeout(() => {
+        // Step 1: Smooth Glide into the Center
+        mLeft.style.transition = "left 2.2s cubic-bezier(0.22, 1, 0.36, 1)";
+        mRight.style.transition = "right 2.2s cubic-bezier(0.22, 1, 0.36, 1)";
+
+        mLeft.style.left = "calc(50% - 130px)";
+        mRight.style.right = "calc(50% - 130px)";
+
+        // Step 2: Show Sleek Floating Note Token
+        setTimeout(() => {
+          noteTag.classList.remove("hidden");
+          setTimeout(() => { noteTag.style.opacity = "1"; }, 50);
+
+          // Step 3: Joyful Micro-Dance
+          setTimeout(() => {
+            mLeftBody.className = "animate-avatar-dance";
+            mRightBody.className = "animate-avatar-dance";
+
+            // Step 4: Gracefully Slide back out
+            setTimeout(() => {
+              noteTag.style.opacity = "0";
+              setTimeout(() => noteTag.classList.add("hidden"), 300);
+
+              mLeft.style.transition = "left 2.2s ease-in";
+              mRight.style.transition = "right 2.2s ease-in";
+
+              mLeft.style.left = "-220px";
+              mRight.style.right = "-220px";
+
+              setTimeout(() => {
+                overlay.style.display = "none";
+                isMascotActive = false;
+              }, 2300);
+
+            }, 2500); // Dance duration
+
+          }, 800);
+
+        }, 2300);
+
+      }, 100);
+    }
+
+    function startMascotLoop() {
+      setTimeout(() => {
+        triggerMascotInteraction();
+        setInterval(() => {
+          triggerMascotInteraction();
+        }, 12000);
+      }, 2500);
+    }
+
     // Initialize Page
     document.addEventListener("DOMContentLoaded", async () => {
+      initTheme();
       loadCartFromStorage();
       await fetchStoreDataFromSupabase();
       renderCategoryNavigation();
       renderProductsGrid();
       updateCartUI();
+      startMascotLoop();
     });
 
     // ==========================================
     // 2. FETCH DATA FROM SUPABASE CLOUD
     // ==========================================
     async function fetchStoreDataFromSupabase() {
-      // 1. Fetch Categories
       try {
         const { data: catData, error: catErr } = await supabaseClient
           .from('categories')
@@ -622,7 +1020,6 @@
         categoriesList = defaultCategories;
       }
 
-      // 2. Fetch Products
       try {
         const { data: prodData, error: prodErr } = await supabaseClient
           .from('products')
@@ -660,11 +1057,11 @@
             onclick="selectCategory('${cat.key}')" 
             class="px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all flex items-center gap-2 ${
               isActive 
-                ? 'bg-blue-700 text-white shadow-sm' 
-                : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+                ? 'theme-primary-bg text-white shadow-sm' 
+                : 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300'
             }"
           >
-            <i class="fa-solid ${cat.icon} text-[11px] ${isActive ? 'text-white' : 'text-blue-600'}"></i>
+            <i class="fa-solid ${cat.icon} text-[11px] ${isActive ? 'text-white' : 'text-blue-600 dark:text-blue-400'}"></i>
             <span>${cat.label}</span>
           </button>
         `;
@@ -733,11 +1130,11 @@
 
       if (filtered.length === 0) {
         container.innerHTML = `
-          <div class="col-span-full py-16 text-center text-slate-400 bg-white rounded-3xl border border-dashed border-slate-200 p-8">
+          <div class="col-span-full py-16 text-center text-slate-400 theme-card rounded-3xl border border-dashed p-8">
             <i class="fa-solid fa-box-open text-4xl mb-3 text-slate-300"></i>
-            <h3 class="font-bold text-slate-700 text-sm">Koi product nahi mila</h3>
+            <h3 class="font-bold text-slate-700 dark:text-slate-300 text-sm">Koi product nahi mila</h3>
             <p class="text-xs text-slate-400 mt-1">Search query ya filter tabdeel karke dekhein.</p>
-            <button onclick="resetFilters()" class="mt-4 px-4 py-2 bg-blue-50 text-blue-700 font-bold text-xs rounded-xl hover:bg-blue-100">
+            <button onclick="resetFilters()" class="mt-4 px-4 py-2 bg-blue-50 dark:bg-slate-800 text-blue-700 dark:text-blue-300 font-bold text-xs rounded-xl hover:bg-blue-100">
               Tamam Collections Dikhayein
             </button>
           </div>
@@ -746,10 +1143,10 @@
       }
 
       container.innerHTML = filtered.map(item => `
-        <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-200 flex flex-col group">
+        <article class="theme-card rounded-2xl border overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-200 flex flex-col group">
           
           <!-- Image Box -->
-          <div class="relative w-full aspect-square bg-slate-100 overflow-hidden">
+          <div class="relative w-full aspect-square bg-slate-100 dark:bg-slate-800 overflow-hidden">
             <img 
               src="${item.image}" 
               alt="${item.title}" 
@@ -766,7 +1163,7 @@
             <!-- Quick View Button -->
             <button 
               onclick="openQuickView('${item.id}')"
-              class="absolute bottom-2.5 right-2.5 bg-white/90 hover:bg-white text-slate-800 text-[11px] font-bold px-3 py-1.5 rounded-full shadow-md backdrop-blur-xs flex items-center gap-1.5 opacity-90 hover:opacity-100 transition-opacity"
+              class="absolute bottom-2.5 right-2.5 bg-white/90 dark:bg-slate-900/90 text-slate-800 dark:text-white text-[11px] font-bold px-3 py-1.5 rounded-full shadow-md backdrop-blur-xs flex items-center gap-1.5 opacity-90 hover:opacity-100 transition-opacity"
             >
               <i class="fa-regular fa-eye"></i> Quick View
             </button>
@@ -778,13 +1175,13 @@
               ${item.category_label || item.categoryLabel || item.category}
             </span>
 
-            <h3 class="font-bold text-xs sm:text-sm text-slate-900 line-clamp-2 leading-snug mb-2 group-hover:text-blue-700 transition-colors">
+            <h3 class="font-bold text-xs sm:text-sm line-clamp-2 leading-snug mb-2 group-hover:text-blue-600 transition-colors">
               ${item.title}
             </h3>
 
             <!-- Price -->
             <div class="mt-auto pt-2 flex items-baseline gap-2 mb-3">
-              <span class="text-base sm:text-lg font-black text-slate-900">
+              <span class="text-base sm:text-lg font-black">
                 Rs. ${Number(item.price).toLocaleString()}
               </span>
               ${(item.old_price || item.oldPrice) ? `
@@ -798,7 +1195,7 @@
             <div class="grid grid-cols-2 gap-2">
               <button 
                 onclick="addToCart('${item.id}')"
-                class="py-2 px-3 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors"
+                class="py-2 px-3 bg-blue-50 dark:bg-slate-800 hover:bg-blue-100 dark:hover:bg-slate-700 text-blue-700 dark:text-blue-300 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors"
               >
                 <i class="fa-solid fa-cart-plus"></i> Add
               </button>
@@ -830,7 +1227,7 @@
       document.getElementById("qvCategory").innerText = item.category_label || item.category;
       document.getElementById("qvPrice").innerText = `Rs. ${Number(item.price).toLocaleString()}`;
       document.getElementById("qvOldPrice").innerText = (item.old_price || item.oldPrice) ? `Rs. ${Number(item.old_price || item.oldPrice).toLocaleString()}` : '';
-      document.getElementById("qvDesc").innerText = item.description || "High-grade quality fabric tailored for ultimate everyday comfort and durability.";
+      document.getElementById("qvDesc").innerText = item.description || "High-grade quality fabric tailored for ultimate everyday comfort and durability (KHM Bedding Verified).";
       document.getElementById("qvBadge").innerText = item.badge || "Verified";
 
       document.getElementById("qvAddBtn").onclick = () => {
@@ -920,7 +1317,7 @@
         container.innerHTML = `
           <div class="py-16 text-center text-slate-400">
             <i class="fa-solid fa-basket-shopping text-4xl mb-3 text-slate-300"></i>
-            <h4 class="font-bold text-slate-700 text-sm">Your shopping bag is empty</h4>
+            <h4 class="font-bold text-sm">Your shopping bag is empty</h4>
             <p class="text-xs text-slate-400 mt-1">Browse products and add them to order.</p>
           </div>
         `;
@@ -934,16 +1331,16 @@
       const grandTotal = subtotal + SHIPPING_FEE;
 
       container.innerHTML = cart.map(ci => `
-        <div class="flex items-center gap-3 p-2.5 rounded-xl bg-slate-50 border border-slate-200">
+        <div class="flex items-center gap-3 p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
           <img src="${ci.image}" alt="${ci.title}" class="w-14 h-14 rounded-lg object-cover bg-white" />
           <div class="flex-1 min-w-0">
-            <h4 class="text-xs font-bold text-slate-900 truncate">${ci.title}</h4>
-            <div class="text-xs font-black text-blue-700 mt-0.5">Rs. ${ci.price.toLocaleString()}</div>
+            <h4 class="text-xs font-bold truncate">${ci.title}</h4>
+            <div class="text-xs font-black text-blue-700 dark:text-blue-400 mt-0.5">Rs. ${ci.price.toLocaleString()}</div>
             
             <div class="flex items-center gap-2 mt-1.5">
-              <button onclick="updateCartQty('${ci.id}', -1)" class="w-6 h-6 rounded-md bg-white border border-slate-200 text-slate-600 hover:bg-slate-100 flex items-center justify-center font-bold text-xs">-</button>
-              <span class="text-xs font-bold text-slate-800">${ci.qty}</span>
-              <button onclick="updateCartQty('${ci.id}', 1)" class="w-6 h-6 rounded-md bg-white border border-slate-200 text-slate-600 hover:bg-slate-100 flex items-center justify-center font-bold text-xs">+</button>
+              <button onclick="updateCartQty('${ci.id}', -1)" class="w-6 h-6 rounded-md bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-200 hover:bg-slate-100 flex items-center justify-center font-bold text-xs">-</button>
+              <span class="text-xs font-bold">${ci.qty}</span>
+              <button onclick="updateCartQty('${ci.id}', 1)" class="w-6 h-6 rounded-md bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-200 hover:bg-slate-100 flex items-center justify-center font-bold text-xs">+</button>
             </div>
           </div>
           <button onclick="removeCartItem('${ci.id}')" class="text-slate-400 hover:text-rose-600 p-2 text-xs" title="Remove item">
@@ -996,7 +1393,7 @@
 
       const itemsText = cart.map(ci => `• ${ci.title} (x${ci.qty}) - Rs. ${(ci.price * ci.qty).toLocaleString()}`).join("\n");
 
-      // 1. Save Directly to Supabase 'orders' Table with 350 shipping fee
+      // 1. Save to Supabase 'orders' Table
       try {
         const { error: dbError } = await supabaseClient
           .from('orders')
@@ -1020,8 +1417,8 @@
         console.warn("Cloud connection err:", err);
       }
 
-      // 2. Prepare WhatsApp Order Message (With Rs. 350 COD)
-      const waMsg = `🛒 *NEW ORDER - VIBRANTMART*
+      // 2. Prepare WhatsApp Order Message
+      const waMsg = `🛒 *NEW ORDER - VIBRANTMART (KHM BEDDING)*
 ━━━━━━━━━━━━━━━━━━━
 *Order ID:* ${orderId}
 *Customer:* ${name}
