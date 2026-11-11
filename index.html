@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VibrantMart | Premium Baby Footwear, Combed Cotton Apparel & Luxury Bedding</title>
+  <title>KHM Bedding | Luxury Bedsheets, Combed Cotton Apparel & Kids Footwear</title>
   
   <!-- SEO & Social Meta Tags -->
-  <meta name="description" content="Shop pediatrician-approved baby shoes, 100% bio-washed combed cotton garments, and hotel luxury bedsheets across Pakistan with cash on delivery." />
-  <meta property="og:title" content="VibrantMart - Premium Family Lifestyle Store" />
+  <meta name="description" content="Shop luxury Egyptian cotton bedsheets, pediatrician-approved baby shoes, and 100% bio-washed garments with cash on delivery across Pakistan." />
+  <meta property="og:title" content="KHM Bedding - Luxury Bedding & Everyday Lifestyle" />
   <meta property="og:description" content="Flat Rs. 350 Nationwide COD Delivery. Order directly via WhatsApp or Online Checkout." />
   <meta property="og:type" content="website" />
 
@@ -182,7 +182,6 @@
       animation: floatMorph4 18s infinite alternate-reverse ease-in-out;
     }
 
-    /* Liquid Organic Float Keyframes */
     @keyframes floatMorph1 {
       0% { transform: translate(0px, 0px) scale(1) rotate(0deg); opacity: 0.85; }
       50% { transform: translate(120px, 60px) scale(1.18) rotate(45deg); opacity: 0.95; }
@@ -207,7 +206,7 @@
       100% { transform: translate(-70px, -40px) scale(0.95); opacity: 0.5; }
     }
 
-    /* Luminous Shimmer Canvas Grid Overlay */
+    /* Grid Overlay */
     .lw-grid-pattern {
       position: absolute;
       inset: 0;
@@ -218,7 +217,7 @@
       opacity: 0.6;
     }
 
-    /* Floating Micro Light Particles */
+    /* Floating Micro Particles */
     .lw-particle {
       position: absolute;
       background: #ffffff;
@@ -233,7 +232,7 @@
       50% { transform: translateY(-24px) scale(1.4); opacity: 0.9; }
     }
 
-    /* Transparent Sleek Mascot Avatars Overlay */
+    /* Transparent Sleek Mascot Avatars */
     #khmMascotOverlay {
       pointer-events: none;
       position: fixed;
@@ -278,9 +277,9 @@
 </head>
 <body class="font-sans antialiased min-h-screen flex flex-col selection:bg-blue-600 selection:text-white">
 
-  <!-- ==================== MODERN SLEEK MASCOT AVATARS (EVERY 10 SECONDS) ==================== -->
+  <!-- ==================== MODERN SLEEK MASCOT AVATARS ==================== -->
   <div id="khmMascotOverlay">
-    <!-- Left Mascot: Nova (Sleek Transparent Cyan) -->
+    <!-- Left Mascot: Nova -->
     <div id="mascotLeft" class="absolute bottom-3 flex items-center gap-2.5 transition-all duration-300 pointer-events-auto" style="left: -200px;">
       <div id="mascotLeftBody" class="animate-avatar-float">
         <div class="mascot-avatar bg-gradient-to-tr from-blue-600/70 via-cyan-500/80 to-white/40 text-white">
@@ -304,7 +303,7 @@
       </div>
     </div>
 
-    <!-- Right Mascot: Lumi (Sleek Transparent Violet) -->
+    <!-- Right Mascot: Lumi -->
     <div id="mascotRight" class="absolute bottom-3 flex items-center gap-2.5 transition-all duration-300 pointer-events-auto" style="right: -200px;">
       <span class="text-[9px] font-black uppercase tracking-wider bg-slate-900/80 text-violet-300 px-2 py-0.5 rounded-full backdrop-blur-md border border-violet-500/30 shadow">Lumi</span>
       <div id="mascotRightBody" class="animate-avatar-float">
@@ -349,20 +348,20 @@
     </div>
   </div>
 
-  <!-- ==================== 2. HEADER & NAVIGATION ==================== -->
+  <!-- ==================== 2. HEADER & NAVIGATION (NO ADMIN BUTTON) ==================== -->
   <header class="theme-nav border-b sticky top-0 z-40 shadow-xs transition-colors">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between gap-4">
       
-      <!-- Brand Logo -->
+      <!-- Brand Logo: KHM Bedding -->
       <a href="index.html" class="flex items-center gap-2.5 shrink-0 group">
         <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-700 via-indigo-600 to-emerald-500 text-white flex items-center justify-center font-extrabold text-xl shadow-md group-hover:scale-105 transition-transform">
-          <i class="fa-solid fa-bag-shopping"></i>
+          <i class="fa-solid fa-bed"></i>
         </div>
         <div>
           <span class="font-display font-black text-2xl tracking-tight block leading-none">
-            Vibrant<span class="text-blue-600 dark:text-blue-400">Mart</span>
+            KHM<span class="text-blue-600 dark:text-blue-400"> Bedding</span>
           </span>
-          <span class="text-[10px] font-bold text-slate-400 tracking-widest uppercase">Lifestyle Retail • KHM Bedding</span>
+          <span class="text-[10px] font-bold text-slate-400 tracking-widest uppercase">Lifestyle Retail & Luxury Living</span>
         </div>
       </a>
 
@@ -373,14 +372,14 @@
             type="text" 
             id="searchInput" 
             oninput="handleSearch(this.value)"
-            placeholder="Search baby shoes, cotton garments, luxury bedsheets..." 
+            placeholder="Search luxury bedsheets, cotton garments, baby shoes..." 
             class="w-full text-xs sm:text-sm pl-10 pr-4 py-2.5 rounded-full border border-slate-200 dark:border-slate-700 bg-slate-100/90 dark:bg-slate-800 focus:bg-white dark:focus:bg-slate-900 focus:ring-2 focus:ring-blue-100 outline-none transition-all text-slate-900 dark:text-white"
           />
           <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400 text-xs"></i>
         </div>
       </div>
 
-      <!-- Quick Actions (Admin Link & Cart Drawer Button) -->
+      <!-- Quick Actions (Mascot Story & Cart Drawer Button ONLY - Admin Button Removed) -->
       <div class="flex items-center gap-3">
         <!-- Interactive Mascot Trigger -->
         <button 
@@ -391,9 +390,6 @@
           <i class="fa-solid fa-sparkles text-cyan-600 animate-spin"></i> KHM Story
         </button>
 
-        <a href="admin.html" target="_blank" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-blue-600 px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 transition-colors">
-          <i class="fa-solid fa-lock text-slate-400"></i> Admin
-        </a>
         <button 
           onclick="toggleCartDrawer(true)"
           class="relative theme-primary-bg hover:opacity-90 text-white px-4 py-2.5 rounded-full font-bold text-xs sm:text-sm flex items-center gap-2.5 shadow-md shadow-blue-700/20 active:scale-95 transition-all"
@@ -575,16 +571,16 @@
     </div>
   </section>
 
-  <!-- ==================== 6. FOOTER ==================== -->
+  <!-- ==================== 6. FOOTER (KHM BEDDING BRANDING) ==================== -->
   <footer class="bg-slate-950 text-slate-400 py-12 px-4 sm:px-6">
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
       
       <div class="space-y-3">
         <div class="flex items-center gap-2">
           <div class="w-8 h-8 rounded-lg bg-blue-700 text-white flex items-center justify-center font-bold">
-            <i class="fa-solid fa-bag-shopping text-sm"></i>
+            <i class="fa-solid fa-bed text-sm"></i>
           </div>
-          <span class="font-display font-black text-xl text-white">Vibrant<span class="text-blue-500">Mart</span></span>
+          <span class="font-display font-black text-xl text-white">KHM <span class="text-blue-500">Bedding</span></span>
         </div>
         <p class="text-xs leading-relaxed">
           Your trusted store for pediatrician-tested baby shoes, 100% bio-washed cotton clothes, and hotel-grade luxury bedsheets (KHM Bedding) with flat Rs. 350 COD nationwide shipping.
@@ -622,7 +618,7 @@
     </div>
 
     <div class="max-w-7xl mx-auto pt-6 border-t border-slate-900 text-center text-xs text-slate-500">
-      &copy; 2026 VibrantMart Lifestyle Retail & KHM Bedding. All Rights Reserved. Connected with Supabase Cloud Database.
+      &copy; 2026 KHM Bedding. All Rights Reserved. Connected with Supabase Cloud Database.
     </div>
   </footer>
 
@@ -890,13 +886,13 @@
         document.documentElement.classList.remove('dark');
       }
       try {
-        localStorage.setItem('vibrantmart_theme', themeName);
+        localStorage.setItem('khmbedding_theme', themeName);
       } catch (e) {}
     }
 
     function initTheme() {
       try {
-        const savedTheme = localStorage.getItem('vibrantmart_theme') || 'vibrant';
+        const savedTheme = localStorage.getItem('khmbedding_theme') || 'vibrant';
         setTheme(savedTheme);
       } catch (e) {
         setTheme('vibrant');
@@ -965,7 +961,7 @@
                 isMascotActive = false;
               }, 2300);
 
-            }, 2500); // Dance duration
+            }, 2500);
 
           }, 800);
 
@@ -1201,7 +1197,7 @@
               </button>
 
               <a 
-                href="https://wa.me/${STORE_WHATSAPP}?text=${encodeURIComponent('Hello VibrantMart, I want to order: ' + item.title + ' (Rs. ' + item.price + ')')}" 
+                href="https://wa.me/${STORE_WHATSAPP}?text=${encodeURIComponent('Hello KHM Bedding, I want to order: ' + item.title + ' (Rs. ' + item.price + ')')}" 
                 target="_blank"
                 class="py-2 px-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors"
               >
@@ -1236,7 +1232,7 @@
         toggleCartDrawer(true);
       };
 
-      document.getElementById("qvWhatsAppBtn").href = `https://wa.me/${STORE_WHATSAPP}?text=${encodeURIComponent('Hello VibrantMart, I want to order: ' + item.title + ' (Rs. ' + item.price + ')')}`;
+      document.getElementById("qvWhatsAppBtn").href = `https://wa.me/${STORE_WHATSAPP}?text=${encodeURIComponent('Hello KHM Bedding, I want to order: ' + item.title + ' (Rs. ' + item.price + ')')}`;
 
       document.getElementById("quickViewModal").classList.remove("hidden");
     }
@@ -1246,11 +1242,11 @@
     }
 
     // ==========================================
-    // 5. SHOPPING CART ENGINE (LOCAL & CLOUD)
+    // 5. SHOPPING CART ENGINE
     // ==========================================
     function loadCartFromStorage() {
       try {
-        const saved = localStorage.getItem("vibrantmart_cart");
+        const saved = localStorage.getItem("khmbedding_cart");
         if (saved) cart = JSON.parse(saved);
       } catch (e) {
         cart = [];
@@ -1259,7 +1255,7 @@
 
     function saveCartToStorage() {
       try {
-        localStorage.setItem("vibrantmart_cart", JSON.stringify(cart));
+        localStorage.setItem("khmbedding_cart", JSON.stringify(cart));
       } catch (e) {}
     }
 
@@ -1368,7 +1364,7 @@
     }
 
     // ==========================================
-    // 6. ORDER PLACEMENT (RS. 350 COD + SUPABASE + WHATSAPP + EMAIL)
+    // 6. ORDER PLACEMENT (RS. 350 COD + SUPABASE + WHATSAPP)
     // ==========================================
     async function handlePlaceOrder(e) {
       e.preventDefault();
@@ -1389,7 +1385,7 @@
 
       const subtotal = cart.reduce((acc, ci) => acc + (ci.price * ci.qty), 0);
       const grandTotal = subtotal + SHIPPING_FEE; // Subtotal + Rs. 350
-      const orderId = "VM-" + Math.floor(100000 + Math.random() * 900000);
+      const orderId = "KHM-" + Math.floor(100000 + Math.random() * 900000);
 
       const itemsText = cart.map(ci => `• ${ci.title} (x${ci.qty}) - Rs. ${(ci.price * ci.qty).toLocaleString()}`).join("\n");
 
@@ -1417,8 +1413,8 @@
         console.warn("Cloud connection err:", err);
       }
 
-      // 2. Prepare WhatsApp Order Message
-      const waMsg = `🛒 *NEW ORDER - VIBRANTMART (KHM BEDDING)*
+      // 2. Prepare WhatsApp Order Message (KHM Bedding)
+      const waMsg = `🛒 *NEW ORDER - KHM BEDDING*
 ━━━━━━━━━━━━━━━━━━━
 *Order ID:* ${orderId}
 *Customer:* ${name}
