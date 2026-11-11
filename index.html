@@ -1055,6 +1055,15 @@
       document.getElementById("custCity").value = "";
       closeCartDrawer();
     }
+    <!-- Supabase SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+  // Aapki Exact Keys:
+  const SUPABASE_URL = "https://yyapzlhdnyduonrekiwe.supabase.co";
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5YXB6bGhkbnlkdW9ucmVraXdlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQzODA3MDYsImV4cCI6MjEwOTk1NjcwNn0.YMdQBz0h9sekPQV-crgmRHrGl96RfNj0xymXD6r4rBE";
+  
+  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   </script>
 </body>
 </html>
