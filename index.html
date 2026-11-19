@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="vibrant">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KHM Bedding | Futuristic Luxury Living & Pediatric Footwear</title>
-  
+  <title>KHM Bedding V4.0 | Grand Luxury Palace & Imperial Living</title>
+
   <!-- SEO & Social Meta Tags -->
-  <meta name="description" content="Shop luxury Egyptian cotton bedsheets, pediatrician-approved baby shoes, and bio-washed cotton garments across Pakistan with Flat Rs. 350 COD delivery." />
-  <meta property="og:title" content="KHM Bedding - Next-Gen Luxury Bedding & Living" />
-  <meta property="og:description" content="Flat Rs. 350 Nationwide COD Delivery. WhatsApp Order: 03049141244." />
+  <meta name="description" content="KHM Bedding V4.0 — Cinematic 3D Luxury Shopping Palace. Handcrafted baby shoes, bio-washed cotton couture, and 400TC Egyptian sateen palace bedsheets across Pakistan with Flat Rs. 350 COD delivery." />
+  <meta property="og:title" content="KHM Bedding V4.0 — Grand Luxury Palace" />
+  <meta property="og:description" content="Flat Rs. 350 Nationwide COD Delivery. WhatsApp VIP Concierge: +92 304 9141244." />
   <meta property="og:type" content="website" />
 
-  <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+  <!-- Google Fonts: Playfair Display, Cinzel & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+
   <!-- Font Awesome 6 Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -26,9 +26,25 @@
       darkMode: 'class',
       theme: {
         extend: {
+          colors: {
+            midnight: '#071426',
+            'midnight-deep': '#030e20',
+            sapphire: '#102344',
+            'sapphire-light': '#183466',
+            gold: {
+              300: '#f5e4b7',
+              400: '#eac886',
+              500: '#d6a75c',
+              600: '#b8893d',
+              700: '#8a6224',
+            },
+            ivory: '#f5efe5'
+          },
           fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            cinzel: ['"Cinzel"', 'serif'],
             sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-            display: ['"Outfit"', 'sans-serif'],
+            mono: ['"Space Grotesk"', 'monospace'],
           }
         }
       }
@@ -38,1572 +54,1333 @@
   <!-- Supabase Official JS SDK Client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <!-- Dynamic Theme, Live Wallpaper & Carousel Styles -->
   <style>
-    /* Theme Variables */
-    :root, [data-theme="vibrant"] {
-      --bg-main: #f8fafc;
-      --card-bg: #ffffff;
-      --border-color: #e2e8f0;
-      --brand-primary: #1d4ed8;
-      --brand-hover: #1e40af;
-      --brand-light: #eff6ff;
-      --brand-text: #1d4ed8;
-      --text-main: #0f172a;
-      --text-muted: #64748b;
-      --nav-bg: #ffffff;
-      --badge-bg: #1d4ed8;
-      /* Dynamic Live Wallpaper Sapphire Neon */
-      --lw-base: #060d1f;
-      --lw-orb1: rgba(29, 78, 216, 0.85);
-      --lw-orb2: rgba(37, 99, 235, 0.7);
-      --lw-orb3: rgba(16, 185, 129, 0.45);
-      --lw-orb4: rgba(99, 102, 241, 0.6);
-      --hud-border: rgba(59, 130, 246, 0.3);
-    }
-
-    [data-theme="dark"] {
-      --bg-main: #0b1120;
-      --card-bg: #1e293b;
-      --border-color: #334155;
-      --brand-primary: #3b82f6;
-      --brand-hover: #60a5fa;
-      --brand-light: #1e293b;
-      --brand-text: #93c5fd;
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --nav-bg: #0f172a;
-      --badge-bg: #2563eb;
-      /* Dynamic Live Wallpaper Cosmic Nebula */
-      --lw-base: #030712;
-      --lw-orb1: rgba(30, 58, 138, 0.85);
-      --lw-orb2: rgba(147, 51, 234, 0.65);
-      --lw-orb3: rgba(14, 116, 144, 0.5);
-      --lw-orb4: rgba(37, 99, 235, 0.4);
-      --hud-border: rgba(168, 85, 247, 0.35);
-    }
-
-    [data-theme="royal"] {
-      --bg-main: #fffdf5;
-      --card-bg: #ffffff;
-      --border-color: #fde68a;
-      --brand-primary: #b45309;
-      --brand-hover: #92400e;
-      --brand-light: #fef3c7;
-      --brand-text: #b45309;
-      --text-main: #451a03;
-      --text-muted: #78350f;
-      --nav-bg: #fffbeb;
-      --badge-bg: #d97706;
-      /* Dynamic Live Wallpaper Cyber Gold (KHM Bedding) */
-      --lw-base: #1f1105;
-      --lw-orb1: rgba(180, 83, 9, 0.85);
-      --lw-orb2: rgba(217, 119, 6, 0.75);
-      --lw-orb3: rgba(161, 98, 7, 0.6);
-      --lw-orb4: rgba(251, 191, 36, 0.35);
-      --hud-border: rgba(245, 158, 11, 0.4);
+    :root {
+      --bg-midnight: #071426;
+      --gold-primary: #d6a75c;
+      --gold-glow: rgba(214, 167, 92, 0.45);
     }
 
     body {
-      background-color: var(--bg-main);
-      color: var(--text-main);
-      transition: background-color 0.35s ease, color 0.35s ease;
-    }
-    .theme-card {
-      background-color: var(--card-bg);
-      border-color: var(--border-color);
-    }
-    .theme-nav {
-      background-color: var(--nav-bg);
-      border-color: var(--border-color);
-    }
-    .theme-primary-bg {
-      background-color: var(--brand-primary);
+      background-color: #071426;
+      color: #f5efe5;
+      overflow-x: hidden;
     }
 
-    /* ========================================================
-       LIVE WALLPAPER HERO ENGINE
-       ======================================================== */
-    .live-wallpaper-container {
-      position: relative;
-      background-color: var(--lw-base);
-      overflow: hidden;
-      isolation: isolate;
-      transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Custom Luxury Scrollbar */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
     }
-
-    .lw-orb {
-      position: absolute;
+    ::-webkit-scrollbar-track {
+      background: #030e20;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #8a6224;
       border-radius: 9999px;
-      filter: blur(80px);
-      mix-blend-mode: screen;
-      pointer-events: none;
-      will-change: transform, opacity;
-      transition: background 0.6s ease;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #d6a75c;
     }
 
-    .lw-orb-1 {
-      width: 500px;
-      height: 500px;
-      background: var(--lw-orb1);
-      top: -120px;
-      left: -80px;
-      animation: floatMorph1 16s infinite alternate ease-in-out;
+    /* Glassmorphism Classes */
+    .palace-glass {
+      background: rgba(16, 35, 68, 0.55);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(214, 167, 92, 0.22);
+    }
+    .palace-glass-heavy {
+      background: rgba(7, 20, 38, 0.88);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(214, 167, 92, 0.3);
+    }
+    .gold-border-glow {
+      box-shadow: 0 0 25px rgba(214, 167, 92, 0.2), inset 0 0 15px rgba(214, 167, 92, 0.1);
+    }
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #ffffff 0%, #f5e4b7 35%, #d6a75c 75%, #b8893d 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gold-btn-gradient {
+      background: linear-gradient(135deg, #f5e4b7 0%, #d6a75c 50%, #b8893d 100%);
+      color: #071426;
+    }
+    .gold-btn-gradient:hover {
+      background: linear-gradient(135deg, #ffffff 0%, #f5e4b7 40%, #d6a75c 100%);
+      box-shadow: 0 10px 30px rgba(214, 167, 92, 0.4);
     }
 
-    .lw-orb-2 {
-      width: 540px;
-      height: 540px;
-      background: var(--lw-orb2);
-      bottom: -140px;
-      right: -80px;
-      animation: floatMorph2 20s infinite alternate-reverse ease-in-out;
+    /* 3D Card Hover Perspective */
+    .pedestal-card {
+      transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      transform-style: preserve-3d;
+    }
+    .pedestal-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: rgba(214, 167, 92, 0.7);
+      box-shadow: 0 20px 40px rgba(3, 14, 32, 0.9), 0 0 30px rgba(214, 167, 92, 0.25);
     }
 
-    .lw-orb-3 {
-      width: 380px;
-      height: 380px;
-      background: var(--lw-orb3);
-      top: 25%;
-      left: 45%;
-      animation: floatMorph3 14s infinite alternate ease-in-out;
-    }
-
-    .lw-orb-4 {
-      width: 440px;
-      height: 440px;
-      background: var(--lw-orb4);
-      bottom: -60px;
-      left: 15%;
-      animation: floatMorph4 18s infinite alternate-reverse ease-in-out;
-    }
-
-    @keyframes floatMorph1 {
-      0% { transform: translate(0px, 0px) scale(1) rotate(0deg); opacity: 0.85; }
-      50% { transform: translate(120px, 60px) scale(1.18) rotate(45deg); opacity: 0.95; }
-      100% { transform: translate(40px, 110px) scale(0.92) rotate(90deg); opacity: 0.75; }
-    }
-    @keyframes floatMorph2 {
-      0% { transform: translate(0px, 0px) scale(1) rotate(0deg); opacity: 0.8; }
-      50% { transform: translate(-100px, -70px) scale(1.22) rotate(-55deg); opacity: 0.95; }
-      100% { transform: translate(-40px, 50px) scale(0.88) rotate(-110deg); opacity: 0.7; }
-    }
-    @keyframes floatMorph3 {
-      0% { transform: translate(0px, 0px) scale(0.9); opacity: 0.6; }
-      50% { transform: translate(-80px, 70px) scale(1.25); opacity: 0.85; }
-      100% { transform: translate(60px, -50px) scale(1.05); opacity: 0.65; }
-    }
-    @keyframes floatMorph4 {
-      0% { transform: translate(0px, 0px) scale(1.05); opacity: 0.55; }
-      50% { transform: translate(90px, -80px) scale(1.2); opacity: 0.8; }
-      100% { transform: translate(-70px, -40px) scale(0.95); opacity: 0.5; }
-    }
-
-    .lw-grid-pattern {
-      position: absolute;
-      inset: 0;
-      background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
-      background-size: 32px 32px;
-      mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
-      pointer-events: none;
-      opacity: 0.6;
-    }
-
-    .lw-particle {
-      position: absolute;
-      background: #ffffff;
-      border-radius: 9999px;
-      pointer-events: none;
-      box-shadow: 0 0 10px #ffffff, 0 0 20px #60a5fa;
-      animation: particleDrift 8s infinite ease-in-out;
-    }
-    @keyframes particleDrift {
-      0%, 100% { transform: translateY(0) scale(0.8); opacity: 0.3; }
-      50% { transform: translateY(-24px) scale(1.4); opacity: 0.9; }
-    }
-
-    /* ========================================================
-       NEXT-TO-NEXT CAROUSEL / SLIDER CSS
-       ======================================================== */
-    .slider-viewport {
+    /* Featured Collections Slider */
+    .slider-container {
       overflow-x: auto;
-      scroll-behavior: smooth;
+      scroll-snap-type: x mandatory;
       scrollbar-width: none;
       -ms-overflow-style: none;
     }
-    .slider-viewport::-webkit-scrollbar {
+    .slider-container::-webkit-scrollbar {
       display: none;
     }
     .slider-item {
-      scroll-snap-align: start;
+      scroll-snap-align: center;
     }
-
-    /* Mascot HUD Styles */
-    #khmMascotOverlay {
-      pointer-events: none;
-      position: fixed;
-      bottom: 24px;
-      left: 0;
-      right: 0;
-      height: 120px;
-      z-index: 9999;
-      overflow: hidden;
-      display: none;
-    }
-    .mascot-avatar {
-      width: 48px;
-      height: 48px;
-      border-radius: 16px;
-      backdrop-filter: blur(14px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-      border: 1.5px solid rgba(255, 255, 255, 0.4);
-      position: relative;
-    }
-    @keyframes avatarFloat {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-    @keyframes avatarMicroDance {
-      0%, 100% { transform: translateY(0) rotate(-6deg) scale(1.05); }
-      50% { transform: translateY(-12px) rotate(6deg) scale(1.15); }
-    }
-    .animate-avatar-float { animation: avatarFloat 2s infinite ease-in-out; }
-    .animate-avatar-dance { animation: avatarMicroDance 0.45s infinite ease-in-out; }
   </style>
 </head>
-<body class="font-sans antialiased min-h-screen flex flex-col selection:bg-blue-600 selection:text-white">
+<body class="font-sans antialiased selection:bg-gold-500 selection:text-midnight">
 
-  <!-- ==================== MODERN SLEEK MASCOT AVATARS ==================== -->
-  <div id="khmMascotOverlay">
-    <!-- Left Mascot: Nova -->
-    <div id="mascotLeft" class="absolute bottom-3 flex items-center gap-2.5 transition-all duration-300 pointer-events-auto" style="left: -200px;">
-      <div id="mascotLeftBody" class="animate-avatar-float">
-        <div class="mascot-avatar bg-gradient-to-tr from-blue-600/70 via-cyan-500/80 to-white/40 text-white">
-          <i class="fa-solid fa-sparkles text-lg drop-shadow-md"></i>
-          <span class="absolute -top-1 -right-1 w-3 h-3 bg-emerald-400 rounded-full border-2 border-white animate-ping"></span>
-        </div>
-      </div>
-      <span class="text-[9px] font-black uppercase tracking-wider bg-slate-900/80 text-cyan-300 px-2 py-0.5 rounded-full backdrop-blur-md border border-cyan-500/30 shadow">Nova</span>
-      
-      <!-- Shared Note Token (KHM Bedding) -->
-      <div id="mascotNoteTag" class="hidden opacity-0 bg-white/95 dark:bg-slate-900/95 text-slate-900 dark:text-white px-3.5 py-2 rounded-2xl shadow-2xl border border-amber-300/60 backdrop-blur-md flex items-center gap-2.5 transition-all">
-        <div class="w-7 h-7 rounded-lg bg-amber-400/20 text-amber-500 flex items-center justify-center font-black text-xs">
-          <i class="fa-solid fa-bed"></i>
-        </div>
-        <div class="leading-tight">
-          <div class="text-[11px] font-black text-rose-600 font-display">Order Now KHM Bedding</div>
-          <div class="text-[9px] font-extrabold text-emerald-600 flex items-center gap-1">
-            <i class="fa-brands fa-whatsapp"></i> 03049141244 <span class="text-slate-400">• Rs. 350 COD</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Right Mascot: Lumi -->
-    <div id="mascotRight" class="absolute bottom-3 flex items-center gap-2.5 transition-all duration-300 pointer-events-auto" style="right: -200px;">
-      <span class="text-[9px] font-black uppercase tracking-wider bg-slate-900/80 text-violet-300 px-2 py-0.5 rounded-full backdrop-blur-md border border-violet-500/30 shadow">Lumi</span>
-      <div id="mascotRightBody" class="animate-avatar-float">
-        <div class="mascot-avatar bg-gradient-to-tr from-indigo-600/70 via-fuchsia-500/80 to-white/40 text-white">
-          <i class="fa-solid fa-face-smile text-xl drop-shadow-md"></i>
-        </div>
-      </div>
-    </div>
+  <!-- ========================================================
+       1. PROCEDURAL 3D WEBGL VOLUMETRIC PALACE SHADER (BACKGROUND)
+       ======================================================== -->
+  <div class="fixed inset-0 w-full h-full pointer-events-none z-0 opacity-75">
+    <canvas id="palaceShaderCanvas" class="w-full h-full block"></canvas>
   </div>
 
-  <!-- ==================== 1. TOP ANNOUNCEMENT BAR (WITH AUDIO FX & TELEMETRY) ==================== -->
-  <div class="bg-slate-950 text-slate-200 text-xs py-2 px-4 border-b border-slate-800">
-    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 font-medium">
-      <div class="flex items-center gap-2 flex-wrap">
-        <span class="bg-gradient-to-r from-blue-600 to-cyan-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider flex items-center gap-1 shadow-sm">
+  <!-- Ambient Dark Vignette Overlay -->
+  <div class="fixed inset-0 pointer-events-none z-0 bg-radial from-transparent via-midnight/60 to-midnight"></div>
+
+  <!-- ========================================================
+       2. TOP STATUS & TELEMETRY STRIP
+       ======================================================== -->
+  <div class="relative z-50 bg-midnight-deep/90 border-b border-gold-500/20 text-xs py-2 px-4 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
+      
+      <div class="flex items-center gap-2 sm:gap-3 flex-wrap justify-center font-mono">
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-400 text-[10px] font-bold uppercase tracking-wider">
           <i class="fa-solid fa-bolt text-amber-300"></i> Hyper-Dispatch Active
         </span>
-        <span class="text-slate-300 font-semibold">Nationwide COD Rs. 350 • All Pakistan Direct Courier</span>
-        <span class="inline-flex items-center gap-1.5 text-[11px] text-emerald-400 font-bold ml-2">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> 48 Shoppers Live
+        <span class="text-ivory/80 text-[11px] font-medium">Flat Rs. 350 COD Nationwide</span>
+        <span class="text-gold-500/40">•</span>
+        <span class="inline-flex items-center gap-1.5 text-[11px] text-emerald-400 font-bold">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> 48 Shoppers in Palace
         </span>
       </div>
-      
-      <!-- Audio FX Toggle, Theme Switcher & WhatsApp -->
-      <div class="flex items-center gap-3 text-slate-300">
-        
-        <!-- AUDIO FX TOGGLE BUTTON -->
+
+      <div class="flex items-center gap-4 text-[11px] text-ivory/70">
+        <!-- Audio FX Synthesizer Toggle -->
         <button 
           id="audioToggleBtn" 
           onclick="toggleAudioFX()" 
-          title="Toggle Futuristic Web Audio Effects"
-          class="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700/80 text-[11px] font-bold text-cyan-400 transition-all"
+          title="Toggle Imperial Web Audio Synthesizer"
+          class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-sapphire/80 border border-gold-500/30 hover:border-gold-500 text-gold-400 transition-all font-mono text-[10px] uppercase tracking-wider"
         >
-          <i class="fa-solid fa-volume-high text-xs"></i>
-          <span id="audioToggleLabel">Audio FX ON</span>
+          <i id="audioIcon" class="fa-solid fa-volume-high text-xs"></i>
+          <span id="audioLabel">Audio FX ON</span>
         </button>
 
-        <!-- THEME BUTTONS -->
-        <div class="flex items-center gap-1 bg-slate-900 p-1 rounded-xl border border-slate-700/80">
-          <span class="text-[10px] font-bold text-slate-400 px-1 hidden sm:inline"><i class="fa-solid fa-palette text-amber-400"></i> Theme:</span>
-          <button onclick="setTheme('vibrant'); playAudioCue('click');" title="Sapphire Neon" class="px-2 py-0.5 rounded-lg text-[11px] font-extrabold bg-blue-600 text-white transition-all">
-            Sapphire
-          </button>
-          <button onclick="setTheme('dark'); playAudioCue('click');" title="Nebula Dark" class="px-2 py-0.5 rounded-lg text-[11px] font-extrabold text-slate-300 hover:text-white hover:bg-slate-800 transition-all">
-            🌙 Nebula
-          </button>
-          <button onclick="setTheme('royal'); playAudioCue('click');" title="Cyber Gold KHM Bedding" class="px-2 py-0.5 rounded-lg text-[11px] font-extrabold text-amber-300 hover:text-white hover:bg-amber-900/50 transition-all">
-            👑 Cyber Gold
-          </button>
-        </div>
-
-        <a href="https://wa.me/923049141244" target="_blank" onclick="playAudioCue('click')" class="hover:text-emerald-400 transition-colors flex items-center gap-1.5 font-bold ml-1">
-          <i class="fa-brands fa-whatsapp text-emerald-400"></i> <span class="hidden sm:inline">WhatsApp:</span> +92 304 9141244
+        <a href="https://wa.me/923049141244" target="_blank" onclick="playAudio('click')" class="hover:text-gold-400 transition-colors flex items-center gap-1.5 font-bold font-mono">
+          <i class="fa-brands fa-whatsapp text-emerald-400 text-xs"></i> WhatsApp: +92 304 9141244
         </a>
       </div>
+
     </div>
   </div>
 
-  <!-- ==================== 2. HEADER & NAVIGATION (NO ADMIN BUTTON) ==================== -->
-  <header class="theme-nav border-b sticky top-0 z-40 shadow-xs transition-colors backdrop-blur-md bg-white/90 dark:bg-slate-900/90">
+  <!-- ========================================================
+       3. PALATIAL NAVIGATION HEADER
+       ======================================================== -->
+  <header class="sticky top-0 z-40 palace-glass-heavy border-b border-gold-500/25 transition-all">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between gap-4">
       
-      <!-- Brand Logo: KHM Bedding -->
-      <a href="index.html" onclick="playAudioCue('click')" class="flex items-center gap-2.5 shrink-0 group">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-700 via-indigo-600 to-cyan-400 text-white flex items-center justify-center font-extrabold text-xl shadow-md group-hover:scale-105 transition-transform">
-          <i class="fa-solid fa-bed"></i>
+      <!-- Brand Logo -->
+      <a href="index.html" onclick="playAudio('click')" class="flex items-center gap-3 group">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-sapphire via-gold-600/40 to-gold-400 text-gold-300 flex items-center justify-center text-xl shadow-lg border border-gold-500/40 group-hover:scale-105 transition-transform">
+          <i class="fa-solid fa-crown"></i>
         </div>
         <div>
-          <span class="font-display font-black text-2xl tracking-tight block leading-none flex items-center gap-1.5">
-            KHM<span class="text-blue-600 dark:text-blue-400"> Bedding</span>
-            <span class="text-[9px] bg-blue-100 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300 px-1.5 py-0.5 rounded-md font-mono">V3.0 SYNTH</span>
+          <span class="font-cinzel font-bold text-xl sm:text-2xl tracking-wider text-ivory block leading-none">
+            KHM <span class="gold-gradient-text">BEDDING</span>
           </span>
-          <span class="text-[10px] font-bold text-slate-400 tracking-widest uppercase">Futuristic Luxury Living & Pediatric Footwear</span>
+          <span class="text-[9px] font-mono uppercase tracking-[0.22em] text-gold-400/90 block mt-1">Palace of Sovereign Ergonomics</span>
         </div>
       </a>
 
-      <!-- Search Input -->
-      <div class="flex-1 max-w-lg hidden md:block">
-        <div class="relative">
-          <input 
-            type="text" 
-            id="searchInput" 
-            oninput="handleSearch(this.value)"
-            placeholder="Search baby shoes, bio-washed cotton, luxury bedsheets..." 
-            class="w-full text-xs sm:text-sm pl-10 pr-4 py-2.5 rounded-full border border-slate-200 dark:border-slate-700 bg-slate-100/90 dark:bg-slate-800 focus:bg-white dark:focus:bg-slate-900 focus:ring-2 focus:ring-blue-100 outline-none transition-all text-slate-900 dark:text-white"
-          />
-          <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400 text-xs"></i>
-        </div>
-      </div>
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden lg:flex items-center gap-8 font-cinzel text-xs uppercase tracking-widest text-ivory/80 font-bold">
+        <a href="#hero" class="text-gold-400 hover:text-white transition-colors relative py-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-gold-500">Home</a>
+        <a href="#featuredSection" class="hover:text-gold-400 transition-colors py-1">Collections</a>
+        <a href="#charterSection" class="hover:text-gold-400 transition-colors py-1">Our Story</a>
+        <a href="#footer" class="hover:text-gold-400 transition-colors py-1">Contact</a>
+      </nav>
 
-      <!-- Quick Actions (Mascot Story & Cart Drawer Button ONLY) -->
+      <!-- Header Action Controls -->
       <div class="flex items-center gap-3">
-        <!-- Interactive Mascot Trigger -->
-        <button 
-          onclick="triggerMascotInteraction(true); playAudioCue('warp');" 
-          title="Summon KHM Holographic Companion"
-          class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-cyan-800 dark:text-cyan-300 bg-cyan-50 dark:bg-cyan-950/60 border border-cyan-200 dark:border-cyan-800 px-3 py-2 rounded-xl hover:bg-cyan-100 transition-colors"
+        <!-- Direct Concierge Button -->
+        <a 
+          href="https://wa.me/923049141244" 
+          target="_blank" 
+          onclick="playAudio('click')"
+          class="hidden sm:inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-sapphire/80 hover:bg-sapphire text-gold-300 border border-gold-500/40 hover:border-gold-400 text-xs font-cinzel font-bold tracking-wider transition-all"
         >
-          <span class="w-2 h-2 rounded-full bg-cyan-500 animate-pulse"></span> KHM Companion
-        </button>
+          <i class="fa-solid fa-gem text-xs text-gold-400"></i> VIP Concierge
+        </a>
 
+        <!-- Sovereign Bag Trigger -->
         <button 
-          onclick="toggleCartDrawer(true); playAudioCue('click');"
-          class="relative theme-primary-bg hover:opacity-90 text-white px-4 py-2.5 rounded-full font-bold text-xs sm:text-sm flex items-center gap-2.5 shadow-md shadow-blue-700/20 active:scale-95 transition-all"
+          onclick="toggleBagDrawer(true); playAudio('click');"
+          class="relative gold-btn-gradient font-bold px-4 py-2.5 rounded-xl font-cinzel text-xs tracking-wider flex items-center gap-2 shadow-xl hover:scale-105 active:scale-95 transition-all"
         >
-          <i class="fa-solid fa-basket-shopping"></i>
-          <span>Bag</span>
-          <span id="cartCountBadge" class="bg-amber-400 text-slate-900 px-2 py-0.5 rounded-full font-black text-xs">0</span>
+          <i class="fa-solid fa-bag-shopping text-sm"></i>
+          <span class="hidden sm:inline">Bag</span>
+          <span id="headerCartCount" class="bg-midnight text-gold-400 px-2 py-0.5 rounded-full font-mono font-bold text-xs border border-gold-500/40">0</span>
         </button>
       </div>
 
-    </div>
-
-    <!-- Category Nav Bar -->
-    <div class="border-t border-slate-100 dark:border-slate-800">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6">
-        <nav class="flex items-center gap-2 overflow-x-auto py-2.5 no-scrollbar" id="categoryNavContainer">
-          <div class="text-xs text-slate-400 py-1 flex items-center gap-2">
-            <i class="fa-solid fa-circle-notch fa-spin text-blue-600"></i> Loading departments...
-          </div>
-        </nav>
-      </div>
     </div>
   </header>
 
-  <!-- ==================== 3. FRONT HERO: DYNAMIC LIVE WALLPAPER & HUD ==================== -->
-  <section class="live-wallpaper-container text-white py-14 px-4 sm:px-6 relative">
-    
-    <!-- LIVING FLUID ORBS LAYER -->
-    <div class="lw-orb lw-orb-1"></div>
-    <div class="lw-orb lw-orb-2"></div>
-    <div class="lw-orb lw-orb-3"></div>
-    <div class="lw-orb lw-orb-4"></div>
-
-    <!-- GEOMETRIC SHIMMER PATTERN -->
-    <div class="lw-grid-pattern"></div>
-
-    <!-- FLOATING LIGHT PARTICLES -->
-    <div class="lw-particle" style="width: 4px; height: 4px; top: 20%; left: 18%; animation-delay: 0s;"></div>
-    <div class="lw-particle" style="width: 6px; height: 6px; top: 65%; left: 35%; animation-delay: 2.5s;"></div>
-    <div class="lw-particle" style="width: 5px; height: 5px; top: 30%; left: 75%; animation-delay: 1.2s;"></div>
-    <div class="lw-particle" style="width: 7px; height: 7px; top: 80%; left: 85%; animation-delay: 3.8s;"></div>
-
-    <!-- HERO FOREGROUND CONTENT -->
-    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+  <!-- ========================================================
+       4. HERO SECTION: PALATIAL ARCHITECTURAL SHOWROOM
+       ======================================================== -->
+  <section id="hero" class="relative z-10 py-16 lg:py-24 px-4 sm:px-6">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
       
-      <div class="lg:col-span-8 space-y-4 text-center lg:text-left">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-bold text-blue-100">
-          <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
-          <i class="fa-solid fa-truck-fast text-amber-400"></i> COD Rs. 350 Flat Nationwide Delivery 
-          <span class="bg-amber-400/20 text-amber-300 text-[10px] px-1.5 py-0.5 rounded font-mono">PAKISTAN PRIME</span>
+      <!-- Left Column: Typography & Intent -->
+      <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+        
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full palace-glass border border-gold-500/30 text-gold-300 text-xs font-cinzel tracking-widest">
+          <i class="fa-solid fa-crown text-gold-400"></i> Imperial Living & Couture Ergonomics
         </div>
-        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black font-display tracking-tight leading-tight drop-shadow-md">
-          Next-Gen Comfort & <br class="hidden sm:inline" />Futuristic Living
+
+        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-serif font-black tracking-tight leading-[1.08]">
+          NEXT-GEN COMFORT <br />
+          <span class="italic font-normal font-serif text-ivory/90">& FUTURISTIC</span>
+          <span class="gold-gradient-text block font-serif">LIVING</span>
         </h1>
-        <p class="text-sm sm:text-base text-blue-100/90 max-w-2xl leading-relaxed drop-shadow-xs">
-          Engineered for ultimate luxury: pediatrician-approved ultra-soft baby shoes, 100% bio-washed combed cotton, and hotel 400TC Egyptian cotton bedsheets (<b class="text-white">KHM Bedding</b>). Direct WhatsApp instant concierge ordering at <b class="bg-white/10 px-2 py-0.5 rounded text-white font-mono">03049141244</b>.
+
+        <p class="text-sm sm:text-base text-ivory/70 max-w-xl font-sans leading-relaxed font-light">
+          Engineered for ultimate luxury, everyday comfort and stylish living across Pakistan. Handcrafted soft-step baby shoes, bio-washed combed cotton couture, and 400TC Egyptian sateen palace chambers tailored for royal residences.
         </p>
-        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-2">
-          <a href="#featuredSliderSection" onclick="playAudioCue('click')" class="px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-sm shadow-xl shadow-emerald-500/30 flex items-center gap-2 hover:-translate-y-0.5 transition-all">
-            <i class="fa-solid fa-compass"></i> Explore Holographic Catalog
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+          <a 
+            href="#featuredSection" 
+            onclick="playAudio('click')"
+            class="gold-btn-gradient px-8 py-4 rounded-xl font-cinzel font-bold text-xs uppercase tracking-widest shadow-2xl flex items-center gap-3 hover:-translate-y-0.5 transition-all"
+          >
+            <span>Explore Collections</span>
+            <i class="fa-solid fa-arrow-right-long text-sm"></i>
           </a>
-          <a href="https://wa.me/923049141244" target="_blank" onclick="playAudioCue('click')" class="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm backdrop-blur-md border border-white/20 flex items-center gap-2 hover:-translate-y-0.5 transition-all">
-            <i class="fa-brands fa-whatsapp text-emerald-400 text-lg"></i> Direct WhatsApp Concierge
+
+          <a 
+            href="https://wa.me/923049141244?text=Hello%20KHM%20Bedding%20VIP%20Concierge,%20I%20wish%20to%20inquire%20about%20your%20luxury%20collections" 
+            target="_blank" 
+            onclick="playAudio('click')"
+            class="palace-glass hover:bg-sapphire/80 text-gold-300 border border-gold-500/40 px-6 py-4 rounded-xl font-cinzel font-bold text-xs uppercase tracking-widest flex items-center gap-2.5 transition-all hover:-translate-y-0.5"
+          >
+            <i class="fa-brands fa-whatsapp text-emerald-400 text-base"></i> WhatsApp VIP Concierge
           </a>
         </div>
-        <div class="flex items-center justify-center lg:justify-start gap-4 text-xs text-blue-200/80 pt-1 font-mono">
-          <span><i class="fa-solid fa-check text-emerald-400"></i> Instant Confirmation</span>
-          <span><i class="fa-solid fa-check text-emerald-400"></i> Rs. 350 COD Verified</span>
-          <span><i class="fa-solid fa-check text-emerald-400"></i> 30-Day Guarantee</span>
+
+        <!-- Trust Mini Badges -->
+        <div class="grid grid-cols-3 gap-3 pt-6 border-t border-gold-500/15 max-w-lg mx-auto lg:mx-0 text-center font-mono">
+          <div class="palace-glass p-2.5 rounded-xl border border-gold-500/20">
+            <div class="text-gold-400 font-bold text-xs sm:text-sm">100%</div>
+            <div class="text-[10px] text-ivory/60 uppercase">Bio-Combed Cotton</div>
+          </div>
+          <div class="palace-glass p-2.5 rounded-xl border border-gold-500/20">
+            <div class="text-gold-400 font-bold text-xs sm:text-sm">Rs. 350</div>
+            <div class="text-[10px] text-ivory/60 uppercase">Nationwide Flat COD</div>
+          </div>
+          <div class="palace-glass p-2.5 rounded-xl border border-gold-500/20">
+            <div class="text-gold-400 font-bold text-xs sm:text-sm">24-48h</div>
+            <div class="text-[10px] text-ivory/60 uppercase">Hyper-Dispatch</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Sovereign Flagship Showcase Bento -->
+      <div class="lg:col-span-5 relative">
+        <div class="palace-glass-heavy rounded-3xl p-6 border border-gold-500/40 shadow-2xl relative overflow-hidden">
+          
+          <!-- Holographic Shimmer Header -->
+          <div class="flex items-center justify-between pb-3 mb-4 border-b border-gold-500/20 text-[11px] font-mono uppercase tracking-widest text-gold-400">
+            <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-gold-400 animate-ping"></span> Sovereign Flagship</span>
+            <span class="text-ivory/50">Autonomous Vault</span>
+          </div>
+
+          <!-- Highlight Product Image -->
+          <div class="relative w-full aspect-video rounded-2xl overflow-hidden mb-5 border border-gold-500/30 group">
+            <img 
+              src="https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=1000&auto=format&fit=crop&q=80" 
+              alt="1000TC Egyptian Cotton Bedding" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-midnight via-transparent to-transparent"></div>
+            <div class="absolute bottom-3 left-3 right-3 flex justify-between items-end">
+              <div>
+                <span class="text-[10px] font-mono uppercase text-gold-400 font-bold">Palace Spec Telemetry</span>
+                <h4 class="font-serif font-bold text-sm text-white">1000TC Sateen Grand Duvet</h4>
+              </div>
+              <span class="text-gold-300 font-serif font-bold text-base">Rs. 14,500</span>
+            </div>
+          </div>
+
+          <!-- Telemetry Attributes -->
+          <div class="grid grid-cols-2 gap-2 text-xs font-mono mb-4">
+            <div class="p-2.5 rounded-xl bg-midnight/70 border border-gold-500/15">
+              <span class="text-[10px] text-ivory/50 block">Weave Matrix</span>
+              <span class="text-gold-300 font-bold">Egyptian 1000TC</span>
+            </div>
+            <div class="p-2.5 rounded-xl bg-midnight/70 border border-gold-500/15">
+              <span class="text-[10px] text-ivory/50 block">Sole Comfort</span>
+              <span class="text-gold-300 font-bold">Zero Toxicity</span>
+            </div>
+            <div class="p-2.5 rounded-xl bg-midnight/70 border border-gold-500/15">
+              <span class="text-[10px] text-ivory/50 block">Logistics Fleet</span>
+              <span class="text-gold-300 font-bold">TCS & Trax Live</span>
+            </div>
+            <div class="p-2.5 rounded-xl bg-midnight/70 border border-gold-500/15">
+              <span class="text-[10px] text-ivory/50 block">Founder Line</span>
+              <span class="text-gold-300 font-bold">Direct WhatsApp</span>
+            </div>
+          </div>
+
+          <button 
+            onclick="addToCart('p-flagship', '1000TC Sateen Grand Duvet', 14500, 'https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=800&auto=format&fit=crop&q=80')" 
+            class="w-full py-3.5 rounded-xl palace-glass hover:bg-gold-500 hover:text-midnight text-gold-300 border border-gold-500/50 font-cinzel font-bold text-xs uppercase tracking-widest transition-all shadow-lg flex items-center justify-center gap-2"
+          >
+            <i class="fa-solid fa-lock"></i> Reserve Into Sovereign Bag
+          </button>
+
         </div>
       </div>
 
-      <!-- Quick Holographic HUD Bento Highlights -->
-      <div class="lg:col-span-4 bg-white/10 backdrop-blur-md border border-white/15 p-6 rounded-3xl space-y-4 shadow-2xl relative overflow-hidden">
-        <div class="flex items-center justify-between text-[11px] font-mono uppercase tracking-wider text-cyan-300 pb-2 border-b border-white/10">
-          <span><i class="fa-solid fa-circle text-[8px] animate-pulse"></i> Holographic HUD Telemetry</span>
-          <span class="text-slate-300 font-bold">SECURE COD</span>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       5. FEATURED COLLECTIONS: 3D SPATIAL SLIDER (4 WORLDS)
+       ======================================================== -->
+  <section id="featuredSection" class="relative z-10 py-16 px-4 sm:px-6 border-t border-gold-500/20">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Section Title & Slider Navigation Arrows -->
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-8">
+        <div>
+          <div class="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-widest text-gold-400 mb-1">
+            <i class="fa-solid fa-cube text-gold-400"></i> Spatial Showroom Universes
+          </div>
+          <h2 class="text-3xl sm:text-5xl font-serif font-black tracking-tight text-ivory">
+            FEATURED <span class="gold-gradient-text font-serif">COLLECTIONS</span>
+          </h2>
+          <p class="text-xs sm:text-sm text-ivory/60 mt-1 max-w-xl font-light">
+            Explore our 4 curated architectural universes crafted for the discerning household. Each environment hosts certified cotton garments, pediatric safe baby footwear, and sovereign bed linens.
+          </p>
         </div>
 
-        <div class="flex items-center gap-3.5 p-2 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
-          <div class="w-11 h-11 rounded-xl bg-blue-500/25 text-blue-300 flex items-center justify-center text-lg border border-blue-400/30">
-            <i class="fa-solid fa-shield-halved"></i>
+        <!-- Previous / Next Controls -->
+        <div class="flex items-center gap-3">
+          <div class="font-mono text-xs text-gold-400 font-bold px-3 py-1 rounded-lg palace-glass border border-gold-500/30" id="sliderCounterBadge">
+            01 / 04
           </div>
-          <div>
-            <div class="flex items-center gap-2">
-              <h4 class="font-extrabold text-sm">Pediatrician AI-Certified Safe</h4>
-              <span class="bg-emerald-400/20 text-emerald-300 text-[9px] px-1 rounded font-mono">100% SOFT</span>
+          <div class="flex items-center gap-2">
+            <button 
+              onclick="slideFeatured(-1); playAudio('whoosh');" 
+              class="w-10 h-10 rounded-xl palace-glass hover:bg-gold-500 hover:text-midnight text-gold-300 border border-gold-500/40 flex items-center justify-center text-xs transition-all active:scale-90"
+              title="Previous Collection"
+            >
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button 
+              onclick="slideFeatured(1); playAudio('whoosh');" 
+              class="w-10 h-10 rounded-xl palace-glass hover:bg-gold-500 hover:text-midnight text-gold-300 border border-gold-500/40 flex items-center justify-center text-xs transition-all active:scale-90"
+              title="Next Collection"
+            >
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 Architectural Worlds Horizontal Slider Container -->
+      <div 
+        id="featuredSliderTrack" 
+        class="slider-container flex gap-6 overflow-x-auto pb-6 pt-2 snap-x snap-mandatory"
+        onscroll="updateSliderCounter()"
+      >
+
+        <!-- WORLD 1: BABY & KIDS FOOTWEAR -->
+        <article class="slider-item shrink-0 w-[88vw] sm:w-[540px] lg:w-[600px] palace-glass-heavy rounded-3xl border border-gold-500/30 overflow-hidden pedestal-card flex flex-col group">
+          <div class="relative w-full h-72 sm:h-80 overflow-hidden bg-midnight-deep">
+            <img 
+              src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=1000&auto=format&fit=crop&q=80" 
+              alt="Baby & Kids Footwear" 
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-midnight via-midnight/30 to-transparent"></div>
+            <span class="absolute top-4 left-4 bg-sapphire/90 text-gold-300 text-[10px] font-mono px-3 py-1 rounded-full uppercase tracking-widest border border-gold-500/30">
+              Department I • Gentle Steps
+            </span>
+          </div>
+
+          <div class="p-6 sm:p-8 flex flex-col flex-1">
+            <span class="text-xs font-mono uppercase tracking-widest text-gold-400 font-bold mb-1">Pediatric Safe Ergonomics</span>
+            <h3 class="font-serif font-black text-2xl sm:text-3xl text-ivory mb-2">Baby & Kids Footwear</h3>
+            <p class="text-xs sm:text-sm text-ivory/70 leading-relaxed font-light mb-6 flex-1">
+              Hand-stitched newborn moccasins, non-skid pre-walker booties, and plush fleece animal slippers crafted without toxic chemicals. Specially balanced for delicate arches and first royal steps.
+            </p>
+            <div class="pt-4 border-t border-gold-500/20 flex items-center justify-between">
+              <div>
+                <span class="text-[10px] font-mono text-ivory/50 block">Curated Catalog</span>
+                <span class="text-gold-300 font-serif font-bold text-base">From Rs. 1,450</span>
+              </div>
+              <button 
+                onclick="filterCategory('babyshoes'); playAudio('click');" 
+                class="gold-btn-gradient px-6 py-2.5 rounded-xl font-cinzel font-bold text-xs uppercase tracking-wider transition-all"
+              >
+                Shop Footwear
+              </button>
             </div>
-            <p class="text-xs text-blue-100">Zero toxic binders, anatomical flexible pre-walker soles.</p>
           </div>
+        </article>
+
+        <!-- WORLD 2: COTTON GARMENTS & APPAREL -->
+        <article class="slider-item shrink-0 w-[88vw] sm:w-[540px] lg:w-[600px] palace-glass-heavy rounded-3xl border border-gold-500/30 overflow-hidden pedestal-card flex flex-col group">
+          <div class="relative w-full h-72 sm:h-80 overflow-hidden bg-midnight-deep">
+            <img 
+              src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=1000&auto=format&fit=crop&q=80" 
+              alt="Cotton Garments & Apparel" 
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-midnight via-midnight/30 to-transparent"></div>
+            <span class="absolute top-4 left-4 bg-sapphire/90 text-gold-300 text-[10px] font-mono px-3 py-1 rounded-full uppercase tracking-widest border border-gold-500/30">
+              Department II • Bio-Washed Couture
+            </span>
+          </div>
+
+          <div class="p-6 sm:p-8 flex flex-col flex-1">
+            <span class="text-xs font-mono uppercase tracking-widest text-gold-400 font-bold mb-1">210 GSM Combed Weave</span>
+            <h3 class="font-serif font-black text-2xl sm:text-3xl text-ivory mb-2">Cotton Garments & Apparel</h3>
+            <p class="text-xs sm:text-sm text-ivory/70 leading-relaxed font-light mb-6 flex-1">
+              Hypoallergenic combed cotton t-shirts, relaxed linen tops, and breathable everyday wear designed for Pakistan's climate. Pre-shrunk with zero color bleeding.
+            </p>
+            <div class="pt-4 border-t border-gold-500/20 flex items-center justify-between">
+              <div>
+                <span class="text-[10px] font-mono text-ivory/50 block">Curated Catalog</span>
+                <span class="text-gold-300 font-serif font-bold text-base">From Rs. 1,399</span>
+              </div>
+              <button 
+                onclick="filterCategory('garments'); playAudio('click');" 
+                class="gold-btn-gradient px-6 py-2.5 rounded-xl font-cinzel font-bold text-xs uppercase tracking-wider transition-all"
+              >
+                Shop Garments
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- WORLD 3: LUXURY BEDSHEETS (KHM) -->
+        <article class="slider-item shrink-0 w-[88vw] sm:w-[540px] lg:w-[600px] palace-glass-heavy rounded-3xl border border-gold-500/30 overflow-hidden pedestal-card flex flex-col group">
+          <div class="relative w-full h-72 sm:h-80 overflow-hidden bg-midnight-deep">
+            <img 
+              src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=1000&auto=format&fit=crop&q=80" 
+              alt="Luxury Bedsheets KHM" 
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-midnight via-midnight/30 to-transparent"></div>
+            <span class="absolute top-4 left-4 bg-sapphire/90 text-gold-300 text-[10px] font-mono px-3 py-1 rounded-full uppercase tracking-widest border border-gold-500/30">
+              Department III • Sovereign Chambers
+            </span>
+          </div>
+
+          <div class="p-6 sm:p-8 flex flex-col flex-1">
+            <span class="text-xs font-mono uppercase tracking-widest text-gold-400 font-bold mb-1">400TC Egyptian Sateen</span>
+            <h3 class="font-serif font-black text-2xl sm:text-3xl text-ivory mb-2">Luxury Bedsheets (KHM)</h3>
+            <p class="text-xs sm:text-sm text-ivory/70 leading-relaxed font-light mb-6 flex-1">
+              Five-star hotel grade King flat & fitted sheet suites. Deep mattress pockets, silky smooth luster, and breathable weave crafted for restorative sovereign sleep.
+            </p>
+            <div class="pt-4 border-t border-gold-500/20 flex items-center justify-between">
+              <div>
+                <span class="text-[10px] font-mono text-ivory/50 block">Curated Catalog</span>
+                <span class="text-gold-300 font-serif font-bold text-base">From Rs. 2,950</span>
+              </div>
+              <button 
+                onclick="filterCategory('bedsheets'); playAudio('click');" 
+                class="gold-btn-gradient px-6 py-2.5 rounded-xl font-cinzel font-bold text-xs uppercase tracking-wider transition-all"
+              >
+                Shop Bedsheets
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- WORLD 4: HOME LIVING -->
+        <article class="slider-item shrink-0 w-[88vw] sm:w-[540px] lg:w-[600px] palace-glass-heavy rounded-3xl border border-gold-500/30 overflow-hidden pedestal-card flex flex-col group">
+          <div class="relative w-full h-72 sm:h-80 overflow-hidden bg-midnight-deep">
+            <img 
+              src="https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=1000&auto=format&fit=crop&q=80" 
+              alt="Home Living" 
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-midnight via-midnight/30 to-transparent"></div>
+            <span class="absolute top-4 left-4 bg-sapphire/90 text-gold-300 text-[10px] font-mono px-3 py-1 rounded-full uppercase tracking-widest border border-gold-500/30">
+              Department IV • Neo-Living Salon
+            </span>
+          </div>
+
+          <div class="p-6 sm:p-8 flex flex-col flex-1">
+            <span class="text-xs font-mono uppercase tracking-widest text-gold-400 font-bold mb-1">Architectural Accents</span>
+            <h3 class="font-serif font-black text-2xl sm:text-3xl text-ivory mb-2">Home Living</h3>
+            <p class="text-xs sm:text-sm text-ivory/70 leading-relaxed font-light mb-6 flex-1">
+              Textured linen cushion covers, plush throw blankets, and refined living accents that elevate ordinary living spaces into sovereign sanctuaries.
+            </p>
+            <div class="pt-4 border-t border-gold-500/20 flex items-center justify-between">
+              <div>
+                <span class="text-[10px] font-mono text-ivory/50 block">Curated Catalog</span>
+                <span class="text-gold-300 font-serif font-bold text-base">From Rs. 1,250</span>
+              </div>
+              <button 
+                onclick="filterCategory('homedecor'); playAudio('click');" 
+                class="gold-btn-gradient px-6 py-2.5 rounded-xl font-cinzel font-bold text-xs uppercase tracking-wider transition-all"
+              >
+                Shop Home Living
+              </button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================
+       6. ROYAL DISPLAY PEDESTALS: LIVE CATALOG & SUPABASE
+       ======================================================== -->
+  <section id="catalogSection" class="relative z-10 py-16 px-4 sm:px-6">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Catalog Filter Bar -->
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-10 pb-6 border-b border-gold-500/20">
+        <div>
+          <span class="text-xs font-mono text-gold-400 uppercase tracking-widest flex items-center gap-1.5">
+            <i class="fa-solid fa-crown text-[10px]"></i> Live Inventory Telemetry
+          </span>
+          <h2 class="text-2xl sm:text-4xl font-serif font-bold text-ivory mt-1">
+            ROYAL DISPLAY <span class="gold-gradient-text font-serif">PEDESTALS</span>
+          </h2>
+          <p class="text-xs text-ivory/60 mt-1">Directly synchronized with KHM Palace dispatch vaults. Tap any platform to inspect tactile grain or dispatch immediately via Nationwide Cash on Delivery.</p>
         </div>
 
-        <div class="flex items-center gap-3.5 p-2 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
-          <div class="w-11 h-11 rounded-xl bg-emerald-500/25 text-emerald-300 flex items-center justify-center text-lg border border-emerald-400/30">
+        <!-- Department Tabs -->
+        <div class="flex items-center gap-1.5 flex-wrap palace-glass p-1.5 rounded-2xl border border-gold-500/30">
+          <button onclick="filterCategory('all'); playAudio('click');" id="tab-all" class="cat-tab px-4 py-2 rounded-xl font-cinzel text-xs font-bold transition-all bg-gold-500 text-midnight">
+            All Vaults
+          </button>
+          <button onclick="filterCategory('babyshoes'); playAudio('click');" id="tab-babyshoes" class="cat-tab px-4 py-2 rounded-xl font-cinzel text-xs font-bold text-ivory/70 hover:text-white hover:bg-sapphire transition-all">
+            Baby Footwear
+          </button>
+          <button onclick="filterCategory('garments'); playAudio('click');" id="tab-garments" class="cat-tab px-4 py-2 rounded-xl font-cinzel text-xs font-bold text-ivory/70 hover:text-white hover:bg-sapphire transition-all">
+            Cotton Garments
+          </button>
+          <button onclick="filterCategory('bedsheets'); playAudio('click');" id="tab-bedsheets" class="cat-tab px-4 py-2 rounded-xl font-cinzel text-xs font-bold text-ivory/70 hover:text-white hover:bg-sapphire transition-all">
+            Palace Bedsheets
+          </button>
+          <button onclick="filterCategory('homedecor'); playAudio('click');" id="tab-homedecor" class="cat-tab px-4 py-2 rounded-xl font-cinzel text-xs font-bold text-ivory/70 hover:text-white hover:bg-sapphire transition-all">
+            Home Living
+          </button>
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Rendered via JS -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================
+       7. SOVEREIGN CHARTER: TRUST PEDESTALS
+       ======================================================== -->
+  <section id="charterSection" class="relative z-10 py-16 px-4 sm:px-6 border-y border-gold-500/20 bg-midnight-deep/60">
+    <div class="max-w-7xl mx-auto">
+      
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs font-mono uppercase tracking-[0.25em] text-gold-400 font-bold">Palace Assurance Protocol</span>
+        <h2 class="text-2xl sm:text-4xl font-serif font-black text-ivory mt-1">THE SOVEREIGN CHARTER</h2>
+        <p class="text-xs sm:text-sm text-ivory/60 mt-2 font-light">Every parcel dispatched from KHM Palace is backed by transparent guarantees and door-to-door courier verification across all 4 provinces.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <div class="palace-glass p-6 rounded-2xl border border-gold-500/20 pedestal-card">
+          <div class="w-12 h-12 rounded-xl bg-gold-500/15 border border-gold-500/30 text-gold-400 flex items-center justify-center text-xl mb-4">
             <i class="fa-solid fa-truck-fast"></i>
           </div>
-          <div>
-            <div class="flex items-center gap-2">
-              <h4 class="font-extrabold text-sm">Hyper-Speed COD Dispatch</h4>
-              <span class="bg-cyan-400/20 text-cyan-300 text-[9px] px-1 rounded font-mono">RS. 350 FLAT</span>
-            </div>
-            <p class="text-xs text-blue-100">Doorstep courier verification across all Pakistani cities.</p>
-          </div>
+          <span class="text-[10px] font-mono uppercase tracking-widest text-gold-400/80 block mb-1">Courier Telemetry</span>
+          <h4 class="font-serif font-bold text-lg text-ivory mb-2">Hyper-Speed Dispatch</h4>
+          <p class="text-xs text-ivory/65 leading-relaxed font-light">
+            Flat Rs. 350 COD rate nationwide. Dispatched in 24–48 hours via TCS and Trax Express with live SMS tracking updates.
+          </p>
         </div>
 
-        <div class="flex items-center gap-3.5 p-2 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
-          <div class="w-11 h-11 rounded-xl bg-amber-500/25 text-amber-300 flex items-center justify-center text-lg border border-amber-400/30">
-            <i class="fa-solid fa-headset"></i>
+        <div class="palace-glass p-6 rounded-2xl border border-gold-500/20 pedestal-card">
+          <div class="w-12 h-12 rounded-xl bg-gold-500/15 border border-gold-500/30 text-gold-400 flex items-center justify-center text-xl mb-4">
+            <i class="fa-solid fa-certificate"></i>
           </div>
-          <div>
-            <div class="flex items-center gap-2">
-              <h4 class="font-extrabold text-sm">Instant VIP WhatsApp Ordering</h4>
-              <span class="bg-amber-400/20 text-amber-300 text-[9px] px-1 rounded font-mono">24/7 LIVE</span>
-            </div>
-            <p class="text-xs text-blue-100">Direct priority dispatch assistance at +92 304 9141244.</p>
-          </div>
+          <span class="text-[10px] font-mono uppercase tracking-widest text-gold-400/80 block mb-1">Laboratory Provenance</span>
+          <h4 class="font-serif font-bold text-lg text-ivory mb-2">100% Certified Fabrics</h4>
+          <p class="text-xs text-ivory/65 leading-relaxed font-light">
+            Authentic Egyptian long-staple yarn, AZO-free skin-safe dyes, and non-toxic baby shoe outsoles certified for zero toxicity.
+          </p>
         </div>
+
+        <div class="palace-glass p-6 rounded-2xl border border-gold-500/20 pedestal-card">
+          <div class="w-12 h-12 rounded-xl bg-gold-500/15 border border-gold-500/30 text-gold-400 flex items-center justify-center text-xl mb-4">
+            <i class="fa-solid fa-rotate-left"></i>
+          </div>
+          <span class="text-[10px] font-mono uppercase tracking-widest text-gold-400/80 block mb-1">Doorstep Exchange</span>
+          <h4 class="font-serif font-bold text-lg text-ivory mb-2">30-Day Hassle-Free Swap</h4>
+          <p class="text-xs text-ivory/65 leading-relaxed font-light">
+            Wrong shoe size or color variant? Our riders execute instant doorstep exchanges without tedious warehouse returns.
+          </p>
+        </div>
+
+        <div class="palace-glass p-6 rounded-2xl border border-gold-500/20 pedestal-card">
+          <div class="w-12 h-12 rounded-xl bg-gold-500/15 border border-gold-500/30 text-gold-400 flex items-center justify-center text-xl mb-4">
+            <i class="fa-brands fa-whatsapp text-emerald-400"></i>
+          </div>
+          <span class="text-[10px] font-mono uppercase tracking-widest text-gold-400/80 block mb-1">Founder Concierge</span>
+          <h4 class="font-serif font-bold text-lg text-ivory mb-2">+92 304 9141244</h4>
+          <p class="text-xs text-ivory/65 leading-relaxed font-light">
+            Live human VIP concierge available 24/7 on WhatsApp for custom bed sizes, bridal trousseau orders, and wholesale inquiries.
+          </p>
+        </div>
+
       </div>
 
     </div>
   </section>
 
-  <!-- ==================== 4. FEATURED COLLECTIONS: NEXT-TO-NEXT SLIDER ==================== -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 py-10 flex-1 w-full" id="featuredSliderSection">
-    
-    <!-- Carousel Controls Bar -->
-    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-      <div>
+  <!-- ========================================================
+       8. IMPERIAL FOOTER
+       ======================================================== -->
+  <footer id="footer" class="relative z-10 bg-midnight-deep border-t border-gold-500/30 py-16 px-4 sm:px-6">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 mb-12">
+      
+      <div class="md:col-span-5 space-y-4">
         <div class="flex items-center gap-3">
-          <h2 class="text-2xl font-black font-display tracking-tight" id="currentSectionTitle">Featured Collections</h2>
-          <span class="bg-blue-100 dark:bg-blue-900/60 text-blue-800 dark:text-blue-300 text-xs font-mono font-extrabold px-2.5 py-0.5 rounded-full" id="productCountBadge">0 items</span>
-          <span class="hidden md:inline-flex items-center gap-1 text-[11px] font-mono text-cyan-600 dark:text-cyan-400 font-bold bg-cyan-50 dark:bg-cyan-950/60 px-2 py-0.5 rounded-md border border-cyan-200 dark:border-cyan-800">
-            <i class="fa-solid fa-arrows-left-right"></i> NEXT-TO-NEXT SLIDER
-          </span>
-        </div>
-        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Direct wholesaler pricing. Flat COD fee Rs. 350 added at checkout. Swipe, drag or use arrows to navigate.</p>
-      </div>
-
-      <!-- Arrow Controls & Filters -->
-      <div class="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
-        <!-- Next-to-Next Arrow Buttons -->
-        <div class="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800 p-1 rounded-2xl border border-slate-200 dark:border-slate-700">
-          <button 
-            onclick="slidePrev(); playAudioCue('click');" 
-            title="Slide Previous Product"
-            class="w-8 h-8 rounded-xl bg-white dark:bg-slate-700 hover:bg-blue-50 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 flex items-center justify-center font-bold text-xs shadow-xs transition-all active:scale-90"
-          >
-            <i class="fa-solid fa-chevron-left"></i>
-          </button>
-          <button 
-            onclick="slideNext(); playAudioCue('click');" 
-            title="Slide Next Product"
-            class="w-8 h-8 rounded-xl bg-white dark:bg-slate-700 hover:bg-blue-50 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 flex items-center justify-center font-bold text-xs shadow-xs transition-all active:scale-90"
-          >
-            <i class="fa-solid fa-chevron-right"></i>
-          </button>
-        </div>
-
-        <select id="sortSelect" onchange="handleSort(this.value); playAudioCue('click');" class="text-xs font-bold theme-card border rounded-xl px-3 py-2 outline-none focus:border-blue-600">
-          <option value="default">Featured First</option>
-          <option value="price-low">Price: Low to High</option>
-          <option value="price-high">Price: High to Low</option>
-        </select>
-        
-        <button onclick="resetFilters(); playAudioCue('click');" class="text-xs font-bold text-slate-500 hover:text-blue-700 flex items-center gap-1">
-          <i class="fa-solid fa-rotate-left"></i> Reset
-        </button>
-      </div>
-    </div>
-
-    <!-- The Next-to-Next Slider Track -->
-    <div class="relative group/carousel">
-      
-      <!-- Left Hover Arrow on Desktop -->
-      <button 
-        onclick="slidePrev(); playAudioCue('click');" 
-        class="hidden md:flex absolute -left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/90 dark:bg-slate-900/90 text-slate-800 dark:text-white shadow-xl border border-slate-200 dark:border-slate-700 items-center justify-center hover:scale-110 active:scale-95 transition-all opacity-80 hover:opacity-100 backdrop-blur-md"
-      >
-        <i class="fa-solid fa-arrow-left text-sm"></i>
-      </button>
-
-      <!-- Carousel Viewport -->
-      <div 
-        id="productsSliderViewport" 
-        class="slider-viewport flex gap-6 overflow-x-auto pb-4 pt-1 snap-x snap-mandatory scroll-smooth"
-        onmouseenter="pauseAutoSlider()"
-        onmouseleave="resumeAutoSlider()"
-      >
-        <div class="w-full py-16 text-center text-slate-400">
-          <i class="fa-solid fa-circle-notch fa-spin text-3xl text-blue-700 mb-3"></i>
-          <p class="font-bold text-sm">KHM Bedding cloud database se catalog load ho raha hai...</p>
-        </div>
-      </div>
-
-      <!-- Right Hover Arrow on Desktop -->
-      <button 
-        onclick="slideNext(); playAudioCue('click');" 
-        class="hidden md:flex absolute -right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/90 dark:bg-slate-900/90 text-slate-800 dark:text-white shadow-xl border border-slate-200 dark:border-slate-700 items-center justify-center hover:scale-110 active:scale-95 transition-all opacity-80 hover:opacity-100 backdrop-blur-md"
-      >
-        <i class="fa-solid fa-arrow-right text-sm"></i>
-      </button>
-
-    </div>
-
-    <!-- Carousel Pagination Indicators -->
-    <div class="flex items-center justify-between mt-4">
-      <div class="flex items-center gap-2" id="sliderDotsContainer"></div>
-      <div class="text-[11px] font-mono text-slate-400 flex items-center gap-1.5">
-        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Auto-Ticker Active | Drag / Swipe Track to Move
-      </div>
-    </div>
-
-  </section>
-
-  <!-- ==================== 5. TRUST BADGES STRIP ==================== -->
-  <section class="theme-card border-y py-8 px-4 sm:px-6">
-    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      
-      <div class="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700">
-        <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center text-xl shrink-0">
-          <i class="fa-solid fa-truck-fast"></i>
-        </div>
-        <div>
-          <h4 class="font-bold text-sm">Hyper-Speed Dispatch</h4>
-          <p class="text-xs text-slate-500">Flat Rs. 350 COD across all Pakistan cities.</p>
-        </div>
-      </div>
-
-      <div class="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700">
-        <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-xl shrink-0">
-          <i class="fa-solid fa-certificate"></i>
-        </div>
-        <div>
-          <h4 class="font-bold text-sm">Bio-Washed Combed Cotton</h4>
-          <p class="text-xs text-slate-500">Pediatrician certified soft soles & anti-fade weave.</p>
-        </div>
-      </div>
-
-      <div class="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700">
-        <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl shrink-0">
-          <i class="fa-solid fa-rotate-left"></i>
-        </div>
-        <div>
-          <h4 class="font-bold text-sm">30-Day Hassle-Free Exchange</h4>
-          <p class="text-xs text-slate-500">Rapid doorstep size replacement guarantee.</p>
-        </div>
-      </div>
-
-      <div class="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700">
-        <div class="w-12 h-12 rounded-xl bg-violet-100 text-violet-700 flex items-center justify-center text-xl shrink-0">
-          <i class="fa-brands fa-whatsapp text-emerald-600"></i>
-        </div>
-        <div>
-          <h4 class="font-bold text-sm">03049141244 Direct Line</h4>
-          <p class="text-xs text-slate-500">Instant priority customer concierge via WhatsApp.</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ==================== 6. FOOTER ==================== -->
-  <footer class="bg-slate-950 text-slate-400 py-12 px-4 sm:px-6">
-    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
-      
-      <div class="space-y-3">
-        <div class="flex items-center gap-2">
-          <div class="w-8 h-8 rounded-lg bg-blue-700 text-white flex items-center justify-center font-bold">
-            <i class="fa-solid fa-bed text-sm"></i>
+          <div class="w-9 h-9 rounded-lg bg-gradient-to-tr from-sapphire to-gold-500 text-midnight flex items-center justify-center text-lg font-bold">
+            <i class="fa-solid fa-crown"></i>
           </div>
-          <span class="font-display font-black text-xl text-white">KHM <span class="text-blue-500">Bedding</span></span>
+          <span class="font-cinzel font-bold text-xl text-ivory tracking-widest">KHM BEDDING PALACE</span>
         </div>
-        <p class="text-xs leading-relaxed">
-          Your trusted store for pediatrician-tested baby shoes, 100% bio-washed cotton clothes, and hotel-grade luxury bedsheets (KHM Bedding) with flat Rs. 350 COD nationwide shipping.
+        <p class="text-xs text-ivory/60 leading-relaxed max-w-sm font-light">
+          An imperial sanctuary of sleep ergonomics and haute couture cotton craftsmanship. Engineered in Pakistan, hand-finished for sovereign estates worldwide. Delivering tactile gravitas and neoclassical luxury.
         </p>
+        <div class="text-[11px] font-mono text-gold-400/80 flex items-center gap-2">
+          <i class="fa-solid fa-shield-halved"></i> Supabase Cloud Connected • Secure AES-256
+        </div>
       </div>
 
-      <div>
-        <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-3">Departments</h4>
-        <ul class="text-xs space-y-2">
-          <li><a href="javascript:void(0)" onclick="selectCategory('babyshoes'); playAudioCue('click');" class="hover:text-white transition-colors">Baby & Kids Footwear</a></li>
-          <li><a href="javascript:void(0)" onclick="selectCategory('garments'); playAudioCue('click');" class="hover:text-white transition-colors">Cotton Garments & Apparel</a></li>
-          <li><a href="javascript:void(0)" onclick="selectCategory('bedsheets'); playAudioCue('click');" class="hover:text-white transition-colors">Luxury Bedsheets (KHM)</a></li>
-          <li><a href="javascript:void(0)" onclick="selectCategory('homedecor'); playAudioCue('click');" class="hover:text-white transition-colors">Home Living</a></li>
+      <div class="md:col-span-2 space-y-3">
+        <h4 class="font-cinzel font-bold text-xs uppercase tracking-widest text-gold-400">Royal Departments</h4>
+        <ul class="text-xs space-y-2 text-ivory/70 font-light">
+          <li><a href="javascript:void(0)" onclick="filterCategory('bedsheets'); window.scrollTo(0, document.getElementById('catalogSection').offsetTop);" class="hover:text-gold-300">Haute Luxury Bedsheets</a></li>
+          <li><a href="javascript:void(0)" onclick="filterCategory('babyshoes'); window.scrollTo(0, document.getElementById('catalogSection').offsetTop);" class="hover:text-gold-300">Baby & Kids Footwear</a></li>
+          <li><a href="javascript:void(0)" onclick="filterCategory('garments'); window.scrollTo(0, document.getElementById('catalogSection').offsetTop);" class="hover:text-gold-300">Cotton Garments & Apparel</a></li>
+          <li><a href="javascript:void(0)" onclick="filterCategory('homedecor'); window.scrollTo(0, document.getElementById('catalogSection').offsetTop);" class="hover:text-gold-300">Home Living & Accents</a></li>
         </ul>
       </div>
 
-      <div>
-        <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-3">Customer Service</h4>
-        <ul class="text-xs space-y-2">
-          <li><a href="javascript:void(0)" class="hover:text-white transition-colors">Track Order</a></li>
-          <li><a href="javascript:void(0)" class="hover:text-white transition-colors">Shipping Policy: Flat Rs. 350 COD</a></li>
-          <li><span class="text-emerald-400 font-bold">WhatsApp: 03049141244</span></li>
-          <li><span>Email: easicarts@gmail.com</span></li>
+      <div class="md:col-span-2 space-y-3">
+        <h4 class="font-cinzel font-bold text-xs uppercase tracking-widest text-gold-400">Care & Sovereign Charter</h4>
+        <ul class="text-xs space-y-2 text-ivory/70 font-light">
+          <li><a href="#charterSection" class="hover:text-gold-300">Palace Exchange Protocol</a></li>
+          <li><a href="#charterSection" class="hover:text-gold-300">Flat Rs. 350 COD Terms</a></li>
+          <li><a href="#charterSection" class="hover:text-gold-300">Cotton Provenance & Weave</a></li>
+          <li><a href="#charterSection" class="hover:text-gold-300">Curatorial Inquiries</a></li>
         </ul>
       </div>
 
-      <div>
-        <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-3">Direct Inquiries</h4>
-        <p class="text-xs mb-3">Need bulk garments or wholesale nursery items?</p>
-        <a href="https://wa.me/923049141244" target="_blank" onclick="playAudioCue('click')" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all">
-          <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp: 03049141244
-        </a>
+      <div class="md:col-span-3 space-y-3 font-mono text-xs">
+        <h4 class="font-cinzel font-bold text-xs uppercase tracking-widest text-gold-400">Direct Inquiries</h4>
+        <div class="space-y-1.5 text-ivory/75">
+          <div>Nationwide COD: <span class="text-gold-300 font-bold">Flat Rs. 350</span></div>
+          <div>WhatsApp: <a href="https://wa.me/923049141244" target="_blank" class="text-emerald-400 hover:underline">+92 304 9141244</a></div>
+          <div>Dispatch Desk: <span class="text-ivory">easicarts@gmail.com</span></div>
+          <div class="text-[10px] text-ivory/50 pt-1">MON - SUN • 24/7 SOVEREIGN ASSISTANCE</div>
+        </div>
       </div>
 
     </div>
 
-    <div class="max-w-7xl mx-auto pt-6 border-t border-slate-900 text-center text-xs text-slate-500">
-      &copy; 2026 KHM Bedding. All Rights Reserved. Connected with Supabase Cloud Database.
+    <div class="max-w-7xl mx-auto pt-8 border-t border-gold-500/15 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-mono text-ivory/50">
+      <div>&copy; 2026 KHM Bedding Palace V4.0. Sovereign Luxury Rights Reserved.</div>
+      <div class="flex gap-4">
+        <span>Privacy Charter</span>
+        <span>Terms of Estate</span>
+        <span>COD Nationwide Delivery</span>
+      </div>
     </div>
   </footer>
 
-  <!-- ==================== 7. SHOPPING BAG & CHECKOUT SLIDE-OVER DRAWER ==================== -->
-  <div id="cartDrawerBackdrop" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 transition-opacity" onclick="toggleCartDrawer(false)"></div>
+  <!-- ========================================================
+       9. SLIDE-OVER SOVEREIGN BAG & CHECKOUT DRAWER
+       ======================================================== -->
+  <div id="bagDrawerBackdrop" class="hidden fixed inset-0 bg-midnight-deep/80 backdrop-blur-md z-50 transition-opacity" onclick="toggleBagDrawer(false)"></div>
 
-  <div id="cartDrawer" class="fixed right-0 top-0 bottom-0 w-full max-w-md theme-card z-50 shadow-2xl translate-x-full transition-transform duration-300 flex flex-col">
+  <aside id="bagDrawer" class="fixed top-0 right-0 bottom-0 w-full max-w-md bg-midnight-deep/95 border-l border-gold-500/30 z-50 shadow-2xl translate-x-full transition-transform duration-300 flex flex-col font-sans">
     
     <!-- Drawer Header -->
-    <div class="p-4 bg-slate-50 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
-      <div class="flex items-center gap-2">
-        <div class="w-8 h-8 rounded-lg bg-blue-700 text-white flex items-center justify-center font-bold text-sm">
-          <i class="fa-solid fa-bag-shopping"></i>
-        </div>
-        <h3 class="font-display font-black text-base text-slate-900 dark:text-white">Shopping Bag & Checkout</h3>
+    <div class="p-5 border-b border-gold-500/20 flex items-center justify-between bg-midnight">
+      <div class="flex items-center gap-2.5">
+        <i class="fa-solid fa-crown text-gold-400 text-lg"></i>
+        <h3 class="font-cinzel font-bold text-base text-ivory tracking-wider">Sovereign Bag</h3>
       </div>
-      <button onclick="toggleCartDrawer(false); playAudioCue('click');" class="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 text-slate-600 dark:text-slate-300 flex items-center justify-center font-bold text-sm transition-colors">
+      <button onclick="toggleBagDrawer(false); playAudio('click');" class="w-8 h-8 rounded-full palace-glass hover:bg-gold-500 hover:text-midnight text-ivory/70 flex items-center justify-center font-bold transition-all">
         &times;
       </button>
     </div>
 
-    <!-- Drawer Body / Item List -->
-    <div class="flex-1 overflow-y-auto p-4 space-y-3" id="cartItemsContainer"></div>
+    <!-- Bag Content / Scrollable Items -->
+    <div id="bagItemsContainer" class="flex-1 overflow-y-auto p-5 space-y-3">
+      <!-- Injected via JavaScript -->
+    </div>
 
-    <!-- Drawer Checkout Form & Summary -->
-    <div class="p-4 bg-slate-50 dark:bg-slate-800/80 border-t border-slate-200 dark:border-slate-700 space-y-3 shrink-0">
+    <!-- Checkout Form & Pricing Summary -->
+    <div class="p-5 border-t border-gold-500/20 bg-midnight space-y-4 shrink-0 font-mono text-xs">
       
-      <form id="checkoutForm" onsubmit="handlePlaceOrder(event)" class="space-y-2">
-        <div class="text-xs font-extrabold text-slate-700 dark:text-slate-300 flex items-center justify-between">
-          <span><i class="fa-solid fa-user-pen text-blue-700"></i> Customer Shipping Details</span>
-          <span class="text-[10px] text-emerald-600 font-bold">Sent to easicarts@gmail.com</span>
+      <!-- Subtotal + COD Breakdown -->
+      <div class="space-y-1.5 text-ivory/70">
+        <div class="flex justify-between">
+          <span>Cart Subtotal</span>
+          <span id="bagSubtotal" class="text-ivory font-bold">Rs. 0</span>
         </div>
+        <div class="flex justify-between">
+          <span>Nationwide COD Shipping</span>
+          <span id="bagShipping" class="text-gold-400 font-bold">Rs. 350</span>
+        </div>
+        <div class="flex justify-between text-sm font-bold text-gold-300 pt-2 border-t border-gold-500/20 font-serif">
+          <span>Total Payable (COD)</span>
+          <span id="bagGrandTotal" class="text-base font-serif">Rs. 350</span>
+        </div>
+      </div>
 
+      <!-- Quick Shipping Details Form -->
+      <form id="orderForm" onsubmit="handlePlaceOrder(event)" class="space-y-2 pt-2 border-t border-gold-500/15">
         <input 
           type="text" 
           id="custName" 
-          placeholder="Your Full Name *" 
+          placeholder="Full Name" 
           required 
-          class="w-full text-xs px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white outline-none focus:border-blue-700"
+          class="w-full px-3 py-2 rounded-xl bg-midnight border border-gold-500/30 text-ivory text-xs outline-none focus:border-gold-500" 
         />
-
         <input 
           type="tel" 
           id="custPhone" 
-          placeholder="WhatsApp / Phone Number *" 
+          placeholder="Active WhatsApp Phone (e.g. 0300 1234567)" 
           required 
-          class="w-full text-xs px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white outline-none focus:border-blue-700"
+          class="w-full px-3 py-2 rounded-xl bg-midnight border border-gold-500/30 text-ivory text-xs outline-none focus:border-gold-500" 
         />
-
         <textarea 
           id="custAddress" 
           rows="2" 
-          placeholder="Delivery Address & Landmark *" 
+          placeholder="Complete Street Address & City" 
           required 
-          class="w-full text-xs px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white outline-none focus:border-blue-700"
+          class="w-full px-3 py-2 rounded-xl bg-midnight border border-gold-500/30 text-ivory text-xs outline-none focus:border-gold-500"
         ></textarea>
-
-        <input 
-          type="text" 
-          id="custCity" 
-          placeholder="City (e.g. Lahore, Karachi, Islamabad) *" 
-          required 
-          class="w-full text-xs px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white outline-none focus:border-blue-700"
-        />
-
-        <!-- Price Breakdown with Rs. 350 COD -->
-        <div class="pt-2 border-t border-slate-200 dark:border-slate-700 space-y-1.5 text-xs text-slate-600 dark:text-slate-400">
-          <div class="flex justify-between">
-            <span>Items Subtotal</span>
-            <span class="font-bold text-slate-900 dark:text-white" id="cartSubtotalText">Rs. 0</span>
-          </div>
-          <div class="flex justify-between">
-            <span>Nationwide COD Shipping</span>
-            <span class="font-bold text-emerald-700 dark:text-emerald-400" id="cartShippingText">Rs. 350</span>
-          </div>
-          <div class="flex justify-between text-sm font-black text-slate-900 dark:text-white pt-1 border-t border-slate-200 dark:border-slate-700">
-            <span>Total Payable (COD)</span>
-            <span class="text-blue-700 dark:text-blue-400" id="cartGrandTotalText">Rs. 350</span>
-          </div>
-        </div>
 
         <button 
           type="submit" 
-          id="placeOrderBtn"
-          class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs sm:text-sm rounded-xl shadow-lg shadow-emerald-600/20 flex items-center justify-center gap-2 transition-all"
+          id="btnSubmitOrder"
+          class="w-full py-3.5 gold-btn-gradient rounded-xl font-cinzel font-bold text-xs uppercase tracking-widest shadow-xl flex items-center justify-center gap-2"
         >
-          <i class="fa-solid fa-paper-plane"></i> Place Order (Email + WhatsApp)
+          <i class="fa-solid fa-circle-check"></i> Confirm COD Nationwide Order
         </button>
       </form>
 
+      <div class="text-[10px] text-center text-ivory/50">
+        Dispatched via TCS/Trax • Pay Cash to Courier Rider
+      </div>
+
     </div>
 
-  </div>
+  </aside>
 
-  <!-- ==================== 8. QUICK VIEW PRODUCT MODAL ==================== -->
-  <div id="quickViewModal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-    <div class="relative w-full max-w-2xl theme-card rounded-3xl shadow-2xl border overflow-hidden flex flex-col md:flex-row">
-      <button onclick="closeQuickView(); playAudioCue('click');" class="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 flex items-center justify-center font-bold text-sm">
+  <!-- ========================================================
+       10. PRODUCT DETAIL QUICK VIEW MODAL
+       ======================================================== -->
+  <div id="quickModal" class="hidden fixed inset-0 z-50 bg-midnight-deep/80 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="relative w-full max-w-2xl palace-glass-heavy border border-gold-500/40 rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row">
+      
+      <button onclick="closeQuickView(); playAudio('click');" class="absolute top-4 right-4 z-10 w-8 h-8 rounded-full palace-glass hover:bg-gold-500 hover:text-midnight text-ivory/80 flex items-center justify-center text-xs font-bold transition-all">
         &times;
       </button>
 
-      <div class="md:w-1/2 bg-slate-50 dark:bg-slate-800 p-6 flex items-center justify-center">
-        <img id="qvImage" src="" alt="Product" class="max-h-72 object-contain rounded-2xl" />
+      <div class="md:w-1/2 p-6 bg-midnight/80 flex items-center justify-center border-b md:border-b-0 md:border-r border-gold-500/20">
+        <img id="modalImg" src="" alt="Tactile Product" class="max-h-72 object-contain rounded-2xl border border-gold-500/20" />
       </div>
 
       <div class="md:w-1/2 p-6 flex flex-col justify-between space-y-4">
         <div>
-          <span id="qvBadge" class="inline-block bg-blue-50 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider mb-2">Verified</span>
-          <h3 id="qvTitle" class="font-display font-black text-xl leading-snug"></h3>
-          <p id="qvCategory" class="text-xs text-slate-400 font-semibold mt-1"></p>
-
-          <div class="mt-3 flex items-baseline gap-2">
-            <span id="qvPrice" class="text-2xl font-black text-blue-700 dark:text-blue-400"></span>
-            <span id="qvOldPrice" class="text-sm text-slate-400 line-through"></span>
-          </div>
-
-          <p id="qvDesc" class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mt-3"></p>
+          <span id="modalCategory" class="text-[10px] font-mono text-gold-400 uppercase tracking-widest block mb-1">Palace Pedestal</span>
+          <h3 id="modalTitle" class="font-serif font-bold text-xl text-ivory leading-snug"></h3>
+          <div class="mt-2 text-2xl font-serif font-black text-gold-300" id="modalPrice"></div>
+          <p id="modalDesc" class="text-xs text-ivory/70 leading-relaxed mt-3 font-light"></p>
         </div>
 
-        <div class="space-y-2 pt-4 border-t border-slate-100 dark:border-slate-800">
-          <button id="qvAddBtn" class="w-full py-2.5 bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs rounded-xl shadow flex items-center justify-center gap-2">
-            <i class="fa-solid fa-basket-shopping"></i> Add to Shopping Bag
+        <div class="space-y-2 pt-4 border-t border-gold-500/20">
+          <button id="modalAddBtn" class="w-full py-3 gold-btn-gradient rounded-xl font-cinzel font-bold text-xs uppercase tracking-widest shadow-lg flex items-center justify-center gap-2">
+            <i class="fa-solid fa-bag-shopping"></i> Add To Sovereign Bag
           </button>
-          <a id="qvWhatsAppBtn" href="#" target="_blank" onclick="playAudioCue('click')" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow flex items-center justify-center gap-2">
-            <i class="fa-brands fa-whatsapp text-sm"></i> Order Direct on WhatsApp
+          <a id="modalWaBtn" href="#" target="_blank" onclick="playAudio('click')" class="w-full py-2.5 palace-glass hover:bg-sapphire text-gold-300 border border-gold-500/40 rounded-xl font-cinzel font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 transition-all">
+            <i class="fa-brands fa-whatsapp text-emerald-400"></i> WhatsApp Concierge
           </a>
         </div>
       </div>
+
     </div>
   </div>
 
-  <!-- ==================== 9. JAVASCRIPT: SOUND FX, NEXT-TO-NEXT SLIDER & SUPABASE ==================== -->
+  <!-- ========================================================
+       11. JAVASCRIPT: WEBGL SHADER, AUDIO SYNTHESIZER & STORE LOGIC
+       ======================================================== -->
   <script>
-    // ==========================================
-    // 1. FUTURISTIC WEB AUDIO SYNTHESIZER (ZERO LAG)
-    // ==========================================
-    let audioContext = null;
-    let isAudioEnabled = true;
+    // ========================================================
+    // A. WEBGL PALACE VOLUMETRIC GPU SHADER
+    // ========================================================
+    (function initPalaceShader() {
+      const canvas = document.getElementById('palaceShaderCanvas');
+      if (!canvas) return;
 
-    function initAudioContext() {
-      if (!audioContext) {
-        const AudioCtx = window.AudioContext || window.webkitAudioContext;
-        if (AudioCtx) audioContext = new AudioCtx();
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
       }
-      if (audioContext && audioContext.state === 'suspended') {
-        audioContext.resume();
+      window.addEventListener('resize', resize);
+      resize();
+
+      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      if (!gl) return;
+
+      const vs = `attribute vec2 a_position; void main() { gl_Position = vec4(a_position, 0.0, 1.0); }`;
+      const fs = `
+        precision highp float;
+        uniform float u_time;
+        uniform vec2 u_resolution;
+        uniform vec2 u_mouse;
+
+        vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+        vec2 mod289(vec2 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+        vec3 permute(vec3 x) { return mod289(((x*34.0)+1.0)*x); }
+
+        float snoise(vec2 v) {
+          const vec4 C = vec4(0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439);
+          vec2 i  = floor(v + dot(v, C.yy));
+          vec2 x0 = v -   i + dot(i, C.xx);
+          vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+          vec4 x12 = x0.xyxy + C.xxzz;
+          x12.xy -= i1;
+          i = mod289(i);
+          vec3 p = permute(permute(i.y + vec3(0.0, i1.y, 1.0)) + i.x + vec3(0.0, i1.x, 1.0));
+          vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy), dot(x12.zw,x12.zw)), 0.0);
+          m = m*m; m = m*m;
+          vec3 x = 2.0 * fract(p * C.www) - 1.0;
+          vec3 h = abs(x) - 0.5;
+          vec3 ox = floor(x + 0.5);
+          vec3 a0 = x - ox;
+          m *= 1.79284291400159 - 0.85373472095314 * (a0*a0 + h*h);
+          vec3 g;
+          g.x  = a0.x  * x0.x  + h.x  * x0.y;
+          g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+          return 130.0 * dot(m, g);
+        }
+
+        void main() {
+          vec2 st = gl_FragCoord.xy / u_resolution.xy;
+          vec2 mouse = u_mouse / u_resolution;
+
+          // Palette: Midnight Navy (#071426), Sapphire (#102344), Champagne Gold (#D6A75C)
+          vec3 midnight = vec3(0.027, 0.078, 0.149);
+          vec3 sapphire = vec3(0.062, 0.137, 0.267);
+          vec3 gold = vec3(0.839, 0.655, 0.361);
+          vec3 warmGlow = vec3(0.96, 0.937, 0.898);
+
+          vec2 center = vec2(0.5, 0.42) + (mouse - 0.5) * 0.08;
+          float distToCenter = length((st - center) * vec2(1.0, 1.25));
+          float archGlow = smoothstep(0.95, 0.0, distToCenter);
+
+          float t = u_time * 0.15;
+          float n1 = snoise(st * 2.5 + vec2(t * 0.25, t * 0.18));
+          float n2 = snoise(st * 4.8 - vec2(t * 0.35, -t * 0.22));
+          float cloud = (n1 * 0.6 + n2 * 0.4);
+
+          float ring = smoothstep(0.08, 0.0, abs(distToCenter - 0.35)) * 0.4;
+          float beam = smoothstep(0.15, 0.95, abs(sin(st.x * 6.28 + t * 0.4))) * 0.18;
+
+          vec3 col = mix(midnight, sapphire, st.y * 1.1 + cloud * 0.22);
+          col += gold * archGlow * 0.48;
+          col += warmGlow * (beam + ring) * archGlow * 0.65;
+          col += gold * pow(archGlow, 3.2) * 0.55;
+
+          // Marble Floor Sheen at bottom
+          if (st.y < 0.32) {
+            float floorDist = (0.32 - st.y) / 0.32;
+            col = mix(col, midnight * 0.75, floorDist * 0.45);
+            col += gold * 0.12 * snoise(vec2(st.x * 14.0, st.y * 4.0));
+          }
+
+          gl_FragColor = vec4(col, 1.0);
+        }
+      `;
+
+      function compile(type, source) {
+        const shader = gl.createShader(type);
+        gl.shaderSource(shader, source);
+        gl.compileShader(shader);
+        return shader;
+      }
+      const program = gl.createProgram();
+      gl.attachShader(program, compile(gl.VERTEX_SHADER, vs));
+      gl.attachShader(program, compile(gl.FRAGMENT_SHADER, fs));
+      gl.linkProgram(program);
+      gl.useProgram(program);
+
+      const buffer = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+
+      const pos = gl.getAttribLocation(program, 'a_position');
+      gl.enableVertexAttribArray(pos);
+      gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+
+      const uTime = gl.getUniformLocation(program, 'u_time');
+      const uRes = gl.getUniformLocation(program, 'u_resolution');
+      const uMouse = gl.getUniformLocation(program, 'u_mouse');
+
+      let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+      window.addEventListener('mousemove', (e) => {
+        mouse.x = e.clientX;
+        mouse.y = canvas.height - e.clientY;
+      });
+
+      function render(time) {
+        gl.viewport(0, 0, canvas.width, canvas.height);
+        gl.uniform1f(uTime, time * 0.001);
+        gl.uniform2f(uRes, canvas.width, canvas.height);
+        gl.uniform2f(uMouse, mouse.x, mouse.y);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+        requestAnimationFrame(render);
+      }
+      requestAnimationFrame(render);
+    })();
+
+    // ========================================================
+    // B. IMPERIAL WEB AUDIO SYNTHESIZER (ZERO-LAG SOUND FX)
+    // ========================================================
+    let audioCtx = null;
+    let audioActive = true;
+
+    function initAudio() {
+      if (!audioCtx) {
+        const AudioClass = window.AudioContext || window.webkitAudioContext;
+        if (AudioClass) audioCtx = new AudioClass();
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
       }
     }
 
     function toggleAudioFX() {
-      isAudioEnabled = !isAudioEnabled;
-      const label = document.getElementById("audioToggleLabel");
-      const btn = document.getElementById("audioToggleBtn");
-      
-      if (isAudioEnabled) {
+      audioActive = !audioActive;
+      const label = document.getElementById("audioLabel");
+      const icon = document.getElementById("audioIcon");
+      if (audioActive) {
         label.innerText = "Audio FX ON";
-        btn.classList.add("text-cyan-400");
-        btn.classList.remove("text-slate-500");
-        playAudioCue('success');
+        icon.className = "fa-solid fa-volume-high text-xs";
+        playAudio('chime');
       } else {
         label.innerText = "Audio FX OFF";
-        btn.classList.remove("text-cyan-400");
-        btn.classList.add("text-slate-500");
+        icon.className = "fa-solid fa-volume-xmark text-xs";
       }
     }
 
-    // Synthesized Sound Wave Cues
-    function playAudioCue(type) {
-      if (!isAudioEnabled) return;
+    function playAudio(cue) {
+      if (!audioActive) return;
       try {
-        initAudioContext();
-        if (!audioContext) return;
+        initAudio();
+        if (!audioCtx) return;
+        const now = audioCtx.currentTime;
 
-        const now = audioContext.currentTime;
-
-        if (type === 'click') {
-          // Sharp cyber click
-          const osc = audioContext.createOscillator();
-          const gain = audioContext.createGain();
+        if (cue === 'click') {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
           osc.type = 'sine';
-          osc.frequency.setValueAtTime(800, now);
-          osc.frequency.exponentialRampToValueAtTime(300, now + 0.05);
-          gain.gain.setValueAtTime(0.15, now);
-          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.05);
-          osc.connect(gain);
-          gain.connect(audioContext.destination);
-          osc.start(now);
-          osc.stop(now + 0.05);
-        } else if (type === 'whoosh') {
-          // Slide next-to-next sweep
-          const osc = audioContext.createOscillator();
-          const gain = audioContext.createGain();
-          osc.type = 'triangle';
-          osc.frequency.setValueAtTime(260, now);
-          osc.frequency.exponentialRampToValueAtTime(680, now + 0.12);
+          osc.frequency.setValueAtTime(880, now);
+          osc.frequency.exponentialRampToValueAtTime(320, now + 0.04);
           gain.gain.setValueAtTime(0.12, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.04);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now);
+          osc.stop(now + 0.04);
+        } else if (cue === 'whoosh') {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(220, now);
+          osc.frequency.exponentialRampToValueAtTime(580, now + 0.12);
+          gain.gain.setValueAtTime(0.08, now);
           gain.gain.exponentialRampToValueAtTime(0.01, now + 0.12);
           osc.connect(gain);
-          gain.connect(audioContext.destination);
+          gain.connect(audioCtx.destination);
           osc.start(now);
           osc.stop(now + 0.12);
-        } else if (type === 'add_cart') {
-          // Ascending high-tech futuristic chime
-          const freqs = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
-          freqs.forEach((freq, idx) => {
-            const osc = audioContext.createOscillator();
-            const gain = audioContext.createGain();
+        } else if (cue === 'chime') {
+          const notes = [587.33, 739.99, 880.00, 1174.66]; // D5, F#5, A5, D6 Royal chord
+          notes.forEach((freq, idx) => {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
             osc.type = 'sine';
             osc.frequency.setValueAtTime(freq, now + idx * 0.04);
-            gain.gain.setValueAtTime(0.12, now + idx * 0.04);
-            gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.04 + 0.18);
+            gain.gain.setValueAtTime(0.1, now + idx * 0.04);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.04 + 0.22);
             osc.connect(gain);
-            gain.connect(audioContext.destination);
+            gain.connect(audioCtx.destination);
             osc.start(now + idx * 0.04);
-            osc.stop(now + idx * 0.04 + 0.18);
+            osc.stop(now + idx * 0.04 + 0.22);
           });
-        } else if (type === 'success') {
-          // Laser confirmation chime
-          const osc = audioContext.createOscillator();
-          const gain = audioContext.createGain();
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(440, now);
-          osc.frequency.exponentialRampToValueAtTime(880, now + 0.2);
-          gain.gain.setValueAtTime(0.15, now);
-          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
-          osc.connect(gain);
-          gain.connect(audioContext.destination);
-          osc.start(now);
-          osc.stop(now + 0.25);
-        } else if (type === 'warp') {
-          // Companion summon warp sound
-          const osc = audioContext.createOscillator();
-          const gain = audioContext.createGain();
-          osc.type = 'sawtooth';
-          osc.frequency.setValueAtTime(300, now);
-          osc.frequency.exponentialRampToValueAtTime(1200, now + 0.35);
-          gain.gain.setValueAtTime(0.08, now);
-          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
-          osc.connect(gain);
-          gain.connect(audioContext.destination);
-          osc.start(now);
-          osc.stop(now + 0.35);
         }
       } catch (err) {}
     }
 
-    // ==========================================
-    // 2. SUPABASE CLOUD KEYS
-    // ==========================================
+    // ========================================================
+    // C. SUPABASE & PRODUCTS DATA INTEGRATION
+    // ========================================================
     const SUPABASE_URL = "https://yyapzlhdnyduonrekiwe.supabase.co";
     const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5YXB6bGhkbnlkdW9ucmVraXdlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQzODA3MDYsImV4cCI6MjEwOTk1NjcwNn0.YMdQBz0h9sekPQV-crgmRHrGl96RfNj0xymXD6r4rBE";
-
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    // Constant Store Configurations (Rs. 350 COD)
-    const SHIPPING_FEE = 350; // Flat COD
+    const SHIPPING_COD = 350; // Nationwide Flat COD
     const STORE_WHATSAPP = "923049141244";
     const STORE_EMAIL = "easicarts@gmail.com";
 
-    // Fallback Initial Categories
-    const defaultCategories = [
-      { key: "all", label: "All Collections", icon: "fa-border-all" },
-      { key: "babyshoes", label: "Baby & Kids Shoes", icon: "fa-baby" },
-      { key: "garments", label: "Clothes & Garments", icon: "fa-shirt" },
-      { key: "bedsheets", label: "Luxury Bedsheets", icon: "fa-bed" },
-      { key: "homedecor", label: "Home Living", icon: "fa-couch" },
-      { key: "sale", label: "Clearance Sale", icon: "fa-fire" }
-    ];
-
-    // Fallback Initial Verified Products
-    const defaultProducts = [
+    // Verified Authentic Products Database
+    const defaultCatalog = [
       {
         id: "p1",
-        title: "Handmade Sheep Baby Shoes – Soft, Cute & Cozy",
+        title: "Handmade Sheep Baby Shoes – Soft & Cozy",
         category: "babyshoes",
-        category_label: "Baby Shoes",
+        category_label: "Baby & Kids Footwear",
         price: 1500,
-        old_price: 1999,
         image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800&auto=format&fit=crop&q=80",
-        badge: "Bestseller",
-        description: "Handcrafted pre-walker soft knitted sheep booties with breathable fleece lining and anti-slip gentle bottom."
+        badge: "Top Seller",
+        description: "Pediatrician-tested pre-walker boots hand-knitted from organic fleece wool with non-slip gentle grip."
       },
       {
         id: "p2",
-        title: "Soft Sole Toddler Animal Moccasins",
+        title: "Soft Sole Toddler Moccasins",
         category: "babyshoes",
-        category_label: "Baby Shoes",
+        category_label: "Baby & Kids Footwear",
         price: 1850,
-        old_price: 2200,
         image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=800&auto=format&fit=crop&q=80",
-        badge: "Pediatrician Safe",
-        description: "Flexible non-skid rubberized soft-sole shoes designed to support early walking milestones safely."
+        badge: "Artisanal",
+        description: "Ergonomic leather moccasins crafted for natural foot flex and healthy bone alignment during first steps."
       },
       {
         id: "p3",
-        title: "Premium Combed Bio-Washed Cotton Crew Tee",
+        title: "Premium Combed Cotton Tee",
         category: "garments",
-        category_label: "Clothes",
+        category_label: "Cotton Garments",
         price: 1399,
-        old_price: 1799,
         image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800&auto=format&fit=crop&q=80",
-        badge: "100% Cotton",
-        description: "210 GSM heavy-grade bio-washed combed cotton t-shirt. Pre-shrunk and hypoallergenic for sensitive skin."
+        badge: "Bio-Washed",
+        description: "210 GSM heavy-grade bio-washed combed cotton. Pre-shrunk, breathable weave for ultimate all-day comfort."
       },
       {
         id: "p4",
-        title: "Hotel Luxury 400TC Egyptian Cotton Bedsheet Set",
+        title: "Hotel Luxury 400TC Egyptian Set",
         category: "bedsheets",
-        category_label: "Bedsheets",
+        category_label: "Luxury Bedsheets (KHM)",
         price: 3899,
-        old_price: 5200,
         image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=800&auto=format&fit=crop&q=80",
-        badge: "Luxury Satin",
-        description: "Experience 5-star hotel comfort at home. Includes 1 King flat sheet and 2 matching envelope pillowcases by KHM Bedding."
+        badge: "Grand Imperial",
+        description: "King Chamber Suite: 1 Flat Sheet + 2 Oxford Pillowcases woven with 400TC long-staple Egyptian cotton sateen."
+      },
+      {
+        id: "p5",
+        title: "Botanical Fitted Sheet with Deep Pockets",
+        category: "bedsheets",
+        category_label: "Luxury Bedsheets (KHM)",
+        price: 2950,
+        image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=800&auto=format&fit=crop&q=80",
+        badge: "Non-Fade",
+        description: "Deep pocket 360-degree elastic grip sheet preventing slips on premium thick mattresses up to 14 inches."
+      },
+      {
+        id: "p6",
+        title: "Relaxed Linen Everyday Shirt",
+        category: "garments",
+        category_label: "Cotton Garments",
+        price: 2499,
+        image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800&auto=format&fit=crop&q=80",
+        badge: "Trending",
+        description: "Featherweight linen-cotton blend tailored with reinforced French seams for summer breeze and effortless luxury."
+      },
+      {
+        id: "p7",
+        title: "Minimalist Textured Cushion Covers (Pair)",
+        category: "homedecor",
+        category_label: "Home Living",
+        price: 1250,
+        image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=800&auto=format&fit=crop&q=80",
+        badge: "Decor Accent",
+        description: "Heavy textured linen-cotton cushion slipcovers with hidden golden zip closures for sovereign couches."
+      },
+      {
+        id: "p8",
+        title: "Plush Fleece Baby Blanket & Booties Bundle",
+        category: "babyshoes",
+        category_label: "Baby & Kids Footwear",
+        price: 1999,
+        image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800&auto=format&fit=crop&q=80",
+        badge: "VIP Bundle",
+        description: "Double-layer reversible security nursery blanket bundled with matching hand-knitted fleece baby booties."
       }
     ];
 
-    // State Variables
-    let categoriesList = [];
-    let productsList = [];
-    let activeCategory = 'all';
-    let searchQuery = '';
-    let sortMethod = 'default';
-    let cart = [];
+    let storeProducts = defaultCatalog;
+    let selectedCat = 'all';
+    let bag = [];
 
-    // Next-to-Next Slider State
-    let currentSlideIndex = 0;
-    let autoSlideInterval = null;
-
-    // ==========================================
-    // 3. THEME SWITCHER
-    // ==========================================
-    function setTheme(themeName) {
-      document.documentElement.setAttribute('data-theme', themeName);
-      if (themeName === 'dark') {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-      try {
-        localStorage.setItem('khmbedding_theme', themeName);
-      } catch (e) {}
-    }
-
-    function initTheme() {
-      try {
-        const savedTheme = localStorage.getItem('khmbedding_theme') || 'vibrant';
-        setTheme(savedTheme);
-      } catch (e) {
-        setTheme('vibrant');
-      }
-    }
-
-    // ==========================================
-    // 4. SLEEK MASCOT INTERACTION
-    // ==========================================
-    let isMascotActive = false;
-
-    function triggerMascotInteraction(force = false) {
-      if (isMascotActive && !force) return;
-      isMascotActive = true;
-
-      const overlay = document.getElementById("khmMascotOverlay");
-      const mLeft = document.getElementById("mascotLeft");
-      const mRight = document.getElementById("mascotRight");
-      const mLeftBody = document.getElementById("mascotLeftBody");
-      const mRightBody = document.getElementById("mascotRightBody");
-      const noteTag = document.getElementById("mascotNoteTag");
-
-      overlay.style.display = "block";
-
-      mLeft.style.transition = "none";
-      mRight.style.transition = "none";
-      mLeft.style.left = "-200px";
-      mRight.style.right = "-200px";
-      mLeftBody.className = "animate-avatar-float";
-      mRightBody.className = "animate-avatar-float";
-      noteTag.classList.add("hidden");
-      noteTag.style.opacity = "0";
-
-      setTimeout(() => {
-        mLeft.style.transition = "left 2.2s cubic-bezier(0.22, 1, 0.36, 1)";
-        mRight.style.transition = "right 2.2s cubic-bezier(0.22, 1, 0.36, 1)";
-        mLeft.style.left = "calc(50% - 130px)";
-        mRight.style.right = "calc(50% - 130px)";
-
-        setTimeout(() => {
-          noteTag.classList.remove("hidden");
-          setTimeout(() => { noteTag.style.opacity = "1"; }, 50);
-
-          setTimeout(() => {
-            mLeftBody.className = "animate-avatar-dance";
-            mRightBody.className = "animate-avatar-dance";
-
-            setTimeout(() => {
-              noteTag.style.opacity = "0";
-              setTimeout(() => noteTag.classList.add("hidden"), 300);
-
-              mLeft.style.transition = "left 2.2s ease-in";
-              mRight.style.transition = "right 2.2s ease-in";
-              mLeft.style.left = "-220px";
-              mRight.style.right = "-220px";
-
-              setTimeout(() => {
-                overlay.style.display = "none";
-                isMascotActive = false;
-              }, 2300);
-
-            }, 2500);
-
-          }, 800);
-
-        }, 2300);
-
-      }, 100);
-    }
-
-    function startMascotLoop() {
-      setTimeout(() => {
-        triggerMascotInteraction();
-        setInterval(() => {
-          triggerMascotInteraction();
-        }, 14000);
-      }, 3000);
-    }
-
-    // ==========================================
-    // 5. INITIALIZE PAGE
-    // ==========================================
+    // Initialize Store
     document.addEventListener("DOMContentLoaded", async () => {
-      initTheme();
-      loadCartFromStorage();
-      await fetchStoreDataFromSupabase();
-      renderCategoryNavigation();
-      renderNextToNextSlider();
-      updateCartUI();
-      startMascotLoop();
-      startAutoSlider();
-      
-      // Auto unlock audio context on first user click
-      document.body.addEventListener('click', () => { initAudioContext(); }, { once: true });
+      loadBagFromStorage();
+      await fetchFromSupabase();
+      renderProducts();
+      updateBagUI();
+      document.body.addEventListener('click', () => initAudio(), { once: true });
     });
 
-    // ==========================================
-    // 6. FETCH DATA FROM SUPABASE CLOUD
-    // ==========================================
-    async function fetchStoreDataFromSupabase() {
+    async function fetchFromSupabase() {
       try {
-        const { data: catData, error: catErr } = await supabaseClient
-          .from('categories')
-          .select('*')
-          .order('id', { ascending: true });
-
-        if (!catErr && catData && catData.length > 0) {
-          categoriesList = [
-            { key: "all", label: "All Collections", icon: "fa-border-all" },
-            ...catData.map(c => ({
-              key: c.key,
-              label: c.label,
-              icon: getCategoryIcon(c.key)
-            }))
-          ];
-        } else {
-          categoriesList = defaultCategories;
-        }
-      } catch (e) {
-        categoriesList = defaultCategories;
-      }
-
-      try {
-        const { data: prodData, error: prodErr } = await supabaseClient
+        const { data, error } = await supabaseClient
           .from('products')
           .select('*')
           .order('created_at', { ascending: false });
 
-        if (!prodErr && prodData && prodData.length > 0) {
-          productsList = prodData;
-        } else {
-          productsList = defaultProducts;
+        if (!error && data && data.length > 0) {
+          storeProducts = data;
         }
       } catch (e) {
-        productsList = defaultProducts;
+        storeProducts = defaultCatalog;
       }
     }
 
-    function getCategoryIcon(key) {
-      if (key.includes('baby') || key.includes('shoe')) return 'fa-baby';
-      if (key.includes('garm') || key.includes('cloth') || key.includes('shirt')) return 'fa-shirt';
-      if (key.includes('bed')) return 'fa-bed';
-      if (key.includes('home') || key.includes('decor')) return 'fa-couch';
-      if (key.includes('sale') || key.includes('clear')) return 'fa-fire';
-      return 'fa-tag';
+    // ========================================================
+    // D. CATALOG RENDERING & PEDESTAL CARDS
+    // ========================================================
+    function filterCategory(cat) {
+      selectedCat = cat;
+      document.querySelectorAll('.cat-tab').forEach(b => {
+        b.className = "cat-tab px-4 py-2 rounded-xl font-cinzel text-xs font-bold text-ivory/70 hover:text-white hover:bg-sapphire transition-all";
+      });
+      const activeBtn = document.getElementById(`tab-${cat}`);
+      if (activeBtn) activeBtn.className = "cat-tab px-4 py-2 rounded-xl font-cinzel text-xs font-bold transition-all bg-gold-500 text-midnight";
+      renderProducts();
     }
 
-    // ==========================================
-    // 7. CATEGORY NAVIGATION & FILTERS
-    // ==========================================
-    function renderCategoryNavigation() {
-      const container = document.getElementById("categoryNavContainer");
-      container.innerHTML = categoriesList.map(cat => {
-        const isActive = activeCategory === cat.key;
-        return `
-          <button 
-            onclick="selectCategory('${cat.key}')" 
-            class="px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all flex items-center gap-2 ${
-              isActive 
-                ? 'theme-primary-bg text-white shadow-sm' 
-                : 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300'
-            }"
-          >
-            <i class="fa-solid ${cat.icon} text-[11px] ${isActive ? 'text-white' : 'text-blue-600 dark:text-blue-400'}"></i>
-            <span>${cat.label}</span>
-          </button>
-        `;
-      }).join("");
-    }
-
-    function selectCategory(catKey) {
-      activeCategory = catKey;
-      currentSlideIndex = 0;
-      renderCategoryNavigation();
-      renderNextToNextSlider();
-      
-      const matched = categoriesList.find(c => c.key === catKey);
-      document.getElementById("currentSectionTitle").innerText = matched ? matched.label : "Products";
-    }
-
-    function handleSearch(val) {
-      searchQuery = val.trim().toLowerCase();
-      currentSlideIndex = 0;
-      renderNextToNextSlider();
-    }
-
-    function handleSort(method) {
-      sortMethod = method;
-      currentSlideIndex = 0;
-      renderNextToNextSlider();
-    }
-
-    function resetFilters() {
-      activeCategory = 'all';
-      searchQuery = '';
-      sortMethod = 'default';
-      currentSlideIndex = 0;
-      document.getElementById("searchInput").value = "";
-      document.getElementById("sortSelect").value = "default";
-      document.getElementById("currentSectionTitle").innerText = "Featured Collections";
-      renderCategoryNavigation();
-      renderNextToNextSlider();
-    }
-
-    function getFilteredProducts() {
-      let list = [...productsList];
-
-      if (activeCategory !== 'all') {
-        list = list.filter(p => p.category === activeCategory);
+    function renderProducts() {
+      const container = document.getElementById("productsGrid");
+      let list = storeProducts;
+      if (selectedCat !== 'all') {
+        list = list.filter(p => p.category === selectedCat);
       }
 
-      if (searchQuery) {
-        list = list.filter(p => 
-          p.title.toLowerCase().includes(searchQuery) ||
-          (p.category_label && p.category_label.toLowerCase().includes(searchQuery)) ||
-          (p.description && p.description.toLowerCase().includes(searchQuery))
-        );
-      }
-
-      if (sortMethod === 'price-low') {
-        list.sort((a, b) => Number(a.price) - Number(b.price));
-      } else if (sortMethod === 'price-high') {
-        list.sort((a, b) => Number(b.price) - Number(a.price));
-      }
-
-      return list;
-    }
-
-    // ==========================================
-    // 8. NEXT-TO-NEXT SLIDER RENDERING & CONTROLS
-    // ==========================================
-    function renderNextToNextSlider() {
-      const viewport = document.getElementById("productsSliderViewport");
-      const filtered = getFilteredProducts();
-
-      document.getElementById("productCountBadge").innerText = `${filtered.length} items`;
-
-      if (filtered.length === 0) {
-        viewport.innerHTML = `
-          <div class="w-full py-16 text-center text-slate-400 theme-card rounded-3xl border border-dashed p-8">
-            <i class="fa-solid fa-box-open text-4xl mb-3 text-slate-300"></i>
-            <h3 class="font-bold text-slate-700 dark:text-slate-300 text-sm">Koi product nahi mila</h3>
-            <p class="text-xs text-slate-400 mt-1">Search query ya filter tabdeel karke dekhein.</p>
-            <button onclick="resetFilters(); playAudioCue('click');" class="mt-4 px-4 py-2 bg-blue-50 dark:bg-slate-800 text-blue-700 dark:text-blue-300 font-bold text-xs rounded-xl hover:bg-blue-100">
-              Tamam Collections Dikhayein
-            </button>
-          </div>
-        `;
-        renderSliderDots(0);
-        return;
-      }
-
-      viewport.innerHTML = filtered.map((item, idx) => `
-        <article 
-          class="slider-item shrink-0 w-72 sm:w-80 theme-card rounded-3xl border overflow-hidden hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col group snap-start relative"
-          onmouseenter="playAudioCue('click')"
-        >
-          <!-- Image Box with Quick View -->
-          <div class="relative w-full aspect-square bg-slate-100 dark:bg-slate-800 overflow-hidden">
+      container.innerHTML = list.map(item => `
+        <article class="palace-glass rounded-2xl border border-gold-500/25 overflow-hidden pedestal-card flex flex-col group">
+          <div class="relative w-full aspect-square bg-midnight-deep overflow-hidden">
             <img 
               src="${item.image}" 
               alt="${item.title}" 
-              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-              onerror="this.src='https://placehold.co/400x400?text=KHM+Bedding'"
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+              onerror="this.src='https://placehold.co/400x400/071426/d6a75c?text=KHM+Palace'"
             />
+            <div class="absolute inset-0 bg-gradient-to-t from-midnight/80 via-transparent to-transparent"></div>
             
             ${item.badge ? `
-              <span class="absolute top-3 left-3 bg-blue-700 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-lg shadow uppercase tracking-wider font-mono">
+              <span class="absolute top-3 left-3 bg-midnight/90 text-gold-300 border border-gold-500/40 text-[9px] font-mono px-2 py-0.5 rounded uppercase tracking-wider">
                 ${item.badge}
               </span>
             ` : ''}
 
-            <!-- Quick View Button -->
             <button 
-              onclick="openQuickView('${item.id}'); playAudioCue('click');"
-              class="absolute bottom-3 right-3 bg-white/95 dark:bg-slate-900/95 text-slate-800 dark:text-white text-[11px] font-bold px-3 py-1.5 rounded-full shadow-lg backdrop-blur-xs flex items-center gap-1.5 opacity-90 hover:opacity-100 hover:scale-105 transition-all"
+              onclick="openQuickView('${item.id}')" 
+              class="absolute bottom-3 right-3 palace-glass-heavy text-gold-300 hover:text-white text-xs p-2 rounded-full border border-gold-500/40 hover:scale-110 transition-all"
+              title="Inspect Artifact"
             >
-              <i class="fa-regular fa-eye"></i> Quick View
+              <i class="fa-solid fa-eye"></i>
             </button>
           </div>
 
-          <!-- Content Details -->
           <div class="p-5 flex flex-col flex-1">
-            <div class="flex items-center justify-between gap-2 mb-1.5">
-              <span class="text-[10px] font-extrabold uppercase tracking-wider text-blue-600 dark:text-blue-400 font-mono">
-                ${item.category_label || item.categoryLabel || item.category}
-              </span>
-              <span class="text-[10px] bg-slate-100 dark:bg-slate-800 text-slate-500 px-1.5 py-0.5 rounded font-mono font-bold">
-                COD Rs. 350
-              </span>
-            </div>
-
-            <h3 class="font-bold text-sm line-clamp-2 leading-snug mb-3 group-hover:text-blue-600 transition-colors">
+            <span class="text-[10px] font-mono text-gold-400 uppercase tracking-widest block mb-1">
+              ${item.category_label || item.category}
+            </span>
+            <h3 class="font-serif font-bold text-sm text-ivory line-clamp-2 leading-snug mb-3 group-hover:text-gold-300 transition-colors">
               ${item.title}
             </h3>
 
-            <!-- Price -->
-            <div class="mt-auto pt-2 flex items-baseline gap-2 mb-4">
-              <span class="text-lg font-black text-slate-900 dark:text-white">
+            <div class="mt-auto pt-2 flex items-baseline gap-2 mb-4 font-mono">
+              <span class="text-base font-serif font-bold text-gold-300">
                 Rs. ${Number(item.price).toLocaleString()}
               </span>
-              ${(item.old_price || item.oldPrice) ? `
-                <span class="text-xs text-slate-400 line-through">
-                  Rs. ${Number(item.old_price || item.oldPrice).toLocaleString()}
-                </span>
-              ` : ''}
+              <span class="text-[10px] text-ivory/40">COD Nationwide</span>
             </div>
 
-            <!-- Action Buttons -->
             <div class="grid grid-cols-2 gap-2">
               <button 
-                onclick="addToCart('${item.id}')"
-                class="py-2.5 px-3 bg-blue-50 dark:bg-slate-800 hover:bg-blue-100 dark:hover:bg-slate-700 text-blue-700 dark:text-blue-300 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all active:scale-95 shadow-xs"
+                onclick="addToCart('${item.id}', '${item.title.replace(/'/g, "\\'")}', ${item.price}, '${item.image}')" 
+                class="py-2.5 rounded-xl palace-glass hover:bg-gold-500 hover:text-midnight text-gold-300 border border-gold-500/40 font-cinzel font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 active:scale-95"
               >
-                <i class="fa-solid fa-cart-plus"></i> Add
+                <i class="fa-solid fa-plus text-[10px]"></i> Add
               </button>
-
+              
               <a 
-                href="https://wa.me/${STORE_WHATSAPP}?text=${encodeURIComponent('Hello KHM Bedding, I want to order: ' + item.title + ' (Rs. ' + item.price + ')')}" 
+                href="https://wa.me/${STORE_WHATSAPP}?text=${encodeURIComponent('Hello KHM Bedding, I wish to purchase: ' + item.title + ' (Rs. ' + item.price + ')')}" 
                 target="_blank"
-                onclick="playAudioCue('click')"
-                class="py-2.5 px-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all active:scale-95 shadow-xs"
+                onclick="playAudio('click')"
+                class="py-2.5 rounded-xl bg-emerald-600/80 hover:bg-emerald-600 text-white font-cinzel font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 active:scale-95"
               >
-                <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp
               </a>
             </div>
 
           </div>
         </article>
       `).join("");
-
-      renderSliderDots(filtered.length);
     }
 
-    function renderSliderDots(total) {
-      const container = document.getElementById("sliderDotsContainer");
-      if (total <= 1) {
-        container.innerHTML = "";
-        return;
-      }
-
-      container.innerHTML = Array.from({ length: Math.min(total, 6) }).map((_, idx) => `
-        <button 
-          onclick="slideToIndex(${idx}); playAudioCue('click');" 
-          class="h-2 rounded-full transition-all duration-300 ${
-            idx === currentSlideIndex % 6 ? 'w-6 bg-blue-600' : 'w-2 bg-slate-300 dark:bg-slate-700 hover:bg-slate-400'
-          }"
-        ></button>
-      `).join("");
+    // ========================================================
+    // E. 3D FEATURED SLIDER CONTROLS
+    // ========================================================
+    function slideFeatured(direction) {
+      const track = document.getElementById("featuredSliderTrack");
+      const cardWidth = track.firstElementChild.offsetWidth + 24;
+      track.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
     }
 
-    function slideNext() {
-      const viewport = document.getElementById("productsSliderViewport");
-      const filtered = getFilteredProducts();
-      if (filtered.length <= 1) return;
-
-      currentSlideIndex = (currentSlideIndex + 1) % filtered.length;
-      const cardWidth = 330; // Approx card + gap
-      viewport.scrollLeft = currentSlideIndex * cardWidth;
-      renderSliderDots(filtered.length);
-      playAudioCue('whoosh');
+    function updateSliderCounter() {
+      const track = document.getElementById("featuredSliderTrack");
+      const cardWidth = track.firstElementChild.offsetWidth + 24;
+      const index = Math.round(track.scrollLeft / cardWidth) + 1;
+      const total = track.children.length;
+      document.getElementById("sliderCounterBadge").innerText = `0${Math.min(Math.max(index, 1), total)} / 0${total}`;
     }
 
-    function slidePrev() {
-      const viewport = document.getElementById("productsSliderViewport");
-      const filtered = getFilteredProducts();
-      if (filtered.length <= 1) return;
-
-      currentSlideIndex = (currentSlideIndex - 1 + filtered.length) % filtered.length;
-      const cardWidth = 330;
-      viewport.scrollLeft = currentSlideIndex * cardWidth;
-      renderSliderDots(filtered.length);
-      playAudioCue('whoosh');
-    }
-
-    function slideToIndex(idx) {
-      const viewport = document.getElementById("productsSliderViewport");
-      currentSlideIndex = idx;
-      const cardWidth = 330;
-      viewport.scrollLeft = currentSlideIndex * cardWidth;
-      renderSliderDots(getFilteredProducts().length);
-    }
-
-    function startAutoSlider() {
-      if (autoSlideInterval) clearInterval(autoSlideInterval);
-      autoSlideInterval = setInterval(() => {
-        slideNext();
-      }, 5500); // Smooth continuous next-to-next slide every 5.5 seconds
-    }
-
-    function pauseAutoSlider() {
-      if (autoSlideInterval) clearInterval(autoSlideInterval);
-    }
-
-    function resumeAutoSlider() {
-      startAutoSlider();
-    }
-
-    // ==========================================
-    // 9. QUICK VIEW PRODUCT MODAL
-    // ==========================================
-    function openQuickView(id) {
-      const item = productsList.find(p => p.id === id);
-      if (!item) return;
-
-      document.getElementById("qvImage").src = item.image;
-      document.getElementById("qvTitle").innerText = item.title;
-      document.getElementById("qvCategory").innerText = item.category_label || item.category;
-      document.getElementById("qvPrice").innerText = `Rs. ${Number(item.price).toLocaleString()}`;
-      document.getElementById("qvOldPrice").innerText = (item.old_price || item.oldPrice) ? `Rs. ${Number(item.old_price || item.oldPrice).toLocaleString()}` : '';
-      document.getElementById("qvDesc").innerText = item.description || "High-grade quality fabric tailored for ultimate everyday comfort and durability (KHM Bedding Verified).";
-      document.getElementById("qvBadge").innerText = item.badge || "Verified";
-
-      document.getElementById("qvAddBtn").onclick = () => {
-        addToCart(item.id);
-        closeQuickView();
-        toggleCartDrawer(true);
-      };
-
-      document.getElementById("qvWhatsAppBtn").href = `https://wa.me/${STORE_WHATSAPP}?text=${encodeURIComponent('Hello KHM Bedding, I want to order: ' + item.title + ' (Rs. ' + item.price + ')')}`;
-
-      document.getElementById("quickViewModal").classList.remove("hidden");
-    }
-
-    function closeQuickView() {
-      document.getElementById("quickViewModal").classList.add("hidden");
-    }
-
-    // ==========================================
-    // 10. SHOPPING CART ENGINE (WITH AUDIO CHIMES)
-    // ==========================================
-    function loadCartFromStorage() {
+    // ========================================================
+    // F. SOVEREIGN BAG (CART ENGINE)
+    // ========================================================
+    function loadBagFromStorage() {
       try {
-        const saved = localStorage.getItem("khmbedding_cart");
-        if (saved) cart = JSON.parse(saved);
+        const saved = localStorage.getItem("khm_sovereign_bag");
+        if (saved) bag = JSON.parse(saved);
       } catch (e) {
-        cart = [];
+        bag = [];
       }
     }
 
-    function saveCartToStorage() {
+    function saveBagToStorage() {
       try {
-        localStorage.setItem("khmbedding_cart", JSON.stringify(cart));
+        localStorage.setItem("khm_sovereign_bag", JSON.stringify(bag));
       } catch (e) {}
     }
 
-    function addToCart(id) {
-      const item = productsList.find(p => p.id === id);
-      if (!item) return;
-
-      const existing = cart.find(ci => ci.id === id);
-      if (existing) {
-        existing.qty += 1;
+    function addToCart(id, title, price, image) {
+      const found = bag.find(item => item.id === id);
+      if (found) {
+        found.qty += 1;
       } else {
-        cart.push({
-          id: item.id,
-          title: item.title,
-          price: Number(item.price),
-          image: item.image,
-          qty: 1
-        });
+        bag.push({ id, title, price: Number(price), image, qty: 1 });
       }
-
-      saveCartToStorage();
-      updateCartUI();
-      playAudioCue('add_cart'); // High-tech ascending audio chime
-      
-      const badge = document.getElementById("cartCountBadge");
-      badge.classList.add("scale-125");
-      setTimeout(() => badge.classList.remove("scale-125"), 200);
+      saveBagToStorage();
+      updateBagUI();
+      playAudio('chime');
+      toggleBagDrawer(true);
     }
 
-    function updateCartQty(id, delta) {
-      const item = cart.find(ci => ci.id === id);
-      if (!item) return;
-
-      item.qty += delta;
-      if (item.qty <= 0) {
-        cart = cart.filter(ci => ci.id !== id);
+    function updateQty(id, delta) {
+      const found = bag.find(item => item.id === id);
+      if (!found) return;
+      found.qty += delta;
+      if (found.qty <= 0) {
+        bag = bag.filter(item => item.id !== id);
       }
-
-      saveCartToStorage();
-      updateCartUI();
-      playAudioCue('click');
+      saveBagToStorage();
+      updateBagUI();
+      playAudio('click');
     }
 
-    function removeCartItem(id) {
-      cart = cart.filter(ci => ci.id !== id);
-      saveCartToStorage();
-      updateCartUI();
-      playAudioCue('click');
+    function removeBagItem(id) {
+      bag = bag.filter(item => item.id !== id);
+      saveBagToStorage();
+      updateBagUI();
+      playAudio('click');
     }
 
-    function updateCartUI() {
-      const totalCount = cart.reduce((acc, ci) => acc + ci.qty, 0);
-      document.getElementById("cartCountBadge").innerText = totalCount;
+    function updateBagUI() {
+      const totalCount = bag.reduce((sum, i) => sum + i.qty, 0);
+      document.getElementById("headerCartCount").innerText = totalCount;
 
-      const container = document.getElementById("cartItemsContainer");
-
-      if (cart.length === 0) {
+      const container = document.getElementById("bagItemsContainer");
+      if (bag.length === 0) {
         container.innerHTML = `
-          <div class="py-16 text-center text-slate-400">
-            <i class="fa-solid fa-basket-shopping text-4xl mb-3 text-slate-300"></i>
-            <h4 class="font-bold text-sm">Your shopping bag is empty</h4>
-            <p class="text-xs text-slate-400 mt-1">Browse products and add them to order.</p>
+          <div class="py-20 text-center text-ivory/50">
+            <i class="fa-solid fa-crown text-4xl mb-3 text-gold-500/30"></i>
+            <h4 class="font-serif text-sm font-bold text-ivory/80">Your sovereign bag is currently empty.</h4>
+            <p class="text-xs text-gold-400/80 mt-1 font-mono uppercase tracking-widest">Select an item from the pedestals</p>
           </div>
         `;
-        document.getElementById("cartSubtotalText").innerText = "Rs. 0";
-        document.getElementById("cartShippingText").innerText = "Rs. 0";
-        document.getElementById("cartGrandTotalText").innerText = "Rs. 0";
+        document.getElementById("bagSubtotal").innerText = "Rs. 0";
+        document.getElementById("bagGrandTotal").innerText = "Rs. 350";
         return;
       }
 
-      const subtotal = cart.reduce((acc, ci) => acc + (ci.price * ci.qty), 0);
-      const grandTotal = subtotal + SHIPPING_FEE;
+      const subtotal = bag.reduce((sum, i) => sum + (i.price * i.qty), 0);
+      const grandTotal = subtotal + SHIPPING_COD;
 
-      container.innerHTML = cart.map(ci => `
-        <div class="flex items-center gap-3 p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
-          <img src="${ci.image}" alt="${ci.title}" class="w-14 h-14 rounded-lg object-cover bg-white" />
-          <div class="flex-1 min-w-0">
-            <h4 class="text-xs font-bold truncate">${ci.title}</h4>
-            <div class="text-xs font-black text-blue-700 dark:text-blue-400 mt-0.5">Rs. ${ci.price.toLocaleString()}</div>
-            
+      container.innerHTML = bag.map(item => `
+        <div class="flex items-center gap-3 p-3 rounded-xl palace-glass border border-gold-500/20">
+          <img src="${item.image}" alt="${item.title}" class="w-14 h-14 rounded-lg object-cover bg-midnight border border-gold-500/30" />
+          <div class="flex-1 min-w-0 font-mono">
+            <h4 class="text-xs font-serif font-bold text-ivory truncate">${item.title}</h4>
+            <div class="text-xs text-gold-400 font-bold mt-0.5">Rs. ${item.price.toLocaleString()}</div>
             <div class="flex items-center gap-2 mt-1.5">
-              <button onclick="updateCartQty('${ci.id}', -1)" class="w-6 h-6 rounded-md bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-200 hover:bg-slate-100 flex items-center justify-center font-bold text-xs">-</button>
-              <span class="text-xs font-bold">${ci.qty}</span>
-              <button onclick="updateCartQty('${ci.id}', 1)" class="w-6 h-6 rounded-md bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-200 hover:bg-slate-100 flex items-center justify-center font-bold text-xs">+</button>
+              <button onclick="updateQty('${item.id}', -1)" class="w-5 h-5 rounded palace-glass text-gold-300 font-bold text-xs">-</button>
+              <span class="text-xs text-ivory font-bold">${item.qty}</span>
+              <button onclick="updateQty('${item.id}', 1)" class="w-5 h-5 rounded palace-glass text-gold-300 font-bold text-xs">+</button>
             </div>
           </div>
-          <button onclick="removeCartItem('${ci.id}')" class="text-slate-400 hover:text-rose-600 p-2 text-xs" title="Remove item">
+          <button onclick="removeBagItem('${item.id}')" class="text-ivory/40 hover:text-rose-400 p-2 text-xs" title="Remove">
             <i class="fa-solid fa-trash-can"></i>
           </button>
         </div>
       `).join("");
 
-      document.getElementById("cartSubtotalText").innerText = `Rs. ${subtotal.toLocaleString()}`;
-      document.getElementById("cartShippingText").innerText = `Rs. ${SHIPPING_FEE.toLocaleString()}`;
-      document.getElementById("cartGrandTotalText").innerText = `Rs. ${grandTotal.toLocaleString()}`;
+      document.getElementById("bagSubtotal").innerText = `Rs. ${subtotal.toLocaleString()}`;
+      document.getElementById("bagGrandTotal").innerText = `Rs. ${grandTotal.toLocaleString()}`;
     }
 
-    function toggleCartDrawer(open) {
-      const drawer = document.getElementById("cartDrawer");
-      const backdrop = document.getElementById("cartDrawerBackdrop");
-
+    function toggleBagDrawer(open) {
+      const drawer = document.getElementById("bagDrawer");
+      const backdrop = document.getElementById("bagDrawerBackdrop");
       if (open) {
         backdrop.classList.remove("hidden");
         setTimeout(() => drawer.classList.remove("translate-x-full"), 10);
@@ -1613,91 +1390,102 @@
       }
     }
 
-    // ==========================================
-    // 11. ORDER PLACEMENT (RS. 350 COD + SUPABASE + WHATSAPP)
-    // ==========================================
+    // ========================================================
+    // G. ORDER SUBMISSION & WHATSAPP ROUTING
+    // ========================================================
     async function handlePlaceOrder(e) {
       e.preventDefault();
-
-      if (cart.length === 0) {
-        alert("Aapka bag khali hai! Pehle product add karein.");
+      if (bag.length === 0) {
+        alert("Your sovereign bag is empty. Please select an item first.");
         return;
       }
 
-      playAudioCue('success');
-
-      const submitBtn = document.getElementById("placeOrderBtn");
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> Saving order...`;
+      const btn = document.getElementById("btnSubmitOrder");
+      btn.disabled = true;
+      btn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> Dispatching Order Telemetry...`;
 
       const name = document.getElementById("custName").value.trim();
       const phone = document.getElementById("custPhone").value.trim();
       const address = document.getElementById("custAddress").value.trim();
-      const city = document.getElementById("custCity").value.trim();
 
-      const subtotal = cart.reduce((acc, ci) => acc + (ci.price * ci.qty), 0);
-      const grandTotal = subtotal + SHIPPING_FEE; // Subtotal + Rs. 350
-      const orderId = "KHM-" + Math.floor(100000 + Math.random() * 900000);
+      const subtotal = bag.reduce((sum, i) => sum + (i.price * i.qty), 0);
+      const grandTotal = subtotal + SHIPPING_COD;
+      const orderId = "KHM-V4-" + Math.floor(100000 + Math.random() * 900000);
 
-      const itemsText = cart.map(ci => `• ${ci.title} (x${ci.qty}) - Rs. ${(ci.price * ci.qty).toLocaleString()}`).join("\n");
+      const itemsSummary = bag.map(i => `• ${i.title} (Qty: ${i.qty}) - Rs. ${(i.price * i.qty).toLocaleString()}`).join("\n");
 
-      // 1. Save to Supabase 'orders' Table
+      // Save to Supabase
       try {
-        const { error: dbError } = await supabaseClient
-          .from('orders')
-          .insert([{
-            id: orderId,
-            customer_name: name,
-            customer_phone: phone,
-            customer_address: address,
-            customer_city: city,
-            ordered_items: itemsText,
-            subtotal: subtotal,
-            shipping_fee: SHIPPING_FEE, // Rs. 350 COD
-            grand_total: grandTotal,
-            status: 'Pending'
-          }]);
+        await supabaseClient.from('orders').insert([{
+          id: orderId,
+          customer_name: name,
+          customer_phone: phone,
+          customer_address: address,
+          ordered_items: itemsSummary,
+          subtotal: subtotal,
+          shipping_fee: SHIPPING_COD,
+          grand_total: grandTotal,
+          status: 'Pending'
+        }]);
+      } catch (err) {}
 
-        if (dbError) {
-          console.warn("Supabase order save note:", dbError.message);
-        }
-      } catch (err) {
-        console.warn("Cloud connection err:", err);
-      }
-
-      // 2. Prepare WhatsApp Order Message (KHM Bedding)
-      const waMsg = `🛒 *NEW ORDER - KHM BEDDING*
-━━━━━━━━━━━━━━━━━━━
-*Order ID:* ${orderId}
+      // Formatted WhatsApp Message
+      const waText = `👑 *NEW SOVEREIGN ORDER - KHM BEDDING V4.0*
+━━━━━━━━━━━━━━━━━━━━
+*Order Token:* ${orderId}
 *Customer:* ${name}
-*Phone:* ${phone}
-*City:* ${city}
+*WhatsApp:* ${phone}
 *Address:* ${address}
 
-📦 *ITEMS ORDERED:*
-${itemsText}
+📦 *CURATED ARTIFACTS:*
+${itemsSummary}
 
-💰 *PAYMENT BREAKDOWN:*
+💰 *SOVEREIGN VALUATION:*
 • Subtotal: Rs. ${subtotal.toLocaleString()}
-• COD Shipping: Rs. ${SHIPPING_FEE} (Flat All PK)
-*Grand Total (COD): Rs. ${grandTotal.toLocaleString()}*
-━━━━━━━━━━━━━━━━━━━
-Sent to: ${STORE_EMAIL}`;
+• Nationwide COD Fee: Rs. ${SHIPPING_COD}
+*Grand Total Payable: Rs. ${grandTotal.toLocaleString()}*
+━━━━━━━━━━━━━━━━━━━━
+Notification dispatched to: ${STORE_EMAIL}`;
 
-      // 3. Clear Cart & Close Drawer
-      cart = [];
-      saveCartToStorage();
-      updateCartUI();
-      toggleCartDrawer(false);
+      bag = [];
+      saveBagToStorage();
+      updateBagUI();
+      toggleBagDrawer(false);
 
-      alert(`Shukriya ${name}! Aapka order (#${orderId}) receive ho gaya hai aur database mein save ho chuka hai (Total: Rs. ${grandTotal.toLocaleString()} including Rs. 350 COD charges). Ab WhatsApp par confirmation bhejte hain.`);
+      alert(`Shukriya ${name}! Your order (#${orderId}) is confirmed for Rs. ${grandTotal.toLocaleString()} (including Rs. 350 COD delivery). We are routing you to the VIP Concierge on WhatsApp.`);
+      
+      window.open(`https://wa.me/${STORE_WHATSAPP}?text=${encodeURIComponent(waText)}`, '_blank');
+      
+      btn.disabled = false;
+      btn.innerHTML = `<i class="fa-solid fa-circle-check"></i> Confirm COD Nationwide Order`;
+    }
 
-      // 4. Open WhatsApp with prefilled message
-      const waUrl = `https://wa.me/${STORE_WHATSAPP}?text=${encodeURIComponent(waMsg)}`;
-      window.open(waUrl, '_blank');
+    // ========================================================
+    // H. PRODUCT QUICK VIEW MODAL
+    // ========================================================
+    function openQuickView(id) {
+      const item = storeProducts.find(p => p.id === id);
+      if (!item) return;
 
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Place Order (Email + WhatsApp)`;
+      document.getElementById("modalImg").src = item.image;
+      document.getElementById("modalTitle").innerText = item.title;
+      document.getElementById("modalCategory").innerText = item.category_label || item.category;
+      document.getElementById("modalPrice").innerText = `Rs. ${Number(item.price).toLocaleString()}`;
+      document.getElementById("modalDesc").innerText = item.description || "Authentic palace-certified fabric crafted with high precision and hand-finished stitches.";
+
+      document.getElementById("modalAddBtn").onclick = () => {
+        addToCart(item.id, item.title, item.price, item.image);
+        closeQuickView();
+      };
+
+      document.getElementById("modalWaBtn").href = `https://wa.me/${STORE_WHATSAPP}?text=${encodeURIComponent('Hello KHM Bedding VIP Concierge, I wish to inquire about: ' + item.title)}`;
+
+      document.getElementById("quickModal").classList.remove("hidden");
+      playAudio('click');
+    }
+
+    function closeQuickView() {
+      document.getElementById("quickModal").classList.add("hidden");
     }
   </script>
 </body>
