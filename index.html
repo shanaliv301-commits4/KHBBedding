@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KHM Bedding V4.0 | Grand Luxury Palace & Imperial Living</title>
+  <title>KHM Bedding V4.0 | Master Cinematic 3D Showroom Palace</title>
 
-  <!-- SEO & Social Meta Tags -->
-  <meta name="description" content="KHM Bedding V4.0 — Cinematic 3D Luxury Shopping Palace. Handcrafted baby shoes, bio-washed cotton couture, and 400TC Egyptian sateen palace bedsheets across Pakistan with Flat Rs. 350 COD delivery." />
-  <meta property="og:title" content="KHM Bedding V4.0 — Grand Luxury Palace" />
+  <!-- SEO & Open Graph Meta Tags -->
+  <meta name="description" content="KHM Bedding V4.0 — Master Cinematic 3D Luxury Palace Showroom. Pediatric-approved baby footwear, bio-washed combed cotton couture, and 400TC Egyptian sateen palace chambers with Flat Rs. 350 Nationwide COD." />
+  <meta property="og:title" content="KHM Bedding V4.0 — Master 3D Luxury Palace" />
   <meta property="og:description" content="Flat Rs. 350 Nationwide COD Delivery. WhatsApp VIP Concierge: +92 304 9141244." />
   <meta property="og:type" content="website" />
 
-  <!-- Google Fonts: Playfair Display, Cinzel & Plus Jakarta Sans -->
+  <!-- Google Fonts: Playfair Display, Cinzel, Plus Jakarta Sans & Space Grotesk -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
@@ -96,9 +96,6 @@
       -webkit-backdrop-filter: blur(24px);
       border: 1px solid rgba(214, 167, 92, 0.3);
     }
-    .gold-border-glow {
-      box-shadow: 0 0 25px rgba(214, 167, 92, 0.2), inset 0 0 15px rgba(214, 167, 92, 0.1);
-    }
     .gold-gradient-text {
       background: linear-gradient(135deg, #ffffff 0%, #f5e4b7 35%, #d6a75c 75%, #b8893d 100%);
       -webkit-background-clip: text;
@@ -113,7 +110,7 @@
       box-shadow: 0 10px 30px rgba(214, 167, 92, 0.4);
     }
 
-    /* 3D Card Hover Perspective */
+    /* 3D Pedestal Card Hover Perspective */
     .pedestal-card {
       transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
       transform-style: preserve-3d;
@@ -122,6 +119,14 @@
       transform: translateY(-8px) scale(1.02);
       border-color: rgba(214, 167, 92, 0.7);
       box-shadow: 0 20px 40px rgba(3, 14, 32, 0.9), 0 0 30px rgba(214, 167, 92, 0.25);
+    }
+
+    /* Glass Cloche Dome */
+    .glass-cloche {
+      background: radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.2), rgba(16, 35, 68, 0.6) 80%);
+      border: 1.5px solid rgba(214, 167, 92, 0.4);
+      border-radius: 9999px 9999px 16px 16px;
+      box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.15), 0 10px 30px rgba(0, 0, 0, 0.5);
     }
 
     /* Featured Collections Slider */
@@ -142,92 +147,78 @@
 <body class="font-sans antialiased selection:bg-gold-500 selection:text-midnight">
 
   <!-- ========================================================
-       1. PROCEDURAL 3D WEBGL VOLUMETRIC PALACE SHADER (BACKGROUND)
+       1. WEBGL VOLUMETRIC PALACE SHADER (BACKGROUND)
        ======================================================== -->
   <div class="fixed inset-0 w-full h-full pointer-events-none z-0 opacity-75">
     <canvas id="palaceShaderCanvas" class="w-full h-full block"></canvas>
   </div>
-
-  <!-- Ambient Dark Vignette Overlay -->
   <div class="fixed inset-0 pointer-events-none z-0 bg-radial from-transparent via-midnight/60 to-midnight"></div>
 
   <!-- ========================================================
-       2. TOP STATUS & TELEMETRY STRIP
+       2. TOP STATUS STRIP
        ======================================================== -->
   <div class="relative z-50 bg-midnight-deep/90 border-b border-gold-500/20 text-xs py-2 px-4 backdrop-blur-md">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
-      
-      <div class="flex items-center gap-2 sm:gap-3 flex-wrap justify-center font-mono">
-        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-400 text-[10px] font-bold uppercase tracking-wider">
-          <i class="fa-solid fa-bolt text-amber-300"></i> Hyper-Dispatch Active
+      <div class="flex items-center gap-2 sm:gap-3 flex-wrap justify-center font-mono text-[11px]">
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-400 font-bold uppercase tracking-wider text-[10px]">
+          <i class="fa-solid fa-crown text-amber-300"></i> KHM Bedding Master Showroom
         </span>
-        <span class="text-ivory/80 text-[11px] font-medium">Flat Rs. 350 COD Nationwide</span>
+        <span class="text-ivory/80">Rs. 350 Flat Nationwide COD</span>
         <span class="text-gold-500/40">•</span>
-        <span class="inline-flex items-center gap-1.5 text-[11px] text-emerald-400 font-bold">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> 48 Shoppers in Palace
-        </span>
+        <span class="text-emerald-400 font-bold"><i class="fa-solid fa-check"></i> 30-Day Hassle-Free Exchange</span>
       </div>
 
       <div class="flex items-center gap-4 text-[11px] text-ivory/70">
-        <!-- Audio FX Synthesizer Toggle -->
         <button 
           id="audioToggleBtn" 
           onclick="toggleAudioFX()" 
-          title="Toggle Imperial Web Audio Synthesizer"
-          class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-sapphire/80 border border-gold-500/30 hover:border-gold-500 text-gold-400 transition-all font-mono text-[10px] uppercase tracking-wider"
+          class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-sapphire/80 border border-gold-500/30 text-gold-400 font-mono text-[10px] uppercase"
         >
           <i id="audioIcon" class="fa-solid fa-volume-high text-xs"></i>
           <span id="audioLabel">Audio FX ON</span>
         </button>
-
         <a href="https://wa.me/923049141244" target="_blank" onclick="playAudio('click')" class="hover:text-gold-400 transition-colors flex items-center gap-1.5 font-bold font-mono">
           <i class="fa-brands fa-whatsapp text-emerald-400 text-xs"></i> WhatsApp: +92 304 9141244
         </a>
       </div>
-
     </div>
   </div>
 
   <!-- ========================================================
        3. PALATIAL NAVIGATION HEADER
        ======================================================== -->
-  <header class="sticky top-0 z-40 palace-glass-heavy border-b border-gold-500/25 transition-all">
+  <header class="sticky top-0 z-40 palace-glass-heavy border-b border-gold-500/25">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between gap-4">
-      
-      <!-- Brand Logo -->
       <a href="index.html" onclick="playAudio('click')" class="flex items-center gap-3 group">
         <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-sapphire via-gold-600/40 to-gold-400 text-gold-300 flex items-center justify-center text-xl shadow-lg border border-gold-500/40 group-hover:scale-105 transition-transform">
-          <i class="fa-solid fa-crown"></i>
+          <i class="fa-solid fa-bed"></i>
         </div>
         <div>
           <span class="font-cinzel font-bold text-xl sm:text-2xl tracking-wider text-ivory block leading-none">
             KHM <span class="gold-gradient-text">BEDDING</span>
           </span>
-          <span class="text-[9px] font-mono uppercase tracking-[0.22em] text-gold-400/90 block mt-1">Palace of Sovereign Ergonomics</span>
+          <span class="text-[9px] font-mono uppercase tracking-[0.22em] text-gold-400/90 block mt-1">Palace of Comfort & Living</span>
         </div>
       </a>
 
-      <!-- Desktop Navigation Links -->
       <nav class="hidden lg:flex items-center gap-8 font-cinzel text-xs uppercase tracking-widest text-ivory/80 font-bold">
         <a href="#hero" class="text-gold-400 hover:text-white transition-colors relative py-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-gold-500">Home</a>
         <a href="#featuredSection" class="hover:text-gold-400 transition-colors py-1">Collections</a>
+        <a href="#studioSection" class="hover:text-gold-400 transition-colors py-1">Product Studio</a>
         <a href="#charterSection" class="hover:text-gold-400 transition-colors py-1">Our Story</a>
         <a href="#footer" class="hover:text-gold-400 transition-colors py-1">Contact</a>
       </nav>
 
-      <!-- Header Action Controls -->
       <div class="flex items-center gap-3">
-        <!-- Direct Concierge Button -->
         <a 
           href="https://wa.me/923049141244" 
           target="_blank" 
           onclick="playAudio('click')"
-          class="hidden sm:inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-sapphire/80 hover:bg-sapphire text-gold-300 border border-gold-500/40 hover:border-gold-400 text-xs font-cinzel font-bold tracking-wider transition-all"
+          class="hidden sm:inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-sapphire/80 text-gold-300 border border-gold-500/40 text-xs font-cinzel font-bold tracking-wider"
         >
           <i class="fa-solid fa-gem text-xs text-gold-400"></i> VIP Concierge
         </a>
 
-        <!-- Sovereign Bag Trigger -->
         <button 
           onclick="toggleBagDrawer(true); playAudio('click');"
           class="relative gold-btn-gradient font-bold px-4 py-2.5 rounded-xl font-cinzel text-xs tracking-wider flex items-center gap-2 shadow-xl hover:scale-105 active:scale-95 transition-all"
@@ -237,432 +228,311 @@
           <span id="headerCartCount" class="bg-midnight text-gold-400 px-2 py-0.5 rounded-full font-mono font-bold text-xs border border-gold-500/40">0</span>
         </button>
       </div>
-
     </div>
   </header>
 
   <!-- ========================================================
-       4. HERO SECTION: PALATIAL ARCHITECTURAL SHOWROOM
+       4. HERO SECTION: 3D MASTER PALACE ARCHITECTURE
        ======================================================== -->
   <section id="hero" class="relative z-10 py-16 lg:py-24 px-4 sm:px-6">
-    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+    <div class="max-w-7xl mx-auto text-center space-y-6">
       
-      <!-- Left Column: Typography & Intent -->
-      <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-        
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full palace-glass border border-gold-500/30 text-gold-300 text-xs font-cinzel tracking-widest">
-          <i class="fa-solid fa-crown text-gold-400"></i> Imperial Living & Couture Ergonomics
-        </div>
-
-        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-serif font-black tracking-tight leading-[1.08]">
-          NEXT-GEN COMFORT <br />
-          <span class="italic font-normal font-serif text-ivory/90">& FUTURISTIC</span>
-          <span class="gold-gradient-text block font-serif">LIVING</span>
-        </h1>
-
-        <p class="text-sm sm:text-base text-ivory/70 max-w-xl font-sans leading-relaxed font-light">
-          Engineered for ultimate luxury, everyday comfort and stylish living across Pakistan. Handcrafted soft-step baby shoes, bio-washed combed cotton couture, and 400TC Egyptian sateen palace chambers tailored for royal residences.
-        </p>
-
-        <!-- CTA Buttons -->
-        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
-          <a 
-            href="#featuredSection" 
-            onclick="playAudio('click')"
-            class="gold-btn-gradient px-8 py-4 rounded-xl font-cinzel font-bold text-xs uppercase tracking-widest shadow-2xl flex items-center gap-3 hover:-translate-y-0.5 transition-all"
-          >
-            <span>Explore Collections</span>
-            <i class="fa-solid fa-arrow-right-long text-sm"></i>
-          </a>
-
-          <a 
-            href="https://wa.me/923049141244?text=Hello%20KHM%20Bedding%20VIP%20Concierge,%20I%20wish%20to%20inquire%20about%20your%20luxury%20collections" 
-            target="_blank" 
-            onclick="playAudio('click')"
-            class="palace-glass hover:bg-sapphire/80 text-gold-300 border border-gold-500/40 px-6 py-4 rounded-xl font-cinzel font-bold text-xs uppercase tracking-widest flex items-center gap-2.5 transition-all hover:-translate-y-0.5"
-          >
-            <i class="fa-brands fa-whatsapp text-emerald-400 text-base"></i> WhatsApp VIP Concierge
-          </a>
-        </div>
-
-        <!-- Trust Mini Badges -->
-        <div class="grid grid-cols-3 gap-3 pt-6 border-t border-gold-500/15 max-w-lg mx-auto lg:mx-0 text-center font-mono">
-          <div class="palace-glass p-2.5 rounded-xl border border-gold-500/20">
-            <div class="text-gold-400 font-bold text-xs sm:text-sm">100%</div>
-            <div class="text-[10px] text-ivory/60 uppercase">Bio-Combed Cotton</div>
-          </div>
-          <div class="palace-glass p-2.5 rounded-xl border border-gold-500/20">
-            <div class="text-gold-400 font-bold text-xs sm:text-sm">Rs. 350</div>
-            <div class="text-[10px] text-ivory/60 uppercase">Nationwide Flat COD</div>
-          </div>
-          <div class="palace-glass p-2.5 rounded-xl border border-gold-500/20">
-            <div class="text-gold-400 font-bold text-xs sm:text-sm">24-48h</div>
-            <div class="text-[10px] text-ivory/60 uppercase">Hyper-Dispatch</div>
-          </div>
-        </div>
-
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full palace-glass border border-gold-500/30 text-gold-300 text-xs font-cinzel tracking-widest">
+        <i class="fa-solid fa-crown text-gold-400"></i> Welcome to Grand Sanctuary
       </div>
 
-      <!-- Right Column: Sovereign Flagship Showcase Bento -->
-      <div class="lg:col-span-5 relative">
-        <div class="palace-glass-heavy rounded-3xl p-6 border border-gold-500/40 shadow-2xl relative overflow-hidden">
-          
-          <!-- Holographic Shimmer Header -->
-          <div class="flex items-center justify-between pb-3 mb-4 border-b border-gold-500/20 text-[11px] font-mono uppercase tracking-widest text-gold-400">
-            <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-gold-400 animate-ping"></span> Sovereign Flagship</span>
-            <span class="text-ivory/50">Autonomous Vault</span>
-          </div>
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-serif font-black tracking-tight leading-[1.08]">
+        NEXT-GEN COMFORT & <br />
+        <span class="gold-gradient-text font-serif">FUTURISTIC LIVING</span>
+      </h1>
 
-          <!-- Highlight Product Image -->
-          <div class="relative w-full aspect-video rounded-2xl overflow-hidden mb-5 border border-gold-500/30 group">
-            <img 
-              src="https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=1000&auto=format&fit=crop&q=80" 
-              alt="1000TC Egyptian Cotton Bedding" 
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-midnight via-transparent to-transparent"></div>
-            <div class="absolute bottom-3 left-3 right-3 flex justify-between items-end">
-              <div>
-                <span class="text-[10px] font-mono uppercase text-gold-400 font-bold">Palace Spec Telemetry</span>
-                <h4 class="font-serif font-bold text-sm text-white">1000TC Sateen Grand Duvet</h4>
-              </div>
-              <span class="text-gold-300 font-serif font-bold text-base">Rs. 14,500</span>
-            </div>
-          </div>
+      <p class="text-sm sm:text-base text-ivory/70 max-w-2xl mx-auto font-sans leading-relaxed font-light">
+        Engineered for ultimate luxury, everyday comfort and stylish living across every department.
+      </p>
 
-          <!-- Telemetry Attributes -->
-          <div class="grid grid-cols-2 gap-2 text-xs font-mono mb-4">
-            <div class="p-2.5 rounded-xl bg-midnight/70 border border-gold-500/15">
-              <span class="text-[10px] text-ivory/50 block">Weave Matrix</span>
-              <span class="text-gold-300 font-bold">Egyptian 1000TC</span>
-            </div>
-            <div class="p-2.5 rounded-xl bg-midnight/70 border border-gold-500/15">
-              <span class="text-[10px] text-ivory/50 block">Sole Comfort</span>
-              <span class="text-gold-300 font-bold">Zero Toxicity</span>
-            </div>
-            <div class="p-2.5 rounded-xl bg-midnight/70 border border-gold-500/15">
-              <span class="text-[10px] text-ivory/50 block">Logistics Fleet</span>
-              <span class="text-gold-300 font-bold">TCS & Trax Live</span>
-            </div>
-            <div class="p-2.5 rounded-xl bg-midnight/70 border border-gold-500/15">
-              <span class="text-[10px] text-ivory/50 block">Founder Line</span>
-              <span class="text-gold-300 font-bold">Direct WhatsApp</span>
-            </div>
-          </div>
+      <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+        <a 
+          href="#featuredSection" 
+          onclick="playAudio('click')"
+          class="gold-btn-gradient px-8 py-4 rounded-xl font-cinzel font-bold text-xs uppercase tracking-widest shadow-2xl flex items-center gap-3 hover:-translate-y-0.5 transition-all"
+        >
+          <span>Explore Collections</span>
+          <i class="fa-solid fa-arrow-right-long text-sm"></i>
+        </a>
 
-          <button 
-            onclick="addToCart('p-flagship', '1000TC Sateen Grand Duvet', 14500, 'https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=800&auto=format&fit=crop&q=80')" 
-            class="w-full py-3.5 rounded-xl palace-glass hover:bg-gold-500 hover:text-midnight text-gold-300 border border-gold-500/50 font-cinzel font-bold text-xs uppercase tracking-widest transition-all shadow-lg flex items-center justify-center gap-2"
-          >
-            <i class="fa-solid fa-lock"></i> Reserve Into Sovereign Bag
+        <a 
+          href="https://wa.me/923049141244?text=Hello%20KHM%20Bedding%20VIP%20Concierge,%20I%20wish%20to%20inquire%20about%20your%20luxury%20collections" 
+          target="_blank" 
+          onclick="playAudio('click')"
+          class="palace-glass hover:bg-sapphire/80 text-gold-300 border border-gold-500/40 px-6 py-4 rounded-xl font-cinzel font-bold text-xs uppercase tracking-widest flex items-center gap-2.5 transition-all hover:-translate-y-0.5"
+        >
+          <i class="fa-brands fa-whatsapp text-emerald-400 text-base"></i> WhatsApp Concierge
+        </a>
+      </div>
+
+      <!-- 4 Golden Architectural Showroom Arches -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-12">
+        
+        <!-- Arch 1: Baby & Kids Footwear -->
+        <div class="palace-glass-heavy rounded-3xl border border-gold-500/30 p-6 pedestal-card flex flex-col items-center text-center relative overflow-hidden group">
+          <div class="w-16 h-16 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400 text-2xl mb-4 group-hover:scale-110 transition-transform">
+            <i class="fa-solid fa-baby"></i>
+          </div>
+          <h3 class="font-serif font-bold text-lg text-ivory mb-1">Baby & Kids Footwear</h3>
+          <p class="text-xs text-ivory/60 font-light mb-4">Soft soles for cute little steps</p>
+          <div class="relative w-full aspect-square rounded-2xl overflow-hidden mb-4 border border-gold-500/20">
+            <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&auto=format&fit=crop&q=80" alt="Baby Footwear" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+          </div>
+          <button onclick="filterCategory('babyshoes'); window.location.hash='#featuredSection';" class="w-full py-2.5 rounded-xl gold-btn-gradient font-cinzel font-bold text-xs uppercase tracking-wider">
+            Shop Now <i class="fa-solid fa-chevron-right text-[10px]"></i>
           </button>
-
         </div>
+
+        <!-- Arch 2: Cotton Garments & Apparel -->
+        <div class="palace-glass-heavy rounded-3xl border border-gold-500/30 p-6 pedestal-card flex flex-col items-center text-center relative overflow-hidden group">
+          <div class="w-16 h-16 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400 text-2xl mb-4 group-hover:scale-110 transition-transform">
+            <i class="fa-solid fa-shirt"></i>
+          </div>
+          <h3 class="font-serif font-bold text-lg text-ivory mb-1">Cotton Garments & Apparel</h3>
+          <p class="text-xs text-ivory/60 font-light mb-4">100% Breathable Egyptian cotton</p>
+          <div class="relative w-full aspect-square rounded-2xl overflow-hidden mb-4 border border-gold-500/20">
+            <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=600&auto=format&fit=crop&q=80" alt="Cotton Garments" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+          </div>
+          <button onclick="filterCategory('garments'); window.location.hash='#featuredSection';" class="w-full py-2.5 rounded-xl gold-btn-gradient font-cinzel font-bold text-xs uppercase tracking-wider">
+            Shop Now <i class="fa-solid fa-chevron-right text-[10px]"></i>
+          </button>
+        </div>
+
+        <!-- Arch 3: Luxury Bedsheets (KHM) -->
+        <div class="palace-glass-heavy rounded-3xl border border-gold-500/30 p-6 pedestal-card flex flex-col items-center text-center relative overflow-hidden group">
+          <div class="w-16 h-16 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400 text-2xl mb-4 group-hover:scale-110 transition-transform">
+            <i class="fa-solid fa-bed"></i>
+          </div>
+          <h3 class="font-serif font-bold text-lg text-ivory mb-1">Luxury Bedsheets (KHM)</h3>
+          <p class="text-xs text-ivory/60 font-light mb-4">1000 Thread Count Royal Sateen</p>
+          <div class="relative w-full aspect-square rounded-2xl overflow-hidden mb-4 border border-gold-500/20">
+            <img src="https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=600&auto=format&fit=crop&q=80" alt="Luxury Bedsheets" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+          </div>
+          <button onclick="filterCategory('bedsheets'); window.location.hash='#featuredSection';" class="w-full py-2.5 rounded-xl gold-btn-gradient font-cinzel font-bold text-xs uppercase tracking-wider">
+            Shop Now <i class="fa-solid fa-chevron-right text-[10px]"></i>
+          </button>
+        </div>
+
+        <!-- Arch 4: Home Living -->
+        <div class="palace-glass-heavy rounded-3xl border border-gold-500/30 p-6 pedestal-card flex flex-col items-center text-center relative overflow-hidden group">
+          <div class="w-16 h-16 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400 text-2xl mb-4 group-hover:scale-110 transition-transform">
+            <i class="fa-solid fa-couch"></i>
+          </div>
+          <h3 class="font-serif font-bold text-lg text-ivory mb-1">Home Living</h3>
+          <p class="text-xs text-ivory/60 font-light mb-4">Sovereign accents & decor</p>
+          <div class="relative w-full aspect-square rounded-2xl overflow-hidden mb-4 border border-gold-500/20">
+            <img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=600&auto=format&fit=crop&q=80" alt="Home Living" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+          </div>
+          <button onclick="filterCategory('homedecor'); window.location.hash='#featuredSection';" class="w-full py-2.5 rounded-xl gold-btn-gradient font-cinzel font-bold text-xs uppercase tracking-wider">
+            Shop Now <i class="fa-solid fa-chevron-right text-[10px]"></i>
+          </button>
+        </div>
+
       </div>
 
     </div>
   </section>
 
   <!-- ========================================================
-       5. FEATURED COLLECTIONS: 3D SPATIAL SLIDER (4 WORLDS)
+       5. FEATURED COLLECTIONS: GLASS CLOCHE DISPLAY PEDESTALS
        ======================================================== -->
   <section id="featuredSection" class="relative z-10 py-16 px-4 sm:px-6 border-t border-gold-500/20">
     <div class="max-w-7xl mx-auto">
       
-      <!-- Section Title & Slider Navigation Arrows -->
-      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-8">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8">
         <div>
-          <div class="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-widest text-gold-400 mb-1">
-            <i class="fa-solid fa-cube text-gold-400"></i> Spatial Showroom Universes
-          </div>
-          <h2 class="text-3xl sm:text-5xl font-serif font-black tracking-tight text-ivory">
-            FEATURED <span class="gold-gradient-text font-serif">COLLECTIONS</span>
-          </h2>
-          <p class="text-xs sm:text-sm text-ivory/60 mt-1 max-w-xl font-light">
-            Explore our 4 curated architectural universes crafted for the discerning household. Each environment hosts certified cotton garments, pediatric safe baby footwear, and sovereign bed linens.
-          </p>
+          <span class="text-xs font-mono uppercase tracking-widest text-gold-400">Step Into Happiness</span>
+          <h2 class="text-3xl sm:text-5xl font-serif font-black text-ivory">Baby & Kids Footwear</h2>
         </div>
 
-        <!-- Previous / Next Controls -->
-        <div class="flex items-center gap-3">
-          <div class="font-mono text-xs text-gold-400 font-bold px-3 py-1 rounded-lg palace-glass border border-gold-500/30" id="sliderCounterBadge">
-            01 / 04
-          </div>
-          <div class="flex items-center gap-2">
-            <button 
-              onclick="slideFeatured(-1); playAudio('whoosh');" 
-              class="w-10 h-10 rounded-xl palace-glass hover:bg-gold-500 hover:text-midnight text-gold-300 border border-gold-500/40 flex items-center justify-center text-xs transition-all active:scale-90"
-              title="Previous Collection"
-            >
-              <i class="fa-solid fa-chevron-left"></i>
-            </button>
-            <button 
-              onclick="slideFeatured(1); playAudio('whoosh');" 
-              class="w-10 h-10 rounded-xl palace-glass hover:bg-gold-500 hover:text-midnight text-gold-300 border border-gold-500/40 flex items-center justify-center text-xs transition-all active:scale-90"
-              title="Next Collection"
-            >
-              <i class="fa-solid fa-chevron-right"></i>
-            </button>
-          </div>
+        <!-- Filter Tags -->
+        <div class="flex items-center gap-2 flex-wrap palace-glass p-1.5 rounded-2xl border border-gold-500/30">
+          <button onclick="filterCategory('all')" class="cat-pill px-4 py-1.5 rounded-xl text-xs font-bold bg-gold-500 text-midnight">All</button>
+          <button onclick="filterCategory('babyshoes')" class="cat-pill px-4 py-1.5 rounded-xl text-xs font-bold text-ivory/70 hover:text-white">Baby Shoes</button>
+          <button onclick="filterCategory('babyshoes')" class="cat-pill px-4 py-1.5 rounded-xl text-xs font-bold text-ivory/70 hover:text-white">Kids Sneakers</button>
+          <button onclick="filterCategory('babyshoes')" class="cat-pill px-4 py-1.5 rounded-xl text-xs font-bold text-ivory/70 hover:text-white">Sandals</button>
+          <button onclick="filterCategory('babyshoes')" class="cat-pill px-4 py-1.5 rounded-xl text-xs font-bold text-ivory/70 hover:text-white">Boots</button>
         </div>
       </div>
 
-      <!-- 4 Architectural Worlds Horizontal Slider Container -->
-      <div 
-        id="featuredSliderTrack" 
-        class="slider-container flex gap-6 overflow-x-auto pb-6 pt-2 snap-x snap-mandatory"
-        onscroll="updateSliderCounter()"
-      >
-
-        <!-- WORLD 1: BABY & KIDS FOOTWEAR -->
-        <article class="slider-item shrink-0 w-[88vw] sm:w-[540px] lg:w-[600px] palace-glass-heavy rounded-3xl border border-gold-500/30 overflow-hidden pedestal-card flex flex-col group">
-          <div class="relative w-full h-72 sm:h-80 overflow-hidden bg-midnight-deep">
-            <img 
-              src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=1000&auto=format&fit=crop&q=80" 
-              alt="Baby & Kids Footwear" 
-              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-midnight via-midnight/30 to-transparent"></div>
-            <span class="absolute top-4 left-4 bg-sapphire/90 text-gold-300 text-[10px] font-mono px-3 py-1 rounded-full uppercase tracking-widest border border-gold-500/30">
-              Department I • Gentle Steps
-            </span>
-          </div>
-
-          <div class="p-6 sm:p-8 flex flex-col flex-1">
-            <span class="text-xs font-mono uppercase tracking-widest text-gold-400 font-bold mb-1">Pediatric Safe Ergonomics</span>
-            <h3 class="font-serif font-black text-2xl sm:text-3xl text-ivory mb-2">Baby & Kids Footwear</h3>
-            <p class="text-xs sm:text-sm text-ivory/70 leading-relaxed font-light mb-6 flex-1">
-              Hand-stitched newborn moccasins, non-skid pre-walker booties, and plush fleece animal slippers crafted without toxic chemicals. Specially balanced for delicate arches and first royal steps.
-            </p>
-            <div class="pt-4 border-t border-gold-500/20 flex items-center justify-between">
-              <div>
-                <span class="text-[10px] font-mono text-ivory/50 block">Curated Catalog</span>
-                <span class="text-gold-300 font-serif font-bold text-base">From Rs. 1,450</span>
-              </div>
-              <button 
-                onclick="filterCategory('babyshoes'); playAudio('click');" 
-                class="gold-btn-gradient px-6 py-2.5 rounded-xl font-cinzel font-bold text-xs uppercase tracking-wider transition-all"
-              >
-                Shop Footwear
-              </button>
-            </div>
-          </div>
-        </article>
-
-        <!-- WORLD 2: COTTON GARMENTS & APPAREL -->
-        <article class="slider-item shrink-0 w-[88vw] sm:w-[540px] lg:w-[600px] palace-glass-heavy rounded-3xl border border-gold-500/30 overflow-hidden pedestal-card flex flex-col group">
-          <div class="relative w-full h-72 sm:h-80 overflow-hidden bg-midnight-deep">
-            <img 
-              src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=1000&auto=format&fit=crop&q=80" 
-              alt="Cotton Garments & Apparel" 
-              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-midnight via-midnight/30 to-transparent"></div>
-            <span class="absolute top-4 left-4 bg-sapphire/90 text-gold-300 text-[10px] font-mono px-3 py-1 rounded-full uppercase tracking-widest border border-gold-500/30">
-              Department II • Bio-Washed Couture
-            </span>
-          </div>
-
-          <div class="p-6 sm:p-8 flex flex-col flex-1">
-            <span class="text-xs font-mono uppercase tracking-widest text-gold-400 font-bold mb-1">210 GSM Combed Weave</span>
-            <h3 class="font-serif font-black text-2xl sm:text-3xl text-ivory mb-2">Cotton Garments & Apparel</h3>
-            <p class="text-xs sm:text-sm text-ivory/70 leading-relaxed font-light mb-6 flex-1">
-              Hypoallergenic combed cotton t-shirts, relaxed linen tops, and breathable everyday wear designed for Pakistan's climate. Pre-shrunk with zero color bleeding.
-            </p>
-            <div class="pt-4 border-t border-gold-500/20 flex items-center justify-between">
-              <div>
-                <span class="text-[10px] font-mono text-ivory/50 block">Curated Catalog</span>
-                <span class="text-gold-300 font-serif font-bold text-base">From Rs. 1,399</span>
-              </div>
-              <button 
-                onclick="filterCategory('garments'); playAudio('click');" 
-                class="gold-btn-gradient px-6 py-2.5 rounded-xl font-cinzel font-bold text-xs uppercase tracking-wider transition-all"
-              >
-                Shop Garments
-              </button>
-            </div>
-          </div>
-        </article>
-
-        <!-- WORLD 3: LUXURY BEDSHEETS (KHM) -->
-        <article class="slider-item shrink-0 w-[88vw] sm:w-[540px] lg:w-[600px] palace-glass-heavy rounded-3xl border border-gold-500/30 overflow-hidden pedestal-card flex flex-col group">
-          <div class="relative w-full h-72 sm:h-80 overflow-hidden bg-midnight-deep">
-            <img 
-              src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=1000&auto=format&fit=crop&q=80" 
-              alt="Luxury Bedsheets KHM" 
-              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-midnight via-midnight/30 to-transparent"></div>
-            <span class="absolute top-4 left-4 bg-sapphire/90 text-gold-300 text-[10px] font-mono px-3 py-1 rounded-full uppercase tracking-widest border border-gold-500/30">
-              Department III • Sovereign Chambers
-            </span>
-          </div>
-
-          <div class="p-6 sm:p-8 flex flex-col flex-1">
-            <span class="text-xs font-mono uppercase tracking-widest text-gold-400 font-bold mb-1">400TC Egyptian Sateen</span>
-            <h3 class="font-serif font-black text-2xl sm:text-3xl text-ivory mb-2">Luxury Bedsheets (KHM)</h3>
-            <p class="text-xs sm:text-sm text-ivory/70 leading-relaxed font-light mb-6 flex-1">
-              Five-star hotel grade King flat & fitted sheet suites. Deep mattress pockets, silky smooth luster, and breathable weave crafted for restorative sovereign sleep.
-            </p>
-            <div class="pt-4 border-t border-gold-500/20 flex items-center justify-between">
-              <div>
-                <span class="text-[10px] font-mono text-ivory/50 block">Curated Catalog</span>
-                <span class="text-gold-300 font-serif font-bold text-base">From Rs. 2,950</span>
-              </div>
-              <button 
-                onclick="filterCategory('bedsheets'); playAudio('click');" 
-                class="gold-btn-gradient px-6 py-2.5 rounded-xl font-cinzel font-bold text-xs uppercase tracking-wider transition-all"
-              >
-                Shop Bedsheets
-              </button>
-            </div>
-          </div>
-        </article>
-
-        <!-- WORLD 4: HOME LIVING -->
-        <article class="slider-item shrink-0 w-[88vw] sm:w-[540px] lg:w-[600px] palace-glass-heavy rounded-3xl border border-gold-500/30 overflow-hidden pedestal-card flex flex-col group">
-          <div class="relative w-full h-72 sm:h-80 overflow-hidden bg-midnight-deep">
-            <img 
-              src="https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=1000&auto=format&fit=crop&q=80" 
-              alt="Home Living" 
-              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-midnight via-midnight/30 to-transparent"></div>
-            <span class="absolute top-4 left-4 bg-sapphire/90 text-gold-300 text-[10px] font-mono px-3 py-1 rounded-full uppercase tracking-widest border border-gold-500/30">
-              Department IV • Neo-Living Salon
-            </span>
-          </div>
-
-          <div class="p-6 sm:p-8 flex flex-col flex-1">
-            <span class="text-xs font-mono uppercase tracking-widest text-gold-400 font-bold mb-1">Architectural Accents</span>
-            <h3 class="font-serif font-black text-2xl sm:text-3xl text-ivory mb-2">Home Living</h3>
-            <p class="text-xs sm:text-sm text-ivory/70 leading-relaxed font-light mb-6 flex-1">
-              Textured linen cushion covers, plush throw blankets, and refined living accents that elevate ordinary living spaces into sovereign sanctuaries.
-            </p>
-            <div class="pt-4 border-t border-gold-500/20 flex items-center justify-between">
-              <div>
-                <span class="text-[10px] font-mono text-ivory/50 block">Curated Catalog</span>
-                <span class="text-gold-300 font-serif font-bold text-base">From Rs. 1,250</span>
-              </div>
-              <button 
-                onclick="filterCategory('homedecor'); playAudio('click');" 
-                class="gold-btn-gradient px-6 py-2.5 rounded-xl font-cinzel font-bold text-xs uppercase tracking-wider transition-all"
-              >
-                Shop Home Living
-              </button>
-            </div>
-          </div>
-        </article>
-
+      <!-- Glass Cloche Pedestals Grid -->
+      <div id="clocheGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Rendered via JavaScript -->
       </div>
 
     </div>
   </section>
 
   <!-- ========================================================
-       6. ROYAL DISPLAY PEDESTALS: LIVE CATALOG & SUPABASE
+       6. PRODUCT DETAILS STUDIO & EXPRESS CHECKOUT
        ======================================================== -->
-  <section id="catalogSection" class="relative z-10 py-16 px-4 sm:px-6">
+  <section id="studioSection" class="relative z-10 py-16 px-4 sm:px-6 border-t border-gold-500/20 bg-midnight-deep/70">
     <div class="max-w-7xl mx-auto">
       
-      <!-- Catalog Filter Bar -->
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-10 pb-6 border-b border-gold-500/20">
-        <div>
-          <span class="text-xs font-mono text-gold-400 uppercase tracking-widest flex items-center gap-1.5">
-            <i class="fa-solid fa-crown text-[10px]"></i> Live Inventory Telemetry
-          </span>
-          <h2 class="text-2xl sm:text-4xl font-serif font-bold text-ivory mt-1">
-            ROYAL DISPLAY <span class="gold-gradient-text font-serif">PEDESTALS</span>
-          </h2>
-          <p class="text-xs text-ivory/60 mt-1">Directly synchronized with KHM Palace dispatch vaults. Tap any platform to inspect tactile grain or dispatch immediately via Nationwide Cash on Delivery.</p>
-        </div>
-
-        <!-- Department Tabs -->
-        <div class="flex items-center gap-1.5 flex-wrap palace-glass p-1.5 rounded-2xl border border-gold-500/30">
-          <button onclick="filterCategory('all'); playAudio('click');" id="tab-all" class="cat-tab px-4 py-2 rounded-xl font-cinzel text-xs font-bold transition-all bg-gold-500 text-midnight">
-            All Vaults
-          </button>
-          <button onclick="filterCategory('babyshoes'); playAudio('click');" id="tab-babyshoes" class="cat-tab px-4 py-2 rounded-xl font-cinzel text-xs font-bold text-ivory/70 hover:text-white hover:bg-sapphire transition-all">
-            Baby Footwear
-          </button>
-          <button onclick="filterCategory('garments'); playAudio('click');" id="tab-garments" class="cat-tab px-4 py-2 rounded-xl font-cinzel text-xs font-bold text-ivory/70 hover:text-white hover:bg-sapphire transition-all">
-            Cotton Garments
-          </button>
-          <button onclick="filterCategory('bedsheets'); playAudio('click');" id="tab-bedsheets" class="cat-tab px-4 py-2 rounded-xl font-cinzel text-xs font-bold text-ivory/70 hover:text-white hover:bg-sapphire transition-all">
-            Palace Bedsheets
-          </button>
-          <button onclick="filterCategory('homedecor'); playAudio('click');" id="tab-homedecor" class="cat-tab px-4 py-2 rounded-xl font-cinzel text-xs font-bold text-ivory/70 hover:text-white hover:bg-sapphire transition-all">
-            Home Living
-          </button>
-        </div>
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <span class="text-xs font-mono uppercase tracking-[0.25em] text-gold-400 font-bold">Seamless Commerce Architecture</span>
+        <h2 class="text-2xl sm:text-4xl font-serif font-black text-ivory mt-1">PRODUCT DETAILS, BAG & EXPRESS CHECKOUT</h2>
       </div>
 
-      <!-- Products Grid -->
-      <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <!-- Rendered via JS -->
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ========================================================
-       7. SOVEREIGN CHARTER: TRUST PEDESTALS
-       ======================================================== -->
-  <section id="charterSection" class="relative z-10 py-16 px-4 sm:px-6 border-y border-gold-500/20 bg-midnight-deep/60">
-    <div class="max-w-7xl mx-auto">
-      
-      <div class="text-center max-w-2xl mx-auto mb-12">
-        <span class="text-xs font-mono uppercase tracking-[0.25em] text-gold-400 font-bold">Palace Assurance Protocol</span>
-        <h2 class="text-2xl sm:text-4xl font-serif font-black text-ivory mt-1">THE SOVEREIGN CHARTER</h2>
-        <p class="text-xs sm:text-sm text-ivory/60 mt-2 font-light">Every parcel dispatched from KHM Palace is backed by transparent guarantees and door-to-door courier verification across all 4 provinces.</p>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
-        <div class="palace-glass p-6 rounded-2xl border border-gold-500/20 pedestal-card">
-          <div class="w-12 h-12 rounded-xl bg-gold-500/15 border border-gold-500/30 text-gold-400 flex items-center justify-center text-xl mb-4">
-            <i class="fa-solid fa-truck-fast"></i>
+        <!-- Left: Studio Image & Variants (Col 6) -->
+        <div class="lg:col-span-6 palace-glass-heavy rounded-3xl p-6 border border-gold-500/30">
+          <div class="flex items-center justify-between mb-4 border-b border-gold-500/20 pb-3">
+            <span class="text-xs font-mono uppercase text-gold-400 font-bold">Product Details</span>
+            <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded font-mono font-bold">In Stock</span>
           </div>
-          <span class="text-[10px] font-mono uppercase tracking-widest text-gold-400/80 block mb-1">Courier Telemetry</span>
-          <h4 class="font-serif font-bold text-lg text-ivory mb-2">Hyper-Speed Dispatch</h4>
-          <p class="text-xs text-ivory/65 leading-relaxed font-light">
-            Flat Rs. 350 COD rate nationwide. Dispatched in 24–48 hours via TCS and Trax Express with live SMS tracking updates.
-          </p>
+
+          <div class="relative w-full aspect-square rounded-2xl overflow-hidden mb-5 border border-gold-500/30 bg-midnight">
+            <img id="studioMainImg" src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800&auto=format&fit=crop&q=80" alt="Selected Product" class="w-full h-full object-cover" />
+          </div>
+
+          <div class="space-y-4">
+            <div>
+              <h3 id="studioTitle" class="font-serif font-bold text-2xl text-ivory">Baby Sneakers</h3>
+              <div class="flex items-center gap-3 mt-1">
+                <span id="studioPrice" class="text-2xl font-serif font-black text-gold-300">Rs. 1,999</span>
+                <span class="text-xs text-amber-400 font-mono">★★★★★ 4.9 (1,210 reviews)</span>
+              </div>
+              <p id="studioDesc" class="text-xs text-ivory/70 leading-relaxed font-light mt-2">
+                Premium quality baby sneakers with ultra-soft sole and stylish ergonomic design for little feet.
+              </p>
+            </div>
+
+            <!-- Size Selector -->
+            <div>
+              <span class="text-xs font-mono text-ivory/70 block mb-2">Select Size:</span>
+              <div class="flex items-center gap-2">
+                <button onclick="selectSize(this, '18')" class="size-btn px-3.5 py-1.5 rounded-lg border border-gold-500/40 text-xs font-mono text-gold-300 bg-sapphire">18</button>
+                <button onclick="selectSize(this, '20')" class="size-btn px-3.5 py-1.5 rounded-lg border border-gold-500/20 text-xs font-mono text-ivory/70 hover:border-gold-500">20</button>
+                <button onclick="selectSize(this, '22')" class="size-btn px-3.5 py-1.5 rounded-lg border border-gold-500/20 text-xs font-mono text-ivory/70 hover:border-gold-500">22</button>
+                <button onclick="selectSize(this, '24')" class="size-btn px-3.5 py-1.5 rounded-lg border border-gold-500/20 text-xs font-mono text-ivory/70 hover:border-gold-500">24</button>
+              </div>
+            </div>
+
+            <!-- Add to Cart & Buy Now Buttons -->
+            <div class="grid grid-cols-2 gap-3 pt-2">
+              <button onclick="addToCartFromStudio()" class="py-3.5 rounded-xl palace-glass hover:bg-gold-500 hover:text-midnight text-gold-300 border border-gold-500/40 font-cinzel font-bold text-xs uppercase tracking-wider transition-all">
+                Add to Cart
+              </button>
+              <button onclick="buyNowFromStudio()" class="py-3.5 rounded-xl gold-btn-gradient font-cinzel font-bold text-xs uppercase tracking-wider shadow-xl transition-all">
+                Buy Now →
+              </button>
+            </div>
+
+            <a href="https://wa.me/923049141244" target="_blank" class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-cinzel font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all">
+              <i class="fa-brands fa-whatsapp text-base"></i> Chat on WhatsApp
+            </a>
+          </div>
         </div>
 
-        <div class="palace-glass p-6 rounded-2xl border border-gold-500/20 pedestal-card">
-          <div class="w-12 h-12 rounded-xl bg-gold-500/15 border border-gold-500/30 text-gold-400 flex items-center justify-center text-xl mb-4">
-            <i class="fa-solid fa-certificate"></i>
+        <!-- Center: Interactive Bag (Col 3) -->
+        <div class="lg:col-span-3 palace-glass-heavy rounded-3xl p-5 border border-gold-500/30">
+          <div class="flex items-center justify-between mb-4 border-b border-gold-500/20 pb-3">
+            <span class="text-xs font-mono uppercase text-gold-400 font-bold">Your Shopping Bag</span>
+            <i class="fa-solid fa-bag-shopping text-gold-400"></i>
           </div>
-          <span class="text-[10px] font-mono uppercase tracking-widest text-gold-400/80 block mb-1">Laboratory Provenance</span>
-          <h4 class="font-serif font-bold text-lg text-ivory mb-2">100% Certified Fabrics</h4>
-          <p class="text-xs text-ivory/65 leading-relaxed font-light">
-            Authentic Egyptian long-staple yarn, AZO-free skin-safe dyes, and non-toxic baby shoe outsoles certified for zero toxicity.
-          </p>
+
+          <div id="studioBagItems" class="space-y-3 min-h-[180px] max-h-[300px] overflow-y-auto">
+            <!-- Dynamic Bag Items -->
+          </div>
+
+          <div class="pt-4 border-t border-gold-500/20 space-y-2 font-mono text-xs text-ivory/70">
+            <div class="flex justify-between">
+              <span>Subtotal:</span>
+              <span id="studioSubtotal" class="font-bold text-ivory">Rs. 0</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Shipping (COD):</span>
+              <span class="font-bold text-gold-400">Rs. 350</span>
+            </div>
+            <div class="flex justify-between text-sm font-bold text-gold-300 pt-1 border-t border-gold-500/20 font-serif">
+              <span>Total:</span>
+              <span id="studioGrandTotal" class="font-serif">Rs. 350</span>
+            </div>
+          </div>
         </div>
 
-        <div class="palace-glass p-6 rounded-2xl border border-gold-500/20 pedestal-card">
-          <div class="w-12 h-12 rounded-xl bg-gold-500/15 border border-gold-500/30 text-gold-400 flex items-center justify-center text-xl mb-4">
-            <i class="fa-solid fa-rotate-left"></i>
+        <!-- Right: Express Checkout Form (Col 3) -->
+        <div class="lg:col-span-3 palace-glass-heavy rounded-3xl p-5 border border-gold-500/30">
+          <div class="flex items-center justify-between mb-4 border-b border-gold-500/20 pb-3">
+            <span class="text-xs font-mono uppercase text-gold-400 font-bold">Express Checkout</span>
+            <span class="text-[10px] text-emerald-400 font-mono"><i class="fa-solid fa-lock"></i> SSL</span>
           </div>
-          <span class="text-[10px] font-mono uppercase tracking-widest text-gold-400/80 block mb-1">Doorstep Exchange</span>
-          <h4 class="font-serif font-bold text-lg text-ivory mb-2">30-Day Hassle-Free Swap</h4>
-          <p class="text-xs text-ivory/65 leading-relaxed font-light">
-            Wrong shoe size or color variant? Our riders execute instant doorstep exchanges without tedious warehouse returns.
-          </p>
+
+          <form onsubmit="handlePlaceOrder(event)" class="space-y-3 font-mono text-xs">
+            <div>
+              <label class="block text-[10px] text-ivory/60 mb-1">Full Name *</label>
+              <input type="text" id="custName" placeholder="Enter your name" required class="w-full px-3 py-2 rounded-xl bg-midnight border border-gold-500/30 text-ivory outline-none focus:border-gold-500 text-xs" />
+            </div>
+
+            <div>
+              <label class="block text-[10px] text-ivory/60 mb-1">WhatsApp Phone *</label>
+              <input type="tel" id="custPhone" placeholder="0300 1234567" required class="w-full px-3 py-2 rounded-xl bg-midnight border border-gold-500/30 text-ivory outline-none focus:border-gold-500 text-xs" />
+            </div>
+
+            <div>
+              <label class="block text-[10px] text-ivory/60 mb-1">City *</label>
+              <input type="text" id="custCity" placeholder="Karachi, Lahore, Islamabad" required class="w-full px-3 py-2 rounded-xl bg-midnight border border-gold-500/30 text-ivory outline-none focus:border-gold-500 text-xs" />
+            </div>
+
+            <div>
+              <label class="block text-[10px] text-ivory/60 mb-1">Delivery Address *</label>
+              <textarea id="custAddress" rows="2" placeholder="House #, Street, Area" required class="w-full px-3 py-2 rounded-xl bg-midnight border border-gold-500/30 text-ivory outline-none focus:border-gold-500 text-xs"></textarea>
+            </div>
+
+            <button type="submit" id="btnSubmitOrder" class="w-full py-3.5 gold-btn-gradient rounded-xl font-cinzel font-bold text-xs uppercase tracking-widest shadow-xl flex items-center justify-center gap-2">
+              <i class="fa-solid fa-circle-check"></i> Place Order (COD)
+            </button>
+          </form>
         </div>
 
-        <div class="palace-glass p-6 rounded-2xl border border-gold-500/20 pedestal-card">
-          <div class="w-12 h-12 rounded-xl bg-gold-500/15 border border-gold-500/30 text-gold-400 flex items-center justify-center text-xl mb-4">
-            <i class="fa-brands fa-whatsapp text-emerald-400"></i>
-          </div>
-          <span class="text-[10px] font-mono uppercase tracking-widest text-gold-400/80 block mb-1">Founder Concierge</span>
-          <h4 class="font-serif font-bold text-lg text-ivory mb-2">+92 304 9141244</h4>
-          <p class="text-xs text-ivory/65 leading-relaxed font-light">
-            Live human VIP concierge available 24/7 on WhatsApp for custom bed sizes, bridal trousseau orders, and wholesale inquiries.
-          </p>
-        </div>
+      </div>
 
+    </div>
+  </section>
+
+  <!-- ========================================================
+       7. SOVEREIGN CHARTER & TRUST STRIP
+       ======================================================== -->
+  <section id="charterSection" class="relative z-10 py-12 px-4 sm:px-6 border-t border-gold-500/20 bg-midnight-deep">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      
+      <div class="palace-glass p-5 rounded-2xl border border-gold-500/20 text-center">
+        <div class="w-12 h-12 rounded-xl bg-gold-500/10 text-gold-400 flex items-center justify-center text-xl mx-auto mb-3">
+          <i class="fa-solid fa-truck-fast"></i>
+        </div>
+        <h4 class="font-serif font-bold text-sm text-ivory">Hyper-Speed Dispatch</h4>
+        <p class="text-xs text-ivory/60 mt-1">Rs. 350 Flat COD Nationwide</p>
+      </div>
+
+      <div class="palace-glass p-5 rounded-2xl border border-gold-500/20 text-center">
+        <div class="w-12 h-12 rounded-xl bg-gold-500/10 text-gold-400 flex items-center justify-center text-xl mx-auto mb-3">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+        <h4 class="font-serif font-bold text-sm text-ivory">Premium Quality</h4>
+        <p class="text-xs text-ivory/60 mt-1">Mastercrafted luxury materials</p>
+      </div>
+
+      <div class="palace-glass p-5 rounded-2xl border border-gold-500/20 text-center">
+        <div class="w-12 h-12 rounded-xl bg-gold-500/10 text-gold-400 flex items-center justify-center text-xl mx-auto mb-3">
+          <i class="fa-solid fa-rotate-left"></i>
+        </div>
+        <h4 class="font-serif font-bold text-sm text-ivory">30-Day Hassle-Free</h4>
+        <p class="text-xs text-ivory/60 mt-1">Easy return & exchange</p>
+      </div>
+
+      <div class="palace-glass p-5 rounded-2xl border border-gold-500/20 text-center">
+        <div class="w-12 h-12 rounded-xl bg-gold-500/10 text-gold-400 flex items-center justify-center text-xl mx-auto mb-3">
+          <i class="fa-brands fa-whatsapp text-emerald-400"></i>
+        </div>
+        <h4 class="font-serif font-bold text-sm text-ivory">WhatsApp Support</h4>
+        <p class="text-xs text-ivory/60 mt-1">+92 304 9141244</p>
       </div>
 
     </div>
@@ -671,191 +541,90 @@
   <!-- ========================================================
        8. IMPERIAL FOOTER
        ======================================================== -->
-  <footer id="footer" class="relative z-10 bg-midnight-deep border-t border-gold-500/30 py-16 px-4 sm:px-6">
-    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 mb-12">
+  <footer id="footer" class="relative z-10 bg-midnight-deep border-t border-gold-500/30 py-14 px-4 sm:px-6">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 mb-10">
       
-      <div class="md:col-span-5 space-y-4">
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-lg bg-gradient-to-tr from-sapphire to-gold-500 text-midnight flex items-center justify-center text-lg font-bold">
-            <i class="fa-solid fa-crown"></i>
+      <div class="md:col-span-5 space-y-3">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-gold-500 text-midnight flex items-center justify-center font-bold">
+            <i class="fa-solid fa-bed"></i>
           </div>
-          <span class="font-cinzel font-bold text-xl text-ivory tracking-widest">KHM BEDDING PALACE</span>
+          <span class="font-cinzel font-bold text-lg text-ivory">KHM BEDDING</span>
         </div>
-        <p class="text-xs text-ivory/60 leading-relaxed max-w-sm font-light">
-          An imperial sanctuary of sleep ergonomics and haute couture cotton craftsmanship. Engineered in Pakistan, hand-finished for sovereign estates worldwide. Delivering tactile gravitas and neoclassical luxury.
+        <p class="text-xs text-ivory/60 max-w-sm font-light leading-relaxed">
+          Premium quality bedding, footwear, and home living essentials crafted for an elevated lifestyle. Engineered for ultimate luxury and tomorrow's comfort.
         </p>
-        <div class="text-[11px] font-mono text-gold-400/80 flex items-center gap-2">
-          <i class="fa-solid fa-shield-halved"></i> Supabase Cloud Connected • Secure AES-256
-        </div>
       </div>
 
-      <div class="md:col-span-2 space-y-3">
-        <h4 class="font-cinzel font-bold text-xs uppercase tracking-widest text-gold-400">Royal Departments</h4>
-        <ul class="text-xs space-y-2 text-ivory/70 font-light">
-          <li><a href="javascript:void(0)" onclick="filterCategory('bedsheets'); window.scrollTo(0, document.getElementById('catalogSection').offsetTop);" class="hover:text-gold-300">Haute Luxury Bedsheets</a></li>
-          <li><a href="javascript:void(0)" onclick="filterCategory('babyshoes'); window.scrollTo(0, document.getElementById('catalogSection').offsetTop);" class="hover:text-gold-300">Baby & Kids Footwear</a></li>
-          <li><a href="javascript:void(0)" onclick="filterCategory('garments'); window.scrollTo(0, document.getElementById('catalogSection').offsetTop);" class="hover:text-gold-300">Cotton Garments & Apparel</a></li>
-          <li><a href="javascript:void(0)" onclick="filterCategory('homedecor'); window.scrollTo(0, document.getElementById('catalogSection').offsetTop);" class="hover:text-gold-300">Home Living & Accents</a></li>
+      <div class="md:col-span-3 space-y-2">
+        <h4 class="font-cinzel font-bold text-xs uppercase tracking-widest text-gold-400">Departments</h4>
+        <ul class="text-xs space-y-1.5 text-ivory/70 font-light">
+          <li>Baby & Kids Footwear</li>
+          <li>Cotton Garments & Apparel</li>
+          <li>Luxury Bedsheets (KHM)</li>
+          <li>Home Living & Decor</li>
         </ul>
       </div>
 
-      <div class="md:col-span-2 space-y-3">
-        <h4 class="font-cinzel font-bold text-xs uppercase tracking-widest text-gold-400">Care & Sovereign Charter</h4>
-        <ul class="text-xs space-y-2 text-ivory/70 font-light">
-          <li><a href="#charterSection" class="hover:text-gold-300">Palace Exchange Protocol</a></li>
-          <li><a href="#charterSection" class="hover:text-gold-300">Flat Rs. 350 COD Terms</a></li>
-          <li><a href="#charterSection" class="hover:text-gold-300">Cotton Provenance & Weave</a></li>
-          <li><a href="#charterSection" class="hover:text-gold-300">Curatorial Inquiries</a></li>
-        </ul>
-      </div>
-
-      <div class="md:col-span-3 space-y-3 font-mono text-xs">
-        <h4 class="font-cinzel font-bold text-xs uppercase tracking-widest text-gold-400">Direct Inquiries</h4>
-        <div class="space-y-1.5 text-ivory/75">
-          <div>Nationwide COD: <span class="text-gold-300 font-bold">Flat Rs. 350</span></div>
-          <div>WhatsApp: <a href="https://wa.me/923049141244" target="_blank" class="text-emerald-400 hover:underline">+92 304 9141244</a></div>
-          <div>Dispatch Desk: <span class="text-ivory">easicarts@gmail.com</span></div>
-          <div class="text-[10px] text-ivory/50 pt-1">MON - SUN • 24/7 SOVEREIGN ASSISTANCE</div>
-        </div>
+      <div class="md:col-span-4 space-y-2 font-mono text-xs">
+        <h4 class="font-cinzel font-bold text-xs uppercase tracking-widest text-gold-400">Contact Us</h4>
+        <p class="text-ivory/70"><i class="fa-solid fa-phone text-gold-400 mr-1.5"></i> +92 304 9141244</p>
+        <p class="text-ivory/70"><i class="fa-solid fa-envelope text-gold-400 mr-1.5"></i> easicarts@gmail.com</p>
+        <p class="text-ivory/50 text-[10px] pt-1">Nationwide Rs. 350 COD • WhatsApp Quick Dispatch</p>
       </div>
 
     </div>
 
-    <div class="max-w-7xl mx-auto pt-8 border-t border-gold-500/15 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-mono text-ivory/50">
-      <div>&copy; 2026 KHM Bedding Palace V4.0. Sovereign Luxury Rights Reserved.</div>
-      <div class="flex gap-4">
-        <span>Privacy Charter</span>
-        <span>Terms of Estate</span>
-        <span>COD Nationwide Delivery</span>
-      </div>
+    <div class="max-w-7xl mx-auto pt-6 border-t border-gold-500/15 text-center text-xs font-mono text-ivory/50">
+      &copy; 2026 KHM Bedding. All Rights Reserved. Engineered for Ultimate Comfort.
     </div>
   </footer>
 
   <!-- ========================================================
-       9. SLIDE-OVER SOVEREIGN BAG & CHECKOUT DRAWER
+       9. SLIDE-OVER BAG DRAWER
        ======================================================== -->
   <div id="bagDrawerBackdrop" class="hidden fixed inset-0 bg-midnight-deep/80 backdrop-blur-md z-50 transition-opacity" onclick="toggleBagDrawer(false)"></div>
 
   <aside id="bagDrawer" class="fixed top-0 right-0 bottom-0 w-full max-w-md bg-midnight-deep/95 border-l border-gold-500/30 z-50 shadow-2xl translate-x-full transition-transform duration-300 flex flex-col font-sans">
-    
-    <!-- Drawer Header -->
     <div class="p-5 border-b border-gold-500/20 flex items-center justify-between bg-midnight">
       <div class="flex items-center gap-2.5">
         <i class="fa-solid fa-crown text-gold-400 text-lg"></i>
-        <h3 class="font-cinzel font-bold text-base text-ivory tracking-wider">Sovereign Bag</h3>
+        <h3 class="font-cinzel font-bold text-base text-ivory tracking-wider">Shopping Bag</h3>
       </div>
-      <button onclick="toggleBagDrawer(false); playAudio('click');" class="w-8 h-8 rounded-full palace-glass hover:bg-gold-500 hover:text-midnight text-ivory/70 flex items-center justify-center font-bold transition-all">
+      <button onclick="toggleBagDrawer(false); playAudio('click');" class="w-8 h-8 rounded-full palace-glass hover:bg-gold-500 hover:text-midnight text-ivory/70 flex items-center justify-center font-bold">
         &times;
       </button>
     </div>
 
-    <!-- Bag Content / Scrollable Items -->
-    <div id="bagItemsContainer" class="flex-1 overflow-y-auto p-5 space-y-3">
+    <div id="drawerBagItems" class="flex-1 overflow-y-auto p-5 space-y-3">
       <!-- Injected via JavaScript -->
     </div>
 
-    <!-- Checkout Form & Pricing Summary -->
-    <div class="p-5 border-t border-gold-500/20 bg-midnight space-y-4 shrink-0 font-mono text-xs">
-      
-      <!-- Subtotal + COD Breakdown -->
-      <div class="space-y-1.5 text-ivory/70">
-        <div class="flex justify-between">
-          <span>Cart Subtotal</span>
-          <span id="bagSubtotal" class="text-ivory font-bold">Rs. 0</span>
-        </div>
-        <div class="flex justify-between">
-          <span>Nationwide COD Shipping</span>
-          <span id="bagShipping" class="text-gold-400 font-bold">Rs. 350</span>
-        </div>
-        <div class="flex justify-between text-sm font-bold text-gold-300 pt-2 border-t border-gold-500/20 font-serif">
-          <span>Total Payable (COD)</span>
-          <span id="bagGrandTotal" class="text-base font-serif">Rs. 350</span>
-        </div>
+    <div class="p-5 border-t border-gold-500/20 bg-midnight space-y-3 shrink-0 font-mono text-xs">
+      <div class="flex justify-between">
+        <span>Subtotal:</span>
+        <span id="drawerSubtotal" class="font-bold text-ivory">Rs. 0</span>
+      </div>
+      <div class="flex justify-between">
+        <span>COD Shipping:</span>
+        <span class="font-bold text-gold-400">Rs. 350</span>
+      </div>
+      <div class="flex justify-between text-sm font-bold text-gold-300 pt-2 border-t border-gold-500/20 font-serif">
+        <span>Total Payable:</span>
+        <span id="drawerGrandTotal" class="font-serif">Rs. 350</span>
       </div>
 
-      <!-- Quick Shipping Details Form -->
-      <form id="orderForm" onsubmit="handlePlaceOrder(event)" class="space-y-2 pt-2 border-t border-gold-500/15">
-        <input 
-          type="text" 
-          id="custName" 
-          placeholder="Full Name" 
-          required 
-          class="w-full px-3 py-2 rounded-xl bg-midnight border border-gold-500/30 text-ivory text-xs outline-none focus:border-gold-500" 
-        />
-        <input 
-          type="tel" 
-          id="custPhone" 
-          placeholder="Active WhatsApp Phone (e.g. 0300 1234567)" 
-          required 
-          class="w-full px-3 py-2 rounded-xl bg-midnight border border-gold-500/30 text-ivory text-xs outline-none focus:border-gold-500" 
-        />
-        <textarea 
-          id="custAddress" 
-          rows="2" 
-          placeholder="Complete Street Address & City" 
-          required 
-          class="w-full px-3 py-2 rounded-xl bg-midnight border border-gold-500/30 text-ivory text-xs outline-none focus:border-gold-500"
-        ></textarea>
-
-        <button 
-          type="submit" 
-          id="btnSubmitOrder"
-          class="w-full py-3.5 gold-btn-gradient rounded-xl font-cinzel font-bold text-xs uppercase tracking-widest shadow-xl flex items-center justify-center gap-2"
-        >
-          <i class="fa-solid fa-circle-check"></i> Confirm COD Nationwide Order
-        </button>
-      </form>
-
-      <div class="text-[10px] text-center text-ivory/50">
-        Dispatched via TCS/Trax • Pay Cash to Courier Rider
-      </div>
-
+      <button onclick="toggleBagDrawer(false); window.location.hash='#studioSection';" class="w-full py-3.5 gold-btn-gradient rounded-xl font-cinzel font-bold text-xs uppercase tracking-widest shadow-xl flex items-center justify-center gap-2">
+        Proceed to Checkout
+      </button>
     </div>
-
   </aside>
 
   <!-- ========================================================
-       10. PRODUCT DETAIL QUICK VIEW MODAL
-       ======================================================== -->
-  <div id="quickModal" class="hidden fixed inset-0 z-50 bg-midnight-deep/80 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="relative w-full max-w-2xl palace-glass-heavy border border-gold-500/40 rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row">
-      
-      <button onclick="closeQuickView(); playAudio('click');" class="absolute top-4 right-4 z-10 w-8 h-8 rounded-full palace-glass hover:bg-gold-500 hover:text-midnight text-ivory/80 flex items-center justify-center text-xs font-bold transition-all">
-        &times;
-      </button>
-
-      <div class="md:w-1/2 p-6 bg-midnight/80 flex items-center justify-center border-b md:border-b-0 md:border-r border-gold-500/20">
-        <img id="modalImg" src="" alt="Tactile Product" class="max-h-72 object-contain rounded-2xl border border-gold-500/20" />
-      </div>
-
-      <div class="md:w-1/2 p-6 flex flex-col justify-between space-y-4">
-        <div>
-          <span id="modalCategory" class="text-[10px] font-mono text-gold-400 uppercase tracking-widest block mb-1">Palace Pedestal</span>
-          <h3 id="modalTitle" class="font-serif font-bold text-xl text-ivory leading-snug"></h3>
-          <div class="mt-2 text-2xl font-serif font-black text-gold-300" id="modalPrice"></div>
-          <p id="modalDesc" class="text-xs text-ivory/70 leading-relaxed mt-3 font-light"></p>
-        </div>
-
-        <div class="space-y-2 pt-4 border-t border-gold-500/20">
-          <button id="modalAddBtn" class="w-full py-3 gold-btn-gradient rounded-xl font-cinzel font-bold text-xs uppercase tracking-widest shadow-lg flex items-center justify-center gap-2">
-            <i class="fa-solid fa-bag-shopping"></i> Add To Sovereign Bag
-          </button>
-          <a id="modalWaBtn" href="#" target="_blank" onclick="playAudio('click')" class="w-full py-2.5 palace-glass hover:bg-sapphire text-gold-300 border border-gold-500/40 rounded-xl font-cinzel font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 transition-all">
-            <i class="fa-brands fa-whatsapp text-emerald-400"></i> WhatsApp Concierge
-          </a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ========================================================
-       11. JAVASCRIPT: WEBGL SHADER, AUDIO SYNTHESIZER & STORE LOGIC
+       10. JAVASCRIPT: WEBGL SHADER, AUDIO & COMMERCE LOGIC
        ======================================================== -->
   <script>
-    // ========================================================
-    // A. WEBGL PALACE VOLUMETRIC GPU SHADER
-    // ========================================================
+    // 1. Procedural 3D WebGL Shader
     (function initPalaceShader() {
       const canvas = document.getElementById('palaceShaderCanvas');
       if (!canvas) return;
@@ -907,7 +676,6 @@
           vec2 st = gl_FragCoord.xy / u_resolution.xy;
           vec2 mouse = u_mouse / u_resolution;
 
-          // Palette: Midnight Navy (#071426), Sapphire (#102344), Champagne Gold (#D6A75C)
           vec3 midnight = vec3(0.027, 0.078, 0.149);
           vec3 sapphire = vec3(0.062, 0.137, 0.267);
           vec3 gold = vec3(0.839, 0.655, 0.361);
@@ -930,7 +698,6 @@
           col += warmGlow * (beam + ring) * archGlow * 0.65;
           col += gold * pow(archGlow, 3.2) * 0.55;
 
-          // Marble Floor Sheen at bottom
           if (st.y < 0.32) {
             float floorDist = (0.32 - st.y) / 0.32;
             col = mix(col, midnight * 0.75, floorDist * 0.45);
@@ -942,28 +709,28 @@
       `;
 
       function compile(type, source) {
-        const shader = gl.createShader(type);
-        gl.shaderSource(shader, source);
-        gl.compileShader(shader);
-        return shader;
+        const s = gl.createShader(type);
+        gl.shaderSource(s, source);
+        gl.compileShader(s);
+        return s;
       }
-      const program = gl.createProgram();
-      gl.attachShader(program, compile(gl.VERTEX_SHADER, vs));
-      gl.attachShader(program, compile(gl.FRAGMENT_SHADER, fs));
-      gl.linkProgram(program);
-      gl.useProgram(program);
+      const prog = gl.createProgram();
+      gl.attachShader(prog, compile(gl.VERTEX_SHADER, vs));
+      gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, fs));
+      gl.linkProgram(prog);
+      gl.useProgram(prog);
 
-      const buffer = gl.createBuffer();
-      gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+      const buf = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, buf);
       gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
 
-      const pos = gl.getAttribLocation(program, 'a_position');
+      const pos = gl.getAttribLocation(prog, 'a_position');
       gl.enableVertexAttribArray(pos);
       gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
 
-      const uTime = gl.getUniformLocation(program, 'u_time');
-      const uRes = gl.getUniformLocation(program, 'u_resolution');
-      const uMouse = gl.getUniformLocation(program, 'u_mouse');
+      const uTime = gl.getUniformLocation(prog, 'u_time');
+      const uRes = gl.getUniformLocation(prog, 'u_resolution');
+      const uMouse = gl.getUniformLocation(prog, 'u_mouse');
 
       let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
       window.addEventListener('mousemove', (e) => {
@@ -982,9 +749,7 @@
       requestAnimationFrame(render);
     })();
 
-    // ========================================================
-    // B. IMPERIAL WEB AUDIO SYNTHESIZER (ZERO-LAG SOUND FX)
-    // ========================================================
+    // 2. Synthesized Web Audio FX
     let audioCtx = null;
     let audioActive = true;
 
@@ -993,9 +758,7 @@
         const AudioClass = window.AudioContext || window.webkitAudioContext;
         if (AudioClass) audioCtx = new AudioClass();
       }
-      if (audioCtx && audioCtx.state === 'suspended') {
-        audioCtx.resume();
-      }
+      if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
     }
 
     function toggleAudioFX() {
@@ -1031,20 +794,8 @@
           gain.connect(audioCtx.destination);
           osc.start(now);
           osc.stop(now + 0.04);
-        } else if (cue === 'whoosh') {
-          const osc = audioCtx.createOscillator();
-          const gain = audioCtx.createGain();
-          osc.type = 'triangle';
-          osc.frequency.setValueAtTime(220, now);
-          osc.frequency.exponentialRampToValueAtTime(580, now + 0.12);
-          gain.gain.setValueAtTime(0.08, now);
-          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.12);
-          osc.connect(gain);
-          gain.connect(audioCtx.destination);
-          osc.start(now);
-          osc.stop(now + 0.12);
         } else if (cue === 'chime') {
-          const notes = [587.33, 739.99, 880.00, 1174.66]; // D5, F#5, A5, D6 Royal chord
+          const notes = [587.33, 739.99, 880.00, 1174.66];
           notes.forEach((freq, idx) => {
             const osc = audioCtx.createOscillator();
             const gain = audioCtx.createGain();
@@ -1061,321 +812,150 @@
       } catch (err) {}
     }
 
-    // ========================================================
-    // C. SUPABASE & PRODUCTS DATA INTEGRATION
-    // ========================================================
+    // 3. Supabase Client & Products Catalog
     const SUPABASE_URL = "https://yyapzlhdnyduonrekiwe.supabase.co";
     const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5YXB6bGhkbnlkdW9ucmVraXdlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQzODA3MDYsImV4cCI6MjEwOTk1NjcwNn0.YMdQBz0h9sekPQV-crgmRHrGl96RfNj0xymXD6r4rBE";
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    const SHIPPING_COD = 350; // Nationwide Flat COD
+    const SHIPPING_COD = 350;
     const STORE_WHATSAPP = "923049141244";
     const STORE_EMAIL = "easicarts@gmail.com";
 
-    // Verified Authentic Products Database
-    const defaultCatalog = [
-      {
-        id: "p1",
-        title: "Handmade Sheep Baby Shoes – Soft & Cozy",
-        category: "babyshoes",
-        category_label: "Baby & Kids Footwear",
-        price: 1500,
-        image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800&auto=format&fit=crop&q=80",
-        badge: "Top Seller",
-        description: "Pediatrician-tested pre-walker boots hand-knitted from organic fleece wool with non-slip gentle grip."
-      },
-      {
-        id: "p2",
-        title: "Soft Sole Toddler Moccasins",
-        category: "babyshoes",
-        category_label: "Baby & Kids Footwear",
-        price: 1850,
-        image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=800&auto=format&fit=crop&q=80",
-        badge: "Artisanal",
-        description: "Ergonomic leather moccasins crafted for natural foot flex and healthy bone alignment during first steps."
-      },
-      {
-        id: "p3",
-        title: "Premium Combed Cotton Tee",
-        category: "garments",
-        category_label: "Cotton Garments",
-        price: 1399,
-        image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800&auto=format&fit=crop&q=80",
-        badge: "Bio-Washed",
-        description: "210 GSM heavy-grade bio-washed combed cotton. Pre-shrunk, breathable weave for ultimate all-day comfort."
-      },
-      {
-        id: "p4",
-        title: "Hotel Luxury 400TC Egyptian Set",
-        category: "bedsheets",
-        category_label: "Luxury Bedsheets (KHM)",
-        price: 3899,
-        image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=800&auto=format&fit=crop&q=80",
-        badge: "Grand Imperial",
-        description: "King Chamber Suite: 1 Flat Sheet + 2 Oxford Pillowcases woven with 400TC long-staple Egyptian cotton sateen."
-      },
-      {
-        id: "p5",
-        title: "Botanical Fitted Sheet with Deep Pockets",
-        category: "bedsheets",
-        category_label: "Luxury Bedsheets (KHM)",
-        price: 2950,
-        image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=800&auto=format&fit=crop&q=80",
-        badge: "Non-Fade",
-        description: "Deep pocket 360-degree elastic grip sheet preventing slips on premium thick mattresses up to 14 inches."
-      },
-      {
-        id: "p6",
-        title: "Relaxed Linen Everyday Shirt",
-        category: "garments",
-        category_label: "Cotton Garments",
-        price: 2499,
-        image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800&auto=format&fit=crop&q=80",
-        badge: "Trending",
-        description: "Featherweight linen-cotton blend tailored with reinforced French seams for summer breeze and effortless luxury."
-      },
-      {
-        id: "p7",
-        title: "Minimalist Textured Cushion Covers (Pair)",
-        category: "homedecor",
-        category_label: "Home Living",
-        price: 1250,
-        image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=800&auto=format&fit=crop&q=80",
-        badge: "Decor Accent",
-        description: "Heavy textured linen-cotton cushion slipcovers with hidden golden zip closures for sovereign couches."
-      },
-      {
-        id: "p8",
-        title: "Plush Fleece Baby Blanket & Booties Bundle",
-        category: "babyshoes",
-        category_label: "Baby & Kids Footwear",
-        price: 1999,
-        image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800&auto=format&fit=crop&q=80",
-        badge: "VIP Bundle",
-        description: "Double-layer reversible security nursery blanket bundled with matching hand-knitted fleece baby booties."
-      }
+    const clocheProducts = [
+      { id: "c1", title: "Baby Sneakers", category: "babyshoes", price: 1999, image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&auto=format&fit=crop&q=80" },
+      { id: "c2", title: "Girls Shoes", category: "babyshoes", price: 1799, image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=600&auto=format&fit=crop&q=80" },
+      { id: "c3", title: "Kids Sport Shoes", category: "babyshoes", price: 2299, image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600&auto=format&fit=crop&q=80" },
+      { id: "c4", title: "Baby Sandals", category: "babyshoes", price: 1699, image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&auto=format&fit=crop&q=80" }
     ];
 
-    let storeProducts = defaultCatalog;
-    let selectedCat = 'all';
-    let bag = [];
+    let bag = [
+      { id: "c1", title: "Baby Sneakers", price: 1999, qty: 1, size: "22", image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&auto=format&fit=crop&q=80" },
+      { id: "c2", title: "Girls Shoes", price: 1799, qty: 1, size: "24", image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=600&auto=format&fit=crop&q=80" }
+    ];
 
-    // Initialize Store
-    document.addEventListener("DOMContentLoaded", async () => {
-      loadBagFromStorage();
-      await fetchFromSupabase();
-      renderProducts();
-      updateBagUI();
+    let currentSelectedSize = "18";
+
+    // 4. Initialize & Render
+    document.addEventListener("DOMContentLoaded", () => {
+      renderClocheGrid();
+      updateAllBagDisplays();
       document.body.addEventListener('click', () => initAudio(), { once: true });
     });
 
-    async function fetchFromSupabase() {
-      try {
-        const { data, error } = await supabaseClient
-          .from('products')
-          .select('*')
-          .order('created_at', { ascending: false });
-
-        if (!error && data && data.length > 0) {
-          storeProducts = data;
-        }
-      } catch (e) {
-        storeProducts = defaultCatalog;
-      }
-    }
-
-    // ========================================================
-    // D. CATALOG RENDERING & PEDESTAL CARDS
-    // ========================================================
-    function filterCategory(cat) {
-      selectedCat = cat;
-      document.querySelectorAll('.cat-tab').forEach(b => {
-        b.className = "cat-tab px-4 py-2 rounded-xl font-cinzel text-xs font-bold text-ivory/70 hover:text-white hover:bg-sapphire transition-all";
-      });
-      const activeBtn = document.getElementById(`tab-${cat}`);
-      if (activeBtn) activeBtn.className = "cat-tab px-4 py-2 rounded-xl font-cinzel text-xs font-bold transition-all bg-gold-500 text-midnight";
-      renderProducts();
-    }
-
-    function renderProducts() {
-      const container = document.getElementById("productsGrid");
-      let list = storeProducts;
-      if (selectedCat !== 'all') {
-        list = list.filter(p => p.category === selectedCat);
-      }
-
-      container.innerHTML = list.map(item => `
-        <article class="palace-glass rounded-2xl border border-gold-500/25 overflow-hidden pedestal-card flex flex-col group">
-          <div class="relative w-full aspect-square bg-midnight-deep overflow-hidden">
-            <img 
-              src="${item.image}" 
-              alt="${item.title}" 
-              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
-              onerror="this.src='https://placehold.co/400x400/071426/d6a75c?text=KHM+Palace'"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-midnight/80 via-transparent to-transparent"></div>
-            
-            ${item.badge ? `
-              <span class="absolute top-3 left-3 bg-midnight/90 text-gold-300 border border-gold-500/40 text-[9px] font-mono px-2 py-0.5 rounded uppercase tracking-wider">
-                ${item.badge}
-              </span>
-            ` : ''}
-
-            <button 
-              onclick="openQuickView('${item.id}')" 
-              class="absolute bottom-3 right-3 palace-glass-heavy text-gold-300 hover:text-white text-xs p-2 rounded-full border border-gold-500/40 hover:scale-110 transition-all"
-              title="Inspect Artifact"
-            >
-              <i class="fa-solid fa-eye"></i>
+    function renderClocheGrid() {
+      const container = document.getElementById("clocheGrid");
+      container.innerHTML = clocheProducts.map(item => `
+        <div class="palace-glass-heavy rounded-3xl border border-gold-500/30 p-6 pedestal-card flex flex-col items-center text-center group">
+          <div class="w-full h-56 rounded-2xl overflow-hidden mb-4 border border-gold-500/20 glass-cloche p-4 flex items-center justify-center">
+            <img src="${item.image}" alt="${item.title}" class="max-h-44 object-contain group-hover:scale-110 transition-transform duration-500" />
+          </div>
+          <h3 class="font-serif font-bold text-base text-ivory mb-1">${item.title}</h3>
+          <div class="font-serif font-black text-gold-300 text-lg mb-4">Rs. ${item.price.toLocaleString()}</div>
+          <div class="grid grid-cols-2 gap-2 w-full">
+            <button onclick="addToCart('${item.id}', '${item.title}', ${item.price}, '${item.image}')" class="py-2.5 rounded-xl gold-btn-gradient font-cinzel font-bold text-xs uppercase tracking-wider">
+              Add to Cart
+            </button>
+            <button onclick="inspectInStudio('${item.id}')" class="py-2.5 rounded-xl palace-glass hover:bg-sapphire text-gold-300 border border-gold-500/40 font-cinzel font-bold text-xs uppercase tracking-wider">
+              View Details
             </button>
           </div>
-
-          <div class="p-5 flex flex-col flex-1">
-            <span class="text-[10px] font-mono text-gold-400 uppercase tracking-widest block mb-1">
-              ${item.category_label || item.category}
-            </span>
-            <h3 class="font-serif font-bold text-sm text-ivory line-clamp-2 leading-snug mb-3 group-hover:text-gold-300 transition-colors">
-              ${item.title}
-            </h3>
-
-            <div class="mt-auto pt-2 flex items-baseline gap-2 mb-4 font-mono">
-              <span class="text-base font-serif font-bold text-gold-300">
-                Rs. ${Number(item.price).toLocaleString()}
-              </span>
-              <span class="text-[10px] text-ivory/40">COD Nationwide</span>
-            </div>
-
-            <div class="grid grid-cols-2 gap-2">
-              <button 
-                onclick="addToCart('${item.id}', '${item.title.replace(/'/g, "\\'")}', ${item.price}, '${item.image}')" 
-                class="py-2.5 rounded-xl palace-glass hover:bg-gold-500 hover:text-midnight text-gold-300 border border-gold-500/40 font-cinzel font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 active:scale-95"
-              >
-                <i class="fa-solid fa-plus text-[10px]"></i> Add
-              </button>
-              
-              <a 
-                href="https://wa.me/${STORE_WHATSAPP}?text=${encodeURIComponent('Hello KHM Bedding, I wish to purchase: ' + item.title + ' (Rs. ' + item.price + ')')}" 
-                target="_blank"
-                onclick="playAudio('click')"
-                class="py-2.5 rounded-xl bg-emerald-600/80 hover:bg-emerald-600 text-white font-cinzel font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 active:scale-95"
-              >
-                <i class="fa-brands fa-whatsapp"></i> WhatsApp
-              </a>
-            </div>
-
-          </div>
-        </article>
+        </div>
       `).join("");
     }
 
-    // ========================================================
-    // E. 3D FEATURED SLIDER CONTROLS
-    // ========================================================
-    function slideFeatured(direction) {
-      const track = document.getElementById("featuredSliderTrack");
-      const cardWidth = track.firstElementChild.offsetWidth + 24;
-      track.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
+    function selectSize(btn, size) {
+      currentSelectedSize = size;
+      document.querySelectorAll('.size-btn').forEach(b => {
+        b.className = "size-btn px-3.5 py-1.5 rounded-lg border border-gold-500/20 text-xs font-mono text-ivory/70 hover:border-gold-500";
+      });
+      btn.className = "size-btn px-3.5 py-1.5 rounded-lg border border-gold-500/40 text-xs font-mono text-gold-300 bg-sapphire";
+      playAudio('click');
     }
 
-    function updateSliderCounter() {
-      const track = document.getElementById("featuredSliderTrack");
-      const cardWidth = track.firstElementChild.offsetWidth + 24;
-      const index = Math.round(track.scrollLeft / cardWidth) + 1;
-      const total = track.children.length;
-      document.getElementById("sliderCounterBadge").innerText = `0${Math.min(Math.max(index, 1), total)} / 0${total}`;
+    function inspectInStudio(id) {
+      const p = clocheProducts.find(item => item.id === id);
+      if (!p) return;
+      document.getElementById("studioMainImg").src = p.image;
+      document.getElementById("studioTitle").innerText = p.title;
+      document.getElementById("studioPrice").innerText = `Rs. ${p.price.toLocaleString()}`;
+      window.location.hash = "#studioSection";
+      playAudio('click');
     }
 
-    // ========================================================
-    // F. SOVEREIGN BAG (CART ENGINE)
-    // ========================================================
-    function loadBagFromStorage() {
-      try {
-        const saved = localStorage.getItem("khm_sovereign_bag");
-        if (saved) bag = JSON.parse(saved);
-      } catch (e) {
-        bag = [];
-      }
+    function addToCartFromStudio() {
+      const title = document.getElementById("studioTitle").innerText;
+      const price = parseInt(document.getElementById("studioPrice").innerText.replace(/[^0-9]/g, ''));
+      const image = document.getElementById("studioMainImg").src;
+      addToCart("studio-item", title, price, image, currentSelectedSize);
     }
 
-    function saveBagToStorage() {
-      try {
-        localStorage.setItem("khm_sovereign_bag", JSON.stringify(bag));
-      } catch (e) {}
+    function buyNowFromStudio() {
+      addToCartFromStudio();
+      window.location.hash = "#studioSection";
+      document.getElementById("custName").focus();
     }
 
-    function addToCart(id, title, price, image) {
-      const found = bag.find(item => item.id === id);
+    function addToCart(id, title, price, image, size = "Standard") {
+      const found = bag.find(i => i.id === id && i.size === size);
       if (found) {
         found.qty += 1;
       } else {
-        bag.push({ id, title, price: Number(price), image, qty: 1 });
+        bag.push({ id, title, price: Number(price), image, size, qty: 1 });
       }
-      saveBagToStorage();
-      updateBagUI();
+      updateAllBagDisplays();
       playAudio('chime');
-      toggleBagDrawer(true);
     }
 
-    function updateQty(id, delta) {
-      const found = bag.find(item => item.id === id);
-      if (!found) return;
-      found.qty += delta;
-      if (found.qty <= 0) {
-        bag = bag.filter(item => item.id !== id);
-      }
-      saveBagToStorage();
-      updateBagUI();
+    function updateBagQty(idx, delta) {
+      bag[idx].qty += delta;
+      if (bag[idx].qty <= 0) bag.splice(idx, 1);
+      updateAllBagDisplays();
       playAudio('click');
     }
 
-    function removeBagItem(id) {
-      bag = bag.filter(item => item.id !== id);
-      saveBagToStorage();
-      updateBagUI();
+    function removeBagItem(idx) {
+      bag.splice(idx, 1);
+      updateAllBagDisplays();
       playAudio('click');
     }
 
-    function updateBagUI() {
+    function updateAllBagDisplays() {
       const totalCount = bag.reduce((sum, i) => sum + i.qty, 0);
       document.getElementById("headerCartCount").innerText = totalCount;
-
-      const container = document.getElementById("bagItemsContainer");
-      if (bag.length === 0) {
-        container.innerHTML = `
-          <div class="py-20 text-center text-ivory/50">
-            <i class="fa-solid fa-crown text-4xl mb-3 text-gold-500/30"></i>
-            <h4 class="font-serif text-sm font-bold text-ivory/80">Your sovereign bag is currently empty.</h4>
-            <p class="text-xs text-gold-400/80 mt-1 font-mono uppercase tracking-widest">Select an item from the pedestals</p>
-          </div>
-        `;
-        document.getElementById("bagSubtotal").innerText = "Rs. 0";
-        document.getElementById("bagGrandTotal").innerText = "Rs. 350";
-        return;
-      }
 
       const subtotal = bag.reduce((sum, i) => sum + (i.price * i.qty), 0);
       const grandTotal = subtotal + SHIPPING_COD;
 
-      container.innerHTML = bag.map(item => `
-        <div class="flex items-center gap-3 p-3 rounded-xl palace-glass border border-gold-500/20">
-          <img src="${item.image}" alt="${item.title}" class="w-14 h-14 rounded-lg object-cover bg-midnight border border-gold-500/30" />
-          <div class="flex-1 min-w-0 font-mono">
-            <h4 class="text-xs font-serif font-bold text-ivory truncate">${item.title}</h4>
-            <div class="text-xs text-gold-400 font-bold mt-0.5">Rs. ${item.price.toLocaleString()}</div>
-            <div class="flex items-center gap-2 mt-1.5">
-              <button onclick="updateQty('${item.id}', -1)" class="w-5 h-5 rounded palace-glass text-gold-300 font-bold text-xs">-</button>
-              <span class="text-xs text-ivory font-bold">${item.qty}</span>
-              <button onclick="updateQty('${item.id}', 1)" class="w-5 h-5 rounded palace-glass text-gold-300 font-bold text-xs">+</button>
+      // Update Studio Bag
+      const studioContainer = document.getElementById("studioBagItems");
+      if (bag.length === 0) {
+        studioContainer.innerHTML = `<div class="py-8 text-center text-xs text-ivory/50">Your bag is empty</div>`;
+      } else {
+        studioContainer.innerHTML = bag.map((item, idx) => `
+          <div class="flex items-center gap-3 p-2.5 rounded-xl palace-glass border border-gold-500/20">
+            <img src="${item.image}" alt="${item.title}" class="w-12 h-12 rounded-lg object-cover bg-midnight border border-gold-500/30" />
+            <div class="flex-1 min-w-0 font-mono text-xs">
+              <div class="font-serif font-bold text-ivory truncate">${item.title}</div>
+              <div class="text-[10px] text-ivory/60">Size: ${item.size} • Qty: ${item.qty}</div>
+              <div class="text-gold-400 font-bold">Rs. ${(item.price * item.qty).toLocaleString()}</div>
             </div>
+            <button onclick="removeBagItem(${idx})" class="text-ivory/40 hover:text-rose-400 p-1 text-xs">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
           </div>
-          <button onclick="removeBagItem('${item.id}')" class="text-ivory/40 hover:text-rose-400 p-2 text-xs" title="Remove">
-            <i class="fa-solid fa-trash-can"></i>
-          </button>
-        </div>
-      `).join("");
+        `).join("");
+      }
 
-      document.getElementById("bagSubtotal").innerText = `Rs. ${subtotal.toLocaleString()}`;
-      document.getElementById("bagGrandTotal").innerText = `Rs. ${grandTotal.toLocaleString()}`;
+      document.getElementById("studioSubtotal").innerText = `Rs. ${subtotal.toLocaleString()}`;
+      document.getElementById("studioGrandTotal").innerText = `Rs. ${grandTotal.toLocaleString()}`;
+
+      // Update Drawer Bag
+      const drawerContainer = document.getElementById("drawerBagItems");
+      if (drawerContainer) {
+        drawerContainer.innerHTML = studioContainer.innerHTML;
+        document.getElementById("drawerSubtotal").innerText = `Rs. ${subtotal.toLocaleString()}`;
+        document.getElementById("drawerGrandTotal").innerText = `Rs. ${grandTotal.toLocaleString()}`;
+      }
     }
 
     function toggleBagDrawer(open) {
@@ -1390,29 +970,28 @@
       }
     }
 
-    // ========================================================
-    // G. ORDER SUBMISSION & WHATSAPP ROUTING
-    // ========================================================
+    // 5. Submit Order (COD + Supabase + WhatsApp)
     async function handlePlaceOrder(e) {
       e.preventDefault();
       if (bag.length === 0) {
-        alert("Your sovereign bag is empty. Please select an item first.");
+        alert("Aapka bag khali hai! Pehle product select karein.");
         return;
       }
 
       const btn = document.getElementById("btnSubmitOrder");
       btn.disabled = true;
-      btn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> Dispatching Order Telemetry...`;
+      btn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> Saving Order...`;
 
       const name = document.getElementById("custName").value.trim();
       const phone = document.getElementById("custPhone").value.trim();
+      const city = document.getElementById("custCity").value.trim();
       const address = document.getElementById("custAddress").value.trim();
 
       const subtotal = bag.reduce((sum, i) => sum + (i.price * i.qty), 0);
       const grandTotal = subtotal + SHIPPING_COD;
       const orderId = "KHM-V4-" + Math.floor(100000 + Math.random() * 900000);
 
-      const itemsSummary = bag.map(i => `• ${i.title} (Qty: ${i.qty}) - Rs. ${(i.price * i.qty).toLocaleString()}`).join("\n");
+      const itemsSummary = bag.map(i => `• ${i.title} (${i.size}) x${i.qty} - Rs. ${(i.price * i.qty).toLocaleString()}`).join("\n");
 
       // Save to Supabase
       try {
@@ -1420,7 +999,7 @@
           id: orderId,
           customer_name: name,
           customer_phone: phone,
-          customer_address: address,
+          customer_address: `${address}, ${city}`,
           ordered_items: itemsSummary,
           subtotal: subtotal,
           shipping_fee: SHIPPING_COD,
@@ -1429,63 +1008,33 @@
         }]);
       } catch (err) {}
 
-      // Formatted WhatsApp Message
-      const waText = `👑 *NEW SOVEREIGN ORDER - KHM BEDDING V4.0*
+      // WhatsApp Message
+      const waText = `👑 *NEW ORDER - KHM BEDDING V4.0*
 ━━━━━━━━━━━━━━━━━━━━
-*Order Token:* ${orderId}
+*Order ID:* ${orderId}
 *Customer:* ${name}
 *WhatsApp:* ${phone}
+*City:* ${city}
 *Address:* ${address}
 
-📦 *CURATED ARTIFACTS:*
+📦 *ITEMS ORDERED:*
 ${itemsSummary}
 
-💰 *SOVEREIGN VALUATION:*
+💰 *PAYMENT (COD):*
 • Subtotal: Rs. ${subtotal.toLocaleString()}
-• Nationwide COD Fee: Rs. ${SHIPPING_COD}
+• Shipping: Rs. ${SHIPPING_COD} (Nationwide Flat)
 *Grand Total Payable: Rs. ${grandTotal.toLocaleString()}*
 ━━━━━━━━━━━━━━━━━━━━
-Notification dispatched to: ${STORE_EMAIL}`;
+Dispatched to: ${STORE_EMAIL}`;
 
       bag = [];
-      saveBagToStorage();
-      updateBagUI();
-      toggleBagDrawer(false);
+      updateAllBagDisplays();
 
-      alert(`Shukriya ${name}! Your order (#${orderId}) is confirmed for Rs. ${grandTotal.toLocaleString()} (including Rs. 350 COD delivery). We are routing you to the VIP Concierge on WhatsApp.`);
-      
+      alert(`Shukriya ${name}! Aapka order (#${orderId}) receive ho gaya hai (Total: Rs. ${grandTotal.toLocaleString()} including Rs. 350 COD delivery). Ab confirmation ke liye WhatsApp open ho raha hai.`);
       window.open(`https://wa.me/${STORE_WHATSAPP}?text=${encodeURIComponent(waText)}`, '_blank');
-      
+
       btn.disabled = false;
-      btn.innerHTML = `<i class="fa-solid fa-circle-check"></i> Confirm COD Nationwide Order`;
-    }
-
-    // ========================================================
-    // H. PRODUCT QUICK VIEW MODAL
-    // ========================================================
-    function openQuickView(id) {
-      const item = storeProducts.find(p => p.id === id);
-      if (!item) return;
-
-      document.getElementById("modalImg").src = item.image;
-      document.getElementById("modalTitle").innerText = item.title;
-      document.getElementById("modalCategory").innerText = item.category_label || item.category;
-      document.getElementById("modalPrice").innerText = `Rs. ${Number(item.price).toLocaleString()}`;
-      document.getElementById("modalDesc").innerText = item.description || "Authentic palace-certified fabric crafted with high precision and hand-finished stitches.";
-
-      document.getElementById("modalAddBtn").onclick = () => {
-        addToCart(item.id, item.title, item.price, item.image);
-        closeQuickView();
-      };
-
-      document.getElementById("modalWaBtn").href = `https://wa.me/${STORE_WHATSAPP}?text=${encodeURIComponent('Hello KHM Bedding VIP Concierge, I wish to inquire about: ' + item.title)}`;
-
-      document.getElementById("quickModal").classList.remove("hidden");
-      playAudio('click');
-    }
-
-    function closeQuickView() {
-      document.getElementById("quickModal").classList.add("hidden");
+      btn.innerHTML = `<i class="fa-solid fa-circle-check"></i> Place Order (COD)`;
     }
   </script>
 </body>
