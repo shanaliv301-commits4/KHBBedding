@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KHM Bedding V4.0 | Real Supabase Products & 3D Architectural Palace</title>
-  <meta name="description" content="KHM Bedding V4.0 - Live Supabase Products, authentic Islamic BGM, 20s dynamic ambient wallpaper, and flat Rs. 350 COD across Pakistan." />
+  <title>KHM Bedding V4.0 | Tactile 3D Palace Storefront</title>
+  <meta name="description" content="KHM Bedding V4.0 - Fully Interactive & Tactile 3D Palace Storefront. Supabase live inventory, Islamic Oud BGM, 360 cloche diorama, and nationwide Rs. 350 COD." />
 
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -129,6 +129,7 @@
       transform: translateY(-2px);
     }
 
+    /* Arch-shaped Pavilion Cards */
     .pavilion-card {
       transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
       border-radius: 9999px 9999px 1.5rem 1.5rem;
@@ -158,12 +159,21 @@
       animation: none !important;
       height: 4px !important;
     }
+
+    /* 3D Cloche Rotation */
+    @keyframes spinY {
+      from { transform: rotateY(0deg); }
+      to { transform: rotateY(360deg); }
+    }
+    .auto-spin-active {
+      animation: spinY 10s infinite linear;
+    }
   </style>
 </head>
 <body class="font-sans antialiased">
 
   <!-- ========================================================
-       1. DYNAMIC AUTO-CHANGING WALLPAPER LAYERS (EVERY 20 SECONDS)
+       1. DYNAMIC AUTO-CHANGING WALLPAPER (20S INTERVAL)
        ======================================================== -->
   <div id="bgLayer0" class="bg-layer active" style="background-image: radial-gradient(circle at 50% 30%, #152744 0%, #071426 50%, #030e20 100%);"></div>
   <div id="bgLayer1" class="bg-layer" style="background-image: radial-gradient(circle at 50% 20%, #2a2012 0%, #121c2e 55%, #030e20 100%);"></div>
@@ -172,42 +182,38 @@
   <div id="bgLayer4" class="bg-layer" style="background-image: radial-gradient(circle at 50% 30%, #1f271b 0%, #0a1728 55%, #020914 100%);"></div>
   <div class="bg-tint-overlay"></div>
 
-  <!-- Floating Sparkles -->
+  <!-- Sparkles -->
   <div class="sparkle" style="width:6px;height:6px;left:15%;animation-delay:0s;animation-duration:11s;"></div>
   <div class="sparkle" style="width:4px;height:4px;left:40%;animation-delay:3s;animation-duration:14s;"></div>
   <div class="sparkle" style="width:8px;height:8px;left:65%;animation-delay:1.5s;animation-duration:12s;"></div>
   <div class="sparkle" style="width:5px;height:5px;left:85%;animation-delay:5s;animation-duration:10s;"></div>
 
   <!-- ========================================================
-       2. AUTHENTIC ISLAMIC AMBIENT OUD & INSTRUMENTAL BGM
+       2. AUTHENTIC ISLAMIC AMBIENT BGM
        ======================================================== -->
   <audio id="bgmAudio" loop preload="auto">
-    <!-- Authentic soft calming instrumental Islamic Oud / Ambient strings -->
     <source src="https://cdn.pixabay.com/download/audio/2022/03/24/audio_3d1efc609c.mp3?filename=desert-oasis-middle-eastern-oriental-arabic-ambient-10903.mp3" type="audio/mp3">
   </audio>
 
-  <!-- TOP BAR & STATUS TELEMETRY -->
+  <!-- TOP BAR & STATUS -->
   <div class="bg-midnight-deep/95 border-b border-gold-500/20 text-[11px] py-1.5 px-4 font-mono text-ivory/80 flex flex-wrap justify-between items-center gap-2 relative z-30">
     <div class="flex items-center gap-3">
       <span class="text-gold-400 font-bold uppercase tracking-wider text-[10px]">
         <i class="fa-solid fa-sparkles text-amber-300 mr-1"></i> Next-Gen Comfort &amp; Futuristic Living
       </span>
       <span class="hidden sm:inline text-gold-500/40">•</span>
-      <span class="text-ivory/70">Flat Nationwide COD Rs. 350</span>
+      <span class="text-ivory/70"><i class="fa-solid fa-truck-fast text-emerald-400 mr-1"></i> Flat Nationwide COD Rs. 350</span>
       <span class="hidden sm:inline text-gold-500/40">•</span>
-      <!-- Live Supabase Status Badge -->
-      <span id="supabaseStatusBadge" class="inline-flex items-center gap-1.5 text-amber-300 text-[10px]">
-        <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span> Connecting Supabase...
+      <span id="supabaseStatusBadge" class="inline-flex items-center gap-1.5 text-emerald-400 text-[10px]">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Supabase Cloud: Ready (Curated Showroom Active)
       </span>
     </div>
 
     <div class="flex items-center gap-4">
-      <!-- Background Cycle Countdown Readout -->
-      <span class="hidden md:inline text-[10px] text-gold-400/80 font-mono" id="bgCountdownText">
-        <i class="fa-solid fa-camera-rotate mr-1"></i> Palace Theme: <span id="bgThemeName">Grand Gilded Dome</span> (<span id="bgTimerCount">20</span>s)
-      </span>
+      <button onclick="changeBackgroundRandom()" class="px-2 py-0.5 rounded bg-midnight border border-gold-500/30 text-gold-400 text-[10px] hover:bg-gold-500 hover:text-midnight transition-colors">
+        <i class="fa-solid fa-wand-magic-sparkles mr-1"></i> Switch Ambiance
+      </button>
 
-      <!-- Authentic Islamic BGM Audio Switcher -->
       <button id="bgmToggleBtn" onclick="toggleAudio()" class="px-2.5 py-1 rounded-full palace-glass border border-gold-500/40 text-gold-300 text-[10px] uppercase font-mono flex items-center gap-2 hover:bg-gold-500 hover:text-midnight transition-all">
         <div id="eqContainer" class="flex items-end gap-0.5 h-3.5 eq-paused">
           <span class="eq-bar"></span>
@@ -224,7 +230,7 @@
     </div>
   </div>
 
-  <!-- MAIN NAVIGATION HEADER -->
+  <!-- NAVIGATION HEADER -->
   <header class="sticky top-0 z-40 palace-glass border-b border-gold-500/25 px-4 sm:px-8 py-3.5 flex items-center justify-between">
     <div class="flex items-center gap-3 cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'})">
       <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sapphire via-gold-600/30 to-gold-400 flex items-center justify-center text-gold-300 text-lg border border-gold-500/40 shadow-lg">
@@ -238,22 +244,24 @@
       </div>
     </div>
 
-    <!-- Navigation Links -->
+    <!-- Navigation Buttons -->
     <nav class="hidden md:flex items-center gap-1 p-1 rounded-2xl palace-glass border border-gold-500/30 font-cinzel text-xs uppercase tracking-wider font-bold">
       <button onclick="scrollToSection('heroSection')" class="px-3.5 py-1.5 rounded-xl bg-gold-500 text-midnight shadow">Showroom</button>
       <button onclick="scrollToSection('pavilionsSection')" class="px-3.5 py-1.5 rounded-xl text-ivory/80 hover:text-gold-300">Pavilions</button>
       <button onclick="scrollToSection('dioramaSection')" class="px-3.5 py-1.5 rounded-xl text-ivory/80 hover:text-gold-300">3D Diorama</button>
-      <button onclick="scrollToSection('productsSection')" class="px-3.5 py-1.5 rounded-xl text-ivory/80 hover:text-gold-300">Live Products</button>
+      <button onclick="scrollToSection('productsSection')" class="px-3.5 py-1.5 rounded-xl text-ivory/80 hover:text-gold-300">Collections</button>
+      <button onclick="openSupabaseLiveCatalog()" class="px-3.5 py-1.5 rounded-xl text-ivory/80 hover:text-gold-300">Live Catalog</button>
+      <a href="https://wa.me/923049141244" target="_blank" class="px-3.5 py-1.5 rounded-xl text-ivory/80 hover:text-gold-300">Contact</a>
     </nav>
 
-    <!-- Cart Button -->
+    <!-- Cart Trigger -->
     <button onclick="toggleBagDrawer(true)" class="relative gold-btn px-4 py-2 rounded-xl font-cinzel text-xs tracking-wider flex items-center gap-2 shadow-xl">
       <i class="fa-solid fa-bag-shopping text-sm"></i>
-      <span>Bag (<span id="cartBadge">0</span>)</span>
+      <span>Bag (<span id="cartBadge">2</span>)</span>
     </button>
   </header>
 
-  <!-- MAIN BODY CONTENT -->
+  <!-- MAIN BODY -->
   <main class="max-w-7xl mx-auto px-4 sm:px-6 pt-10 pb-20 space-y-16 relative z-10">
 
     <!-- HERO SECTION -->
@@ -266,10 +274,10 @@
         <span class="gold-gradient-text font-serif">FUTURISTIC LIVING</span>
       </h1>
       <p class="text-xs sm:text-sm text-ivory/70 max-w-xl mx-auto font-sans leading-relaxed">
-        Engineered for ultimate luxury, everyday comfort, and stylish living. Explore our majestic palace pavilions below with real-time cloud inventory.
+        Engineered for sovereign luxury and everyday ease. Explore our architectural pavilions and inspect master collections inside interactive 3D cloche chambers.
       </p>
       <div class="flex flex-wrap items-center justify-center gap-4 pt-3">
-        <button onclick="scrollToSection('productsSection')" class="px-6 py-3 rounded-full gold-btn font-cinzel text-xs uppercase tracking-wider flex items-center gap-2 shadow-xl">
+        <button onclick="scrollToSection('pavilionsSection')" class="px-6 py-3 rounded-full gold-btn font-cinzel text-xs uppercase tracking-wider flex items-center gap-2 shadow-xl">
           <span>Explore Collections</span>
           <i class="fa-solid fa-arrow-right-long"></i>
         </button>
@@ -279,77 +287,99 @@
       </div>
     </section>
 
-    <!-- 4 FEATURED SHOWROOM PAVILIONS -->
+    <!-- 4 FEATURED SHOWROOM PAVILIONS (CLICK TO DYNAMICALLY FILTER PRODUCTS) -->
     <section id="pavilionsSection" class="space-y-6">
       <div class="flex items-center justify-between">
         <div>
-          <span class="text-xs font-mono uppercase tracking-[0.2em] text-gold-400">Architectural Galleries</span>
+          <span class="text-xs font-mono uppercase tracking-[0.2em] text-gold-400">Architectural Pavilions</span>
           <h2 class="text-2xl sm:text-3xl font-serif font-bold text-ivory">Featured Showroom Pavilions</h2>
+          <p class="text-xs text-ivory/60 mt-0.5">Select an architectural pavilion to filter live master collections below</p>
         </div>
-        <button onclick="changeBackgroundRandom()" class="px-3 py-1.5 rounded-xl palace-glass text-gold-300 text-xs font-mono hover:bg-gold-500 hover:text-midnight transition-colors" title="Change Background Ambience Now">
-          <i class="fa-solid fa-wand-magic-sparkles mr-1"></i> Switch Ambiance
-        </button>
+        <div class="flex items-center gap-2">
+          <button onclick="changeBackgroundRandom()" class="w-8 h-8 rounded-full palace-glass hover:bg-gold-500 hover:text-midnight flex items-center justify-center text-gold-300 text-xs">
+            <i class="fa-solid fa-rotate"></i>
+          </button>
+          <button onclick="scrollToSection('productsSection')" class="w-8 h-8 rounded-full palace-glass hover:bg-gold-500 hover:text-midnight flex items-center justify-center text-gold-300 text-xs">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <!-- Pavilion 1 -->
-        <div class="pavilion-card palace-glass-heavy border border-gold-500/30 p-6 flex flex-col items-center text-center justify-between group">
+        <!-- Pavilion 1: Baby & Kids -->
+        <div class="pavilion-card palace-glass-heavy border border-gold-500/30 p-6 flex flex-col items-center text-center justify-between group cursor-pointer" onclick="dynamicFilter('Baby Shoes')">
           <div class="w-full flex flex-col items-center">
             <span class="px-3 py-1 rounded-full bg-sapphire text-gold-300 border border-gold-500/30 text-[10px] font-mono uppercase mb-4">Kids Kingdom</span>
-            <div class="w-32 h-32 rounded-full border-2 border-gold-500/40 flex items-center justify-center bg-midnight/80 mb-4 group-hover:scale-105 transition-transform">
-              <i class="fa-solid fa-face-smile text-4xl text-gold-400"></i>
+            <div class="w-32 h-32 rounded-full border-2 border-gold-500/40 flex items-center justify-center bg-midnight/80 mb-4 group-hover:scale-105 transition-transform overflow-hidden p-2">
+              <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=400&auto=format&fit=crop&q=80" alt="Baby Footwear" class="w-full h-full object-cover rounded-full" />
             </div>
+            <span class="text-[10px] font-mono text-gold-400 mb-1">Teddy Pod</span>
             <h3 class="font-serif font-bold text-lg text-ivory mb-1">Baby &amp; Kids Footwear</h3>
             <p class="text-xs text-ivory/60 leading-relaxed font-light mb-4">Soft orthopedic soles, glowing cartoon sneakers, and joyful comfort.</p>
           </div>
-          <button onclick="filterCategory('Baby')" class="w-full py-2.5 rounded-xl gold-btn font-cinzel text-xs uppercase tracking-wider">
-            Shop Now →
-          </button>
+          <div class="w-full space-y-2">
+            <button class="w-full py-2.5 rounded-xl gold-btn font-cinzel text-xs uppercase tracking-wider">
+              Shop Now →
+            </button>
+            <div class="text-[10px] font-mono text-ivory/50">Starting from Rs. 1,699</div>
+          </div>
         </div>
 
-        <!-- Pavilion 2 -->
-        <div class="pavilion-card palace-glass-heavy border border-gold-500/30 p-6 flex flex-col items-center text-center justify-between group">
+        <!-- Pavilion 2: Cotton Garments -->
+        <div class="pavilion-card palace-glass-heavy border border-gold-500/30 p-6 flex flex-col items-center text-center justify-between group cursor-pointer" onclick="dynamicFilter('Garments')">
           <div class="w-full flex flex-col items-center">
             <span class="px-3 py-1 rounded-full bg-sapphire text-gold-300 border border-gold-500/30 text-[10px] font-mono uppercase mb-4">100% Combed Cotton</span>
-            <div class="w-32 h-32 rounded-full border-2 border-gold-500/40 flex items-center justify-center bg-midnight/80 mb-4 group-hover:scale-105 transition-transform">
-              <i class="fa-solid fa-shirt text-4xl text-gold-400"></i>
+            <div class="w-32 h-32 rounded-full border-2 border-gold-500/40 flex items-center justify-center bg-midnight/80 mb-4 group-hover:scale-105 transition-transform overflow-hidden p-2">
+              <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=400&auto=format&fit=crop&q=80" alt="Cotton Garments" class="w-full h-full object-cover rounded-full" />
             </div>
-            <h3 class="font-serif font-bold text-lg text-ivory mb-1">Cotton Garments</h3>
+            <span class="text-[10px] font-mono text-gold-400 mb-1">Pique Polo Arch</span>
+            <h3 class="font-serif font-bold text-lg text-ivory mb-1">Cotton Garments &amp; Apparel</h3>
             <p class="text-xs text-ivory/60 leading-relaxed font-light mb-4">Breathable polo shirts, luxury knitted lounge separates &amp; cozy basics.</p>
           </div>
-          <button onclick="filterCategory('Garments')" class="w-full py-2.5 rounded-xl gold-btn font-cinzel text-xs uppercase tracking-wider">
-            Shop Now →
-          </button>
+          <div class="w-full space-y-2">
+            <button class="w-full py-2.5 rounded-xl gold-btn font-cinzel text-xs uppercase tracking-wider">
+              Shop Now →
+            </button>
+            <div class="text-[10px] font-mono text-ivory/50">Starting from Rs. 1,499</div>
+          </div>
         </div>
 
-        <!-- Pavilion 3 -->
-        <div class="pavilion-card palace-glass-heavy border border-gold-500/30 p-6 flex flex-col items-center text-center justify-between group">
+        <!-- Pavilion 3: Luxury Bedsheets -->
+        <div class="pavilion-card palace-glass-heavy border border-gold-500/30 p-6 flex flex-col items-center text-center justify-between group cursor-pointer" onclick="dynamicFilter('Bedsheets')">
           <div class="w-full flex flex-col items-center">
-            <span class="px-3 py-1 rounded-full bg-sapphire text-gold-300 border border-gold-500/30 text-[10px] font-mono uppercase mb-4">Signature Suite</span>
-            <div class="w-32 h-32 rounded-full border-2 border-gold-500/40 flex items-center justify-center bg-midnight/80 mb-4 group-hover:scale-105 transition-transform">
-              <i class="fa-solid fa-bed text-4xl text-gold-400"></i>
+            <span class="px-3 py-1 rounded-full bg-sapphire text-gold-300 border border-gold-500/30 text-[10px] font-mono uppercase mb-4">Royal Egyptian Satin</span>
+            <div class="w-32 h-32 rounded-full border-2 border-gold-500/40 flex items-center justify-center bg-midnight/80 mb-4 group-hover:scale-105 transition-transform overflow-hidden p-2">
+              <img src="https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=400&auto=format&fit=crop&q=80" alt="Luxury Bedsheets" class="w-full h-full object-cover rounded-full" />
             </div>
+            <span class="text-[10px] font-mono text-gold-400 mb-1">Master Duvet</span>
             <h3 class="font-serif font-bold text-lg text-ivory mb-1">Luxury Bedsheets (KHM)</h3>
             <p class="text-xs text-ivory/60 leading-relaxed font-light mb-4">Sovereign navy blue embroidered sets, 600TC silky duvet spreads.</p>
           </div>
-          <button onclick="filterCategory('Bedsheet')" class="w-full py-2.5 rounded-xl gold-btn font-cinzel text-xs uppercase tracking-wider">
-            Shop Now →
-          </button>
+          <div class="w-full space-y-2">
+            <button class="w-full py-2.5 rounded-xl gold-btn font-cinzel text-xs uppercase tracking-wider">
+              Shop Now →
+            </button>
+            <div class="text-[10px] font-mono text-ivory/50">Starting from Rs. 3,499</div>
+          </div>
         </div>
 
-        <!-- Pavilion 4 -->
-        <div class="pavilion-card palace-glass-heavy border border-gold-500/30 p-6 flex flex-col items-center text-center justify-between group">
+        <!-- Pavilion 4: Home Living -->
+        <div class="pavilion-card palace-glass-heavy border border-gold-500/30 p-6 flex flex-col items-center text-center justify-between group cursor-pointer" onclick="dynamicFilter('Home Living')">
           <div class="w-full flex flex-col items-center">
             <span class="px-3 py-1 rounded-full bg-sapphire text-gold-300 border border-gold-500/30 text-[10px] font-mono uppercase mb-4">Palatial Decor</span>
-            <div class="w-32 h-32 rounded-full border-2 border-gold-500/40 flex items-center justify-center bg-midnight/80 mb-4 group-hover:scale-105 transition-transform">
-              <i class="fa-solid fa-couch text-4xl text-gold-400"></i>
+            <div class="w-32 h-32 rounded-full border-2 border-gold-500/40 flex items-center justify-center bg-midnight/80 mb-4 group-hover:scale-105 transition-transform overflow-hidden p-2">
+              <img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=400&auto=format&fit=crop&q=80" alt="Home Living" class="w-full h-full object-cover rounded-full" />
             </div>
+            <span class="text-[10px] font-mono text-gold-400 mb-1">Velvet Decor</span>
             <h3 class="font-serif font-bold text-lg text-ivory mb-1">Home Living</h3>
             <p class="text-xs text-ivory/60 leading-relaxed font-light mb-4">Regal damask velvet cushions, warm luxury seating and cozy accents.</p>
           </div>
-          <button onclick="filterCategory('Home')" class="w-full py-2.5 rounded-xl gold-btn font-cinzel text-xs uppercase tracking-wider">
-            Shop Now →
-          </button>
+          <div class="w-full space-y-2">
+            <button class="w-full py-2.5 rounded-xl gold-btn font-cinzel text-xs uppercase tracking-wider">
+              Shop Now →
+            </button>
+            <div class="text-[10px] font-mono text-ivory/50">Starting from Rs. 2,199</div>
+          </div>
         </div>
       </div>
     </section>
@@ -364,31 +394,31 @@
           Interactive Palace Diorama &amp; <span class="gold-gradient-text font-serif">360° WebGL Inspection</span>
         </h2>
         <p class="text-xs sm:text-sm text-ivory/70 leading-relaxed font-light">
-          Step directly inside the sovereign palace pavilion. Rotate the gilded cloche domes, view realistic fabric textures under ambient royal chandeliers, and experience seamless 3D inspect-to-dispatch workflow.
+          Step directly inside the royal palace showroom. Rotate gilded cloche domes, view realistic textures under warm chandeliers, and seamlessly dispatch orders via WhatsApp COD.
         </p>
 
         <div class="flex flex-wrap items-center gap-3 pt-3">
-          <button onclick="openDioramaInspector()" class="px-5 py-3 rounded-xl gold-btn font-cinzel text-xs uppercase tracking-wider shadow-lg flex items-center gap-2">
+          <button onclick="openDioramaInspector(activeClocheProduct)" class="px-5 py-3 rounded-xl gold-btn font-cinzel text-xs uppercase tracking-wider shadow-lg flex items-center gap-2">
             <i class="fa-solid fa-arrows-spin"></i> Launch 360° Cloche Inspector
           </button>
-          <button onclick="scrollToSection('productsSection')" class="px-5 py-3 rounded-xl palace-glass hover:bg-sapphire text-gold-300 border border-gold-500/40 font-cinzel text-xs uppercase tracking-wider flex items-center gap-2">
-            <i class="fa-solid fa-eye"></i> Full 3D Room Walkthrough
+          <button onclick="cycleClocheSample()" class="px-5 py-3 rounded-xl palace-glass hover:bg-sapphire text-gold-300 border border-gold-500/40 font-cinzel text-xs uppercase tracking-wider flex items-center gap-2">
+            <i class="fa-solid fa-repeat"></i> Switch Chamber Product
           </button>
         </div>
       </div>
 
-      <!-- Cloche Viewport Simulation -->
+      <!-- Live 3D Cloche Dome Simulation Viewport -->
       <div class="lg:col-span-6 palace-glass rounded-2xl p-6 border border-gold-500/30 flex flex-col items-center justify-center relative overflow-hidden text-center bg-midnight/90">
         <div class="absolute top-3 right-3 text-[10px] font-mono text-emerald-400 flex items-center gap-1.5">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Real-Time WebGL Ready
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Real-Time 3D Active
         </div>
 
-        <div class="w-48 h-48 rounded-full border-2 border-gold-500/50 relative flex items-center justify-center bg-gradient-to-b from-sapphire/50 to-midnight-deep p-4 shadow-[0_0_50px_rgba(214,167,92,0.2)] my-3">
-          <div id="diorama3DObject" class="transition-transform duration-300 text-5xl">
-            🧸
+        <div class="w-48 h-48 rounded-full border-2 border-gold-500/50 relative flex items-center justify-center bg-gradient-to-b from-sapphire/50 to-midnight-deep p-4 shadow-[0_0_50px_rgba(214,167,92,0.2)] my-3 overflow-hidden cursor-pointer" onclick="openDioramaInspector(activeClocheProduct)">
+          <div id="diorama3DObject" class="transition-transform duration-300 w-36 h-36 flex items-center justify-center">
+            <img id="dioramaMainImg" src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=400&auto=format&fit=crop&q=80" alt="3D Cloche Product" class="max-h-28 object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]" />
           </div>
-          <div class="absolute -bottom-2 bg-midnight px-3 py-0.5 rounded-full border border-gold-500/40 text-[9px] font-mono text-gold-300 uppercase">
-            Live 3D Viewport
+          <div class="absolute bottom-2 bg-midnight/90 px-3 py-0.5 rounded-full border border-gold-500/40 text-[9px] font-mono text-gold-300 uppercase tracking-widest">
+            Click to Inspect
           </div>
         </div>
 
@@ -396,33 +426,55 @@
           <button onclick="rotateDiorama(-45)" class="px-2.5 py-1 rounded bg-sapphire border border-gold-500/30 hover:bg-gold-500 hover:text-midnight">⟲ -45°</button>
           <span class="text-ivory/60 text-[11px]" id="angleReadout">Angle: 0°</span>
           <button onclick="rotateDiorama(45)" class="px-2.5 py-1 rounded bg-sapphire border border-gold-500/30 hover:bg-gold-500 hover:text-midnight">⟳ +45°</button>
+          <button onclick="toggleAutoSpin()" id="autoSpinBtn" class="px-2.5 py-1 rounded bg-sapphire border border-gold-500/30 hover:bg-gold-500 hover:text-midnight text-[10px]">
+            <i class="fa-solid fa-rotate mr-1"></i> Auto-Spin
+          </button>
         </div>
-        <span class="text-[10px] font-mono text-ivory/50 mt-2">Active Chamber: Kids Kingdom Dome #1</span>
+        <span class="text-[10px] font-mono text-ivory/50 mt-2" id="clocheSubtitle">Active Chamber: Baby Bear Sneakers</span>
       </div>
     </section>
 
-    <!-- ========================================================
-         REAL SUPABASE PRODUCTS LIVE EXHIBITION SECTION
-         ======================================================== -->
+    <!-- LIVE CURATED & SUPABASE PRODUCTS SECTION -->
     <section id="productsSection" class="space-y-6">
       <div class="text-center space-y-2 max-w-xl mx-auto">
         <span class="text-xs font-mono uppercase tracking-[0.2em] text-gold-400">Step Into Happiness</span>
-        <h2 class="text-3xl font-serif font-black text-ivory" id="productSectionTitle">Baby &amp; Kids Footwear Collection</h2>
+        <h2 class="text-3xl sm:text-4xl font-serif font-black text-ivory" id="productSectionTitle">Baby &amp; Kids Footwear Collection</h2>
         <p class="text-xs text-ivory/60 italic font-serif">Little Steps... Big Dreams...</p>
         
         <!-- Category Filter Pills -->
         <div class="flex flex-wrap items-center justify-center gap-2 pt-3">
-          <button onclick="filterCategory('All')" class="cat-pill px-3 py-1 rounded-full text-xs font-cinzel font-bold bg-gold-500 text-midnight shadow">All</button>
-          <button onclick="filterCategory('Baby')" class="cat-pill px-3 py-1 rounded-full text-xs font-cinzel font-bold palace-glass text-ivory/80 hover:text-gold-300">Baby Shoes</button>
-          <button onclick="filterCategory('Kids')" class="cat-pill px-3 py-1 rounded-full text-xs font-cinzel font-bold palace-glass text-ivory/80 hover:text-gold-300">Kids Sneakers</button>
-          <button onclick="filterCategory('Garments')" class="cat-pill px-3 py-1 rounded-full text-xs font-cinzel font-bold palace-glass text-ivory/80 hover:text-gold-300">Garments</button>
-          <button onclick="filterCategory('Bedsheet')" class="cat-pill px-3 py-1 rounded-full text-xs font-cinzel font-bold palace-glass text-ivory/80 hover:text-gold-300">Bedsheets</button>
+          <button onclick="filterCategory(this, 'All')" class="cat-pill px-4 py-1.5 rounded-full text-xs font-cinzel font-bold bg-gold-500 text-midnight shadow">ALL</button>
+          <button onclick="filterCategory(this, 'Baby Shoes')" class="cat-pill px-4 py-1.5 rounded-full text-xs font-cinzel font-bold palace-glass text-ivory/80 hover:text-gold-300">BABY SHOES</button>
+          <button onclick="filterCategory(this, 'Garments')" class="cat-pill px-4 py-1.5 rounded-full text-xs font-cinzel font-bold palace-glass text-ivory/80 hover:text-gold-300">GARMENTS</button>
+          <button onclick="filterCategory(this, 'Bedsheets')" class="cat-pill px-4 py-1.5 rounded-full text-xs font-cinzel font-bold palace-glass text-ivory/80 hover:text-gold-300">BEDSHEETS</button>
+          <button onclick="filterCategory(this, 'Home Living')" class="cat-pill px-4 py-1.5 rounded-full text-xs font-cinzel font-bold palace-glass text-ivory/80 hover:text-gold-300">HOME LIVING</button>
         </div>
       </div>
 
-      <!-- Real Products Grid (Injected Dynamically from Supabase with Fallbacks) -->
+      <!-- Dynamic Interactive Products Grid (Curated + Live Sync) -->
       <div id="liveProductGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-4">
-        <!-- Products injected via JS below -->
+        <!-- Rendered via JS -->
+      </div>
+
+      <!-- Pagination & Security Bar -->
+      <div class="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl palace-glass border border-gold-500/20 text-xs font-mono text-ivory/70">
+        <div class="flex items-center gap-1.5">
+          <button class="w-7 h-7 rounded-lg border border-gold-500/30 flex items-center justify-center hover:bg-gold-500 hover:text-midnight">‹</button>
+          <button class="w-7 h-7 rounded-lg bg-gold-500 text-midnight font-bold flex items-center justify-center">1</button>
+          <button class="w-7 h-7 rounded-lg border border-gold-500/30 flex items-center justify-center hover:bg-gold-500 hover:text-midnight">2</button>
+          <button class="w-7 h-7 rounded-lg border border-gold-500/30 flex items-center justify-center hover:bg-gold-500 hover:text-midnight">3</button>
+          <button class="w-7 h-7 rounded-lg border border-gold-500/30 flex items-center justify-center hover:bg-gold-500 hover:text-midnight">›</button>
+        </div>
+
+        <div class="flex items-center gap-4 text-[11px]">
+          <span><i class="fa-solid fa-gift text-gold-400 mr-1"></i> Free Delivery on orders &gt; Rs. 5,000</span>
+          <span class="text-gold-500/30">|</span>
+          <span><i class="fa-solid fa-shield-halved text-emerald-400 mr-1"></i> Flat Rs. 350 COD Nationwide</span>
+        </div>
+
+        <a href="https://wa.me/923049141244" target="_blank" class="px-3 py-1 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-cinzel text-xs flex items-center gap-1.5 transition-colors">
+          <i class="fa-brands fa-whatsapp"></i> Chat with Us
+        </a>
       </div>
     </section>
 
@@ -431,55 +483,140 @@
       <div class="palace-glass p-5 rounded-2xl border border-gold-500/20 text-center space-y-1">
         <i class="fa-solid fa-truck-fast text-gold-400 text-xl mb-1"></i>
         <div class="font-cinzel font-bold text-xs uppercase text-ivory">Rs. 350 Flat COD</div>
-        <p class="text-[11px] text-ivory/60">Nationwide doorstep speed delivery</p>
+        <p class="text-[11px] text-ivory/60">Nationwide hyper-speed dispatch directly to your doorstep.</p>
       </div>
       <div class="palace-glass p-5 rounded-2xl border border-gold-500/20 text-center space-y-1">
         <i class="fa-solid fa-award text-gold-400 text-xl mb-1"></i>
         <div class="font-cinzel font-bold text-xs uppercase text-ivory">Premium Quality</div>
-        <p class="text-[11px] text-ivory/60">Hypoallergenic baby fabrics &amp; high thread count</p>
+        <p class="text-[11px] text-ivory/60">Hypoallergenic baby fabrics &amp; high thread count bedding.</p>
       </div>
       <div class="palace-glass p-5 rounded-2xl border border-gold-500/20 text-center space-y-1">
         <i class="fa-solid fa-rotate-left text-gold-400 text-xl mb-1"></i>
         <div class="font-cinzel font-bold text-xs uppercase text-ivory">30-Day Hassle-Free</div>
-        <p class="text-[11px] text-ivory/60">Seamless exchange guarantee on sizes</p>
+        <p class="text-[11px] text-ivory/60">Seamless exchange guarantee on sizes and specifications.</p>
       </div>
       <div class="palace-glass p-5 rounded-2xl border border-gold-500/20 text-center space-y-1">
         <i class="fa-solid fa-headset text-gold-400 text-xl mb-1"></i>
         <div class="font-cinzel font-bold text-xs uppercase text-ivory">WhatsApp Support</div>
-        <p class="text-[11px] text-ivory/60">Direct assistance +92 304 9141244</p>
+        <p class="text-[11px] text-ivory/60">Direct instant assistance via +92 304 9141244 anytime.</p>
       </div>
     </section>
 
   </main>
 
-  <!-- ==========================================
-       MODAL: 360° DIORAMA CLOCHE INSPECTOR
-       ========================================== -->
+  <!-- ========================================================
+       FOOTER
+       ======================================================== -->
+  <footer class="palace-glass-heavy border-t border-gold-500/30 pt-12 pb-8 px-4 sm:px-8 mt-20 relative z-10 text-xs">
+    <div class="max-w-7xl mx-auto flex flex-col items-center text-center space-y-3 mb-10">
+      <div class="w-12 h-12 rounded-full border border-gold-500/40 flex items-center justify-center text-gold-400 text-2xl bg-midnight">
+        <i class="fa-solid fa-crown"></i>
+      </div>
+      <h3 class="font-cinzel font-bold text-lg text-ivory tracking-widest">KHM BEDDING</h3>
+      <span class="text-[10px] font-mono text-gold-400 tracking-[0.2em] uppercase">Your Premium Comfort Partner</span>
+      <p class="text-ivory/60 max-w-md text-xs leading-relaxed font-light">
+        Premium quality bedding, footwear and home living essentials for a better tomorrow.
+      </p>
+    </div>
+
+    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pb-10 border-b border-gold-500/20 font-mono text-xs">
+      <div>
+        <h4 class="font-cinzel font-bold text-gold-400 uppercase mb-3">Departments</h4>
+        <ul class="space-y-2 text-ivory/70">
+          <li class="hover:text-gold-300 cursor-pointer" onclick="dynamicFilter('Baby Shoes')">Baby &amp; Kids Footwear</li>
+          <li class="hover:text-gold-300 cursor-pointer" onclick="dynamicFilter('Garments')">Cotton Garments &amp; Apparel</li>
+          <li class="hover:text-gold-300 cursor-pointer" onclick="dynamicFilter('Bedsheets')">Luxury Bedsheets (KHM)</li>
+          <li class="hover:text-gold-300 cursor-pointer" onclick="dynamicFilter('Home Living')">Home Living Essentials</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-cinzel font-bold text-gold-400 uppercase mb-3">Customer Service</h4>
+        <ul class="space-y-2 text-ivory/70">
+          <li class="hover:text-gold-300 cursor-pointer">Track Order</li>
+          <li class="hover:text-gold-300 cursor-pointer">Shipping Policy (Flat Rs. 350 COD)</li>
+          <li class="hover:text-gold-300 cursor-pointer">30-Day Exchange Policy</li>
+          <li class="hover:text-gold-300 cursor-pointer">Direct Concierge</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-cinzel font-bold text-gold-400 uppercase mb-3">Contact Us</h4>
+        <ul class="space-y-2 text-ivory/70">
+          <li><i class="fa-solid fa-phone mr-1 text-gold-400"></i> +92 304 9141244</li>
+          <li><i class="fa-solid fa-envelope mr-1 text-gold-400"></i> easicarts@gmail.com</li>
+          <li><i class="fa-solid fa-location-dot mr-1 text-gold-400"></i> Luxury Avenue, Pakistan</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-cinzel font-bold text-gold-400 uppercase mb-3">Follow The Experience</h4>
+        <p class="text-ivory/60 mb-3 text-[11px]">Join our VIP channel for exclusive palace drops &amp; offers.</p>
+        <div class="flex items-center gap-3">
+          <a href="https://wa.me/923049141244" target="_blank" class="w-9 h-9 rounded-full palace-glass border border-gold-500/30 flex items-center justify-center text-emerald-400 hover:bg-gold-500 hover:text-midnight transition-colors">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+          <a href="#" class="w-9 h-9 rounded-full palace-glass border border-gold-500/30 flex items-center justify-center text-ivory/80 hover:bg-gold-500 hover:text-midnight transition-colors">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a href="#" class="w-9 h-9 rounded-full palace-glass border border-gold-500/30 flex items-center justify-center text-ivory/80 hover:bg-gold-500 hover:text-midnight transition-colors">
+            <i class="fa-brands fa-facebook"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto pt-6 flex flex-wrap items-center justify-between gap-4 text-[11px] text-ivory/50 font-mono">
+      <span>© 2025 KHM BEDDING. All rights reserved. Master Showroom Edition.</span>
+      <a href="https://wa.me/923049141244" target="_blank" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-600/90 text-white font-bold hover:bg-emerald-500 transition-colors">
+        <i class="fa-brands fa-whatsapp text-sm"></i> Order on WhatsApp
+      </a>
+    </div>
+  </footer>
+
+  <!-- ========================================================
+       MODAL: FULL 360° DIORAMA CLOCHE INSPECTOR
+       ======================================================== -->
   <div id="inspectorModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-midnight-deep/90 backdrop-blur-xl">
-    <div class="palace-glass-heavy rounded-3xl border border-gold-500/40 p-6 sm:p-8 max-w-lg w-full space-y-5 text-center relative">
-      <button onclick="closeDioramaInspector()" class="absolute top-4 right-4 text-ivory/60 hover:text-gold-300 text-xl">✕</button>
+    <div class="palace-glass-heavy rounded-3xl border border-gold-500/40 p-6 sm:p-8 max-w-lg w-full space-y-5 text-center relative shadow-2xl">
+      <button onclick="closeDioramaInspector()" class="absolute top-4 right-4 text-ivory/60 hover:text-gold-300 text-xl font-bold">✕</button>
       
       <span class="px-3 py-1 rounded-full bg-gold-500/20 text-gold-300 font-mono text-[10px] uppercase">360° Diorama Cloche Inspection</span>
-      <h3 class="text-2xl font-serif font-black text-ivory" id="modalProductTitle">Baby Bear Orthopedic Sneaker</h3>
+      <h3 class="text-2xl font-serif font-black text-ivory" id="modalProductTitle">Baby Bear Sneakers</h3>
       
-      <div class="w-56 h-56 mx-auto rounded-full border-2 border-gold-500/60 relative flex items-center justify-center bg-midnight/90 shadow-[0_0_60px_rgba(214,167,92,0.3)]">
-        <div id="modal3DItem" class="text-7xl transition-transform duration-300">🧸</div>
+      <!-- Rotating Cloche Sphere -->
+      <div class="w-60 h-60 mx-auto rounded-full border-2 border-gold-500/60 relative flex items-center justify-center bg-midnight/90 shadow-[0_0_60px_rgba(214,167,92,0.3)] overflow-hidden">
+        <div id="modal3DItem" class="transition-transform duration-300 w-44 h-44 flex items-center justify-center">
+          <img id="modalProductImg" src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=500&auto=format&fit=crop&q=80" alt="Inspected Product" class="max-h-36 object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.9)]" />
+        </div>
       </div>
 
+      <!-- Size Selector in Modal -->
+      <div class="flex items-center justify-center gap-2 pt-1 font-mono text-xs">
+        <span class="text-ivory/60 mr-1">Size:</span>
+        <button onclick="selectModalSize(this, '18')" class="modal-size-pill px-3 py-1 rounded-lg border border-gold-500/20 text-ivory/80">18</button>
+        <button onclick="selectModalSize(this, '20')" class="modal-size-pill px-3 py-1 rounded-lg border border-gold-500/40 text-gold-300 bg-sapphire font-bold">20</button>
+        <button onclick="selectModalSize(this, '22')" class="modal-size-pill px-3 py-1 rounded-lg border border-gold-500/20 text-ivory/80">22</button>
+        <button onclick="selectModalSize(this, '24')" class="modal-size-pill px-3 py-1 rounded-lg border border-gold-500/20 text-ivory/80">24</button>
+      </div>
+
+      <!-- Modal Controls -->
       <div class="flex items-center justify-center gap-3 font-mono text-xs">
-        <button onclick="rotateModalItem(-45)" class="px-4 py-2 rounded-xl bg-sapphire text-gold-300 hover:bg-gold-500 hover:text-midnight">⟲ Turn -45°</button>
-        <button onclick="rotateModalItem(45)" class="px-4 py-2 rounded-xl bg-sapphire text-gold-300 hover:bg-gold-500 hover:text-midnight">⟳ Turn +45°</button>
+        <button onclick="rotateModalItem(-45)" class="px-4 py-2 rounded-xl bg-sapphire text-gold-300 hover:bg-gold-500 hover:text-midnight border border-gold-500/30">⟲ Turn -45°</button>
+        <button onclick="rotateModalItem(45)" class="px-4 py-2 rounded-xl bg-sapphire text-gold-300 hover:bg-gold-500 hover:text-midnight border border-gold-500/30">⟳ Turn +45°</button>
       </div>
 
-      <button id="modalBuyBtn" onclick="addToBag('Baby Bear Sneakers', 1999, '20'); closeDioramaInspector();" class="w-full py-3.5 gold-btn rounded-xl font-cinzel text-xs uppercase tracking-widest shadow-xl">
-        Add Specimen to Bag (Rs. 1,999 + Rs. 350 COD)
+      <button id="modalBuyBtn" onclick="addModalItemToBag()" class="w-full py-3.5 gold-btn rounded-xl font-cinzel text-xs uppercase tracking-widest shadow-xl flex items-center justify-center gap-2">
+        <i class="fa-solid fa-bag-shopping"></i> Add Specimen to Bag (Rs. 1,999)
       </button>
     </div>
   </div>
 
-  <!-- SHOPPING BAG DRAWER -->
-  <div id="bagBackdrop" class="hidden fixed inset-0 bg-midnight-deep/80 backdrop-blur-md z-50" onclick="toggleBagDrawer(false)"></div>
-  <aside id="bagDrawer" class="fixed top-0 right-0 bottom-0 w-full max-w-md bg-midnight-deep/95 border-l border-gold-500/30 z-50 shadow-2xl translate-x-full transition-transform duration-300 flex flex-col">
+  <!-- ========================================================
+       SHOPPING BAG (CART DRAWER)
+       ======================================================== -->
+  <div id="bagBackdrop" class="hidden fixed inset-0 bg-midnight-deep/80 backdrop-blur-md z-50 transition-opacity" onclick="toggleBagDrawer(false)"></div>
+  <aside id="bagDrawer" class="fixed top-0 right-0 bottom-0 w-full max-w-md bg-midnight-deep/95 border-l border-gold-500/30 z-50 shadow-2xl translate-x-full transition-transform duration-300 flex flex-col font-sans">
     <div class="p-5 border-b border-gold-500/20 flex items-center justify-between bg-midnight">
       <div class="flex items-center gap-2">
         <i class="fa-solid fa-crown text-gold-400"></i>
@@ -488,10 +625,12 @@
       <button onclick="toggleBagDrawer(false)" class="w-8 h-8 rounded-full palace-glass hover:bg-gold-500 hover:text-midnight text-ivory/70 flex items-center justify-center font-bold">×</button>
     </div>
 
+    <!-- Bag Items -->
     <div id="bagItemList" class="flex-1 overflow-y-auto p-5 space-y-3 font-mono text-xs">
-      <!-- Items via JS -->
+      <!-- Injected via JS -->
     </div>
 
+    <!-- Bag Footer -->
     <div class="p-5 border-t border-gold-500/20 bg-midnight space-y-3 font-mono text-xs shrink-0">
       <div class="flex justify-between">
         <span>Subtotal:</span>
@@ -506,128 +645,313 @@
         <span id="bagGrandTotal">Rs. 350</span>
       </div>
 
+      <!-- Customer Checkout Details -->
       <div class="space-y-2 pt-2">
         <input type="text" id="custName" placeholder="Full Name" class="w-full px-3 py-2 rounded-lg bg-midnight-deep border border-gold-500/30 text-ivory outline-none text-xs" />
         <input type="tel" id="custPhone" placeholder="WhatsApp Number" class="w-full px-3 py-2 rounded-lg bg-midnight-deep border border-gold-500/30 text-ivory outline-none text-xs" />
         <input type="text" id="custCity" placeholder="City & Shipping Address" class="w-full px-3 py-2 rounded-lg bg-midnight-deep border border-gold-500/30 text-ivory outline-none text-xs" />
       </div>
 
-      <button id="btnCheckout" onclick="submitOrder()" class="w-full py-3.5 gold-btn rounded-xl font-cinzel font-bold text-xs uppercase tracking-widest shadow-xl">
-        Place Order (Rs. 350 COD)
+      <button id="btnCheckout" onclick="submitOrder()" class="w-full py-3.5 gold-btn rounded-xl font-cinzel font-bold text-xs uppercase tracking-widest shadow-xl flex items-center justify-center gap-2">
+        <i class="fa-solid fa-lock"></i> Place Order (Rs. 350 COD)
       </button>
     </div>
   </aside>
 
   <!-- ========================================================
-       JAVASCRIPT: SUPABASE REAL PRODUCTS + BGM + 20S CYCLE
+       MASTER JAVASCRIPT LOGIC
        ======================================================== -->
   <script>
     // ------------------------------------------------------------------
-    // 1. SUPABASE CLIENT & LIVE PRODUCTS FETCH
+    // 1. SUPABASE CLIENT & LIVE CURATED PRODUCT REPOSITORY
     // ------------------------------------------------------------------
     const SUPABASE_URL = "https://yyapzlhdnyduonrekiwe.supabase.co";
     const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5YXB6bGhkbnlkdW9ucmVraXdlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQzODA3MDYsImV4cCI6MjEwOTk1NjcwNn0.YMdQBz0h9sekPQV-crgmRHrGl96RfNj0xymXD6r4rBE";
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    // Default Curated Fallback Products (Used if Supabase is initializing or table empty)
-    const defaultProducts = [
-      { id: "db1", title: "Baby Bear Sneakers", category: "Baby", price: 1999, emoji: "🧸", tag: "New", rating: "4.9", image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&auto=format&fit=crop&q=80", desc: "Cloud-cushion EVA outsole with anti-slip micro traction." },
-      { id: "db2", title: "Girls Velvet Bow Shoes", category: "Baby", price: 1799, emoji: "🎀", tag: "Hot", rating: "4.8", image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=600&auto=format&fit=crop&q=80", desc: "Princess blush velvet with hypoallergenic memory insole." },
-      { id: "db3", title: "Kids Sport Shoes", category: "Kids", price: 2299, emoji: "👟", tag: "Best Seller", rating: "5.0", image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600&auto=format&fit=crop&q=80", desc: "Dynamic energy-return bounce sole with quick-strap." },
-      { id: "db4", title: "Baby Breathable Sandals", category: "Baby", price: 1699, emoji: "👡", tag: "Cool Air", rating: "4.7", image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&auto=format&fit=crop&q=80", desc: "Open-air ergonomic sandals for gentle first steps." },
-      { id: "db5", title: "Combed Cotton Royal Polo", category: "Garments", price: 2450, emoji: "👕", tag: "100% Pima", rating: "4.9", image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=600&auto=format&fit=crop&q=80", desc: "Mercerized breathable jersey polo shirt." },
-      { id: "db6", title: "Royal Azure 1000TC Bedset", category: "Bedsheet", price: 4850, emoji: "🛏️", tag: "Signature", rating: "5.0", image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=600&auto=format&fit=crop&q=80", desc: "Sovereign navy blue embroidered 1000 thread-count cotton." }
+    // 8 Master Products matching the visual reference board
+    const masterCuratedProducts = [
+      {
+        id: "p1",
+        title: "Baby Bear Sneakers",
+        category: "Baby Shoes",
+        price: 1999,
+        tag: "New",
+        subbadge: "KHM SoftGrip",
+        rating: "4.9",
+        image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=500&auto=format&fit=crop&q=80",
+        desc: "Orthopedic cloud-cushion soles with playful baby bear design."
+      },
+      {
+        id: "p2",
+        title: "Girls Bow Shoes",
+        category: "Baby Shoes",
+        price: 1799,
+        tag: "Hot",
+        subbadge: "Princess Comfort",
+        rating: "4.8",
+        image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=500&auto=format&fit=crop&q=80",
+        desc: "Princess blush soft sole with gentle stretch ribbon bow."
+      },
+      {
+        id: "p3",
+        title: "Kids TurboFlex Sport Shoes",
+        category: "Baby Shoes",
+        price: 2299,
+        tag: "Best Seller",
+        subbadge: "TurboFlex Active",
+        rating: "5.0",
+        image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&auto=format&fit=crop&q=80",
+        desc: "High-traction bounce sneakers for active little champions."
+      },
+      {
+        id: "p4",
+        title: "Baby Summer Sandals",
+        category: "Baby Shoes",
+        price: 1699,
+        tag: "Cool Air",
+        subbadge: "Breathable Grip",
+        rating: "4.7",
+        image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=500&auto=format&fit=crop&q=80",
+        desc: "Ultra-breathable open ergonomic straps for tender first steps."
+      },
+      {
+        id: "p5",
+        title: "Royal Pique Combed Cotton Polo",
+        category: "Garments",
+        price: 1499,
+        tag: "100% Organic",
+        subbadge: "Long-Staple Cotton",
+        rating: "4.9",
+        image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500&auto=format&fit=crop&q=80",
+        desc: "240 GSM pre-shrunk mercerized combed cotton with sovereign gold buttons."
+      },
+      {
+        id: "p6",
+        title: "600TC Egyptian Satin Bedset",
+        category: "Bedsheets",
+        price: 3499,
+        tag: "Royal Suite",
+        subbadge: "600 Thread Count",
+        rating: "5.0",
+        image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=500&auto=format&fit=crop&q=80",
+        desc: "Silky 600-thread count Egyptian sateen palace weave with 2 pillow shams."
+      },
+      {
+        id: "p7",
+        title: "Imperial Damask Velvet Cushion",
+        category: "Home Living",
+        price: 2199,
+        tag: "Artisan",
+        subbadge: "Gold Bullion Fringe",
+        rating: "4.8",
+        image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=500&auto=format&fit=crop&q=80",
+        desc: "Sovereign embroidered plush velvet cushion with metallic bullion cord."
+      },
+      {
+        id: "p8",
+        title: "Cozy Knitted Baby Booties",
+        category: "Baby Shoes",
+        price: 1399,
+        tag: "Pure Wool",
+        subbadge: "Gentle Warmth",
+        rating: "4.9",
+        image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=500&auto=format&fit=crop&q=80",
+        desc: "Handcrafted cashmere wool booties with hypoallergenic lining."
+      }
     ];
 
-    let allLoadedProducts = [...defaultProducts];
+    let currentProductsList = [...masterCuratedProducts];
+    let activeClocheProduct = masterCuratedProducts[0];
+    let selectedSizesState = {};
 
-    async function fetchSupabaseProducts() {
-      const badge = document.getElementById('supabaseStatusBadge');
+    async function loadProductsFromSupabase() {
       try {
         const { data, error } = await supabaseClient.from('products').select('*');
-        if (error || !data || data.length === 0) {
-          badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400"></span> Supabase: Ready (Curated Cache)`;
-          badge.className = "inline-flex items-center gap-1.5 text-emerald-400 text-[10px]";
-          renderProducts(defaultProducts);
-        } else {
-          badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Supabase: ${data.length} Live Cloud Products`;
-          badge.className = "inline-flex items-center gap-1.5 text-emerald-400 text-[10px]";
-          // Map supabase items to expected format
-          allLoadedProducts = data.map((item, idx) => ({
-            id: item.id || 'sp_' + idx,
-            title: item.title || item.name || 'Palace Product',
+        if (!error && data && data.length > 0) {
+          const mapped = data.map((item, idx) => ({
+            id: item.id || `sp_${idx}`,
+            title: item.title || item.name || 'Palace Specimen',
+            category: item.category || 'Curated',
             price: Number(item.price) || 1999,
-            category: item.category || 'Luxury',
-            image: item.image || item.image_url || defaultProducts[idx % defaultProducts.length].image,
-            desc: item.description || 'Exclusive luxury collection piece.',
-            tag: item.tag || 'In Stock',
+            tag: item.tag || 'Cloud Item',
+            subbadge: item.category || 'KHM Edition',
             rating: item.rating || '4.9',
-            emoji: '👑'
+            image: item.image || item.image_url || masterCuratedProducts[idx % masterCuratedProducts.length].image,
+            desc: item.description || 'Exclusive luxury comfort edition.'
           }));
-          renderProducts(allLoadedProducts);
+          currentProductsList = [...mapped, ...masterCuratedProducts];
+          document.getElementById('supabaseStatusBadge').innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Supabase: ${data.length} Live Cloud Items Synced`;
         }
-      } catch (err) {
-        badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400"></span> Supabase: Ready (Curated Mode)`;
-        badge.className = "inline-flex items-center gap-1.5 text-emerald-400 text-[10px]";
-        renderProducts(defaultProducts);
-      }
+      } catch (e) {}
+      renderProductsGrid(currentProductsList);
     }
 
-    function renderProducts(list) {
-      const grid = document.getElementById('liveProductGrid');
+    function renderProductsGrid(list) {
+      const container = document.getElementById('liveProductGrid');
       if (!list || list.length === 0) {
-        grid.innerHTML = `<div class="col-span-full py-12 text-center text-ivory/50 font-mono text-xs">No products found in this chamber.</div>`;
+        container.innerHTML = `<div class="col-span-full py-12 text-center font-mono text-ivory/50">No products found in this chamber.</div>`;
         return;
       }
 
-      grid.innerHTML = list.map((item, idx) => `
-        <div class="pavilion-card palace-glass-heavy border border-gold-500/30 p-5 flex flex-col justify-between group">
-          <div class="flex flex-col items-center text-center">
-            <span class="self-end px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 font-mono text-[9px] uppercase">${item.tag || 'Verified'}</span>
-            <div class="w-full h-36 rounded-2xl bg-midnight/80 border border-gold-500/20 flex items-center justify-center p-2 mb-3 relative overflow-hidden">
-              <img src="${item.image}" alt="${item.title}" class="max-h-32 object-contain group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null;this.parentElement.innerHTML='<span class=\\'text-5xl\\'>${item.emoji || '👑'}</span>';" />
-              <span class="absolute bottom-1 px-2 py-0.5 rounded bg-midnight/90 text-gold-300 font-mono text-[9px]">${item.category || 'KHM Collection'}</span>
-            </div>
-            <h4 class="font-serif font-bold text-base text-ivory mb-1 line-clamp-1">${item.title}</h4>
-            <div class="text-xs text-amber-400 mb-1">★★★★★ (${item.rating || '4.9'})</div>
-            <div class="font-serif font-black text-gold-300 text-lg mb-3">Rs. ${item.price.toLocaleString()}</div>
-            
-            <div class="flex items-center gap-1.5 mb-4">
-              <span class="px-2 py-0.5 rounded bg-sapphire text-gold-300 border border-gold-500/30 text-[10px] font-mono">18</span>
-              <span class="px-2 py-0.5 rounded bg-sapphire text-gold-300 border border-gold-500/30 text-[10px] font-mono">20</span>
-              <span class="px-2 py-0.5 rounded bg-sapphire text-gold-300 border border-gold-500/30 text-[10px] font-mono">22</span>
-              <span class="px-2 py-0.5 rounded bg-sapphire text-gold-300 border border-gold-500/30 text-[10px] font-mono">24</span>
-            </div>
-          </div>
+      container.innerHTML = list.map((item) => {
+        const curSize = selectedSizesState[item.id] || "20";
+        return `
+          <div class="pavilion-card palace-glass-heavy border border-gold-500/30 p-5 flex flex-col justify-between group transition-all">
+            <div class="flex flex-col items-center text-center">
+              <div class="w-full flex items-center justify-between text-[9px] font-mono mb-2">
+                <button onclick='openDioramaInspector(${JSON.stringify(item).replace(/'/g, "&apos;")})' class="px-2 py-0.5 rounded bg-gold-500/10 hover:bg-gold-500 hover:text-midnight border border-gold-500/30 text-gold-300 flex items-center gap-1 transition-colors">
+                  <i class="fa-solid fa-cube"></i> Inspect
+                </button>
+                <span class="px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 uppercase">${item.tag || 'Exclusive'}</span>
+              </div>
 
-          <div class="grid grid-cols-2 gap-2">
-            <button onclick="addToBag('${item.title.replace(/'/g, "\\'")}', ${item.price}, '20')" class="py-2.5 rounded-xl gold-btn font-cinzel text-xs uppercase tracking-wider">
-              Add
-            </button>
-            <a href="https://wa.me/923049141244?text=${encodeURIComponent('Assalam-o-Alaikum, I want to order ' + item.title + ' (Rs. ' + item.price + ')')}" target="_blank" class="py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-cinzel text-xs uppercase tracking-wider flex items-center justify-center gap-1">
-              <i class="fa-brands fa-whatsapp text-xs"></i> Quick Buy
-            </a>
+              <!-- Product Image Pod -->
+              <div class="w-full h-36 rounded-2xl bg-midnight/80 border border-gold-500/20 flex items-center justify-center p-3 mb-3 relative overflow-hidden group-hover:border-gold-500/50 transition-colors cursor-pointer" onclick='openDioramaInspector(${JSON.stringify(item).replace(/'/g, "&apos;")})'>
+                <img src="${item.image}" alt="${item.title}" class="max-h-28 object-contain group-hover:scale-110 transition-transform duration-500" />
+                <span class="absolute bottom-1 px-2 py-0.5 rounded bg-midnight/90 text-gold-300 font-mono text-[9px]">${item.subbadge || item.category}</span>
+              </div>
+
+              <h4 class="font-serif font-bold text-base text-ivory mb-1 line-clamp-1">${item.title}</h4>
+              <div class="text-xs text-amber-400 mb-1">★★★★★ (${item.rating || '4.9'})</div>
+              <div class="font-serif font-black text-gold-300 text-lg mb-3">Rs. ${item.price.toLocaleString()}</div>
+              
+              <!-- Real Interactive Size Pills -->
+              <div class="flex items-center gap-1.5 mb-4">
+                ${['18','20','22','24'].map(sz => `
+                  <button onclick="pickProductSize('${item.id}', '${sz}')" class="size-btn-${item.id} px-2 py-0.5 rounded ${curSize === sz ? 'bg-gold-500 text-midnight font-bold' : 'bg-sapphire text-gold-300'} border border-gold-500/30 text-[10px] font-mono hover:border-gold-400 transition-colors">
+                    ${sz}
+                  </button>
+                `).join('')}
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="grid grid-cols-2 gap-2">
+              <button onclick="addToBag('${item.title.replace(/'/g, "\\'")}', ${item.price}, selectedSizesState['${item.id}'] || '20', '${item.image}')" class="py-2.5 rounded-xl gold-btn font-cinzel text-xs uppercase tracking-wider flex items-center justify-center gap-1">
+                <i class="fa-solid fa-cart-plus text-xs"></i> Add
+              </button>
+              <a href="https://wa.me/923049141244?text=${encodeURIComponent('Assalam-o-Alaikum, I want to order ' + item.title + ' (Size: ' + (selectedSizesState[item.id] || '20') + ', Rs. ' + item.price + ')')}" target="_blank" class="py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-cinzel text-xs uppercase tracking-wider flex items-center justify-center gap-1 transition-colors">
+                <i class="fa-brands fa-whatsapp text-xs"></i> Quick Buy
+              </a>
+            </div>
           </div>
-        </div>
-      `).join('');
+        `;
+      }).join('');
     }
 
-    function filterCategory(cat) {
-      document.querySelectorAll('.cat-pill').forEach(btn => {
-        btn.className = "cat-pill px-3 py-1 rounded-full text-xs font-cinzel font-bold palace-glass text-ivory/80 hover:text-gold-300";
+    function pickProductSize(productId, size) {
+      selectedSizesState[productId] = size;
+      document.querySelectorAll(`.size-btn-${productId}`).forEach(btn => {
+        if (btn.innerText.trim() === size) {
+          btn.className = `size-btn-${productId} px-2 py-0.5 rounded bg-gold-500 text-midnight font-bold border border-gold-500/30 text-[10px] font-mono`;
+        } else {
+          btn.className = `size-btn-${productId} px-2 py-0.5 rounded bg-sapphire text-gold-300 border border-gold-500/30 text-[10px] font-mono`;
+        }
       });
-      event.target.className = "cat-pill px-3 py-1 rounded-full text-xs font-cinzel font-bold bg-gold-500 text-midnight shadow";
+    }
 
-      if (cat === 'All') {
-        renderProducts(allLoadedProducts);
+    function filterCategory(btnEl, categoryKey) {
+      document.querySelectorAll('.cat-pill').forEach(b => {
+        b.className = "cat-pill px-4 py-1.5 rounded-full text-xs font-cinzel font-bold palace-glass text-ivory/80 hover:text-gold-300";
+      });
+      if (btnEl) btnEl.className = "cat-pill px-4 py-1.5 rounded-full text-xs font-cinzel font-bold bg-gold-500 text-midnight shadow";
+
+      if (categoryKey === 'All') {
+        renderProductsGrid(currentProductsList);
+        document.getElementById('productSectionTitle').innerText = "All Master Collections";
       } else {
-        const filtered = allLoadedProducts.filter(p => (p.category && p.category.toLowerCase().includes(cat.toLowerCase())) || (p.title && p.title.toLowerCase().includes(cat.toLowerCase())));
-        renderProducts(filtered.length > 0 ? filtered : allLoadedProducts);
+        const filtered = currentProductsList.filter(p => p.category.toLowerCase().includes(categoryKey.toLowerCase()) || p.title.toLowerCase().includes(categoryKey.toLowerCase()));
+        renderProductsGrid(filtered.length > 0 ? filtered : currentProductsList);
+        document.getElementById('productSectionTitle').innerText = `${categoryKey} Collection`;
       }
     }
 
+    function dynamicFilter(categoryKey) {
+      scrollToSection('productsSection');
+      const targetBtn = Array.from(document.querySelectorAll('.cat-pill')).find(b => b.innerText.toLowerCase().includes(categoryKey.toLowerCase()));
+      filterCategory(targetBtn, categoryKey);
+    }
+
+    function openSupabaseLiveCatalog() {
+      dynamicFilter('All');
+    }
+
     // ------------------------------------------------------------------
-    // 2. DYNAMIC BACKGROUND RANDOM CHANGER EVERY 20 SECONDS
+    // 2. 3D CLOCHE DIORAMA ROTATION & INSPECTION
+    // ------------------------------------------------------------------
+    let dioramaAngle = 0;
+    let modalAngle = 0;
+    let isAutoSpinning = false;
+    let currentModalProduct = masterCuratedProducts[0];
+    let modalSelectedSize = "20";
+
+    function rotateDiorama(delta) {
+      dioramaAngle += delta;
+      document.getElementById('diorama3DObject').style.transform = `rotate(${dioramaAngle}deg) scale(1.08)`;
+      document.getElementById('angleReadout').innerText = `Angle: ${dioramaAngle}°`;
+    }
+
+    function toggleAutoSpin() {
+      isAutoSpinning = !isAutoSpinning;
+      const obj = document.getElementById('diorama3DObject');
+      const btn = document.getElementById('autoSpinBtn');
+      if (isAutoSpinning) {
+        obj.classList.add('auto-spin-active');
+        btn.classList.add('bg-gold-500', 'text-midnight');
+      } else {
+        obj.classList.remove('auto-spin-active');
+        btn.classList.remove('bg-gold-500', 'text-midnight');
+      }
+    }
+
+    function cycleClocheSample() {
+      const randomIdx = Math.floor(Math.random() * masterCuratedProducts.length);
+      activeClocheProduct = masterCuratedProducts[randomIdx];
+      document.getElementById('dioramaMainImg').src = activeClocheProduct.image;
+      document.getElementById('clocheSubtitle').innerText = `Active Chamber: ${activeClocheProduct.title}`;
+    }
+
+    function openDioramaInspector(product) {
+      currentModalProduct = product || activeClocheProduct;
+      document.getElementById('modalProductTitle').innerText = currentModalProduct.title;
+      document.getElementById('modalProductImg').src = currentModalProduct.image;
+      document.getElementById('modalBuyBtn').innerHTML = `<i class="fa-solid fa-bag-shopping mr-1"></i> Add Specimen to Bag (Rs. ${currentModalProduct.price.toLocaleString()})`;
+      modalAngle = 0;
+      document.getElementById('modal3DItem').style.transform = `rotate(0deg) scale(1)`;
+      document.getElementById('inspectorModal').classList.remove('hidden');
+    }
+
+    function closeDioramaInspector() {
+      document.getElementById('inspectorModal').classList.add('hidden');
+    }
+
+    function rotateModalItem(delta) {
+      modalAngle += delta;
+      document.getElementById('modal3DItem').style.transform = `rotate(${modalAngle}deg) scale(1.15)`;
+    }
+
+    function selectModalSize(btn, sz) {
+      modalSelectedSize = sz;
+      document.querySelectorAll('.modal-size-pill').forEach(b => {
+        b.className = "modal-size-pill px-3 py-1 rounded-lg border border-gold-500/20 text-ivory/80";
+      });
+      btn.className = "modal-size-pill px-3 py-1 rounded-lg border border-gold-500/40 text-gold-300 bg-sapphire font-bold";
+    }
+
+    function addModalItemToBag() {
+      addToBag(currentModalProduct.title, currentModalProduct.price, modalSelectedSize, currentModalProduct.image);
+      closeDioramaInspector();
+      toggleBagDrawer(true);
+    }
+
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // ------------------------------------------------------------------
+    // 3. DYNAMIC PALACE AMBIANCE (EVERY 20 SECONDS)
     // ------------------------------------------------------------------
     const palaceThemes = [
       { name: "Grand Gilded Dome", gradient: "radial-gradient(circle at 50% 30%, #152744 0%, #071426 50%, #030e20 100%)" },
@@ -638,8 +962,6 @@
     ];
 
     let currentLayerIndex = 0;
-    let countdownSec = 20;
-
     function changeBackgroundRandom() {
       const nextIndex = Math.floor(Math.random() * palaceThemes.length);
       const nextTheme = palaceThemes[nextIndex];
@@ -656,31 +978,19 @@
         nextLayer.classList.add('active');
         activeLayer.classList.remove('active');
         currentLayerIndex = nextLayerIdx;
-
-        document.getElementById('bgThemeName').innerText = nextTheme.name;
-        countdownSec = 20;
       }
     }
 
-    // Background Timer Loop (Every 20 Seconds)
-    setInterval(() => {
-      countdownSec--;
-      const countEl = document.getElementById('bgTimerCount');
-      if (countEl) countEl.innerText = countdownSec;
-      if (countdownSec <= 0) {
-        changeBackgroundRandom();
-      }
-    }, 1000);
+    // 20s Interval Ambiance Shift
+    setInterval(changeBackgroundRandom, 20000);
 
     // ------------------------------------------------------------------
-    // 3. AUTHENTIC ISLAMIC AMBIENT BGM LOGIC
+    // 4. AUTHENTIC ISLAMIC AMBIENT BGM
     // ------------------------------------------------------------------
     const audio = document.getElementById('bgmAudio');
     const bgmStatusText = document.getElementById('bgmStatusText');
     const eqContainer = document.getElementById('eqContainer');
     let isAudioPlaying = false;
-
-    // Subtle gentle volume
     audio.volume = 0.15;
 
     function toggleAudio() {
@@ -692,74 +1002,53 @@
       } else {
         audio.play().then(() => {
           isAudioPlaying = true;
-          bgmStatusText.innerText = "Islamic Oud BGM: Playing";
+          bgmStatusText.innerText = "Islamic Oud BGM: Active";
           eqContainer.classList.remove('eq-paused');
-        }).catch(err => {
-          console.log("Audio autoplay prevented by browser:", err);
-        });
+        }).catch(e => console.log("User interaction required for audio"));
       }
     }
 
-    // Smooth single-click initial launch
-    window.addEventListener('click', function autoStartOnFirstClick() {
+    window.addEventListener('click', function firstClickAudio() {
       if (!isAudioPlaying) {
         audio.play().then(() => {
           isAudioPlaying = true;
-          bgmStatusText.innerText = "Islamic Oud BGM: Playing";
+          bgmStatusText.innerText = "Islamic Oud BGM: Active";
           eqContainer.classList.remove('eq-paused');
         }).catch(() => {});
       }
-      window.removeEventListener('click', autoStartOnFirstClick);
+      window.removeEventListener('click', firstClickAudio);
     }, { once: true });
 
     // ------------------------------------------------------------------
-    // 4. 3D ROTATION & INSPECTION
-    // ------------------------------------------------------------------
-    let currentAngle = 0;
-    function rotateDiorama(delta) {
-      currentAngle += delta;
-      document.getElementById('diorama3DObject').style.transform = `rotate(${currentAngle}deg) scale(1.1)`;
-      document.getElementById('angleReadout').innerText = `Angle: ${currentAngle}°`;
-    }
-
-    let modalAngle = 0;
-    function rotateModalItem(delta) {
-      modalAngle += delta;
-      document.getElementById('modal3DItem').style.transform = `rotate(${modalAngle}deg) scale(1.15)`;
-    }
-
-    function openDioramaInspector() {
-      document.getElementById('inspectorModal').classList.remove('hidden');
-    }
-    function closeDioramaInspector() {
-      document.getElementById('inspectorModal').classList.add('hidden');
-    }
-
-    function scrollToSection(id) {
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    // ------------------------------------------------------------------
-    // 5. SHOPPING BAG & SUPABASE ORDER SUBMISSION
+    // 5. SHOPPING BAG & SUPABASE COD CHECKOUT
     // ------------------------------------------------------------------
     const SHIPPING_FEE = 350;
     const STORE_WHATSAPP = "923049141244";
     const STORE_EMAIL = "easicarts@gmail.com";
 
     let bag = [
-      { id: "p1", title: "Baby Bear Sneakers", price: 1999, size: "20", qty: 1 }
+      { id: "cart_1", title: "Baby Bear Sneakers", price: 1999, size: "20", qty: 1, image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=400&auto=format&fit=crop&q=80" },
+      { id: "cart_2", title: "600TC Egyptian Satin Bedset", price: 3499, size: "King", qty: 1, image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=400&auto=format&fit=crop&q=80" }
     ];
 
-    function addToBag(title, price, size) {
+    function addToBag(title, price, size = "20", image = "") {
+      const fallbackImg = image || "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=400&auto=format&fit=crop&q=80";
       const found = bag.find(i => i.title === title && i.size === size);
       if (found) {
         found.qty += 1;
       } else {
-        bag.push({ id: 'item_' + Date.now(), title, price: Number(price), size, qty: 1 });
+        bag.push({ id: `item_${Date.now()}`, title, price: Number(price), size, qty: 1, image: fallbackImg });
       }
       updateBagUI();
       toggleBagDrawer(true);
+    }
+
+    function changeBagQty(idx, delta) {
+      if (bag[idx]) {
+        bag[idx].qty += delta;
+        if (bag[idx].qty <= 0) bag.splice(idx, 1);
+        updateBagUI();
+      }
     }
 
     function removeBagItem(idx) {
@@ -772,20 +1061,26 @@
       document.getElementById('cartBadge').innerText = totalQty;
 
       const subtotal = bag.reduce((sum, i) => sum + (i.price * i.qty), 0);
-      const grandTotal = subtotal + SHIPPING_FEE;
+      const grandTotal = subtotal + (bag.length > 0 ? SHIPPING_FEE : 0);
 
       const list = document.getElementById('bagItemList');
       if (bag.length === 0) {
-        list.innerHTML = `<div class="py-12 text-center text-ivory/50">Your bag is empty</div>`;
+        list.innerHTML = `<div class="py-12 text-center text-ivory/50">Your palace bag is empty</div>`;
       } else {
         list.innerHTML = bag.map((item, idx) => `
-          <div class="flex items-center justify-between p-3 rounded-xl palace-glass border border-gold-500/20">
-            <div>
-              <div class="font-serif font-bold text-ivory">${item.title}</div>
-              <div class="text-[10px] text-ivory/60">Size: ${item.size} • Qty: ${item.qty}</div>
-              <div class="text-gold-300 font-bold">Rs. ${(item.price * item.qty).toLocaleString()}</div>
+          <div class="flex items-center gap-3 p-3 rounded-xl palace-glass border border-gold-500/20 font-mono">
+            <img src="${item.image}" alt="${item.title}" class="w-12 h-12 rounded-lg object-cover bg-midnight border border-gold-500/30" />
+            <div class="flex-1 min-w-0">
+              <div class="font-serif font-bold text-ivory truncate text-xs">${item.title}</div>
+              <div class="text-[10px] text-ivory/60">Size: ${item.size}</div>
+              <div class="text-gold-300 font-bold text-xs">Rs. ${(item.price * item.qty).toLocaleString()}</div>
             </div>
-            <button onclick="removeBagItem(${idx})" class="text-ivory/40 hover:text-rose-400 p-2">
+            <div class="flex items-center gap-1.5">
+              <button onclick="changeBagQty(${idx}, -1)" class="w-6 h-6 rounded bg-sapphire text-gold-300 flex items-center justify-center font-bold text-xs">-</button>
+              <span class="text-xs font-bold text-ivory px-1">${item.qty}</span>
+              <button onclick="changeBagQty(${idx}, 1)" class="w-6 h-6 rounded bg-sapphire text-gold-300 flex items-center justify-center font-bold text-xs">+</button>
+            </div>
+            <button onclick="removeBagItem(${idx})" class="text-ivory/40 hover:text-rose-400 p-1 text-xs ml-1">
               <i class="fa-solid fa-trash-can"></i>
             </button>
           </div>
@@ -810,7 +1105,7 @@
 
     async function submitOrder() {
       if (bag.length === 0) {
-        alert("Bag khali hai!");
+        alert("Bag is empty! Please add products.");
         return;
       }
       const name = document.getElementById('custName').value.trim();
@@ -831,7 +1126,7 @@
       const orderId = "KHM-" + Math.floor(100000 + Math.random() * 900000);
       const itemsSummary = bag.map(i => `• ${i.title} (${i.size}) x${i.qty} = Rs. ${(i.price * i.qty).toLocaleString()}`).join("\n");
 
-      // Direct Supabase Orders Table Record
+      // Save into Supabase 'orders' table
       try {
         await supabaseClient.from('orders').insert([{
           id: orderId,
@@ -846,7 +1141,7 @@
         }]);
       } catch (err) {}
 
-      // WhatsApp VIP Dispatch
+      // WhatsApp VIP Dispatch message
       const waText = `👑 *NEW ORDER - KHM BEDDING V4.0*
 ━━━━━━━━━━━━━━━━━━━━
 *Order ID:* ${orderId}
@@ -872,12 +1167,12 @@ Dispatched to: ${STORE_EMAIL}`;
       window.open(`https://wa.me/${STORE_WHATSAPP}?text=${encodeURIComponent(waText)}`, '_blank');
 
       btn.disabled = false;
-      btn.innerHTML = `Place Order (Rs. 350 COD)`;
+      btn.innerHTML = `<i class="fa-solid fa-lock"></i> Place Order (Rs. 350 COD)`;
     }
 
-    // Initialize Supabase & UI on Load
+    // Initialize on DOM load
     window.addEventListener('DOMContentLoaded', () => {
-      fetchSupabaseProducts();
+      loadProductsFromSupabase();
       updateBagUI();
     });
   </script>
