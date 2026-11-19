@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KHM Bedding | 3D Metaverse Shopping Mall</title>
-  <meta name="description" content="KHM Bedding - Metaverse Shopping Mall. Explore 4 architectural luxury pavilions, 3D cloche inspection, soothing Islamic Oud BGM, and flat Rs. 350 COD across Pakistan." />
+  <meta name="description" content="KHM Bedding - Metaverse Shopping Mall. Explore 4 architectural luxury pavilions, 3D cloche inspection, soothing Islamic Oud BGM, 20s dynamic palace ambiance, and flat Rs. 350 COD across Pakistan." />
 
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -53,6 +53,23 @@
       overflow-x: hidden;
       min-height: 100vh;
       position: relative;
+    }
+
+    /* Dynamic Palace Background Layers (Smooth Crossfade every 20s) */
+    .bg-layer {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -2;
+      opacity: 0;
+      transition: opacity 2.5s cubic-bezier(0.4, 0, 0.2, 1);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .bg-layer.active {
+      opacity: 1;
     }
 
     /* Ambient Overlay Tint */
@@ -143,7 +160,7 @@
       height: 4px !important;
     }
 
-    /* Continuous 3D Auto Spin */
+    /* 3D Auto Spin */
     @keyframes spinY {
       from { transform: rotateY(0deg); }
       to { transform: rotateY(360deg); }
@@ -152,7 +169,7 @@
       animation: spinY 10s infinite linear;
     }
 
-    /* Fullscreen Entrance Gates Curtain */
+    /* Entrance Gates Overlay */
     #entranceOverlay {
       transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -166,16 +183,26 @@
 <body class="font-sans antialiased">
 
   <!-- ========================================================
-       SCENE 1 — CINEMATIC METAVERSE MALL ENTRANCE (MODAL / OVERLAY)
+       1. DYNAMIC AUTO-CHANGING WALLPAPER LAYERS (EVERY 20 SECONDS)
+       ======================================================== -->
+  <div id="bgLayer0" class="bg-layer active" style="background-image: radial-gradient(circle at 50% 30%, #152744 0%, #071426 50%, #030e20 100%);"></div>
+  <div id="bgLayer1" class="bg-layer" style="background-image: radial-gradient(circle at 50% 20%, #2a2012 0%, #121c2e 55%, #030e20 100%);"></div>
+  <div id="bgLayer2" class="bg-layer" style="background-image: radial-gradient(circle at 50% 30%, #142e3b 0%, #071526 55%, #020814 100%);"></div>
+  <div id="bgLayer3" class="bg-layer" style="background-image: radial-gradient(circle at 50% 25%, #291b29 0%, #0d1627 55%, #030e20 100%);"></div>
+  <div id="bgLayer4" class="bg-layer" style="background-image: radial-gradient(circle at 50% 30%, #1f271b 0%, #0a1728 55%, #020914 100%);"></div>
+  <div class="bg-tint-overlay"></div>
+
+  <!-- Sparkles -->
+  <div class="sparkle" style="width:7px;height:7px;left:20%;animation-delay:0s;animation-duration:9s;"></div>
+  <div class="sparkle" style="width:5px;height:5px;left:75%;animation-delay:2s;animation-duration:11s;"></div>
+  <div class="sparkle" style="width:9px;height:9px;left:50%;animation-delay:4s;animation-duration:8s;"></div>
+
+  <!-- ========================================================
+       2. CINEMATIC ENTRANCE GATES OVERLAY
        ======================================================== -->
   <div id="entranceOverlay" class="fixed inset-0 z-50 flex flex-col justify-between items-center bg-[#030e20] p-6 text-center overflow-hidden">
-    <!-- Atmospheric Background Glow -->
     <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(214,167,92,0.18)_0%,rgba(7,20,38,0.95)_55%,#030e20_100%)] pointer-events-none"></div>
-    <div class="sparkle" style="width:7px;height:7px;left:20%;animation-delay:0s;animation-duration:9s;"></div>
-    <div class="sparkle" style="width:5px;height:5px;left:75%;animation-delay:2s;animation-duration:11s;"></div>
-    <div class="sparkle" style="width:9px;height:9px;left:50%;animation-delay:4s;animation-duration:8s;"></div>
 
-    <!-- Entrance Top Bar -->
     <div class="w-full flex items-center justify-between relative z-10 max-w-7xl">
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sapphire to-gold-500/40 border border-gold-500/50 flex items-center justify-center text-gold-300 text-lg shadow-lg">
@@ -193,7 +220,6 @@
       </button>
     </div>
 
-    <!-- Center Grand Entrance Portal -->
     <div class="relative z-10 max-w-3xl space-y-6 my-auto">
       <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full palace-glass border border-gold-500/40 text-gold-300 font-cinzel text-xs tracking-[0.3em] uppercase">
         Sovereign Metaverse Showroom
@@ -212,11 +238,10 @@
           <span>Open Palace Gates &amp; Enter Mall</span>
           <i class="fa-solid fa-arrow-right-long text-sm group-hover:translate-x-1 transition-transform"></i>
         </button>
-        <span class="block text-[11px] font-mono text-ivory/50 mt-3">Touch or click anywhere to commence ambient oud &amp; 3D camera travel</span>
+        <span class="block text-[11px] font-mono text-ivory/50 mt-3">Touch or click anywhere to commence ambient Islamic Oud &amp; 3D flight</span>
       </div>
     </div>
 
-    <!-- Entrance Footer Telemetry -->
     <div class="w-full max-w-7xl flex flex-wrap items-center justify-between text-[11px] font-mono text-ivory/60 relative z-10 border-t border-gold-500/20 pt-4">
       <div class="flex items-center gap-4">
         <span><i class="fa-solid fa-cube text-gold-400 mr-1"></i> 4 Architectural Pavilions</span>
@@ -229,23 +254,14 @@
     </div>
   </div>
 
-  <!-- Ambient Backdrop Overlay -->
-  <div class="bg-tint-overlay"></div>
-
-  <!-- Floating Sparkles in Main Mall -->
-  <div class="sparkle" style="width:6px;height:6px;left:15%;animation-delay:0s;animation-duration:11s;"></div>
-  <div class="sparkle" style="width:4px;height:4px;left:40%;animation-delay:3s;animation-duration:14s;"></div>
-  <div class="sparkle" style="width:8px;height:8px;left:65%;animation-delay:1.5s;animation-duration:12s;"></div>
-  <div class="sparkle" style="width:5px;height:5px;left:85%;animation-delay:5s;animation-duration:10s;"></div>
-
-  <!-- AUTHENTIC ISLAMIC AMBIENT OUD BGM -->
+  <!-- ========================================================
+       3. AUTHENTIC ISLAMIC AMBIENT OUD BGM AUDIO
+       ======================================================== -->
   <audio id="bgmAudio" loop preload="auto">
     <source src="https://cdn.pixabay.com/download/audio/2022/03/24/audio_3d1efc609c.mp3?filename=desert-oasis-middle-eastern-oriental-arabic-ambient-10903.mp3" type="audio/mp3">
   </audio>
 
-  <!-- ========================================================
-       TOP META HUD & STATUS BAR
-       ======================================================== -->
+  <!-- TOP META HUD & STATUS BAR -->
   <div class="bg-midnight-deep/95 border-b border-gold-500/20 text-[11px] py-1.5 px-4 font-mono text-ivory/80 flex flex-wrap justify-between items-center gap-2 relative z-30">
     <div class="flex items-center gap-3">
       <span class="text-gold-400 font-bold uppercase tracking-wider text-[10px]">
@@ -255,7 +271,7 @@
       <span class="text-ivory/70"><i class="fa-solid fa-truck-fast text-emerald-400 mr-1"></i> Flat Nationwide COD Rs. 350</span>
       <span class="hidden sm:inline text-gold-500/40">•</span>
       <span id="supabaseStatusBadge" class="inline-flex items-center gap-1.5 text-emerald-400 text-[10px]">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Supabase Cloud: Ready (Curated Showroom Active)
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Connecting Supabase...
       </span>
     </div>
 
@@ -294,7 +310,6 @@
       </div>
     </div>
 
-    <!-- Navigation Buttons -->
     <nav class="hidden md:flex items-center gap-1 p-1 rounded-2xl palace-glass border border-gold-500/30 font-cinzel text-xs uppercase tracking-wider font-bold">
       <button onclick="scrollToSection('heroSection')" class="px-3.5 py-1.5 rounded-xl bg-gold-500 text-midnight shadow">Showroom</button>
       <button onclick="scrollToSection('pavilionsSection')" class="px-3.5 py-1.5 rounded-xl text-ivory/80 hover:text-gold-300">Pavilions</button>
@@ -304,16 +319,13 @@
       <a href="https://wa.me/923049141244" target="_blank" class="px-3.5 py-1.5 rounded-xl text-ivory/80 hover:text-gold-300">Contact</a>
     </nav>
 
-    <!-- Cart Trigger -->
     <button onclick="toggleBagDrawer(true)" class="relative gold-btn px-4 py-2 rounded-xl font-cinzel text-xs tracking-wider flex items-center gap-2 shadow-xl">
       <i class="fa-solid fa-bag-shopping text-sm"></i>
       <span>Bag (<span id="cartBadge">2</span>)</span>
     </button>
   </header>
 
-  <!-- ========================================================
-       MAIN METAVERSE MALL FLOOR
-       ======================================================== -->
+  <!-- MAIN CONTENT -->
   <main class="max-w-7xl mx-auto px-4 sm:px-6 pt-10 pb-20 space-y-16 relative z-10">
 
     <!-- HERO INTRODUCTION -->
@@ -339,7 +351,7 @@
       </div>
     </section>
 
-    <!-- SCENE 2 — 4 ARCHITECTURAL SHOWROOM PAVILIONS -->
+    <!-- 4 SHOWROOM PAVILIONS -->
     <section id="pavilionsSection" class="space-y-6">
       <div class="flex items-center justify-between">
         <div>
@@ -436,7 +448,7 @@
       </div>
     </section>
 
-    <!-- SCENE 3 & 8 — 3D DIORAMA & CLOCHE INSPECTION -->
+    <!-- 3D DIORAMA & CLOCHE INSPECTION -->
     <section id="dioramaSection" class="palace-glass-heavy rounded-3xl p-6 sm:p-10 border border-gold-500/40 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
       <div class="lg:col-span-6 space-y-4">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-500/15 border border-gold-500/30 text-gold-300 font-mono text-[10px] uppercase">
@@ -459,7 +471,6 @@
         </div>
       </div>
 
-      <!-- Live 3D Cloche Dome Simulation Viewport -->
       <div class="lg:col-span-6 palace-glass rounded-2xl p-6 border border-gold-500/30 flex flex-col items-center justify-center relative overflow-hidden text-center bg-midnight/90">
         <div class="absolute top-3 right-3 text-[10px] font-mono text-emerald-400 flex items-center gap-1.5">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Real-Time 3D Active
@@ -486,14 +497,13 @@
       </div>
     </section>
 
-    <!-- SCENES 4, 5, 6, 7 — LIVE CURATED & SUPABASE PRODUCTS -->
+    <!-- LIVE CURATED & SUPABASE PRODUCTS -->
     <section id="productsSection" class="space-y-6">
       <div class="text-center space-y-2 max-w-xl mx-auto">
         <span class="text-xs font-mono uppercase tracking-[0.2em] text-gold-400">Step Into Happiness</span>
         <h2 class="text-3xl sm:text-4xl font-serif font-black text-ivory" id="productSectionTitle">Baby &amp; Kids Footwear Collection</h2>
         <p class="text-xs text-ivory/60 italic font-serif">Little Steps... Big Dreams...</p>
         
-        <!-- Category Filter Pills -->
         <div class="flex flex-wrap items-center justify-center gap-2 pt-3">
           <button onclick="filterCategory(this, 'All')" class="cat-pill px-4 py-1.5 rounded-full text-xs font-cinzel font-bold bg-gold-500 text-midnight shadow">ALL</button>
           <button onclick="filterCategory(this, 'Baby Shoes')" class="cat-pill px-4 py-1.5 rounded-full text-xs font-cinzel font-bold palace-glass text-ivory/80 hover:text-gold-300">BABY SHOES</button>
@@ -503,12 +513,10 @@
         </div>
       </div>
 
-      <!-- Dynamic Interactive Products Grid (Curated + Live Sync) -->
       <div id="liveProductGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-4">
         <!-- Rendered via JS -->
       </div>
 
-      <!-- Secure Shopping Banner -->
       <div class="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl palace-glass border border-gold-500/20 text-xs font-mono text-ivory/70">
         <div class="flex items-center gap-1.5">
           <button class="w-7 h-7 rounded-lg border border-gold-500/30 flex items-center justify-center hover:bg-gold-500 hover:text-midnight">‹</button>
@@ -556,9 +564,7 @@
 
   </main>
 
-  <!-- ========================================================
-       FOOTER
-       ======================================================== -->
+  <!-- FOOTER -->
   <footer class="palace-glass-heavy border-t border-gold-500/30 pt-12 pb-8 px-4 sm:px-8 mt-20 relative z-10 text-xs">
     <div class="max-w-7xl mx-auto flex flex-col items-center text-center space-y-3 mb-10">
       <div class="w-12 h-12 rounded-full border border-gold-500/40 flex items-center justify-center text-gold-400 text-2xl bg-midnight">
@@ -626,9 +632,7 @@
     </div>
   </footer>
 
-  <!-- ========================================================
-       SCENE 8 — MODAL: 360° DIORAMA CLOCHE PRODUCT STUDIO
-       ======================================================== -->
+  <!-- MODAL: 360° DIORAMA CLOCHE PRODUCT STUDIO -->
   <div id="inspectorModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-midnight-deep/90 backdrop-blur-xl">
     <div class="palace-glass-heavy rounded-3xl border border-gold-500/40 p-6 sm:p-8 max-w-lg w-full space-y-5 text-center relative shadow-2xl">
       <button onclick="closeDioramaInspector()" class="absolute top-4 right-4 text-ivory/60 hover:text-gold-300 text-xl font-bold">✕</button>
@@ -636,14 +640,12 @@
       <span class="px-3 py-1 rounded-full bg-gold-500/20 text-gold-300 font-mono text-[10px] uppercase">360° Diorama Cloche Inspection</span>
       <h3 class="text-2xl font-serif font-black text-ivory" id="modalProductTitle">Baby Bear Sneakers</h3>
       
-      <!-- Rotating Cloche Sphere -->
       <div class="w-60 h-60 mx-auto rounded-full border-2 border-gold-500/60 relative flex items-center justify-center bg-midnight/90 shadow-[0_0_60px_rgba(214,167,92,0.3)] overflow-hidden">
         <div id="modal3DItem" class="transition-transform duration-300 w-44 h-44 flex items-center justify-center">
           <img id="modalProductImg" src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=500&auto=format&fit=crop&q=80" alt="Inspected Product" class="max-h-36 object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.9)]" />
         </div>
       </div>
 
-      <!-- Size Selector in Modal -->
       <div class="flex items-center justify-center gap-2 pt-1 font-mono text-xs">
         <span class="text-ivory/60 mr-1">Size:</span>
         <button onclick="selectModalSize(this, '18')" class="modal-size-pill px-3 py-1 rounded-lg border border-gold-500/20 text-ivory/80">18</button>
@@ -652,7 +654,6 @@
         <button onclick="selectModalSize(this, '24')" class="modal-size-pill px-3 py-1 rounded-lg border border-gold-500/20 text-ivory/80">24</button>
       </div>
 
-      <!-- Modal Controls -->
       <div class="flex items-center justify-center gap-3 font-mono text-xs">
         <button onclick="rotateModalItem(-45)" class="px-4 py-2 rounded-xl bg-sapphire text-gold-300 hover:bg-gold-500 hover:text-midnight border border-gold-500/30">⟲ Turn -45°</button>
         <button onclick="rotateModalItem(45)" class="px-4 py-2 rounded-xl bg-sapphire text-gold-300 hover:bg-gold-500 hover:text-midnight border border-gold-500/30">⟳ Turn +45°</button>
@@ -664,9 +665,7 @@
     </div>
   </div>
 
-  <!-- ========================================================
-       SCENES 9 & 10 — SHOPPING BAG (CART DRAWER & COD CHECKOUT)
-       ======================================================== -->
+  <!-- SHOPPING BAG (CART DRAWER & COD CHECKOUT) -->
   <div id="bagBackdrop" class="hidden fixed inset-0 bg-midnight-deep/80 backdrop-blur-md z-50 transition-opacity" onclick="toggleBagDrawer(false)"></div>
   <aside id="bagDrawer" class="fixed top-0 right-0 bottom-0 w-full max-w-md bg-midnight-deep/95 border-l border-gold-500/30 z-50 shadow-2xl translate-x-full transition-transform duration-300 flex flex-col font-sans">
     <div class="p-5 border-b border-gold-500/20 flex items-center justify-between bg-midnight">
@@ -677,12 +676,10 @@
       <button onclick="toggleBagDrawer(false)" class="w-8 h-8 rounded-full palace-glass hover:bg-gold-500 hover:text-midnight text-ivory/70 flex items-center justify-center font-bold">×</button>
     </div>
 
-    <!-- Bag Items -->
     <div id="bagItemList" class="flex-1 overflow-y-auto p-5 space-y-3 font-mono text-xs">
       <!-- Injected via JS -->
     </div>
 
-    <!-- Bag Footer -->
     <div class="p-5 border-t border-gold-500/20 bg-midnight space-y-3 font-mono text-xs shrink-0">
       <div class="flex justify-between">
         <span>Subtotal:</span>
@@ -697,7 +694,6 @@
         <span id="bagGrandTotal">Rs. 350</span>
       </div>
 
-      <!-- Customer Checkout Details -->
       <div class="space-y-2 pt-2">
         <input type="text" id="custName" placeholder="Full Name" class="w-full px-3 py-2 rounded-lg bg-midnight-deep border border-gold-500/30 text-ivory outline-none text-xs" />
         <input type="tel" id="custPhone" placeholder="WhatsApp Number" class="w-full px-3 py-2 rounded-lg bg-midnight-deep border border-gold-500/30 text-ivory outline-none text-xs" />
@@ -710,13 +706,9 @@
     </div>
   </aside>
 
-  <!-- ========================================================
-       MASTER JAVASCRIPT: SUPABASE & METAVERSE INTERACTION
-       ======================================================== -->
+  <!-- MASTER JS: SUPABASE, 20S CYCLE & BGM -->
   <script>
-    // ------------------------------------------------------------------
-    // 1. SUPABASE CLIENT & LIVE CURATED REPOSITORY
-    // ------------------------------------------------------------------
+    // 1. SUPABASE CLIENT & REAL PRODUCTS
     const SUPABASE_URL = "https://yyapzlhdnyduonrekiwe.supabase.co";
     const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5YXB6bGhkbnlkdW9ucmVraXdlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQzODA3MDYsImV4cCI6MjEwOTk1NjcwNn0.YMdQBz0h9sekPQV-crgmRHrGl96RfNj0xymXD6r4rBE";
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -817,6 +809,7 @@
     let selectedSizesState = {};
 
     async function loadProductsFromSupabase() {
+      const badge = document.getElementById('supabaseStatusBadge');
       try {
         const { data, error } = await supabaseClient.from('products').select('*');
         if (!error && data && data.length > 0) {
@@ -832,9 +825,13 @@
             desc: item.description || 'Exclusive luxury comfort edition.'
           }));
           currentProductsList = [...mapped, ...masterCuratedProducts];
-          document.getElementById('supabaseStatusBadge').innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Supabase: ${data.length} Live Cloud Items Synced`;
+          badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Supabase: ${data.length} Live Cloud Items`;
+        } else {
+          badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400"></span> Supabase Cloud: Ready`;
         }
-      } catch (e) {}
+      } catch (e) {
+        badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400"></span> Supabase Cloud: Ready`;
+      }
       renderProductsGrid(currentProductsList);
     }
 
@@ -857,7 +854,6 @@
                 <span class="px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 uppercase">${item.tag || 'Exclusive'}</span>
               </div>
 
-              <!-- Product Image Pod -->
               <div class="w-full h-36 rounded-2xl bg-midnight/80 border border-gold-500/20 flex items-center justify-center p-3 mb-3 relative overflow-hidden group-hover:border-gold-500/50 transition-colors cursor-pointer" onclick='openDioramaInspector(${JSON.stringify(item).replace(/'/g, "&apos;")})'>
                 <img src="${item.image}" alt="${item.title}" class="max-h-28 object-contain group-hover:scale-110 transition-transform duration-500" />
                 <span class="absolute bottom-1 px-2 py-0.5 rounded bg-midnight/90 text-gold-300 font-mono text-[9px]">${item.subbadge || item.category}</span>
@@ -867,7 +863,6 @@
               <div class="text-xs text-amber-400 mb-1">★★★★★ (${item.rating || '4.9'})</div>
               <div class="font-serif font-black text-gold-300 text-lg mb-3">Rs. ${item.price.toLocaleString()}</div>
               
-              <!-- Real Interactive Size Pills -->
               <div class="flex items-center gap-1.5 mb-4">
                 ${['18','20','22','24'].map(sz => `
                   <button onclick="pickProductSize('${item.id}', '${sz}')" class="size-btn-${item.id} px-2 py-0.5 rounded ${curSize === sz ? 'bg-gold-500 text-midnight font-bold' : 'bg-sapphire text-gold-300'} border border-gold-500/30 text-[10px] font-mono hover:border-gold-400 transition-colors">
@@ -877,7 +872,6 @@
               </div>
             </div>
 
-            <!-- Action Buttons -->
             <div class="grid grid-cols-2 gap-2">
               <button onclick="addToBag('${item.title.replace(/'/g, "\\'")}', ${item.price}, selectedSizesState['${item.id}'] || '20', '${item.image}')" class="py-2.5 rounded-xl gold-btn font-cinzel text-xs uppercase tracking-wider flex items-center justify-center gap-1">
                 <i class="fa-solid fa-cart-plus text-xs"></i> Add
@@ -924,9 +918,7 @@
       filterCategory(targetBtn, categoryKey);
     }
 
-    // ------------------------------------------------------------------
-    // 2. ENTRANCE GATE OPENING & CAMERA TRANSITION
-    // ------------------------------------------------------------------
+    // 2. ENTRANCE GATE OPENING
     function enterMall(isSkip) {
       const overlay = document.getElementById('entranceOverlay');
       overlay.classList.add('gate-opened');
@@ -936,19 +928,60 @@
       toggleAudio(true);
     }
 
-    // Check if customer preferred to skip intro previously
-    window.addEventListener('DOMContentLoaded', () => {
-      if (localStorage.getItem('khm_skip_intro') === 'true') {
-        const overlay = document.getElementById('entranceOverlay');
-        if (overlay) overlay.classList.add('gate-opened');
-      }
-      loadProductsFromSupabase();
-      updateBagUI();
-    });
+    // 3. 20-SECOND PALACE AMBIANCE RANDOM CYCLE
+    const palaceThemes = [
+      { name: "Grand Gilded Dome", gradient: "radial-gradient(circle at 50% 30%, #152744 0%, #071426 50%, #030e20 100%)" },
+      { name: "Obsidian Royal Velvet", gradient: "radial-gradient(circle at 50% 20%, #2a2012 0%, #121c2e 55%, #030e20 100%)" },
+      { name: "Sapphire Starlight Pavilion", gradient: "radial-gradient(circle at 50% 30%, #142e3b 0%, #071526 55%, #020814 100%)" },
+      { name: "Imperial Amber Sanctuary", gradient: "radial-gradient(circle at 50% 25%, #291b29 0%, #0d1627 55%, #030e20 100%)" },
+      { name: "Celestial Emerald Court", gradient: "radial-gradient(circle at 50% 30%, #1f271b 0%, #0a1728 55%, #020914 100%)" }
+    ];
 
-    // ------------------------------------------------------------------
-    // 3. 3D CLOCHE ROTATION & MODAL PRODUCT STUDIO
-    // ------------------------------------------------------------------
+    let currentLayerIndex = 0;
+    function cyclePalaceAmbiance() {
+      const nextIndex = Math.floor(Math.random() * palaceThemes.length);
+      const nextTheme = palaceThemes[nextIndex];
+
+      const activeLayerId = `bgLayer${currentLayerIndex % 5}`;
+      const nextLayerIdx = (currentLayerIndex + 1) % 5;
+      const nextLayerId = `bgLayer${nextLayerIdx}`;
+
+      const activeLayer = document.getElementById(activeLayerId);
+      const nextLayer = document.getElementById(nextLayerId);
+
+      if (nextLayer && activeLayer) {
+        nextLayer.style.backgroundImage = nextTheme.gradient;
+        nextLayer.classList.add('active');
+        activeLayer.classList.remove('active');
+        currentLayerIndex = nextLayerIdx;
+      }
+    }
+
+    setInterval(cyclePalaceAmbiance, 20000);
+
+    // 4. AUTHENTIC ISLAMIC OUD BGM
+    const audio = document.getElementById('bgmAudio');
+    const bgmStatusText = document.getElementById('bgmStatusText');
+    const eqContainer = document.getElementById('eqContainer');
+    let isAudioPlaying = false;
+    audio.volume = 0.15;
+
+    function toggleAudio(forcePlay = null) {
+      if (forcePlay === true || (!isAudioPlaying && forcePlay === null)) {
+        audio.play().then(() => {
+          isAudioPlaying = true;
+          bgmStatusText.innerText = "Islamic Oud BGM: Active";
+          eqContainer.classList.remove('eq-paused');
+        }).catch(() => {});
+      } else {
+        audio.pause();
+        isAudioPlaying = false;
+        bgmStatusText.innerText = "Islamic Oud BGM: Muted";
+        eqContainer.classList.add('eq-paused');
+      }
+    }
+
+    // 5. 3D CLOCHE DIORAMA INSPECTOR
     let dioramaAngle = 0;
     let modalAngle = 0;
     let isAutoSpinning = false;
@@ -1019,43 +1052,7 @@
       if (el) el.scrollIntoView({ behavior: 'smooth' });
     }
 
-    // ------------------------------------------------------------------
-    // 4. AUTHENTIC ISLAMIC BGM AUDIO
-    // ------------------------------------------------------------------
-    const audio = document.getElementById('bgmAudio');
-    const bgmStatusText = document.getElementById('bgmStatusText');
-    const eqContainer = document.getElementById('eqContainer');
-    let isAudioPlaying = false;
-    audio.volume = 0.15;
-
-    function toggleAudio(forcePlay = null) {
-      if (forcePlay === true || (!isAudioPlaying && forcePlay === null)) {
-        audio.play().then(() => {
-          isAudioPlaying = true;
-          bgmStatusText.innerText = "Islamic Oud BGM: Active";
-          eqContainer.classList.remove('eq-paused');
-        }).catch(() => {});
-      } else {
-        audio.pause();
-        isAudioPlaying = false;
-        bgmStatusText.innerText = "Islamic Oud BGM: Muted";
-        eqContainer.classList.add('eq-paused');
-      }
-    }
-
-    function cyclePalaceAmbiance() {
-      const gradients = [
-        "radial-gradient(circle at 50% 18%, rgba(214, 167, 92, 0.18) 0%, rgba(7, 20, 38, 0.88) 55%, #030e20 100%)",
-        "radial-gradient(circle at 50% 25%, rgba(42, 32, 18, 0.35) 0%, rgba(18, 28, 46, 0.9) 55%, #030e20 100%)",
-        "radial-gradient(circle at 50% 20%, rgba(20, 46, 59, 0.35) 0%, rgba(7, 21, 38, 0.9) 55%, #020814 100%)"
-      ];
-      const randomGrad = gradients[Math.floor(Math.random() * gradients.length)];
-      document.querySelector('.bg-tint-overlay').style.background = randomGrad;
-    }
-
-    // ------------------------------------------------------------------
-    // 5. SHOPPING BAG & SUPABASE COD CHECKOUT
-    // ------------------------------------------------------------------
+    // 6. SHOPPING BAG & SUPABASE COD CHECKOUT
     const SHIPPING_FEE = 350;
     const STORE_WHATSAPP = "923049141244";
     const STORE_EMAIL = "easicarts@gmail.com";
@@ -1160,7 +1157,6 @@
       const orderId = "KHM-" + Math.floor(100000 + Math.random() * 900000);
       const itemsSummary = bag.map(i => `• ${i.title} (${i.size}) x${i.qty} = Rs. ${(i.price * i.qty).toLocaleString()}`).join("\n");
 
-      // Save into Supabase 'orders' table
       try {
         await supabaseClient.from('orders').insert([{
           id: orderId,
@@ -1175,7 +1171,6 @@
         }]);
       } catch (err) {}
 
-      // WhatsApp VIP Dispatch message
       const waText = `👑 *NEW ORDER - KHM BEDDING METAVERSE MALL*
 ━━━━━━━━━━━━━━━━━━━━
 *Order ID:* ${orderId}
@@ -1203,6 +1198,15 @@ Dispatched to: ${STORE_EMAIL}`;
       btn.disabled = false;
       btn.innerHTML = `<i class="fa-solid fa-lock"></i> Place Order (Rs. 350 COD)`;
     }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      if (localStorage.getItem('khm_skip_intro') === 'true') {
+        const overlay = document.getElementById('entranceOverlay');
+        if (overlay) overlay.classList.add('gate-opened');
+      }
+      loadProductsFromSupabase();
+      updateBagUI();
+    });
   </script>
 </body>
 </html>
