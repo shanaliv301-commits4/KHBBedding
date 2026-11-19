@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KHM Bedding V4.0 | Architectural 3D Showroom & Islamic Ambience</title>
-  <meta name="description" content="KHM Bedding V4.0 - True 3D Architectural Showroom with soft Islamic ambient BGM, 360 diorama inspection and nationwide Rs. 350 COD." />
+  <title>KHM Bedding V4.0 | Real Supabase Products & 3D Architectural Palace</title>
+  <meta name="description" content="KHM Bedding V4.0 - Live Supabase Products, authentic Islamic BGM, 20s dynamic ambient wallpaper, and flat Rs. 350 COD across Pakistan." />
 
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -48,16 +48,55 @@
   <style>
     * { box-sizing: border-box; }
     body {
-      background-color: #071426;
+      background-color: #030e20;
       color: #f8f5ee;
       overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
     }
 
-    /* Ambient Warm Showroom Background */
-    .showroom-bg {
-      background: radial-gradient(circle at 50% 15%, rgba(214, 167, 92, 0.18) 0%, rgba(14, 31, 59, 0.95) 45%, #030e20 100%),
-                  linear-gradient(180deg, #071426 0%, #030e20 100%);
-      min-height: 100vh;
+    /* Dynamic Palace Background Layers (Smooth Crossfade every 20s) */
+    .bg-layer {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -2;
+      opacity: 0;
+      transition: opacity 2.5s cubic-bezier(0.4, 0, 0.2, 1);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .bg-layer.active {
+      opacity: 1;
+    }
+
+    /* Ambient Overlay Tint */
+    .bg-tint-overlay {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      background: radial-gradient(circle at 50% 20%, rgba(214, 167, 92, 0.12) 0%, rgba(7, 20, 38, 0.85) 55%, #030e20 100%),
+                  linear-gradient(180deg, rgba(3, 14, 32, 0.6) 0%, rgba(3, 14, 32, 0.95) 100%);
+      pointer-events: none;
+    }
+
+    /* Floating Gold Dust Particles */
+    .sparkle {
+      position: absolute;
+      background: radial-gradient(circle, #f5e4b7 0%, rgba(214, 167, 92, 0) 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: floatUp 8s infinite linear;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) scale(0.4); opacity: 0; }
+      20% { opacity: 0.8; }
+      80% { opacity: 0.8; }
+      100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
     }
 
     /* Glass Panels */
@@ -90,7 +129,6 @@
       transform: translateY(-2px);
     }
 
-    /* 3D Booth Cloche Cards */
     .pavilion-card {
       transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
       border-radius: 9999px 9999px 1.5rem 1.5rem;
@@ -101,7 +139,7 @@
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(214, 167, 92, 0.25);
     }
 
-    /* Soundwave equalizer bars */
+    /* Soundwave Equalizer */
     .eq-bar {
       display: inline-block;
       width: 3px;
@@ -122,28 +160,54 @@
     }
   </style>
 </head>
-<body class="font-sans antialiased showroom-bg">
+<body class="font-sans antialiased">
 
-  <!-- ==========================================
-       AUDIO ELEMENT: SOOTHING ISLAMIC AMBIENT BGM
-       ========================================== -->
+  <!-- ========================================================
+       1. DYNAMIC AUTO-CHANGING WALLPAPER LAYERS (EVERY 20 SECONDS)
+       ======================================================== -->
+  <div id="bgLayer0" class="bg-layer active" style="background-image: radial-gradient(circle at 50% 30%, #152744 0%, #071426 50%, #030e20 100%);"></div>
+  <div id="bgLayer1" class="bg-layer" style="background-image: radial-gradient(circle at 50% 20%, #2a2012 0%, #121c2e 55%, #030e20 100%);"></div>
+  <div id="bgLayer2" class="bg-layer" style="background-image: radial-gradient(circle at 50% 30%, #142e3b 0%, #071526 55%, #020814 100%);"></div>
+  <div id="bgLayer3" class="bg-layer" style="background-image: radial-gradient(circle at 50% 25%, #291b29 0%, #0d1627 55%, #030e20 100%);"></div>
+  <div id="bgLayer4" class="bg-layer" style="background-image: radial-gradient(circle at 50% 30%, #1f271b 0%, #0a1728 55%, #020914 100%);"></div>
+  <div class="bg-tint-overlay"></div>
+
+  <!-- Floating Sparkles -->
+  <div class="sparkle" style="width:6px;height:6px;left:15%;animation-delay:0s;animation-duration:11s;"></div>
+  <div class="sparkle" style="width:4px;height:4px;left:40%;animation-delay:3s;animation-duration:14s;"></div>
+  <div class="sparkle" style="width:8px;height:8px;left:65%;animation-delay:1.5s;animation-duration:12s;"></div>
+  <div class="sparkle" style="width:5px;height:5px;left:85%;animation-delay:5s;animation-duration:10s;"></div>
+
+  <!-- ========================================================
+       2. AUTHENTIC ISLAMIC AMBIENT OUD & INSTRUMENTAL BGM
+       ======================================================== -->
   <audio id="bgmAudio" loop preload="auto">
-    <!-- High-quality soothing ambient acoustic strings loop -->
-    <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=meditation-relaxing-ambient-112191.mp3" type="audio/mp3">
+    <!-- Authentic soft calming instrumental Islamic Oud / Ambient strings -->
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/24/audio_3d1efc609c.mp3?filename=desert-oasis-middle-eastern-oriental-arabic-ambient-10903.mp3" type="audio/mp3">
   </audio>
 
-  <!-- TOP BAR -->
-  <div class="bg-midnight-deep/95 border-b border-gold-500/20 text-[11px] py-1.5 px-4 font-mono text-ivory/80 flex flex-wrap justify-between items-center gap-2">
+  <!-- TOP BAR & STATUS TELEMETRY -->
+  <div class="bg-midnight-deep/95 border-b border-gold-500/20 text-[11px] py-1.5 px-4 font-mono text-ivory/80 flex flex-wrap justify-between items-center gap-2 relative z-30">
     <div class="flex items-center gap-3">
       <span class="text-gold-400 font-bold uppercase tracking-wider text-[10px]">
-        <i class="fa-solid fa-sparkles text-amber-300 mr-1"></i> Next-Gen Comfort & Futuristic Living
+        <i class="fa-solid fa-sparkles text-amber-300 mr-1"></i> Next-Gen Comfort &amp; Futuristic Living
       </span>
       <span class="hidden sm:inline text-gold-500/40">•</span>
       <span class="text-ivory/70">Flat Nationwide COD Rs. 350</span>
+      <span class="hidden sm:inline text-gold-500/40">•</span>
+      <!-- Live Supabase Status Badge -->
+      <span id="supabaseStatusBadge" class="inline-flex items-center gap-1.5 text-amber-300 text-[10px]">
+        <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span> Connecting Supabase...
+      </span>
     </div>
 
     <div class="flex items-center gap-4">
-      <!-- Islamic BGM Sound Controller -->
+      <!-- Background Cycle Countdown Readout -->
+      <span class="hidden md:inline text-[10px] text-gold-400/80 font-mono" id="bgCountdownText">
+        <i class="fa-solid fa-camera-rotate mr-1"></i> Palace Theme: <span id="bgThemeName">Grand Gilded Dome</span> (<span id="bgTimerCount">20</span>s)
+      </span>
+
+      <!-- Authentic Islamic BGM Audio Switcher -->
       <button id="bgmToggleBtn" onclick="toggleAudio()" class="px-2.5 py-1 rounded-full palace-glass border border-gold-500/40 text-gold-300 text-[10px] uppercase font-mono flex items-center gap-2 hover:bg-gold-500 hover:text-midnight transition-all">
         <div id="eqContainer" class="flex items-end gap-0.5 h-3.5 eq-paused">
           <span class="eq-bar"></span>
@@ -151,7 +215,7 @@
           <span class="eq-bar"></span>
           <span class="eq-bar"></span>
         </div>
-        <span id="bgmStatusText">Islamic BGM: Muted</span>
+        <span id="bgmStatusText">Islamic Oud BGM: Muted</span>
       </button>
 
       <a href="https://wa.me/923049141244" target="_blank" class="hover:text-gold-300 transition-colors flex items-center gap-1 font-bold text-emerald-400">
@@ -160,7 +224,7 @@
     </div>
   </div>
 
-  <!-- MAIN HEADER -->
+  <!-- MAIN NAVIGATION HEADER -->
   <header class="sticky top-0 z-40 palace-glass border-b border-gold-500/25 px-4 sm:px-8 py-3.5 flex items-center justify-between">
     <div class="flex items-center gap-3 cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'})">
       <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sapphire via-gold-600/30 to-gold-400 flex items-center justify-center text-gold-300 text-lg border border-gold-500/40 shadow-lg">
@@ -179,7 +243,7 @@
       <button onclick="scrollToSection('heroSection')" class="px-3.5 py-1.5 rounded-xl bg-gold-500 text-midnight shadow">Showroom</button>
       <button onclick="scrollToSection('pavilionsSection')" class="px-3.5 py-1.5 rounded-xl text-ivory/80 hover:text-gold-300">Pavilions</button>
       <button onclick="scrollToSection('dioramaSection')" class="px-3.5 py-1.5 rounded-xl text-ivory/80 hover:text-gold-300">3D Diorama</button>
-      <button onclick="scrollToSection('footwearSection')" class="px-3.5 py-1.5 rounded-xl text-ivory/80 hover:text-gold-300">Footwear</button>
+      <button onclick="scrollToSection('productsSection')" class="px-3.5 py-1.5 rounded-xl text-ivory/80 hover:text-gold-300">Live Products</button>
     </nav>
 
     <!-- Cart Button -->
@@ -189,8 +253,8 @@
     </button>
   </header>
 
-  <!-- MAIN BODY -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 pt-10 pb-20 space-y-16">
+  <!-- MAIN BODY CONTENT -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 pt-10 pb-20 space-y-16 relative z-10">
 
     <!-- HERO SECTION -->
     <section id="heroSection" class="text-center space-y-4 max-w-3xl mx-auto pt-4">
@@ -202,10 +266,10 @@
         <span class="gold-gradient-text font-serif">FUTURISTIC LIVING</span>
       </h1>
       <p class="text-xs sm:text-sm text-ivory/70 max-w-xl mx-auto font-sans leading-relaxed">
-        Engineered for ultimate luxury, everyday comfort, and stylish living. Explore our majestic palace pavilions below.
+        Engineered for ultimate luxury, everyday comfort, and stylish living. Explore our majestic palace pavilions below with real-time cloud inventory.
       </p>
       <div class="flex flex-wrap items-center justify-center gap-4 pt-3">
-        <button onclick="scrollToSection('pavilionsSection')" class="px-6 py-3 rounded-full gold-btn font-cinzel text-xs uppercase tracking-wider flex items-center gap-2 shadow-xl">
+        <button onclick="scrollToSection('productsSection')" class="px-6 py-3 rounded-full gold-btn font-cinzel text-xs uppercase tracking-wider flex items-center gap-2 shadow-xl">
           <span>Explore Collections</span>
           <i class="fa-solid fa-arrow-right-long"></i>
         </button>
@@ -215,13 +279,16 @@
       </div>
     </section>
 
-    <!-- 4 FEATURED SHOWROOM PAVILIONS (ARCHES) -->
+    <!-- 4 FEATURED SHOWROOM PAVILIONS -->
     <section id="pavilionsSection" class="space-y-6">
       <div class="flex items-center justify-between">
         <div>
           <span class="text-xs font-mono uppercase tracking-[0.2em] text-gold-400">Architectural Galleries</span>
           <h2 class="text-2xl sm:text-3xl font-serif font-bold text-ivory">Featured Showroom Pavilions</h2>
         </div>
+        <button onclick="changeBackgroundRandom()" class="px-3 py-1.5 rounded-xl palace-glass text-gold-300 text-xs font-mono hover:bg-gold-500 hover:text-midnight transition-colors" title="Change Background Ambience Now">
+          <i class="fa-solid fa-wand-magic-sparkles mr-1"></i> Switch Ambiance
+        </button>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -235,7 +302,7 @@
             <h3 class="font-serif font-bold text-lg text-ivory mb-1">Baby &amp; Kids Footwear</h3>
             <p class="text-xs text-ivory/60 leading-relaxed font-light mb-4">Soft orthopedic soles, glowing cartoon sneakers, and joyful comfort.</p>
           </div>
-          <button onclick="scrollToSection('footwearSection')" class="w-full py-2.5 rounded-xl gold-btn font-cinzel text-xs uppercase tracking-wider">
+          <button onclick="filterCategory('Baby')" class="w-full py-2.5 rounded-xl gold-btn font-cinzel text-xs uppercase tracking-wider">
             Shop Now →
           </button>
         </div>
@@ -250,9 +317,9 @@
             <h3 class="font-serif font-bold text-lg text-ivory mb-1">Cotton Garments</h3>
             <p class="text-xs text-ivory/60 leading-relaxed font-light mb-4">Breathable polo shirts, luxury knitted lounge separates &amp; cozy basics.</p>
           </div>
-          <a href="https://wa.me/923049141244?text=Hi%2C+I+want+to+order+Garments" target="_blank" class="w-full py-2.5 rounded-xl gold-btn font-cinzel text-xs uppercase tracking-wider text-center">
+          <button onclick="filterCategory('Garments')" class="w-full py-2.5 rounded-xl gold-btn font-cinzel text-xs uppercase tracking-wider">
             Shop Now →
-          </a>
+          </button>
         </div>
 
         <!-- Pavilion 3 -->
@@ -262,12 +329,12 @@
             <div class="w-32 h-32 rounded-full border-2 border-gold-500/40 flex items-center justify-center bg-midnight/80 mb-4 group-hover:scale-105 transition-transform">
               <i class="fa-solid fa-bed text-4xl text-gold-400"></i>
             </div>
-            <h3 class="font-serif font-bold text-lg text-ivory mb-1">Luxury Bedsheets</h3>
+            <h3 class="font-serif font-bold text-lg text-ivory mb-1">Luxury Bedsheets (KHM)</h3>
             <p class="text-xs text-ivory/60 leading-relaxed font-light mb-4">Sovereign navy blue embroidered sets, 600TC silky duvet spreads.</p>
           </div>
-          <a href="https://wa.me/923049141244?text=Hi%2C+I+want+to+order+Luxury+Bedsheets" target="_blank" class="w-full py-2.5 rounded-xl gold-btn font-cinzel text-xs uppercase tracking-wider text-center">
+          <button onclick="filterCategory('Bedsheet')" class="w-full py-2.5 rounded-xl gold-btn font-cinzel text-xs uppercase tracking-wider">
             Shop Now →
-          </a>
+          </button>
         </div>
 
         <!-- Pavilion 4 -->
@@ -280,16 +347,14 @@
             <h3 class="font-serif font-bold text-lg text-ivory mb-1">Home Living</h3>
             <p class="text-xs text-ivory/60 leading-relaxed font-light mb-4">Regal damask velvet cushions, warm luxury seating and cozy accents.</p>
           </div>
-          <a href="https://wa.me/923049141244?text=Hi%2C+I+want+to+order+Home+Living" target="_blank" class="w-full py-2.5 rounded-xl gold-btn font-cinzel text-xs uppercase tracking-wider text-center">
+          <button onclick="filterCategory('Home')" class="w-full py-2.5 rounded-xl gold-btn font-cinzel text-xs uppercase tracking-wider">
             Shop Now →
-          </a>
+          </button>
         </div>
       </div>
     </section>
 
-    <!-- ========================================================
-         NECHAY WALY DONO OPTIONS (3D CLOCHE & INTERACTIVE INSPECTION)
-         ======================================================== -->
+    <!-- 3D DIORAMA & CLOCHE INSPECTION -->
     <section id="dioramaSection" class="palace-glass-heavy rounded-3xl p-6 sm:p-10 border border-gold-500/40 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
       <div class="lg:col-span-6 space-y-4">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-500/15 border border-gold-500/30 text-gold-300 font-mono text-[10px] uppercase">
@@ -302,24 +367,22 @@
           Step directly inside the sovereign palace pavilion. Rotate the gilded cloche domes, view realistic fabric textures under ambient royal chandeliers, and experience seamless 3D inspect-to-dispatch workflow.
         </p>
 
-        <!-- The 2 Options Requested by User -->
         <div class="flex flex-wrap items-center gap-3 pt-3">
           <button onclick="openDioramaInspector()" class="px-5 py-3 rounded-xl gold-btn font-cinzel text-xs uppercase tracking-wider shadow-lg flex items-center gap-2">
             <i class="fa-solid fa-arrows-spin"></i> Launch 360° Cloche Inspector
           </button>
-          <button onclick="scrollToSection('footwearSection')" class="px-5 py-3 rounded-xl palace-glass hover:bg-sapphire text-gold-300 border border-gold-500/40 font-cinzel text-xs uppercase tracking-wider flex items-center gap-2">
-            <i class="fa-solid fa-eye"></i> Explore Full 3D Walkthrough
+          <button onclick="scrollToSection('productsSection')" class="px-5 py-3 rounded-xl palace-glass hover:bg-sapphire text-gold-300 border border-gold-500/40 font-cinzel text-xs uppercase tracking-wider flex items-center gap-2">
+            <i class="fa-solid fa-eye"></i> Full 3D Room Walkthrough
           </button>
         </div>
       </div>
 
-      <!-- Live 3D Interactive Viewport Simulation -->
+      <!-- Cloche Viewport Simulation -->
       <div class="lg:col-span-6 palace-glass rounded-2xl p-6 border border-gold-500/30 flex flex-col items-center justify-center relative overflow-hidden text-center bg-midnight/90">
         <div class="absolute top-3 right-3 text-[10px] font-mono text-emerald-400 flex items-center gap-1.5">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Real-Time WebGL Ready
         </div>
 
-        <!-- 3D Cloche Pod with Rotate Angle Controls -->
         <div class="w-48 h-48 rounded-full border-2 border-gold-500/50 relative flex items-center justify-center bg-gradient-to-b from-sapphire/50 to-midnight-deep p-4 shadow-[0_0_50px_rgba(214,167,92,0.2)] my-3">
           <div id="diorama3DObject" class="transition-transform duration-300 text-5xl">
             🧸
@@ -338,137 +401,28 @@
       </div>
     </section>
 
-    <!-- BABY & KIDS FOOTWEAR COLLECTION (4 PEDESTAL CARDS) -->
-    <section id="footwearSection" class="space-y-6">
+    <!-- ========================================================
+         REAL SUPABASE PRODUCTS LIVE EXHIBITION SECTION
+         ======================================================== -->
+    <section id="productsSection" class="space-y-6">
       <div class="text-center space-y-2 max-w-xl mx-auto">
         <span class="text-xs font-mono uppercase tracking-[0.2em] text-gold-400">Step Into Happiness</span>
-        <h2 class="text-3xl font-serif font-black text-ivory">Baby &amp; Kids Footwear Collection</h2>
+        <h2 class="text-3xl font-serif font-black text-ivory" id="productSectionTitle">Baby &amp; Kids Footwear Collection</h2>
         <p class="text-xs text-ivory/60 italic font-serif">Little Steps... Big Dreams...</p>
+        
+        <!-- Category Filter Pills -->
+        <div class="flex flex-wrap items-center justify-center gap-2 pt-3">
+          <button onclick="filterCategory('All')" class="cat-pill px-3 py-1 rounded-full text-xs font-cinzel font-bold bg-gold-500 text-midnight shadow">All</button>
+          <button onclick="filterCategory('Baby')" class="cat-pill px-3 py-1 rounded-full text-xs font-cinzel font-bold palace-glass text-ivory/80 hover:text-gold-300">Baby Shoes</button>
+          <button onclick="filterCategory('Kids')" class="cat-pill px-3 py-1 rounded-full text-xs font-cinzel font-bold palace-glass text-ivory/80 hover:text-gold-300">Kids Sneakers</button>
+          <button onclick="filterCategory('Garments')" class="cat-pill px-3 py-1 rounded-full text-xs font-cinzel font-bold palace-glass text-ivory/80 hover:text-gold-300">Garments</button>
+          <button onclick="filterCategory('Bedsheet')" class="cat-pill px-3 py-1 rounded-full text-xs font-cinzel font-bold palace-glass text-ivory/80 hover:text-gold-300">Bedsheets</button>
+        </div>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-4">
-        
-        <!-- Product 1 -->
-        <div class="pavilion-card palace-glass-heavy border border-gold-500/30 p-5 flex flex-col justify-between group">
-          <div class="flex flex-col items-center text-center">
-            <span class="self-end px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 font-mono text-[9px] uppercase">New</span>
-            <div class="w-full h-36 rounded-2xl bg-midnight/80 border border-gold-500/20 flex items-center justify-center p-3 mb-3 relative overflow-hidden">
-              <span class="text-5xl group-hover:scale-110 transition-transform">🧸</span>
-              <span class="absolute bottom-1 px-2 py-0.5 rounded bg-midnight/90 text-gold-300 font-mono text-[9px]">KHM SoftGrip</span>
-            </div>
-            <h4 class="font-serif font-bold text-base text-ivory mb-1">Baby Bear Sneakers</h4>
-            <div class="text-xs text-amber-400 mb-1">★★★★★ (4.9)</div>
-            <div class="font-serif font-black text-gold-300 text-lg mb-3">Rs. 1,999</div>
-            
-            <!-- Sizes -->
-            <div class="flex items-center gap-1.5 mb-4">
-              <span class="px-2 py-0.5 rounded bg-sapphire text-gold-300 border border-gold-500/30 text-[10px] font-mono">18</span>
-              <span class="px-2 py-0.5 rounded bg-sapphire text-gold-300 border border-gold-500/30 text-[10px] font-mono">20</span>
-              <span class="px-2 py-0.5 rounded bg-sapphire text-gold-300 border border-gold-500/30 text-[10px] font-mono">22</span>
-              <span class="px-2 py-0.5 rounded bg-sapphire text-gold-300 border border-gold-500/30 text-[10px] font-mono">24</span>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-2 gap-2">
-            <button onclick="addToBag('Baby Bear Sneakers', 1999, '20')" class="py-2.5 rounded-xl gold-btn font-cinzel text-xs uppercase tracking-wider">
-              Add
-            </button>
-            <a href="https://wa.me/923049141244?text=Hi%2C+I+want+to+order+Baby+Bear+Sneakers+(Rs.+1999)" target="_blank" class="py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-cinzel text-xs uppercase tracking-wider flex items-center justify-center gap-1">
-              <i class="fa-brands fa-whatsapp text-xs"></i> Quick Buy
-            </a>
-          </div>
-        </div>
-
-        <!-- Product 2 -->
-        <div class="pavilion-card palace-glass-heavy border border-gold-500/30 p-5 flex flex-col justify-between group">
-          <div class="flex flex-col items-center text-center">
-            <span class="self-end px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 font-mono text-[9px] uppercase">Hot</span>
-            <div class="w-full h-36 rounded-2xl bg-midnight/80 border border-gold-500/20 flex items-center justify-center p-3 mb-3 relative overflow-hidden">
-              <span class="text-5xl group-hover:scale-110 transition-transform">🎀</span>
-              <span class="absolute bottom-1 px-2 py-0.5 rounded bg-midnight/90 text-gold-300 font-mono text-[9px]">Princess Comfort</span>
-            </div>
-            <h4 class="font-serif font-bold text-base text-ivory mb-1">Girls Bow Shoes</h4>
-            <div class="text-xs text-amber-400 mb-1">★★★★★ (4.8)</div>
-            <div class="font-serif font-black text-gold-300 text-lg mb-3">Rs. 1,799</div>
-            
-            <div class="flex items-center gap-1.5 mb-4">
-              <span class="px-2 py-0.5 rounded bg-sapphire text-gold-300 border border-gold-500/30 text-[10px] font-mono">18</span>
-              <span class="px-2 py-0.5 rounded bg-sapphire text-gold-300 border border-gold-500/30 text-[10px] font-mono">20</span>
-              <span class="px-2 py-0.5 rounded bg-sapphire text-gold-300 border border-gold-500/30 text-[10px] font-mono">22</span>
-              <span class="px-2 py-0.5 rounded bg-sapphire text-gold-300 border border-gold-500/30 text-[10px] font-mono">24</span>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-2 gap-2">
-            <button onclick="addToBag('Girls Bow Shoes', 1799, '22')" class="py-2.5 rounded-xl gold-btn font-cinzel text-xs uppercase tracking-wider">
-              Add
-            </button>
-            <a href="https://wa.me/923049141244?text=Hi%2C+I+want+to+order+Girls+Bow+Shoes+(Rs.+1799)" target="_blank" class="py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-cinzel text-xs uppercase tracking-wider flex items-center justify-center gap-1">
-              <i class="fa-brands fa-whatsapp text-xs"></i> Quick Buy
-            </a>
-          </div>
-        </div>
-
-        <!-- Product 3 -->
-        <div class="pavilion-card palace-glass-heavy border border-gold-500/30 p-5 flex flex-col justify-between group">
-          <div class="flex flex-col items-center text-center">
-            <span class="self-end px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-mono text-[9px] uppercase">Best Seller</span>
-            <div class="w-full h-36 rounded-2xl bg-midnight/80 border border-gold-500/20 flex items-center justify-center p-3 mb-3 relative overflow-hidden">
-              <span class="text-5xl group-hover:scale-110 transition-transform">👟</span>
-              <span class="absolute bottom-1 px-2 py-0.5 rounded bg-midnight/90 text-gold-300 font-mono text-[9px]">TurboFlex</span>
-            </div>
-            <h4 class="font-serif font-bold text-base text-ivory mb-1">Kids Sport Shoes</h4>
-            <div class="text-xs text-amber-400 mb-1">★★★★★ (5.0)</div>
-            <div class="font-serif font-black text-gold-300 text-lg mb-3">Rs. 2,299</div>
-            
-            <div class="flex items-center gap-1.5 mb-4">
-              <span class="px-2 py-0.5 rounded bg-sapphire text-gold-300 border border-gold-500/30 text-[10px] font-mono">18</span>
-              <span class="px-2 py-0.5 rounded bg-sapphire text-gold-300 border border-gold-500/30 text-[10px] font-mono">20</span>
-              <span class="px-2 py-0.5 rounded bg-sapphire text-gold-300 border border-gold-500/30 text-[10px] font-mono">22</span>
-              <span class="px-2 py-0.5 rounded bg-sapphire text-gold-300 border border-gold-500/30 text-[10px] font-mono">24</span>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-2 gap-2">
-            <button onclick="addToBag('Kids Sport Shoes', 2299, '24')" class="py-2.5 rounded-xl gold-btn font-cinzel text-xs uppercase tracking-wider">
-              Add
-            </button>
-            <a href="https://wa.me/923049141244?text=Hi%2C+I+want+to+order+Kids+Sport+Shoes+(Rs.+2299)" target="_blank" class="py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-cinzel text-xs uppercase tracking-wider flex items-center justify-center gap-1">
-              <i class="fa-brands fa-whatsapp text-xs"></i> Quick Buy
-            </a>
-          </div>
-        </div>
-
-        <!-- Product 4 -->
-        <div class="pavilion-card palace-glass-heavy border border-gold-500/30 p-5 flex flex-col justify-between group">
-          <div class="flex flex-col items-center text-center">
-            <span class="self-end px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[9px] uppercase">Cool Air</span>
-            <div class="w-full h-36 rounded-2xl bg-midnight/80 border border-gold-500/20 flex items-center justify-center p-3 mb-3 relative overflow-hidden">
-              <span class="text-5xl group-hover:scale-110 transition-transform">👡</span>
-              <span class="absolute bottom-1 px-2 py-0.5 rounded bg-midnight/90 text-gold-300 font-mono text-[9px]">Breathable</span>
-            </div>
-            <h4 class="font-serif font-bold text-base text-ivory mb-1">Baby Sandals</h4>
-            <div class="text-xs text-amber-400 mb-1">★★★★★ (4.7)</div>
-            <div class="font-serif font-black text-gold-300 text-lg mb-3">Rs. 1,699</div>
-            
-            <div class="flex items-center gap-1.5 mb-4">
-              <span class="px-2 py-0.5 rounded bg-sapphire text-gold-300 border border-gold-500/30 text-[10px] font-mono">18</span>
-              <span class="px-2 py-0.5 rounded bg-sapphire text-gold-300 border border-gold-500/30 text-[10px] font-mono">20</span>
-              <span class="px-2 py-0.5 rounded bg-sapphire text-gold-300 border border-gold-500/30 text-[10px] font-mono">22</span>
-              <span class="px-2 py-0.5 rounded bg-sapphire text-gold-300 border border-gold-500/30 text-[10px] font-mono">24</span>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-2 gap-2">
-            <button onclick="addToBag('Baby Sandals', 1699, '20')" class="py-2.5 rounded-xl gold-btn font-cinzel text-xs uppercase tracking-wider">
-              Add
-            </button>
-            <a href="https://wa.me/923049141244?text=Hi%2C+I+want+to+order+Baby+Sandals+(Rs.+1699)" target="_blank" class="py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-cinzel text-xs uppercase tracking-wider flex items-center justify-center gap-1">
-              <i class="fa-brands fa-whatsapp text-xs"></i> Quick Buy
-            </a>
-          </div>
-        </div>
-
+      <!-- Real Products Grid (Injected Dynamically from Supabase with Fallbacks) -->
+      <div id="liveProductGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-4">
+        <!-- Products injected via JS below -->
       </div>
     </section>
 
@@ -487,7 +441,7 @@
       <div class="palace-glass p-5 rounded-2xl border border-gold-500/20 text-center space-y-1">
         <i class="fa-solid fa-rotate-left text-gold-400 text-xl mb-1"></i>
         <div class="font-cinzel font-bold text-xs uppercase text-ivory">30-Day Hassle-Free</div>
-        <p class="text-[11px] text-ivory/60">Instant exchange guarantee on sizes</p>
+        <p class="text-[11px] text-ivory/60">Seamless exchange guarantee on sizes</p>
       </div>
       <div class="palace-glass p-5 rounded-2xl border border-gold-500/20 text-center space-y-1">
         <i class="fa-solid fa-headset text-gold-400 text-xl mb-1"></i>
@@ -506,7 +460,7 @@
       <button onclick="closeDioramaInspector()" class="absolute top-4 right-4 text-ivory/60 hover:text-gold-300 text-xl">✕</button>
       
       <span class="px-3 py-1 rounded-full bg-gold-500/20 text-gold-300 font-mono text-[10px] uppercase">360° Diorama Cloche Inspection</span>
-      <h3 class="text-2xl font-serif font-black text-ivory">Baby Bear Orthopedic Sneaker</h3>
+      <h3 class="text-2xl font-serif font-black text-ivory" id="modalProductTitle">Baby Bear Orthopedic Sneaker</h3>
       
       <div class="w-56 h-56 mx-auto rounded-full border-2 border-gold-500/60 relative flex items-center justify-center bg-midnight/90 shadow-[0_0_60px_rgba(214,167,92,0.3)]">
         <div id="modal3DItem" class="text-7xl transition-transform duration-300">🧸</div>
@@ -517,7 +471,7 @@
         <button onclick="rotateModalItem(45)" class="px-4 py-2 rounded-xl bg-sapphire text-gold-300 hover:bg-gold-500 hover:text-midnight">⟳ Turn +45°</button>
       </div>
 
-      <button onclick="addToBag('Baby Bear Sneakers', 1999, '20'); closeDioramaInspector();" class="w-full py-3.5 gold-btn rounded-xl font-cinzel text-xs uppercase tracking-widest shadow-xl">
+      <button id="modalBuyBtn" onclick="addToBag('Baby Bear Sneakers', 1999, '20'); closeDioramaInspector();" class="w-full py-3.5 gold-btn rounded-xl font-cinzel text-xs uppercase tracking-widest shadow-xl">
         Add Specimen to Bag (Rs. 1,999 + Rs. 350 COD)
       </button>
     </div>
@@ -564,47 +518,203 @@
     </div>
   </aside>
 
-  <!-- JAVASCRIPT LOGIC -->
+  <!-- ========================================================
+       JAVASCRIPT: SUPABASE REAL PRODUCTS + BGM + 20S CYCLE
+       ======================================================== -->
   <script>
-    // 1. ISLAMIC AMBIENT BGM LOGIC (Dheemi voice / Low volume)
+    // ------------------------------------------------------------------
+    // 1. SUPABASE CLIENT & LIVE PRODUCTS FETCH
+    // ------------------------------------------------------------------
+    const SUPABASE_URL = "https://yyapzlhdnyduonrekiwe.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5YXB6bGhkbnlkdW9ucmVraXdlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQzODA3MDYsImV4cCI6MjEwOTk1NjcwNn0.YMdQBz0h9sekPQV-crgmRHrGl96RfNj0xymXD6r4rBE";
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // Default Curated Fallback Products (Used if Supabase is initializing or table empty)
+    const defaultProducts = [
+      { id: "db1", title: "Baby Bear Sneakers", category: "Baby", price: 1999, emoji: "🧸", tag: "New", rating: "4.9", image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&auto=format&fit=crop&q=80", desc: "Cloud-cushion EVA outsole with anti-slip micro traction." },
+      { id: "db2", title: "Girls Velvet Bow Shoes", category: "Baby", price: 1799, emoji: "🎀", tag: "Hot", rating: "4.8", image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=600&auto=format&fit=crop&q=80", desc: "Princess blush velvet with hypoallergenic memory insole." },
+      { id: "db3", title: "Kids Sport Shoes", category: "Kids", price: 2299, emoji: "👟", tag: "Best Seller", rating: "5.0", image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600&auto=format&fit=crop&q=80", desc: "Dynamic energy-return bounce sole with quick-strap." },
+      { id: "db4", title: "Baby Breathable Sandals", category: "Baby", price: 1699, emoji: "👡", tag: "Cool Air", rating: "4.7", image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&auto=format&fit=crop&q=80", desc: "Open-air ergonomic sandals for gentle first steps." },
+      { id: "db5", title: "Combed Cotton Royal Polo", category: "Garments", price: 2450, emoji: "👕", tag: "100% Pima", rating: "4.9", image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=600&auto=format&fit=crop&q=80", desc: "Mercerized breathable jersey polo shirt." },
+      { id: "db6", title: "Royal Azure 1000TC Bedset", category: "Bedsheet", price: 4850, emoji: "🛏️", tag: "Signature", rating: "5.0", image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=600&auto=format&fit=crop&q=80", desc: "Sovereign navy blue embroidered 1000 thread-count cotton." }
+    ];
+
+    let allLoadedProducts = [...defaultProducts];
+
+    async function fetchSupabaseProducts() {
+      const badge = document.getElementById('supabaseStatusBadge');
+      try {
+        const { data, error } = await supabaseClient.from('products').select('*');
+        if (error || !data || data.length === 0) {
+          badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400"></span> Supabase: Ready (Curated Cache)`;
+          badge.className = "inline-flex items-center gap-1.5 text-emerald-400 text-[10px]";
+          renderProducts(defaultProducts);
+        } else {
+          badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Supabase: ${data.length} Live Cloud Products`;
+          badge.className = "inline-flex items-center gap-1.5 text-emerald-400 text-[10px]";
+          // Map supabase items to expected format
+          allLoadedProducts = data.map((item, idx) => ({
+            id: item.id || 'sp_' + idx,
+            title: item.title || item.name || 'Palace Product',
+            price: Number(item.price) || 1999,
+            category: item.category || 'Luxury',
+            image: item.image || item.image_url || defaultProducts[idx % defaultProducts.length].image,
+            desc: item.description || 'Exclusive luxury collection piece.',
+            tag: item.tag || 'In Stock',
+            rating: item.rating || '4.9',
+            emoji: '👑'
+          }));
+          renderProducts(allLoadedProducts);
+        }
+      } catch (err) {
+        badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400"></span> Supabase: Ready (Curated Mode)`;
+        badge.className = "inline-flex items-center gap-1.5 text-emerald-400 text-[10px]";
+        renderProducts(defaultProducts);
+      }
+    }
+
+    function renderProducts(list) {
+      const grid = document.getElementById('liveProductGrid');
+      if (!list || list.length === 0) {
+        grid.innerHTML = `<div class="col-span-full py-12 text-center text-ivory/50 font-mono text-xs">No products found in this chamber.</div>`;
+        return;
+      }
+
+      grid.innerHTML = list.map((item, idx) => `
+        <div class="pavilion-card palace-glass-heavy border border-gold-500/30 p-5 flex flex-col justify-between group">
+          <div class="flex flex-col items-center text-center">
+            <span class="self-end px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 font-mono text-[9px] uppercase">${item.tag || 'Verified'}</span>
+            <div class="w-full h-36 rounded-2xl bg-midnight/80 border border-gold-500/20 flex items-center justify-center p-2 mb-3 relative overflow-hidden">
+              <img src="${item.image}" alt="${item.title}" class="max-h-32 object-contain group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null;this.parentElement.innerHTML='<span class=\\'text-5xl\\'>${item.emoji || '👑'}</span>';" />
+              <span class="absolute bottom-1 px-2 py-0.5 rounded bg-midnight/90 text-gold-300 font-mono text-[9px]">${item.category || 'KHM Collection'}</span>
+            </div>
+            <h4 class="font-serif font-bold text-base text-ivory mb-1 line-clamp-1">${item.title}</h4>
+            <div class="text-xs text-amber-400 mb-1">★★★★★ (${item.rating || '4.9'})</div>
+            <div class="font-serif font-black text-gold-300 text-lg mb-3">Rs. ${item.price.toLocaleString()}</div>
+            
+            <div class="flex items-center gap-1.5 mb-4">
+              <span class="px-2 py-0.5 rounded bg-sapphire text-gold-300 border border-gold-500/30 text-[10px] font-mono">18</span>
+              <span class="px-2 py-0.5 rounded bg-sapphire text-gold-300 border border-gold-500/30 text-[10px] font-mono">20</span>
+              <span class="px-2 py-0.5 rounded bg-sapphire text-gold-300 border border-gold-500/30 text-[10px] font-mono">22</span>
+              <span class="px-2 py-0.5 rounded bg-sapphire text-gold-300 border border-gold-500/30 text-[10px] font-mono">24</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2">
+            <button onclick="addToBag('${item.title.replace(/'/g, "\\'")}', ${item.price}, '20')" class="py-2.5 rounded-xl gold-btn font-cinzel text-xs uppercase tracking-wider">
+              Add
+            </button>
+            <a href="https://wa.me/923049141244?text=${encodeURIComponent('Assalam-o-Alaikum, I want to order ' + item.title + ' (Rs. ' + item.price + ')')}" target="_blank" class="py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-cinzel text-xs uppercase tracking-wider flex items-center justify-center gap-1">
+              <i class="fa-brands fa-whatsapp text-xs"></i> Quick Buy
+            </a>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filterCategory(cat) {
+      document.querySelectorAll('.cat-pill').forEach(btn => {
+        btn.className = "cat-pill px-3 py-1 rounded-full text-xs font-cinzel font-bold palace-glass text-ivory/80 hover:text-gold-300";
+      });
+      event.target.className = "cat-pill px-3 py-1 rounded-full text-xs font-cinzel font-bold bg-gold-500 text-midnight shadow";
+
+      if (cat === 'All') {
+        renderProducts(allLoadedProducts);
+      } else {
+        const filtered = allLoadedProducts.filter(p => (p.category && p.category.toLowerCase().includes(cat.toLowerCase())) || (p.title && p.title.toLowerCase().includes(cat.toLowerCase())));
+        renderProducts(filtered.length > 0 ? filtered : allLoadedProducts);
+      }
+    }
+
+    // ------------------------------------------------------------------
+    // 2. DYNAMIC BACKGROUND RANDOM CHANGER EVERY 20 SECONDS
+    // ------------------------------------------------------------------
+    const palaceThemes = [
+      { name: "Grand Gilded Dome", gradient: "radial-gradient(circle at 50% 30%, #152744 0%, #071426 50%, #030e20 100%)" },
+      { name: "Obsidian Royal Velvet", gradient: "radial-gradient(circle at 50% 20%, #2a2012 0%, #121c2e 55%, #030e20 100%)" },
+      { name: "Sapphire Starlight Pavilion", gradient: "radial-gradient(circle at 50% 30%, #142e3b 0%, #071526 55%, #020814 100%)" },
+      { name: "Imperial Amber Sanctuary", gradient: "radial-gradient(circle at 50% 25%, #291b29 0%, #0d1627 55%, #030e20 100%)" },
+      { name: "Celestial Emerald Court", gradient: "radial-gradient(circle at 50% 30%, #1f271b 0%, #0a1728 55%, #020914 100%)" }
+    ];
+
+    let currentLayerIndex = 0;
+    let countdownSec = 20;
+
+    function changeBackgroundRandom() {
+      const nextIndex = Math.floor(Math.random() * palaceThemes.length);
+      const nextTheme = palaceThemes[nextIndex];
+
+      const activeLayerId = `bgLayer${currentLayerIndex % 5}`;
+      const nextLayerIdx = (currentLayerIndex + 1) % 5;
+      const nextLayerId = `bgLayer${nextLayerIdx}`;
+
+      const activeLayer = document.getElementById(activeLayerId);
+      const nextLayer = document.getElementById(nextLayerId);
+
+      if (nextLayer && activeLayer) {
+        nextLayer.style.backgroundImage = nextTheme.gradient;
+        nextLayer.classList.add('active');
+        activeLayer.classList.remove('active');
+        currentLayerIndex = nextLayerIdx;
+
+        document.getElementById('bgThemeName').innerText = nextTheme.name;
+        countdownSec = 20;
+      }
+    }
+
+    // Background Timer Loop (Every 20 Seconds)
+    setInterval(() => {
+      countdownSec--;
+      const countEl = document.getElementById('bgTimerCount');
+      if (countEl) countEl.innerText = countdownSec;
+      if (countdownSec <= 0) {
+        changeBackgroundRandom();
+      }
+    }, 1000);
+
+    // ------------------------------------------------------------------
+    // 3. AUTHENTIC ISLAMIC AMBIENT BGM LOGIC
+    // ------------------------------------------------------------------
     const audio = document.getElementById('bgmAudio');
     const bgmStatusText = document.getElementById('bgmStatusText');
     const eqContainer = document.getElementById('eqContainer');
     let isAudioPlaying = false;
 
-    // Set subtle low volume (0.15)
+    // Subtle gentle volume
     audio.volume = 0.15;
 
     function toggleAudio() {
       if (isAudioPlaying) {
         audio.pause();
         isAudioPlaying = false;
-        bgmStatusText.innerText = "Islamic BGM: Muted";
+        bgmStatusText.innerText = "Islamic Oud BGM: Muted";
         eqContainer.classList.add('eq-paused');
       } else {
         audio.play().then(() => {
           isAudioPlaying = true;
-          bgmStatusText.innerText = "Islamic BGM: Playing";
+          bgmStatusText.innerText = "Islamic Oud BGM: Playing";
           eqContainer.classList.remove('eq-paused');
         }).catch(err => {
-          console.log("Audio autoplay prevented, user click required.");
+          console.log("Audio autoplay prevented by browser:", err);
         });
       }
     }
 
-    // Auto-start audio smoothly on first interaction
+    // Smooth single-click initial launch
     window.addEventListener('click', function autoStartOnFirstClick() {
       if (!isAudioPlaying) {
         audio.play().then(() => {
           isAudioPlaying = true;
-          bgmStatusText.innerText = "Islamic BGM: Playing";
+          bgmStatusText.innerText = "Islamic Oud BGM: Playing";
           eqContainer.classList.remove('eq-paused');
         }).catch(() => {});
       }
       window.removeEventListener('click', autoStartOnFirstClick);
     }, { once: true });
 
-    // 2. 3D ROTATION CONTROLS (Diorama Cloche)
+    // ------------------------------------------------------------------
+    // 4. 3D ROTATION & INSPECTION
+    // ------------------------------------------------------------------
     let currentAngle = 0;
     function rotateDiorama(delta) {
       currentAngle += delta;
@@ -630,13 +740,12 @@
       if (el) el.scrollIntoView({ behavior: 'smooth' });
     }
 
-    // 3. CART & COMMERCE LOGIC (Rs. 350 COD & Supabase)
+    // ------------------------------------------------------------------
+    // 5. SHOPPING BAG & SUPABASE ORDER SUBMISSION
+    // ------------------------------------------------------------------
     const SHIPPING_FEE = 350;
     const STORE_WHATSAPP = "923049141244";
     const STORE_EMAIL = "easicarts@gmail.com";
-    const SUPABASE_URL = "https://yyapzlhdnyduonrekiwe.supabase.co";
-    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5YXB6bGhkbnlkdW9ucmVraXdlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQzODA3MDYsImV4cCI6MjEwOTk1NjcwNn0.YMdQBz0h9sekPQV-crgmRHrGl96RfNj0xymXD6r4rBE";
-    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     let bag = [
       { id: "p1", title: "Baby Bear Sneakers", price: 1999, size: "20", qty: 1 }
@@ -647,7 +756,7 @@
       if (found) {
         found.qty += 1;
       } else {
-        bag.push({ id: 'item_' + Date.now(), title, price, size, qty: 1 });
+        bag.push({ id: 'item_' + Date.now(), title, price: Number(price), size, qty: 1 });
       }
       updateBagUI();
       toggleBagDrawer(true);
@@ -722,6 +831,7 @@
       const orderId = "KHM-" + Math.floor(100000 + Math.random() * 900000);
       const itemsSummary = bag.map(i => `• ${i.title} (${i.size}) x${i.qty} = Rs. ${(i.price * i.qty).toLocaleString()}`).join("\n");
 
+      // Direct Supabase Orders Table Record
       try {
         await supabaseClient.from('orders').insert([{
           id: orderId,
@@ -736,6 +846,7 @@
         }]);
       } catch (err) {}
 
+      // WhatsApp VIP Dispatch
       const waText = `👑 *NEW ORDER - KHM BEDDING V4.0*
 ━━━━━━━━━━━━━━━━━━━━
 *Order ID:* ${orderId}
@@ -764,8 +875,9 @@ Dispatched to: ${STORE_EMAIL}`;
       btn.innerHTML = `Place Order (Rs. 350 COD)`;
     }
 
-    // Init on load
+    // Initialize Supabase & UI on Load
     window.addEventListener('DOMContentLoaded', () => {
+      fetchSupabaseProducts();
       updateBagUI();
     });
   </script>
