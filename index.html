@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KHM Bedding | Master Luxury Mall & 3D Interactive Showroom</title>
-  <meta name="description" content="KHM Bedding Palace V4.0 - Master Luxury Mall with Category Card Grid, Full-Screen 3D Product Turntable Studio, and Flat Rs. 350 COD Nationwide." />
+  <meta name="description" content="KHM Bedding Palace V4.0 - Master Luxury Mall with 7 Prominent Categories, Card Grid Showcase, Full-Screen 3D Product Turntable Studio, and Flat Rs. 350 COD Nationwide." />
 
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -62,7 +62,7 @@
       padding: 0;
       width: 100%;
       height: 100%;
-      overflow: hidden;
+      overflow-x: hidden;
       background-color: #fdf9f1;
       color: #1c160c;
       font-family: 'Plus Jakarta Sans', sans-serif;
@@ -94,7 +94,7 @@
     }
 
     .pearl-glass {
-      background: rgba(255, 255, 255, 0.88);
+      background: rgba(255, 255, 255, 0.90);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(197, 160, 89, 0.35);
@@ -124,7 +124,7 @@
       transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .stall-card:hover {
-      transform: translateY(-8px) scale(1.02);
+      transform: translateY(-6px) scale(1.02);
       box-shadow: 0 20px 40px rgba(166, 124, 46, 0.2);
       border-color: rgba(197, 160, 89, 0.85);
     }
@@ -137,6 +137,20 @@
       box-shadow: 0 16px 35px rgba(166, 124, 46, 0.18);
       border-color: rgba(197, 160, 89, 0.85);
     }
+
+    .cat-nav-pill {
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .cat-nav-pill:hover {
+      transform: translateY(-2px);
+      border-color: #c5a059;
+      background-color: #ffffff;
+      box-shadow: 0 4px 15px rgba(197, 160, 89, 0.2);
+    }
+
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: #f5efe4; }
@@ -158,10 +172,10 @@
     <source src="https://assets.mixkit.co/music/preview/mixkit-oriental-serenade-598.mp3" type="audio/mp3" />
   </audio>
 
-  <!-- TOP HEADER HUD (BRIGHT ROYAL THEME) -->
-  <header class="fixed top-0 left-0 right-0 z-30 bg-white/85 backdrop-blur-xl border-b border-gold-500/25 shadow-sm">
-    <div class="h-20 w-full px-4 lg:px-12 flex items-center justify-between gap-4">
-      <div class="flex items-center gap-6">
+  <!-- TOP HEADER HUD (BRIGHT ROYAL THEME WITH PROMINENT CATEGORY STRIP) -->
+  <header class="fixed top-0 left-0 right-0 z-30 bg-white/90 backdrop-blur-xl border-b border-gold-500/25 shadow-sm">
+    <div class="h-16 lg:h-20 w-full px-4 lg:px-10 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-4 lg:gap-6">
         <a href="#" onclick="returnToAtrium()" class="flex items-center gap-3 group">
           <div class="w-10 h-10 rounded-full bg-ivory-200 border border-gold-500/40 flex items-center justify-center shadow-inner group-hover:bg-gold-500 group-hover:text-white transition-colors">
             <span class="material-symbols-outlined text-gold-600 group-hover:text-white font-bold text-xl">crown</span>
@@ -172,27 +186,18 @@
           </div>
         </a>
 
-        <!-- Center Navigation -->
-        <nav class="hidden xl:flex items-center gap-6 text-sm font-outfit font-medium text-royal-bronze/70">
-          <a href="#" onclick="returnToAtrium()" class="text-royal-bronze font-bold tracking-wider px-3.5 py-1.5 rounded-lg bg-ivory-200 border border-gold-500/30">Home</a>
-          <button onclick="openCategoryShowcase('khm-bedsheets')" class="px-4 py-1.5 rounded-full gold-btn text-xs uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
-            <span class="material-symbols-outlined text-sm">explore</span>
-            <span>Explore Collections</span>
-          </button>
-          <a href="#" class="hover:text-gold-600 transition-colors">Our Story</a>
-          <a href="#" class="hover:text-gold-600 transition-colors">Contact</a>
-        </nav>
+        <!-- COD Info Badge -->
+        <span class="hidden xl:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-ivory-200 border border-gold-500/30 text-[11px] font-outfit font-semibold text-royal-bronze">
+          <i class="fa-solid fa-truck-fast text-gold-600"></i>
+          <span>Flat Rs. 350 COD All Over Pakistan</span>
+        </span>
       </div>
 
       <!-- Right HUD Controls -->
-      <div class="flex items-center gap-3">
-        <button aria-label="Search" class="w-9 h-9 rounded-full pearl-glass hover:bg-gold-500 hover:text-white text-royal-bronze flex items-center justify-center transition-colors">
-          <span class="material-symbols-outlined text-[18px]">search</span>
-        </button>
-
+      <div class="flex items-center gap-2.5 sm:gap-3">
         <a href="https://wa.me/923049141244" target="_blank" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-300 hover:bg-emerald-600 hover:text-white text-xs font-bold transition-all shadow-sm">
           <i class="fa-brands fa-whatsapp text-sm text-emerald-600"></i>
-          <span class="hidden sm:inline">WhatsApp</span>
+          <span class="hidden sm:inline">03049141244</span>
         </a>
 
         <button onclick="toggleMallMusic()" class="w-9 h-9 rounded-full pearl-glass text-gold-600 flex items-center justify-center hover:bg-gold-500 hover:text-white transition-colors" title="Islamic Oud Ambient FX">
@@ -206,130 +211,173 @@
         </button>
       </div>
     </div>
+
+    <!-- PROMINENT 7 CATEGORIES HORIZONTAL QUICK-STRIP -->
+    <div class="w-full bg-ivory-100/90 border-t border-gold-500/20 px-4 lg:px-10 py-2 flex items-center gap-2 overflow-x-auto hide-scrollbar">
+      <span class="text-[10px] font-mono text-royal-bronze/60 uppercase font-bold tracking-widest shrink-0 flex items-center gap-1 mr-1">
+        <span class="w-2 h-2 rounded-full bg-gold-500"></span> CATEGORIES:
+      </span>
+      <button onclick="openCategoryShowcase('baby-shoes')" class="cat-nav-pill px-3 py-1 rounded-full text-xs font-semibold bg-white border border-gold-500/30 text-royal-bronze flex items-center gap-1.5 shadow-sm">
+        <span>👟</span> <span>Baby Shoes</span>
+      </button>
+      <button onclick="openCategoryShowcase('handmade-items')" class="cat-nav-pill px-3 py-1 rounded-full text-xs font-semibold bg-white border border-gold-500/30 text-royal-bronze flex items-center gap-1.5 shadow-sm">
+        <span>🎨</span> <span>Handmade Items</span>
+      </button>
+      <button onclick="openCategoryShowcase('clothes')" class="cat-nav-pill px-3 py-1 rounded-full text-xs font-semibold bg-white border border-gold-500/30 text-royal-bronze flex items-center gap-1.5 shadow-sm">
+        <span>👕</span> <span>Clothes</span>
+      </button>
+      <button onclick="openCategoryShowcase('premium-clothes')" class="cat-nav-pill px-3 py-1 rounded-full text-xs font-semibold bg-white border border-gold-500/40 text-gold-800 flex items-center gap-1.5 shadow-sm">
+        <span>💎</span> <span>Premium Clothes</span>
+      </button>
+      <button onclick="openCategoryShowcase('bedsheets')" class="cat-nav-pill px-3.5 py-1 rounded-full text-xs font-bold bg-gold-500 text-white flex items-center gap-1.5 shadow-md">
+        <span>🛏️</span> <span>Bedsheets (KHM)</span>
+      </button>
+      <button onclick="openCategoryShowcase('desi-product')" class="cat-nav-pill px-3 py-1 rounded-full text-xs font-semibold bg-white border border-gold-500/30 text-royal-bronze flex items-center gap-1.5 shadow-sm">
+        <span>🍯</span> <span>Desi Product</span>
+      </button>
+      <button onclick="openCategoryShowcase('desi-phakki')" class="cat-nav-pill px-3 py-1 rounded-full text-xs font-bold bg-amber-100 border border-amber-400 text-amber-900 flex items-center gap-1.5 shadow-sm">
+        <span>🌿</span> <span>Desi Phakki (Herbal)</span>
+      </button>
+    </div>
   </header>
 
   <!-- INTERACTIVE HUD OVERLAY (BRIGHT ROTUNDA) -->
-  <div id="mall-hud" class="relative z-10 w-full h-[calc(100vh-5rem)] mt-20 flex flex-col justify-between p-4 lg:p-8 pointer-events-none transition-opacity duration-300">
+  <div id="mall-hud" class="relative z-10 w-full h-[calc(100vh-8rem)] mt-32 flex flex-col justify-between p-4 lg:p-8 pointer-events-none transition-opacity duration-300">
     
-    <!-- TOP ROW: INSTRUCTION PILL & RADAR AZIMUTH COMPASS -->
+    <!-- TOP ROW: INSTRUCTION PILL & ROTUNDA TELEMETRY -->
     <div class="w-full flex items-start justify-between pointer-events-none">
       <div class="pointer-events-auto flex items-center gap-2.5 px-4 py-2 rounded-full pearl-glass shadow-md text-xs text-royal-bronze font-outfit font-semibold border border-gold-500/30">
         <span class="material-symbols-outlined text-gold-600 text-base">touch_app</span>
-        <span>Click any Boutique storefront to view Products</span>
-        <button onclick="toggleMallMusic()" class="ml-2 w-5 h-5 rounded-full bg-ivory-300 text-royal-bronze flex items-center justify-center hover:bg-gold-500 hover:text-white text-[10px]">
-          <span class="material-symbols-outlined text-[13px]">volume_up</span>
-        </button>
+        <span>Click any Pavilion to explore Products</span>
       </div>
 
       <div class="pointer-events-auto flex flex-col items-end gap-1 pearl-glass p-2.5 px-3.5 rounded-xl border border-gold-500/30 text-right shadow-sm">
         <div class="flex items-center gap-1.5 text-xs font-mono font-bold text-royal-bronze">
-          <span>AZM: 358°</span>
-          <span class="w-2 h-2 rounded-full bg-amber-500 animate-ping"></span>
+          <span>7 PAVILIONS ACTIVE</span>
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
         </div>
-        <span class="text-[9px] font-mono text-royal-bronze/60 uppercase">ROTUNDA S-04</span>
+        <span class="text-[9px] font-mono text-royal-bronze/60 uppercase">ROTUNDA ATRIUM V4.0</span>
       </div>
     </div>
 
-    <!-- CENTER ROW: 4 REAL PHOTOREALISTIC BOUTIQUE STALLS WITH LIVE CUSTOMERS -->
-    <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto my-auto pointer-events-auto">
-      
-      <!-- STALL 1: BABY & KIDS FOOTWEAR -->
-      <div onclick="openCategoryShowcase('kids-footwear')" class="stall-card pearl-glass rounded-2xl p-3.5 border border-gold-500/35 cursor-pointer group flex flex-col justify-between shadow-lg">
-        <div class="flex items-center justify-between mb-2">
-          <span class="text-[10px] font-mono uppercase tracking-wider text-royal-bronze font-bold flex items-center gap-1.5">
-            <span class="w-2 h-2 rounded-full bg-emerald-500"></span> STORE 01 • KIDS
-          </span>
-          <span class="material-symbols-outlined text-sm text-gold-600 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">north_east</span>
+    <!-- CENTER ROW: PROMINENT 7-CATEGORY CONCOURSE VITRINES (GRID) -->
+    <div class="w-full max-w-7xl mx-auto my-auto pointer-events-auto">
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-3">
+        
+        <!-- 1. Baby Shoes -->
+        <div onclick="openCategoryShowcase('baby-shoes')" class="stall-card pearl-glass rounded-2xl p-3 border border-gold-500/30 cursor-pointer flex flex-col justify-between shadow-md bg-white/95">
+          <div class="text-[10px] font-mono uppercase font-bold text-royal-bronze flex items-center justify-between mb-1.5">
+            <span>01 • SHOES</span>
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          </div>
+          <div class="w-full h-24 rounded-lg overflow-hidden relative mb-2">
+            <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=500&auto=format&fit=crop&q=80" alt="Baby Shoes" class="w-full h-full object-cover" />
+            <span class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-white/90 text-[9px] font-bold text-royal-bronze">👟 Baby</span>
+          </div>
+          <span class="font-serif font-bold text-xs text-royal-bronze truncate">Baby Shoes</span>
+          <span class="text-[10px] text-emerald-700 font-bold mt-0.5">Rs. 1,850+</span>
         </div>
-        <div class="w-full h-44 rounded-xl overflow-hidden bg-ivory-200 border border-gold-500/20 relative">
-          <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&auto=format&fit=crop&q=80" alt="Kids Boutique Stall" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-          <span class="absolute bottom-2 left-2 px-2 py-0.5 rounded-md bg-white/90 text-[10px] font-bold text-royal-bronze backdrop-blur-sm">Shoppers in Stall: 14</span>
-        </div>
-        <div class="mt-2.5 pt-2 border-t border-gold-500/20 flex items-center justify-between text-[11px] font-outfit">
-          <span class="text-emerald-700 font-bold flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> 14 Browsing Now</span>
-          <span class="text-royal-bronze font-bold">View Products →</span>
-        </div>
-        <div class="mt-1 text-[10px] text-royal-bronze/60 text-center bg-ivory-200/80 rounded py-0.5 font-medium">✨ 4 Purchased in last hour</div>
-      </div>
 
-      <!-- STALL 2: COTTON GARMENTS & APPAREL -->
-      <div onclick="openCategoryShowcase('cotton-garments')" class="stall-card pearl-glass rounded-2xl p-3.5 border border-gold-500/35 cursor-pointer group flex flex-col justify-between shadow-lg">
-        <div class="flex items-center justify-between mb-2">
-          <span class="text-[10px] font-mono uppercase tracking-wider text-royal-bronze font-bold flex items-center gap-1.5">
-            <span class="w-2 h-2 rounded-full bg-emerald-500"></span> STORE 02 • GARMENTS
-          </span>
-          <span class="material-symbols-outlined text-sm text-gold-600 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">north_east</span>
+        <!-- 2. Handmade Items -->
+        <div onclick="openCategoryShowcase('handmade-items')" class="stall-card pearl-glass rounded-2xl p-3 border border-gold-500/30 cursor-pointer flex flex-col justify-between shadow-md bg-white/95">
+          <div class="text-[10px] font-mono uppercase font-bold text-royal-bronze flex items-center justify-between mb-1.5">
+            <span>02 • CRAFT</span>
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          </div>
+          <div class="w-full h-24 rounded-lg overflow-hidden relative mb-2">
+            <img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=500&auto=format&fit=crop&q=80" alt="Handmade Items" class="w-full h-full object-cover" />
+            <span class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-white/90 text-[9px] font-bold text-royal-bronze">🎨 Craft</span>
+          </div>
+          <span class="font-serif font-bold text-xs text-royal-bronze truncate">Handmade Items</span>
+          <span class="text-[10px] text-emerald-700 font-bold mt-0.5">Rs. 1,600+</span>
         </div>
-        <div class="w-full h-44 rounded-xl overflow-hidden bg-ivory-200 border border-gold-500/20 relative">
-          <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&auto=format&fit=crop&q=80" alt="Garments Boutique Stall" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-          <span class="absolute bottom-2 left-2 px-2 py-0.5 rounded-md bg-white/90 text-[10px] font-bold text-royal-bronze backdrop-blur-sm">Shoppers in Stall: 19</span>
-        </div>
-        <div class="mt-2.5 pt-2 border-t border-gold-500/20 flex items-center justify-between text-[11px] font-outfit">
-          <span class="text-emerald-700 font-bold flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> 19 Browsing Now</span>
-          <span class="text-royal-bronze font-bold">View Products →</span>
-        </div>
-        <div class="mt-1 text-[10px] text-royal-bronze/60 text-center bg-ivory-200/80 rounded py-0.5 font-medium">✨ Robe Consignment Packed</div>
-      </div>
 
-      <!-- STALL 3: LUXURY BEDSHEETS (KHM FLAGSHIP) -->
-      <div onclick="openCategoryShowcase('khm-bedsheets')" class="stall-card pearl-glass rounded-2xl p-3.5 border-2 border-gold-500/60 cursor-pointer group flex flex-col justify-between shadow-xl ring-2 ring-gold-400/20">
-        <div class="flex items-center justify-between mb-2">
-          <span class="text-[10px] font-mono uppercase tracking-wider text-gold-700 font-bold flex items-center gap-1.5">
-            <span class="w-2 h-2 rounded-full bg-amber-500"></span> STORE 03 • BEDSHEETS
-          </span>
-          <span class="material-symbols-outlined text-sm text-gold-600 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">north_east</span>
+        <!-- 3. Clothes -->
+        <div onclick="openCategoryShowcase('clothes')" class="stall-card pearl-glass rounded-2xl p-3 border border-gold-500/30 cursor-pointer flex flex-col justify-between shadow-md bg-white/95">
+          <div class="text-[10px] font-mono uppercase font-bold text-royal-bronze flex items-center justify-between mb-1.5">
+            <span>03 • WEAR</span>
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          </div>
+          <div class="w-full h-24 rounded-lg overflow-hidden relative mb-2">
+            <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500&auto=format&fit=crop&q=80" alt="Clothes" class="w-full h-full object-cover" />
+            <span class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-white/90 text-[9px] font-bold text-royal-bronze">👕 Casual</span>
+          </div>
+          <span class="font-serif font-bold text-xs text-royal-bronze truncate">Clothes</span>
+          <span class="text-[10px] text-emerald-700 font-bold mt-0.5">Rs. 1,399+</span>
         </div>
-        <div class="w-full h-44 rounded-xl overflow-hidden bg-ivory-200 border border-gold-500/30 relative">
-          <img src="https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=600&auto=format&fit=crop&q=80" alt="Bedsheet Boutique Stall" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-          <span class="absolute bottom-2 left-2 px-2 py-0.5 rounded-md bg-gold-400 text-[10px] font-bold text-white shadow-sm">Imperial Suite</span>
-        </div>
-        <div class="mt-2.5 pt-2 border-t border-gold-500/25 flex items-center justify-between text-[11px] font-outfit">
-          <span class="text-emerald-700 font-bold flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> 27 Browsing Now</span>
-          <span class="text-gold-700 font-bold">View Products →</span>
-        </div>
-        <div class="mt-1 text-[10px] text-gold-700 text-center bg-ivory-300/80 rounded py-0.5 font-semibold">✨ 1000TC Sateen Sold 2m ago</div>
-      </div>
 
-      <!-- STALL 4: HOME LIVING SHOWCASE -->
-      <div onclick="openCategoryShowcase('home-living')" class="stall-card pearl-glass rounded-2xl p-3.5 border border-gold-500/35 cursor-pointer group flex flex-col justify-between shadow-lg">
-        <div class="flex items-center justify-between mb-2">
-          <span class="text-[10px] font-mono uppercase tracking-wider text-royal-bronze font-bold flex items-center gap-1.5">
-            <span class="w-2 h-2 rounded-full bg-emerald-500"></span> STORE 04 • LIVING
-          </span>
-          <span class="material-symbols-outlined text-sm text-gold-600 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">north_east</span>
+        <!-- 4. Premium Clothes -->
+        <div onclick="openCategoryShowcase('premium-clothes')" class="stall-card pearl-glass rounded-2xl p-3 border border-gold-500/40 cursor-pointer flex flex-col justify-between shadow-md bg-white/95 ring-1 ring-gold-400/20">
+          <div class="text-[10px] font-mono uppercase font-bold text-gold-700 flex items-center justify-between mb-1.5">
+            <span>04 • LUXE</span>
+            <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+          </div>
+          <div class="w-full h-24 rounded-lg overflow-hidden relative mb-2">
+            <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500&auto=format&fit=crop&q=80" alt="Premium Clothes" class="w-full h-full object-cover" />
+            <span class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-gold-400 text-[9px] font-bold text-white">💎 Premium</span>
+          </div>
+          <span class="font-serif font-bold text-xs text-royal-bronze truncate">Premium Clothes</span>
+          <span class="text-[10px] text-gold-700 font-bold mt-0.5">Rs. 4,200+</span>
         </div>
-        <div class="w-full h-44 rounded-xl overflow-hidden bg-ivory-200 border border-gold-500/20 relative">
-          <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&auto=format&fit=crop&q=80" alt="Home Living Boutique Stall" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-          <span class="absolute bottom-2 left-2 px-2 py-0.5 rounded-md bg-white/90 text-[10px] font-bold text-royal-bronze backdrop-blur-sm">Shoppers in Stall: 11</span>
+
+        <!-- 5. Bedsheets (KHM Flagship) -->
+        <div onclick="openCategoryShowcase('bedsheets')" class="stall-card pearl-glass rounded-2xl p-3 border-2 border-gold-500/60 cursor-pointer flex flex-col justify-between shadow-xl bg-white/95 ring-2 ring-gold-400/30">
+          <div class="text-[10px] font-mono uppercase font-bold text-gold-700 flex items-center justify-between mb-1.5">
+            <span>05 • FLAGSHIP</span>
+            <span class="w-2 h-2 rounded-full bg-gold-500 animate-ping"></span>
+          </div>
+          <div class="w-full h-24 rounded-lg overflow-hidden relative mb-2">
+            <img src="https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=500&auto=format&fit=crop&q=80" alt="Bedsheets" class="w-full h-full object-cover" />
+            <span class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-gold-500 text-[9px] font-bold text-white">🛏️ 1000TC</span>
+          </div>
+          <span class="font-serif font-bold text-xs text-royal-bronze truncate">Bedsheets (KHM)</span>
+          <span class="text-[10px] text-gold-700 font-bold mt-0.5">Rs. 12,500+</span>
         </div>
-        <div class="mt-2.5 pt-2 border-t border-gold-500/20 flex items-center justify-between text-[11px] font-outfit">
-          <span class="text-emerald-700 font-bold flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> 11 Browsing Now</span>
-          <span class="text-royal-bronze font-bold">View Products →</span>
+
+        <!-- 6. Desi Product -->
+        <div onclick="openCategoryShowcase('desi-product')" class="stall-card pearl-glass rounded-2xl p-3 border border-gold-500/30 cursor-pointer flex flex-col justify-between shadow-md bg-white/95">
+          <div class="text-[10px] font-mono uppercase font-bold text-royal-bronze flex items-center justify-between mb-1.5">
+            <span>06 • PURE</span>
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          </div>
+          <div class="w-full h-24 rounded-lg overflow-hidden relative mb-2">
+            <img src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=500&auto=format&fit=crop&q=80" alt="Desi Product" class="w-full h-full object-cover" />
+            <span class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-white/90 text-[9px] font-bold text-royal-bronze">🍯 Desi</span>
+          </div>
+          <span class="font-serif font-bold text-xs text-royal-bronze truncate">Desi Product</span>
+          <span class="text-[10px] text-emerald-700 font-bold mt-0.5">Rs. 2,200+</span>
         </div>
-        <div class="mt-1 text-[10px] text-royal-bronze/60 text-center bg-ivory-200/80 rounded py-0.5 font-medium">✨ Mahogany Suite Reserved</div>
+
+        <!-- 7. Desi Phakki -->
+        <div onclick="openCategoryShowcase('desi-phakki')" class="stall-card pearl-glass rounded-2xl p-3 border-2 border-amber-400 cursor-pointer flex flex-col justify-between shadow-md bg-amber-50/80">
+          <div class="text-[10px] font-mono uppercase font-bold text-amber-900 flex items-center justify-between mb-1.5">
+            <span>07 • HERBAL</span>
+            <span class="w-2 h-2 rounded-full bg-amber-600"></span>
+          </div>
+          <div class="w-full h-24 rounded-lg overflow-hidden relative mb-2">
+            <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=500&auto=format&fit=crop&q=80" alt="Desi Phakki" class="w-full h-full object-cover" />
+            <span class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-amber-500 text-[9px] font-bold text-white">🌿 Shahi</span>
+          </div>
+          <span class="font-serif font-bold text-xs text-amber-950 truncate">Desi Phakki</span>
+          <span class="text-[10px] text-amber-800 font-bold mt-0.5">Rs. 950+</span>
+        </div>
+
       </div>
     </div>
 
     <!-- LOWER FLOATING CARDS & MARQUEE ATRIUM TICKER -->
     <div class="w-full flex flex-col md:flex-row items-end md:items-center justify-between gap-4 pointer-events-none mt-auto">
       
-      <!-- Left Floating Product: Kids Sneakers -->
+      <!-- Left Floating Product: Kids Royal Sneakers -->
       <div onclick="openProductStudio('sp_1')" class="pointer-events-auto flex items-center gap-3 p-3 rounded-2xl pearl-glass shadow-xl hover:scale-105 transition-all cursor-pointer group border border-gold-500/35">
-        <div class="w-14 h-14 rounded-xl bg-ivory-200 flex items-center justify-center p-1 overflow-hidden border border-gold-500/30">
+        <div class="w-12 h-12 rounded-xl bg-ivory-200 flex items-center justify-center p-1 overflow-hidden border border-gold-500/30">
           <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=500&auto=format&fit=crop&q=80" alt="Kids Sneakers" class="w-full h-full object-cover rounded-lg" />
         </div>
         <div class="flex flex-col">
-          <div class="flex items-center gap-1 text-[9px] font-mono text-royal-bronze/60 font-bold uppercase">
-            <span>QUICK PICK</span> • <span>ID: 804</span>
-          </div>
-          <span class="font-serif font-bold text-sm text-royal-bronze group-hover:text-gold-700">Kids Royal Sneakers</span>
-          <span class="text-xs text-gold-700 font-bold">Rs. 2,499</span>
-          <button onclick="event.stopPropagation(); openProductStudio('sp_1');" class="mt-1 px-3 py-1 rounded-full gold-btn text-[10px] uppercase font-bold tracking-wider shadow-sm flex items-center gap-1">
-            <span class="material-symbols-outlined text-[13px]">view_in_ar</span>
+          <span class="font-serif font-bold text-xs text-royal-bronze group-hover:text-gold-700">Kids Royal Sneakers</span>
+          <span class="text-[11px] text-gold-700 font-bold">Rs. 2,499</span>
+          <button class="mt-1 px-2.5 py-0.5 rounded-full gold-btn text-[9px] uppercase font-bold tracking-wider shadow-sm flex items-center gap-1">
+            <span class="material-symbols-outlined text-[11px]">view_in_ar</span>
             <span>VIEW 3D</span>
           </button>
         </div>
@@ -339,42 +387,39 @@
       <div class="pointer-events-auto hidden xl:flex flex-col items-center gap-1 text-center">
         <div class="px-3.5 py-1 rounded-full bg-white/90 border border-gold-500/35 text-[11px] font-mono text-royal-bronze font-bold shadow-sm flex items-center gap-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-          <span>ROTUNDA CORE V4.0 • 71 LIVE PATRONS IN ATRIUM</span>
+          <span>ROTUNDA CORE V4.0 • 78 LIVE SHOPPERS IN ATRIUM</span>
         </div>
         <div class="text-[10px] text-royal-bronze/70 font-outfit bg-ivory-200/80 px-3 py-0.5 rounded-full border border-gold-500/20">
-          ✨ Fatima from Lahore just ordered 1000TC Sateen Set • COD Rs. 350 Trax
+          ✨ Usman from Rawalpindi just ordered 1000TC Sateen Set • COD Rs. 350 Trax
         </div>
       </div>
 
-      <!-- Right Floating Product: Premium Comfort Bed -->
+      <!-- Right Floating Product: 1000TC Egyptian Duvet -->
       <div onclick="openProductStudio('sp_5')" class="pointer-events-auto flex items-center gap-3 p-3 rounded-2xl pearl-glass shadow-xl hover:scale-105 transition-all cursor-pointer group border border-gold-500/35">
-        <div class="w-14 h-14 rounded-xl bg-ivory-200 flex items-center justify-center p-1 overflow-hidden border border-gold-500/30">
+        <div class="w-12 h-12 rounded-xl bg-ivory-200 flex items-center justify-center p-1 overflow-hidden border border-gold-500/30">
           <img src="https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=500&auto=format&fit=crop&q=80" alt="Comfort Bed" class="w-full h-full object-cover rounded-lg" />
         </div>
         <div class="flex flex-col">
-          <div class="flex items-center gap-1 text-[9px] font-mono text-royal-bronze/60 font-bold uppercase">
-            <span>SIGNATURE</span> • <span>ID: 102</span>
-          </div>
-          <span class="font-serif font-bold text-sm text-royal-bronze group-hover:text-gold-700">Premium Comfort Bed</span>
-          <span class="text-xs text-gold-700 font-bold">Rs. 49,999</span>
-          <button onclick="event.stopPropagation(); openProductStudio('sp_5');" class="mt-1 px-3 py-1 rounded-full gold-btn text-[10px] uppercase font-bold tracking-wider shadow-sm flex items-center gap-1">
-            <span>VIEW DETAILS</span>
-            <span class="material-symbols-outlined text-[13px]">arrow_forward</span>
+          <span class="font-serif font-bold text-xs text-royal-bronze group-hover:text-gold-700">1000TC Sateen Duvet</span>
+          <span class="text-[11px] text-gold-700 font-bold">Rs. 16,800</span>
+          <button class="mt-1 px-2.5 py-0.5 rounded-full gold-btn text-[9px] uppercase font-bold tracking-wider shadow-sm flex items-center gap-1">
+            <span>VIEW 3D</span>
+            <span class="material-symbols-outlined text-[11px]">arrow_forward</span>
           </button>
         </div>
       </div>
     </div>
 
     <!-- BOTTOM FLANK: CENTER PEARL NAVIGATION DOCK -->
-    <div class="w-full flex items-center justify-center pt-4 pointer-events-none">
+    <div class="w-full flex items-center justify-center pt-3 pointer-events-none">
       <nav class="pointer-events-auto flex items-center gap-1 sm:gap-2 px-5 py-2.5 rounded-full pearl-glass-heavy shadow-xl border border-gold-500/40">
         <button onclick="returnToAtrium()" class="flex items-center gap-1.5 px-4 py-2 rounded-full gold-btn font-outfit text-xs font-bold shadow-md">
           <span class="material-symbols-outlined text-base">storefront</span>
           <span>Mall Atrium</span>
         </button>
-        <button onclick="openCategoryShowcase('khm-bedsheets')" class="flex items-center gap-1.5 px-3.5 py-2 rounded-full hover:bg-ivory-200 text-royal-bronze font-outfit text-xs font-semibold transition-all">
+        <button onclick="openCategoryShowcase('bedsheets')" class="flex items-center gap-1.5 px-3.5 py-2 rounded-full hover:bg-ivory-200 text-royal-bronze font-outfit text-xs font-semibold transition-all">
           <span class="material-symbols-outlined text-base text-gold-600">grid_view</span>
-          <span>Collections</span>
+          <span>7 Categories</span>
         </button>
         <button onclick="openProductStudio('sp_5')" class="flex items-center gap-1.5 px-3.5 py-2 rounded-full hover:bg-ivory-200 text-royal-bronze font-outfit text-xs font-semibold transition-all">
           <span class="material-symbols-outlined text-base text-gold-600">360</span>
@@ -385,15 +430,15 @@
           <span>Cart (Rs. 350 COD)</span>
         </button>
         <a href="https://wa.me/923049141244" target="_blank" class="flex items-center gap-1.5 px-3.5 py-2 rounded-full hover:bg-ivory-200 text-royal-bronze font-outfit text-xs font-semibold transition-all">
-          <span class="material-symbols-outlined text-base text-gold-600">person</span>
-          <span>VIP Account</span>
+          <span class="material-symbols-outlined text-base text-gold-600">chat</span>
+          <span>WhatsApp Help</span>
         </a>
       </nav>
     </div>
   </div>
 
   <!-- =========================================================================
-       NEW DEDICATED FULL-SCREEN CATEGORY PRODUCTS CARD GRID VIEW (CARDVIEW)
+       DEDICATED FULL-SCREEN CATEGORY PRODUCTS CARD GRID VIEW (CARDVIEW)
        ========================================================================= -->
   <section id="full-screen-category-showcase" class="hidden fixed inset-0 z-40 w-full h-full bg-[#fdf9f1] text-royal-bronze flex flex-col overflow-y-auto select-none">
     
@@ -429,11 +474,11 @@
       <div class="p-6 sm:p-8 rounded-3xl pearl-glass border border-gold-500/35 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-md bg-gradient-to-r from-white via-ivory-100 to-ivory-200">
         <div>
           <div class="flex items-center gap-2 mb-2">
-            <span id="category-badge-num" class="px-2.5 py-0.5 rounded-full bg-gold-400 text-white font-mono text-[10px] uppercase font-bold tracking-wider">BOUTIQUE 03</span>
+            <span id="category-badge-num" class="px-2.5 py-0.5 rounded-full bg-gold-400 text-white font-mono text-[10px] uppercase font-bold tracking-wider">DEPARTMENT</span>
             <span class="text-xs text-emerald-700 font-bold">• In-Stock & Ready for Trax COD</span>
           </div>
-          <h1 id="category-main-heading" class="font-serif text-3xl sm:text-4xl font-bold text-royal-bronze">Luxury Bedsheets & Bedding</h1>
-          <p id="category-main-subtext" class="text-sm text-royal-bronze/70 mt-1 max-w-2xl">Browse our authentic 1000TC Egyptian sateen linen and handcrafted royal chamber sets. Click any product to inspect in 360° 3D.</p>
+          <h1 id="category-main-heading" class="font-serif text-3xl sm:text-4xl font-bold text-royal-bronze">Category Name</h1>
+          <p id="category-main-subtext" class="text-sm text-royal-bronze/70 mt-1 max-w-2xl">Browse articles. Click any product to inspect in 360° 3D.</p>
         </div>
 
         <div class="flex items-center gap-3 shrink-0 pearl-glass px-4 py-2.5 rounded-2xl border border-gold-500/30">
@@ -449,13 +494,13 @@
     <!-- Live Category Products Grid (Cardview) -->
     <div class="w-full max-w-7xl mx-auto px-4 lg:px-12 py-6">
       <div class="flex items-center justify-between mb-4">
-        <h3 class="font-serif font-bold text-xl text-royal-bronze">Available Articles in Boutique</h3>
-        <span id="category-product-count" class="text-xs font-mono text-royal-bronze/70 bg-ivory-200 px-3 py-1 rounded-full border border-gold-500/30">Loading Products...</span>
+        <h3 class="font-serif font-bold text-xl text-royal-bronze">Available Articles in Department</h3>
+        <span id="category-product-count" class="text-xs font-mono text-royal-bronze/70 bg-ivory-200 px-3 py-1 rounded-full border border-gold-500/30">Loading...</span>
       </div>
 
       <!-- The Cards Grid Container -->
       <div id="category-cards-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pb-16">
-        <!-- Rendered dynamically from liveProducts -->
+        <!-- Dynamically rendered -->
       </div>
     </div>
   </section>
@@ -475,7 +520,7 @@
         <div class="hidden sm:flex items-center gap-2 text-xs text-royal-bronze/70 font-outfit">
           <span>KHM Palace</span>
           <span>/</span>
-          <span id="studio-crumb-category" class="text-gold-700 font-bold">Luxury Bedsheets</span>
+          <span id="studio-crumb-category" class="text-gold-700 font-bold">Collection</span>
           <span>/</span>
           <span id="studio-crumb-title" class="text-royal-bronze font-semibold truncate max-w-xs">Product Details</span>
         </div>
@@ -499,31 +544,27 @@
       
       <!-- LEFT 7 COLS: 3D TURNTABLE INSPECTION CHAMBER -->
       <div class="lg:col-span-7 relative flex flex-col items-center justify-center p-6 lg:p-12 bg-radial from-white via-[#fbf6ea] to-[#f4ead4] overflow-hidden min-h-[460px] lg:min-h-0 border-b lg:border-b-0 lg:border-r border-gold-500/25">
-        
-        <!-- Radiant Gold Radial Glow -->
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(197,160,89,0.18)_0%,transparent_65%)] pointer-events-none"></div>
 
         <!-- 3D Turntable Plinth Platform -->
         <div class="relative w-80 h-80 sm:w-96 sm:h-96 lg:w-[480px] lg:h-[480px] flex items-center justify-center">
-          
-          <!-- Concentric Gold Rings Pedestal -->
           <div class="absolute inset-4 rounded-full border-2 border-gold-500/40 shadow-[0_0_50px_rgba(197,160,89,0.25)] animate-pulse pointer-events-none"></div>
           <div class="absolute inset-16 rounded-full border border-gold-500/25 pointer-events-none"></div>
           <div class="absolute bottom-6 w-3/4 h-12 bg-gold-700/20 blur-xl rounded-full pointer-events-none"></div>
 
           <!-- Interactive 360 Turntable Mesh/Image Wrapper -->
           <div id="product-turntable-core" class="relative z-10 w-64 h-64 sm:w-80 sm:h-80 flex items-center justify-center cursor-grab active:cursor-grabbing transition-transform duration-75">
-            <img id="studio-active-image" src="https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=800&auto=format&fit=crop&q=80" alt="Master 3D Product" class="max-h-72 sm:max-h-96 object-contain drop-shadow-[0_20px_35px_rgba(166,124,46,0.35)] select-none pointer-events-none" />
+            <img id="studio-active-image" src="" alt="Master 3D Product" class="max-h-72 sm:max-h-96 object-contain drop-shadow-[0_20px_35px_rgba(166,124,46,0.35)] select-none pointer-events-none" />
           </div>
 
-          <!-- Azimuth Indicator Tag -->
+          <!-- Azimuth Readout -->
           <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2 px-3.5 py-1 rounded-full pearl-glass text-[11px] font-mono text-royal-bronze font-bold border border-gold-500/45 shadow-sm">
             <span class="material-symbols-outlined text-sm text-gold-600">360</span>
             <span id="turntable-angle-readout">0° AZIMUTH</span>
           </div>
         </div>
 
-        <!-- Turntable Degree Interactive Slider & Drag Prompt -->
+        <!-- Turntable Degree Slider -->
         <div class="w-full max-w-md mt-6 space-y-2 z-10">
           <div class="flex items-center justify-between text-xs text-royal-bronze/70 font-outfit">
             <span class="flex items-center gap-1 font-semibold"><span class="material-symbols-outlined text-sm text-gold-600">touch_app</span> Drag object to rotate</span>
@@ -539,58 +580,47 @@
 
       <!-- RIGHT 5 COLS: PRODUCT SPECIFICATIONS & COD CHECKOUT -->
       <div class="lg:col-span-5 flex flex-col justify-between p-6 lg:p-10 bg-white/95 overflow-y-auto space-y-6">
-        
         <div class="space-y-4">
           <!-- Tag & Stock Telemetry -->
           <div class="flex items-center justify-between">
-            <span id="studio-product-tag" class="px-3 py-1 rounded-full bg-ivory-200 text-gold-700 text-[10px] uppercase font-bold tracking-widest border border-gold-500/35">1000TC Sateen Imperial</span>
+            <span id="studio-product-tag" class="px-3 py-1 rounded-full bg-ivory-200 text-gold-700 text-[10px] uppercase font-bold tracking-widest border border-gold-500/35">Certified Luxury</span>
             <span class="text-xs text-emerald-700 font-bold flex items-center gap-1">
               <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
               In Stock — Lahore Hub
             </span>
           </div>
 
-          <!-- Product Title & Price -->
+          <!-- Title & Price -->
           <div>
-            <h1 id="studio-product-title" class="font-serif text-2xl lg:text-3xl font-bold text-royal-bronze leading-tight">Imperial Gold 1000TC Sateen Duvet Set</h1>
+            <h1 id="studio-product-title" class="font-serif text-2xl lg:text-3xl font-bold text-royal-bronze leading-tight">Product Title</h1>
             <div class="flex items-baseline gap-3 mt-2">
-              <span id="studio-product-price" class="font-serif text-2xl lg:text-3xl font-bold text-gold-700">Rs. 16,800</span>
-              <span class="text-xs text-royal-bronze/40 line-through">Rs. 22,500</span>
-              <span class="text-[11px] font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded border border-emerald-300">SAVE 25%</span>
+              <span id="studio-product-price" class="font-serif text-2xl lg:text-3xl font-bold text-gold-700">Rs. 0</span>
+              <span class="text-xs text-royal-bronze/40 line-through">Rs. 3,500</span>
+              <span class="text-[11px] font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded border border-emerald-300">SPECIAL COD OFFER</span>
             </div>
           </div>
 
-          <!-- Product Story / Description -->
+          <!-- Description -->
           <div class="text-xs text-royal-bronze/80 leading-relaxed space-y-2 border-y border-gold-500/20 py-4 font-sans">
-            <p id="studio-product-desc">Indulge in royal chamber ergonomics. Woven from authentic long-staple Egyptian Giza cotton with a lustrous 1000-thread-count sateen finish for silk-like drape and breathability.</p>
+            <p id="studio-product-desc">Authentic ergonomic craftsmanship.</p>
             <div class="grid grid-cols-2 gap-2 pt-2 text-[11px] text-royal-bronze font-medium">
-              <span class="flex items-center gap-1.5"><i class="fa-solid fa-gem text-gold-600"></i> Pure Organic Combed</span>
+              <span class="flex items-center gap-1.5"><i class="fa-solid fa-gem text-gold-600"></i> Pure Authentic Quality</span>
               <span class="flex items-center gap-1.5"><i class="fa-solid fa-truck-fast text-gold-600"></i> Flat Rs. 350 COD</span>
-              <span class="flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-gold-600"></i> Zero Harsh Dyes</span>
-              <span class="flex items-center gap-1.5"><i class="fa-solid fa-rotate-left text-gold-600"></i> 30-Day Exchange</span>
+              <span class="flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-gold-600"></i> Safe Formulation</span>
+              <span class="flex items-center gap-1.5"><i class="fa-solid fa-rotate-left text-gold-600"></i> 30-Day Easy Exchange</span>
             </div>
           </div>
 
-          <!-- Chamber Dimensions / Size Selector -->
+          <!-- Dimension / Option Selector -->
           <div class="space-y-2">
             <div class="flex justify-between text-xs font-outfit">
-              <span class="text-royal-bronze font-semibold">Select Chamber Dimension:</span>
-              <span id="selected-size-label" class="text-gold-700 font-bold">King 6x6.5 ft</span>
+              <span class="text-royal-bronze font-semibold">Select Option / Dimension:</span>
+              <span id="selected-size-label" class="text-gold-700 font-bold">Standard Size</span>
             </div>
             <div class="grid grid-cols-3 gap-2 text-xs">
-              <button onclick="selectVariantSize(this, 'King 6x6.5 ft')" class="variant-size-btn py-2.5 px-2 rounded-xl gold-btn text-center shadow-sm">King (6x6.5)</button>
-              <button onclick="selectVariantSize(this, 'Queen 5x6.5 ft')" class="variant-size-btn py-2.5 px-2 rounded-xl bg-ivory-200 text-royal-bronze hover:bg-ivory-300 text-center border border-gold-500/30 transition-all font-semibold">Queen (5x6.5)</button>
-              <button onclick="selectVariantSize(this, 'Super King 7x7 ft')" class="variant-size-btn py-2.5 px-2 rounded-xl bg-ivory-200 text-royal-bronze hover:bg-ivory-300 text-center border border-gold-500/30 transition-all font-semibold">Super King (7x7)</button>
-            </div>
-          </div>
-
-          <!-- Color Swatch Finishes -->
-          <div class="space-y-2">
-            <span class="text-xs text-royal-bronze font-semibold block">Imperial Palette Finishes:</span>
-            <div class="flex items-center gap-3">
-              <button aria-label="Royal Gold" onclick="selectPaletteColor(this, 'Royal Obsidian Gold')" class="w-8 h-8 rounded-full bg-[#c5a059] ring-2 ring-gold-600 shadow-md cursor-pointer transform scale-110 transition-transform"></button>
-              <button aria-label="Pearl White" onclick="selectPaletteColor(this, 'Pearl White Sateen')" class="w-8 h-8 rounded-full bg-[#ffffff] ring-1 ring-gold-500/50 shadow-md cursor-pointer transition-transform hover:scale-110 border border-gray-200"></button>
-              <button aria-label="Champagne Ivory" onclick="selectPaletteColor(this, 'Champagne Ivory')" class="w-8 h-8 rounded-full bg-[#eee5d3] ring-1 ring-gold-500/50 shadow-md cursor-pointer transition-transform hover:scale-110"></button>
+              <button onclick="selectVariantSize(this, 'Standard Size')" class="variant-size-btn py-2.5 px-2 rounded-xl gold-btn text-center shadow-sm">Standard</button>
+              <button onclick="selectVariantSize(this, 'Large / King')" class="variant-size-btn py-2.5 px-2 rounded-xl bg-ivory-200 text-royal-bronze hover:bg-ivory-300 text-center border border-gold-500/30 transition-all font-semibold">Large / King</button>
+              <button onclick="selectVariantSize(this, 'Royal Grand')" class="variant-size-btn py-2.5 px-2 rounded-xl bg-ivory-200 text-royal-bronze hover:bg-ivory-300 text-center border border-gold-500/30 transition-all font-semibold">Royal Grand</button>
             </div>
           </div>
 
@@ -605,7 +635,7 @@
           </div>
         </div>
 
-        <!-- ACTION CTAS: ADD TO BAG & BUY NOW -->
+        <!-- ACTION CTAS -->
         <div class="pt-4 border-t border-gold-500/20 space-y-3 shrink-0">
           <div class="grid grid-cols-2 gap-3">
             <button onclick="addCurrentStudioItemToBag()" class="w-full py-4 rounded-xl pearl-glass hover:bg-ivory-200 text-royal-bronze font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 border border-gold-500/50 shadow-md transition-all">
@@ -677,80 +707,124 @@
   </aside>
 
   <!-- =========================================================================
-       MASTER JAVASCRIPT ENGINE (SUPABASE + CATEGORY GRID + 360 TURNTABLE)
+       MASTER JAVASCRIPT ENGINE (SUPABASE + 7 CATEGORIES + 360 TURNTABLE)
        ========================================================================= -->
   <script>
-    // 1. SUPABASE CLIENT & LIVE PRODUCTS
+    // 1. SUPABASE CLIENT & LIVE PRODUCTS FOR ALL 7 CATEGORIES
     const SUPABASE_URL = "https://yyapzlhdnyduonrekiwe.supabase.co";
     const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5YXB6bGhkbnlkdW9ucmVraXdlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQzODA3MDYsImV4cCI6MjEwOTk1NjcwNn0.YMdQBz0h9sekPQV-crgmRHrGl96RfNj0xymXD6r4rBE";
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     let liveProducts = [
-      { id: "sp_1", title: "Kids Royal Sneaker Shoes", category: "kids-footwear", price: 2499, tag: "Best Seller", image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800&auto=format&fit=crop&q=80", desc: "Handcrafted breathable pre-walker sneakers engineered with natural leather cushioning for royal sovereign steps." },
-      { id: "sp_2", title: "Handmade Sheep Soft Moccasins", category: "kids-footwear", price: 1850, tag: "Artisanal", image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=800&auto=format&fit=crop&q=80", desc: "Ultra-soft calfskin booties lined with hypoallergenic organic sheep fleece. Crafted for delicate newborn feet." },
-      { id: "sp_3", title: "Royal Pique Cotton Polo", category: "cotton-garments", price: 1499, tag: "100% Organic", image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800&auto=format&fit=crop&q=80", desc: "Double-mercerized combed Egyptian cotton pique with gilded collar trim and breathable luxury texture." },
-      { id: "sp_4", title: "Bio-Washed Combed Cotton Tee", category: "cotton-garments", price: 1399, tag: "Bio-Washed", image: "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=800&auto=format&fit=crop&q=80", desc: "240 GSM bio-washed heavy cotton tee crafted with zero shrinkage technology and velvet touch feel." },
-      { id: "sp_5", title: "Imperial Gold 1000TC Sateen Duvet Set", category: "khm-bedsheets", price: 16800, tag: "KHM Signature", image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=800&auto=format&fit=crop&q=80", desc: "1000-thread-count royal sateen bed set woven from authentic Nile basin long-staple cotton with custom embroidery." },
-      { id: "sp_6", title: "Crown Jewel Ivory Fitted Sheet Set", category: "khm-bedsheets", price: 12500, tag: "Super King", image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=800&auto=format&fit=crop&q=80", desc: "Deep pocket elasticated fitted sheet set in ivory luster, engineered for palatial mattress heights up to 18 inches." },
-      { id: "sp_7", title: "Imperial Living Room Suite", category: "home-living", price: 49999, tag: "Palatial Accent", image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&auto=format&fit=crop&q=80", desc: "Handcrafted architectural lounge chair wrapped in soft ivory velvet with polished champagne gold brushed brass legs." }
+      // 1. Baby Shoes
+      { id: "sp_1", title: "Kids Royal Sneaker Shoes", category: "baby-shoes", price: 2499, tag: "Best Seller", image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800&auto=format&fit=crop&q=80", desc: "Handcrafted breathable pre-walker sneakers engineered with natural leather cushioning for soft sovereign steps." },
+      { id: "sp_2", title: "Handmade Sheep Soft Moccasins", category: "baby-shoes", price: 1850, tag: "Artisanal", image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=800&auto=format&fit=crop&q=80", desc: "Ultra-soft calfskin booties lined with hypoallergenic organic sheep fleece. Crafted for delicate newborn feet." },
+      
+      // 2. Handmade Items
+      { id: "sp_3", title: "Pure Artisanal Crochet Keepsake Set", category: "handmade-items", price: 1600, tag: "Handmade", image: "https://images.unsplash.com/photo-1584992236310-6edddc08acff?w=800&auto=format&fit=crop&q=80", desc: "Hand-knitted pure wool delicate baby booties and artisanal decorative bonnet handcrafted by local masters." },
+      { id: "sp_4", title: "Royal Ceramic Decorative Keepsake", category: "handmade-items", price: 2800, tag: "Palace Decor", image: "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=800&auto=format&fit=crop&q=80", desc: "Gilded ceramic heirloom handicraft with hand-painted gold calligraphy motifs." },
+
+      // 3. Clothes
+      { id: "sp_5", title: "Bio-Washed Combed Cotton Tee", category: "clothes", price: 1399, tag: "Everyday Wear", image: "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=800&auto=format&fit=crop&q=80", desc: "240 GSM bio-washed heavy cotton tee crafted with zero shrinkage technology and velvet touch feel." },
+      { id: "sp_6", title: "Essential Breathable Cotton Henley", category: "clothes", price: 1650, tag: "Bio-Washed", image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800&auto=format&fit=crop&q=80", desc: "Classic button-down henley collar shirt in pure breathable Pakistan-grown long cotton." },
+
+      // 4. Premium Clothes
+      { id: "sp_7", title: "Royal Pique Egyptian Cotton Polo", category: "premium-clothes", price: 4200, tag: "100% Giza Cotton", image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&auto=format&fit=crop&q=80", desc: "Double-mercerized combed Egyptian Giza cotton polo with gilded 24K insignia buttons and tailored silhouette." },
+      { id: "sp_8", title: "Sovereign Gold Embroidered Kurta", category: "premium-clothes", price: 6500, tag: "Haute Couture", image: "https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?w=800&auto=format&fit=crop&q=80", desc: "Festive pure jacquard cotton silk kurta featuring understated imperial chest embroidery." },
+
+      // 5. Bedsheets
+      { id: "sp_9", title: "Imperial Gold 1000TC Sateen Duvet Set", category: "bedsheets", price: 16800, tag: "KHM Signature", image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=800&auto=format&fit=crop&q=80", desc: "1000-thread-count royal sateen bed set woven from authentic Nile basin long-staple cotton with custom embroidery." },
+      { id: "sp_10", title: "Crown Jewel Ivory Fitted Sheet Set", category: "bedsheets", price: 12500, tag: "Super King", image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=800&auto=format&fit=crop&q=80", desc: "Deep pocket elasticated fitted sheet set in ivory luster, engineered for palatial mattress heights up to 18 inches." },
+
+      // 6. Desi Product
+      { id: "sp_11", title: "Pure Churned Desi Buffalo Ghee (1 KG)", category: "desi-product", price: 2400, tag: "100% Pure Organic", image: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=800&auto=format&fit=crop&q=80", desc: "Traditionally churned organic village butter boiled to golden perfection. Free from preservatives and chemicals." },
+      { id: "sp_12", title: "Wild Organic Sidr Honey (Beri)", category: "desi-product", price: 2950, tag: "Raw Unfiltered", image: "https://images.unsplash.com/photo-1589733955941-5eeaf752f6dd?w=800&auto=format&fit=crop&q=80", desc: "Pure natural berry blossom honey harvested directly from the wild trees of Karak and Potohar." },
+
+      // 7. Desi Phakki
+      { id: "sp_13", title: "Shahi Hazmi Digestive Phakki (Special Elixir)", category: "desi-phakki", price: 950, tag: "Traditional Formulation", image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=800&auto=format&fit=crop&q=80", desc: "Time-tested herbal blend of Ajwain, Black Salt, Mint crystals, and natural herbs for instant digestive lightness." },
+      { id: "sp_14", title: "Herbal Metabolic & Sugar Wellness Phakki", category: "desi-phakki", price: 1200, tag: "Herbal Elixir", image: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&auto=format&fit=crop&q=80", desc: "Pure organic blend of Jamun seed, Karela, Methi, and medicinal botanical roots for natural wellness." }
     ];
 
     async function loadSupabaseData() {
       try {
         const { data, error } = await supabaseClient.from('products').select('*');
         if (!error && data && data.length > 0) {
-          liveProducts = data.map((item, idx) => ({
-            id: item.id || `sp_${idx}`,
-            title: item.title || item.name || 'Palatial Artifact',
-            category: (item.category || '').toLowerCase().includes('baby') || (item.category || '').toLowerCase().includes('shoe') ? 'kids-footwear' :
-                      (item.category || '').toLowerCase().includes('garment') || (item.category || '').toLowerCase().includes('cloth') ? 'cotton-garments' :
-                      (item.category || '').toLowerCase().includes('bed') ? 'khm-bedsheets' : 'home-living',
-            price: Number(item.price) || 2499,
-            tag: item.tag || 'Certified Luxury',
-            image: item.image || item.image_url || liveProducts[idx % liveProducts.length].image,
-            desc: item.description || liveProducts[idx % liveProducts.length].desc
-          }));
+          const dbProducts = data.map((item, idx) => {
+            const rawCat = (item.category || '').toLowerCase();
+            let catKey = 'clothes';
+            if (rawCat.includes('baby') || rawCat.includes('shoe')) catKey = 'baby-shoes';
+            else if (rawCat.includes('hand') || rawCat.includes('craft')) catKey = 'handmade-items';
+            else if (rawCat.includes('premium')) catKey = 'premium-clothes';
+            else if (rawCat.includes('bed') || rawCat.includes('sheet')) catKey = 'bedsheets';
+            else if (rawCat.includes('phakki') || rawCat.includes('digest')) catKey = 'desi-phakki';
+            else if (rawCat.includes('desi') || rawCat.includes('honey') || rawCat.includes('ghee')) catKey = 'desi-product';
+
+            return {
+              id: item.id || `db_sp_${idx}`,
+              title: item.title || item.name || 'Palatial Artifact',
+              category: catKey,
+              price: Number(item.price) || 2499,
+              tag: item.tag || 'Certified Luxury',
+              image: item.image || item.image_url || liveProducts[idx % liveProducts.length].image,
+              desc: item.description || liveProducts[idx % liveProducts.length].desc
+            };
+          });
+          liveProducts = [...dbProducts, ...liveProducts];
         }
       } catch (err) {}
     }
 
-    // Category Metadata Mapping
+    // 2. CATEGORY METADATA DEFINITIONS
     const categoryInfo = {
-      'kids-footwear': {
-        title: 'Baby & Kids Footwear',
-        desc: 'Handcrafted first-step soft sneakers and pure artisanal moccasins designed for tender ergonomics.',
-        badge: 'BOUTIQUE 01 • KIDS FOOTWEAR'
+      'baby-shoes': {
+        title: 'Baby Shoes Collection',
+        desc: 'Handcrafted first-step soft sneakers and pure artisanal moccasins designed for tender infant ergonomics.',
+        badge: 'PAVILION 01 • BABY SHOES'
       },
-      'cotton-garments': {
-        title: 'Cotton Garments & Apparel',
-        desc: 'Bio-washed double-mercerized combed cotton t-shirts and luxury lounge polo wear.',
-        badge: 'BOUTIQUE 02 • APPAREL ATELIER'
+      'handmade-items': {
+        title: 'Handmade Items & Artifacts',
+        desc: 'Artisanal crochet treasures, hand-knitted woolen baby suits, and traditional home keepsakes.',
+        badge: 'PAVILION 02 • ARTISANAL CRAFTS'
       },
-      'khm-bedsheets': {
+      'clothes': {
+        title: 'Everyday Clothes & Garments',
+        desc: 'Bio-washed combed cotton t-shirts, comfortable lounge shirts, and everyday breathable wear.',
+        badge: 'PAVILION 03 • CASUAL APPAREL'
+      },
+      'premium-clothes': {
+        title: 'Premium Clothes & Haute Couture',
+        desc: 'Double-mercerized Egyptian Giza cotton polos, embroidered festive kurtas, and palatial designer attire.',
+        badge: 'PAVILION 04 • HAUTE COUTURE'
+      },
+      'bedsheets': {
         title: 'Luxury Bedsheets (KHM Flagship)',
-        desc: 'Signature 1000TC long-staple Egyptian sateen bedsheets and palatial duvet sets.',
-        badge: 'BOUTIQUE 03 • IMPERIAL FLAGSHIP'
+        desc: 'Signature 1000TC long-staple Egyptian sateen bedsheets, king duvet sets, and palatial hotel linens.',
+        badge: 'PAVILION 05 • KHM FLAGSHIP'
       },
-      'home-living': {
-        title: 'Home Living Showcase',
-        desc: 'Curated architectural furniture suites, velvet accents, and palatial bedroom accessories.',
-        badge: 'BOUTIQUE 04 • LIVING SHOWCASE'
+      'desi-product': {
+        title: 'Pure Desi Products & Organic Pantry',
+        desc: 'Traditionally churned pure buffalo desi ghee, raw unpasteurized Sidr honey, and natural organic delights.',
+        badge: 'PAVILION 06 • PURE ORGANIC'
+      },
+      'desi-phakki': {
+        title: 'Desi Phakki & Herbal Elixir',
+        desc: 'Time-tested digestive Shahi Hazmi Phakki and herbal botanical wellness powders for whole-body vitality.',
+        badge: 'PAVILION 07 • HERBAL REMEDIES'
       }
     };
 
-    let activeCategoryKey = 'khm-bedsheets';
+    let activeCategoryKey = 'bedsheets';
 
-    // 2. CATEGORY PRODUCTS CARD GRID VIEW (CARDVIEW) LOGIC
+    // 3. CATEGORY SHOWCASE CARDVIEW
     function openCategoryShowcase(categoryKey) {
       activeCategoryKey = categoryKey;
-      const meta = categoryInfo[categoryKey] || categoryInfo['khm-bedsheets'];
+      const meta = categoryInfo[categoryKey] || categoryInfo['bedsheets'];
       
       document.getElementById('category-breadcrumb-title').innerText = meta.title;
       document.getElementById('category-main-heading').innerText = meta.title;
       document.getElementById('category-main-subtext').innerText = meta.desc;
       document.getElementById('category-badge-num').innerText = meta.badge;
 
-      // Filter products for this category
       const filtered = liveProducts.filter(p => p.category === categoryKey);
       const grid = document.getElementById('category-cards-grid');
       document.getElementById('category-product-count').innerText = `${filtered.length} Authentic Products`;
@@ -761,7 +835,7 @@
         grid.innerHTML = filtered.map(item => `
           <div onclick="openProductStudio('${item.id}')" class="product-grid-card pearl-glass rounded-2xl p-4 border border-gold-500/30 flex flex-col justify-between cursor-pointer group shadow-sm bg-white">
             <div>
-              <div class="relative w-full h-56 rounded-xl overflow-hidden bg-ivory-100 border border-gold-500/25 mb-3">
+              <div class="relative w-full h-52 rounded-xl overflow-hidden bg-ivory-100 border border-gold-500/25 mb-3">
                 <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 <span class="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-white/95 text-gold-700 font-bold text-[10px] uppercase shadow-sm border border-gold-500/20">${item.tag}</span>
                 <span class="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded-md bg-royal-bronze/90 text-white font-mono text-[10px] flex items-center gap-1">
@@ -798,11 +872,10 @@
       toggleBagDrawer(false);
     }
 
-    // 3. FULL-SCREEN 3D PRODUCT TURNTABLE STUDIO
+    // 4. FULL-SCREEN 3D PRODUCT TURNTABLE STUDIO
     let activeProduct = null;
     let studioQty = 1;
-    let selectedSize = "King 6x6.5 ft";
-    let selectedColor = "Royal Obsidian Gold";
+    let selectedSize = "Standard Size";
     let turntableAzimuth = 0;
 
     function openProductStudio(productId) {
@@ -810,8 +883,7 @@
       activeProduct = prod;
       studioQty = 1;
 
-      // Populate Studio Data
-      document.getElementById('studio-crumb-category').innerText = categoryInfo[prod.category]?.title || "Imperial Collection";
+      document.getElementById('studio-crumb-category').innerText = categoryInfo[prod.category]?.title || "Collection";
       document.getElementById('studio-crumb-title').innerText = prod.title;
       document.getElementById('studio-product-tag').innerText = prod.tag;
       document.getElementById('studio-product-title').innerText = prod.title;
@@ -827,14 +899,12 @@
 
     function backFromStudio() {
       document.getElementById('full-screen-product-studio').classList.add('hidden');
-      // Category Showcase remains open behind it!
     }
 
     function closeProductStudio() {
       document.getElementById('full-screen-product-studio').classList.add('hidden');
     }
 
-    // 4. 360 TURNTABLE ENGINE
     function setProductAzimuth(deg) {
       turntableAzimuth = Number(deg);
       const core = document.getElementById('product-turntable-core');
@@ -844,38 +914,30 @@
       document.getElementById('turntable-angle-readout').innerText = `${turntableAzimuth}° AZIMUTH`;
     }
 
-    // Direct Drag on 3D Product
-    let isDraggingProduct = false;
-    let dragStartX = 0;
+    // Direct Drag on 3D Turntable
+    let isDragging = false;
+    let dragStart = 0;
     const turntableContainer = document.getElementById('product-turntable-core');
 
     if (turntableContainer) {
-      turntableContainer.addEventListener('mousedown', (e) => {
-        isDraggingProduct = true;
-        dragStartX = e.clientX;
-      });
-      window.addEventListener('mouseup', () => { isDraggingProduct = false; });
+      turntableContainer.addEventListener('mousedown', (e) => { isDragging = true; dragStart = e.clientX; });
+      window.addEventListener('mouseup', () => { isDragging = false; });
       window.addEventListener('mousemove', (e) => {
-        if (!isDraggingProduct) return;
-        const delta = e.clientX - dragStartX;
-        dragStartX = e.clientX;
+        if (!isDragging) return;
+        const delta = e.clientX - dragStart;
+        dragStart = e.clientX;
         let newAngle = (turntableAzimuth + delta * 0.8) % 360;
         if (newAngle < 0) newAngle += 360;
         document.getElementById('full-turntable-slider').value = Math.round(newAngle);
         setProductAzimuth(Math.round(newAngle));
       });
 
-      turntableContainer.addEventListener('touchstart', (e) => {
-        if (e.touches.length === 1) {
-          isDraggingProduct = true;
-          dragStartX = e.touches[0].clientX;
-        }
-      });
-      window.addEventListener('touchend', () => { isDraggingProduct = false; });
+      turntableContainer.addEventListener('touchstart', (e) => { if (e.touches.length === 1) { isDragging = true; dragStart = e.touches[0].clientX; } });
+      window.addEventListener('touchend', () => { isDragging = false; });
       window.addEventListener('touchmove', (e) => {
-        if (!isDraggingProduct || e.touches.length !== 1) return;
-        const delta = e.touches[0].clientX - dragStartX;
-        dragStartX = e.touches[0].clientX;
+        if (!isDragging || e.touches.length !== 1) return;
+        const delta = e.touches[0].clientX - dragStart;
+        dragStart = e.touches[0].clientX;
         let newAngle = (turntableAzimuth + delta * 0.8) % 360;
         if (newAngle < 0) newAngle += 360;
         document.getElementById('full-turntable-slider').value = Math.round(newAngle);
@@ -892,16 +954,6 @@
       btn.className = "variant-size-btn py-2.5 px-2 rounded-xl gold-btn text-center shadow-sm";
     }
 
-    function selectPaletteColor(btn, colorName) {
-      selectedColor = colorName;
-      btn.parentElement.querySelectorAll('button').forEach(b => {
-        b.classList.remove('ring-2', 'ring-gold-600', 'scale-110');
-        b.classList.add('ring-1', 'ring-gold-500/50');
-      });
-      btn.classList.add('ring-2', 'ring-gold-600', 'scale-110');
-      btn.classList.remove('ring-1', 'ring-gold-500/50');
-    }
-
     function adjustStudioQty(delta) {
       studioQty = Math.max(1, studioQty + delta);
       document.getElementById('studio-item-qty').innerText = studioQty;
@@ -914,7 +966,6 @@
         title: activeProduct.title,
         price: activeProduct.price,
         size: selectedSize,
-        color: selectedColor,
         qty: studioQty,
         image: activeProduct.image
       });
@@ -934,8 +985,8 @@
     const STORE_EMAIL = "easicarts@gmail.com";
 
     let bag = [
-      { id: "c1", title: "1000TC Sateen Imperial Sheet", price: 14500, size: "King 6x6.5 ft", qty: 1, image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=500&auto=format&fit=crop&q=80" },
-      { id: "c2", title: "Royal Heir Soft Moccasins", price: 4200, size: "6-12M", qty: 2, image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=500&auto=format&fit=crop&q=80" }
+      { id: "c1", title: "1000TC Sateen Duvet Set", price: 16800, size: "King 6x6.5 ft", qty: 1, image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=500&auto=format&fit=crop&q=80" },
+      { id: "c2", title: "Shahi Hazmi Digestive Phakki", price: 950, size: "Standard 200g", qty: 1, image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=500&auto=format&fit=crop&q=80" }
     ];
 
     function updateBagUI() {
@@ -958,7 +1009,7 @@
             <img src="${item.image}" alt="${item.title}" class="w-12 h-12 rounded-lg object-cover bg-ivory-200 border border-gold-500/30" />
             <div class="flex-1 min-w-0">
               <div class="font-serif font-bold text-royal-bronze truncate text-xs">${item.title}</div>
-              <div class="text-[10px] text-royal-bronze/60">Variant: ${item.size}</div>
+              <div class="text-[10px] text-royal-bronze/60">Option: ${item.size}</div>
               <div class="text-gold-700 font-bold text-xs">Rs. ${(item.price * item.qty).toLocaleString()}</div>
             </div>
             <button onclick="bag.splice(${idx}, 1); updateBagUI();" class="text-royal-bronze/40 hover:text-rose-600 p-1 text-xs">
@@ -1028,7 +1079,7 @@
       btn.innerHTML = `<i class="fa-solid fa-paper-plane mr-1.5"></i> Place Order (Email + WhatsApp)`;
     }
 
-    // 6. AUDIO AMBIENCE FX
+    // 6. AUDIO FX & PARALLAX
     const audio = document.getElementById('mall-ambience-audio');
     let isAudioPlaying = false;
     function toggleMallMusic() {
@@ -1040,6 +1091,13 @@
         isAudioPlaying = false;
       }
     }
+
+    const backdrop = document.getElementById('backdrop');
+    window.addEventListener('mousemove', (e) => {
+      const xPercent = (e.clientX / window.innerWidth - 0.5) * 14;
+      const yPercent = (e.clientY / window.innerHeight - 0.5) * 8;
+      backdrop.style.transform = `scale(1.04) translate(${xPercent * -1}px, ${yPercent * -1}px)`;
+    });
 
     window.addEventListener('DOMContentLoaded', () => {
       loadSupabaseData();
