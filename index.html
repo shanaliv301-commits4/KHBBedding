@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KHM Bedding | Master 3D Playable Virtual Luxury Mall</title>
-  <meta name="description" content="KHM Bedding - Master 3D Virtual Luxury Shopping Mall, Playable 360° Experience, Real Supabase Cloud Products, Interactive Inspection Studio, and Flat Rs. 350 COD across Pakistan." />
+  <title>KHM Bedding | Master Cinematic 3D Virtual Luxury Mall</title>
+  <meta name="description" content="KHM Bedding - Master Cinematic 3D Virtual Luxury Shopping Mall, Interactive Hotspots, 360° Turntable Studio, and Flat Rs. 350 COD across Pakistan." />
 
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -44,8 +44,7 @@
     };
   </script>
 
-  <!-- Three.js + GSAP + Supabase SDKs -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- GSAP & Supabase SDKs -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -64,36 +63,42 @@
       -webkit-user-select: none;
     }
 
-    #threejs-mall-viewport {
+    .palace-viewport {
       position: fixed;
       inset: 0;
       width: 100vw;
       height: 100vh;
+      background: radial-gradient(circle at 50% 50%, #0d1e38 0%, #040b15 100%);
       z-index: 0;
-      cursor: grab;
+      overflow: hidden;
     }
-    #threejs-mall-viewport:active {
-      cursor: grabbing;
+
+    .cinematic-backdrop {
+      position: absolute;
+      inset: -5%;
+      width: 110%;
+      height: 110%;
+      background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDuZVvCkL9psFVrJEEL6nn4Hy_xVn-tXc2bun98nUprQTTBPRztIptdOWz_7ozDukgoJuQHb5opB8nnNcLOS_Ks1fbQw-L1UF73E_YeJ042wP1QrQbxVE8ra60UnVqZvfbIgWOOVgXtBDBu321iZWvovxuObRFPbsRZQGezooUlGm2VPOQMsApgwN_ySgYU6BFLEiOJ_MvnyJxCcrmFW26jxW10mfqM-GT8rSQkqiWNrwDUKprxLub4FA');
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      filter: saturate(1.1) contrast(1.05);
     }
 
     .palace-glass {
       background: rgba(7, 20, 38, 0.85);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(214, 167, 92, 0.3);
+      border: 1px solid rgba(214, 167, 92, 0.35);
     }
+
     .palace-glass-heavy {
       background: rgba(3, 14, 32, 0.95);
       backdrop-filter: blur(28px);
       -webkit-backdrop-filter: blur(28px);
-      border: 1px solid rgba(214, 167, 92, 0.45);
+      border: 1px solid rgba(214, 167, 92, 0.5);
     }
 
-    .gold-gradient-text {
-      background: linear-gradient(135deg, #ffffff 0%, #f5e4b7 30%, #d6a75c 70%, #b8893d 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
     .gold-btn {
       background: linear-gradient(135deg, #f5e4b7 0%, #d6a75c 50%, #b8893d 100%);
       color: #040b15;
@@ -105,29 +110,39 @@
       transform: translateY(-2px);
     }
 
+    .hotspot-pulse {
+      animation: hotspot-glow 2s infinite ease-in-out;
+    }
+    @keyframes hotspot-glow {
+      0%, 100% { box-shadow: 0 0 15px rgba(214, 167, 92, 0.5), inset 0 0 10px rgba(214, 167, 92, 0.3); border-color: rgba(214, 167, 92, 0.8); }
+      50% { box-shadow: 0 0 35px rgba(242, 203, 135, 0.9), inset 0 0 20px rgba(242, 203, 135, 0.6); border-color: #f2cb87; }
+    }
+
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: rgba(3, 14, 32, 0.6); }
     ::-webkit-scrollbar-thumb { background: rgba(214, 167, 92, 0.4); border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: rgba(214, 167, 92, 0.8); }
   </style>
 </head>
-<body class="relative w-full h-full antialiased">
+<body class="relative w-full h-full antialiased overflow-hidden">
 
-  <!-- 1. FULLSCREEN 3D WEBGL ENGINE VIEWPORT -->
-  <div id="threejs-mall-viewport"></div>
+  <!-- 1. CINEMATIC 3D ROTUNDA BACKDROP WITH PARALLAX -->
+  <div class="palace-viewport" id="viewport">
+    <div class="cinematic-backdrop" id="backdrop"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-midnight-deep via-transparent to-midnight/60 pointer-events-none"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(214,167,92,0.12)_0%,transparent_65%)] pointer-events-none"></div>
+  </div>
 
   <!-- AMBIENT ISLAMIC PALACE OUD AUDIO -->
   <audio id="mall-ambience-audio" loop preload="none">
     <source src="https://assets.mixkit.co/music/preview/mixkit-oriental-serenade-598.mp3" type="audio/mp3" />
   </audio>
 
-  <!-- ==========================================
-       TOP PERSISTENT METAVERSE HUD HEADER
-       ========================================== -->
+  <!-- TOP HEADER HUD -->
   <header class="fixed top-0 left-0 right-0 z-40 bg-midnight/85 backdrop-blur-xl border-b border-gold-500/20 shadow-xl">
     <div class="h-20 w-full px-4 lg:px-12 flex items-center justify-between gap-4">
       <div class="flex items-center gap-6">
-        <a href="#" onclick="window.KHM_MASTER_MALL.returnToAtrium()" class="flex items-center gap-3 group">
+        <a href="#" onclick="returnToAtrium()" class="flex items-center gap-3 group">
           <div class="w-10 h-10 rounded-full bg-sapphire flex items-center justify-center border border-gold-500/40 shadow-inner group-hover:bg-gold-500 group-hover:text-midnight transition-colors">
             <span class="font-serif text-gold-400 group-hover:text-midnight font-bold text-lg">K</span>
           </div>
@@ -137,10 +152,10 @@
           </div>
         </a>
 
-        <!-- Center Nav Links -->
+        <!-- Center Navigation -->
         <nav class="hidden xl:flex items-center gap-6 text-sm font-outfit font-medium text-ivory/70">
-          <a href="#" onclick="window.KHM_MASTER_MALL.returnToAtrium()" class="text-gold-400 font-semibold tracking-wider px-3 py-1.5 rounded-lg bg-sapphire/50">Home</a>
-          <button onclick="window.enterStorefront('khm-bedsheets')" class="hover:text-gold-300 transition-colors flex items-center gap-1">
+          <a href="#" onclick="returnToAtrium()" class="text-gold-400 font-semibold tracking-wider px-3.5 py-1.5 rounded-lg bg-sapphire/60 border border-gold-500/30">Home</a>
+          <button onclick="enterStorefront('khm-bedsheets')" class="hover:text-gold-300 transition-colors flex items-center gap-1">
             <span>Collections</span>
             <span class="material-symbols-outlined text-[16px]">expand_more</span>
           </button>
@@ -149,19 +164,19 @@
         </nav>
       </div>
 
-      <!-- Right Header Actions -->
+      <!-- Right Actions -->
       <div class="flex items-center gap-3">
         <button aria-label="Search" class="w-10 h-10 rounded-full palace-glass hover:bg-gold-500 hover:text-midnight text-ivory/80 flex items-center justify-center transition-colors">
           <span class="material-symbols-outlined text-[20px]">search</span>
         </button>
 
-        <button id="synth-toggle" onclick="window.toggleMallMusic()" class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full palace-glass hover:bg-gold-500 hover:text-midnight text-ivory/80 transition-colors">
+        <button id="synth-toggle" onclick="toggleMallMusic()" class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full palace-glass hover:bg-gold-500 hover:text-midnight text-ivory/80 transition-colors">
           <span class="material-symbols-outlined text-[18px] text-gold-400">graphic_eq</span>
           <span class="text-xs uppercase font-outfit tracking-wider text-ivory">Audio FX</span>
           <span class="w-1.5 h-1.5 rounded-full bg-gold-400 animate-pulse"></span>
         </button>
 
-        <a href="https://wa.me/923049141244" target="_blank" class="w-8 h-8 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white flex items-center justify-center transition-transform hover:scale-105 shadow-md">
+        <a href="https://wa.me/923049141244" target="_blank" class="w-8 h-8 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white flex items-center justify-center transition-transform hover:scale-105 shadow-md" title="Direct WhatsApp Concierge">
           <i class="fa-brands fa-whatsapp text-sm"></i>
         </a>
 
@@ -174,15 +189,13 @@
     </div>
   </header>
 
-  <!-- ==========================================
-       INTERACTIVE HUD OVERLAY CONTAINER
-       ========================================== -->
+  <!-- INTERACTIVE HUD OVERLAY -->
   <div class="relative z-10 w-full h-[calc(100vh-5rem)] mt-20 flex flex-col justify-between p-4 lg:p-8 pointer-events-none">
     
-    <!-- TOP ROW: WELCOME PILL & RADAR COMPASS -->
+    <!-- TOP ROW: WELCOME PILL & COMPASS -->
     <div class="w-full flex items-start justify-between pointer-events-none">
-      <!-- Welcome Pill (Left, Reference Layout) -->
-      <div onclick="window.triggerWalkForward()" class="pointer-events-auto flex items-center gap-3 p-1.5 pr-5 rounded-full palace-glass shadow-2xl hover:bg-midnight/90 transition-all cursor-pointer group">
+      <!-- Welcome Pill -->
+      <div onclick="enterStorefront('khm-bedsheets')" class="pointer-events-auto flex items-center gap-3 p-1.5 pr-5 rounded-full palace-glass shadow-2xl hover:bg-midnight/90 transition-all cursor-pointer group">
         <div class="relative w-12 h-12 rounded-full overflow-hidden bg-sapphire flex items-center justify-center border border-gold-500/40">
           <span class="material-symbols-outlined text-gold-400 text-2xl">diamond</span>
         </div>
@@ -195,8 +208,8 @@
         </div>
       </div>
 
-      <!-- Radar Compass HUD (Right, Reference Layout) -->
-      <div id="radar-hud" onclick="window.KHM_MASTER_MALL.returnToAtrium()" class="pointer-events-auto relative w-24 h-24 lg:w-28 lg:h-28 rounded-full palace-glass p-2 shadow-2xl flex items-center justify-center group cursor-pointer" title="Spatial Positioning Grid">
+      <!-- Radar Compass HUD -->
+      <div onclick="returnToAtrium()" class="pointer-events-auto relative w-24 h-24 lg:w-28 lg:h-28 rounded-full palace-glass p-2 shadow-2xl flex items-center justify-center group cursor-pointer" title="Spatial Positioning Grid">
         <svg class="w-full h-full text-gold-400/40 -rotate-45" viewBox="0 0 100 100">
           <circle cx="50" cy="50" fill="none" r="46" stroke="currentColor" stroke-dasharray="2 3" stroke-width="1"></circle>
           <circle cx="50" cy="50" fill="none" r="32" stroke="currentColor" stroke-width="0.8"></circle>
@@ -214,10 +227,10 @@
       </div>
     </div>
 
-    <!-- MID STAGE: 4 STORE PORTAL HOTSPOTS -->
+    <!-- 4 CONNECTED STOREFRONT HOTSPOT PORTALS -->
     <div class="w-full grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-5 my-auto max-w-7xl mx-auto pointer-events-auto">
       <!-- Store 1: Kids Footwear -->
-      <button onclick="window.enterStorefront('kids-footwear')" class="text-left relative p-4 rounded-2xl palace-glass shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-sapphire/80 group">
+      <button onclick="enterStorefront('kids-footwear')" class="hotspot-pulse text-left relative p-4 rounded-2xl palace-glass shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-sapphire/90 group">
         <div class="flex items-center justify-between mb-2">
           <div class="flex items-center gap-2">
             <span class="material-symbols-outlined text-gold-400 text-2xl group-hover:scale-110 transition-transform">footprint</span>
@@ -235,7 +248,7 @@
       </button>
 
       <!-- Store 2: Cotton Garments -->
-      <button onclick="window.enterStorefront('cotton-garments')" class="text-left relative p-4 rounded-2xl palace-glass shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-sapphire/80 group">
+      <button onclick="enterStorefront('cotton-garments')" class="hotspot-pulse text-left relative p-4 rounded-2xl palace-glass shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-sapphire/90 group">
         <div class="flex items-center justify-between mb-2">
           <div class="flex items-center gap-2">
             <span class="material-symbols-outlined text-gold-400 text-2xl group-hover:scale-110 transition-transform">styler</span>
@@ -252,8 +265,8 @@
         </div>
       </button>
 
-      <!-- Store 3: Luxury Bedsheets -->
-      <button onclick="window.enterStorefront('khm-bedsheets')" class="text-left relative p-4 rounded-2xl palace-glass shadow-[0_0_35px_rgba(214,167,92,0.25)] transition-all duration-300 hover:scale-105 hover:bg-sapphire/90 group border-gold-500/60">
+      <!-- Store 3: Luxury Bedsheets (KHM Flagship) -->
+      <button onclick="enterStorefront('khm-bedsheets')" class="hotspot-pulse text-left relative p-4 rounded-2xl palace-glass shadow-[0_0_35px_rgba(214,167,92,0.35)] transition-all duration-300 hover:scale-105 hover:bg-sapphire/90 group border-gold-500/60">
         <div class="flex items-center justify-between mb-2">
           <div class="flex items-center gap-2">
             <span class="material-symbols-outlined text-gold-400 text-2xl group-hover:scale-110 transition-transform">bed</span>
@@ -265,13 +278,13 @@
           <span class="material-symbols-outlined text-gold-400 group-hover:translate-x-1 transition-transform">arrow_forward</span>
         </div>
         <div class="flex items-center justify-between mt-2 pt-2 border-t border-gold-500/30 text-[11px]">
-          <span class="text-gold-300 font-bold">Imperial Suite</span>
+          <span class="text-gold-300 font-bold">Imperial Flagship</span>
           <span class="text-gold-400 font-bold uppercase tracking-wider">Explore</span>
         </div>
       </button>
 
       <!-- Store 4: Home Living -->
-      <button onclick="window.enterStorefront('home-living')" class="text-left relative p-4 rounded-2xl palace-glass shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-sapphire/80 group">
+      <button onclick="enterStorefront('home-living')" class="hotspot-pulse text-left relative p-4 rounded-2xl palace-glass shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-sapphire/90 group">
         <div class="flex items-center justify-between mb-2">
           <div class="flex items-center gap-2">
             <span class="material-symbols-outlined text-gold-400 text-2xl group-hover:scale-110 transition-transform">chair</span>
@@ -289,7 +302,7 @@
       </button>
     </div>
 
-    <!-- LOWER FLOATING CARDS -->
+    <!-- LOWER FLOATING CARDS (Reference Image) -->
     <div class="w-full flex flex-col md:flex-row items-end md:items-center justify-between gap-4 pointer-events-none mt-auto">
       
       <!-- Left Floating Product: Kids Sneakers -->
@@ -300,7 +313,7 @@
         <div class="flex flex-col">
           <span class="font-outfit font-bold text-sm text-ivory">Kids Sneakers</span>
           <span class="text-sm text-gold-400 font-bold">Rs. 2,499</span>
-          <button onclick="window.quickBuy('Kids Royal Sneakers', 2499)" class="mt-1 flex items-center gap-1.5 px-3 py-1 rounded-full gold-btn text-[10px] uppercase font-bold tracking-wider shadow-md">
+          <button onclick="quickBuy('Kids Royal Sneakers', 2499)" class="mt-1 flex items-center gap-1.5 px-3 py-1 rounded-full gold-btn text-[10px] uppercase font-bold tracking-wider shadow-md">
             <span class="material-symbols-outlined text-[13px]">shopping_cart</span>
             <span>Buy Now</span>
           </button>
@@ -308,7 +321,7 @@
       </div>
 
       <!-- Center Concourse Glide Forward Prompt -->
-      <div onclick="window.triggerWalkForward()" class="pointer-events-auto hidden xl:flex flex-col items-center justify-center animate-bounce cursor-pointer group">
+      <div onclick="triggerWalkForward()" class="pointer-events-auto hidden xl:flex flex-col items-center justify-center animate-bounce cursor-pointer group">
         <span class="text-[10px] font-outfit uppercase tracking-[0.25em] text-gold-400 mb-1 font-bold">Glide Forward</span>
         <div class="w-10 h-10 rounded-full palace-glass flex items-center justify-center shadow-lg group-hover:bg-gold-500 group-hover:text-midnight transition-colors">
           <span class="material-symbols-outlined text-gold-400 group-hover:text-midnight text-2xl">keyboard_double_arrow_up</span>
@@ -328,7 +341,7 @@
           <div class="flex flex-col">
             <span class="font-outfit font-bold text-sm text-ivory">Premium Comfort Bed</span>
             <span class="text-sm text-gold-400 font-bold">Rs. 49,999</span>
-            <button onclick="window.openProductStudio('Premium Comfort Bed Set', 49999, '1000TC Sateen Imperial')" class="mt-1 flex items-center gap-1 px-3 py-1 rounded-full gold-btn text-[10px] uppercase font-bold tracking-wider shadow-md">
+            <button onclick="openProductStudio('Premium Comfort Bed Set', 49999, '1000TC Sateen Imperial')" class="mt-1 flex items-center gap-1 px-3 py-1 rounded-full gold-btn text-[10px] uppercase font-bold tracking-wider shadow-md">
               <span>View Details</span>
               <span class="material-symbols-outlined text-[13px]">arrow_forward</span>
             </button>
@@ -337,39 +350,39 @@
       </div>
     </div>
 
-    <!-- BOTTOM FLANK: D-PAD CONTROLLER + CENTER GLASS NAVIGATION DOCK -->
+    <!-- BOTTOM FLANK: D-PAD + CENTER GLASS NAVIGATION DOCK -->
     <div class="w-full flex items-center justify-between pt-4 pointer-events-none">
       
-      <!-- Virtual D-Pad Controller (Bottom-Left) -->
+      <!-- D-Pad Navigation Controller -->
       <div id="dpad-controller" class="pointer-events-auto relative w-28 h-28 rounded-full palace-glass shadow-2xl p-2 flex items-center justify-center">
-        <button aria-label="Walk Forward" onclick="window.handleWalk('up')" class="absolute top-1 left-1/2 -translate-x-1/2 w-7 h-7 rounded-lg bg-sapphire hover:bg-gold-500 hover:text-midnight text-gold-400 flex items-center justify-center transition-colors">
+        <button aria-label="Walk Forward" onclick="handleWalk('up')" class="absolute top-1 left-1/2 -translate-x-1/2 w-7 h-7 rounded-lg bg-sapphire hover:bg-gold-500 hover:text-midnight text-gold-400 flex items-center justify-center transition-colors">
           <span class="material-symbols-outlined text-base">keyboard_arrow_up</span>
         </button>
-        <button aria-label="Walk Backward" onclick="window.handleWalk('down')" class="absolute bottom-1 left-1/2 -translate-x-1/2 w-7 h-7 rounded-lg bg-sapphire hover:bg-gold-500 hover:text-midnight text-gold-400 flex items-center justify-center transition-colors">
+        <button aria-label="Walk Backward" onclick="handleWalk('down')" class="absolute bottom-1 left-1/2 -translate-x-1/2 w-7 h-7 rounded-lg bg-sapphire hover:bg-gold-500 hover:text-midnight text-gold-400 flex items-center justify-center transition-colors">
           <span class="material-symbols-outlined text-base">keyboard_arrow_down</span>
         </button>
-        <button aria-label="Turn Left" onclick="window.handleWalk('left')" class="absolute left-1 top-1/2 -translate-y-1/2 w-7 h-7 rounded-lg bg-sapphire hover:bg-gold-500 hover:text-midnight text-gold-400 flex items-center justify-center transition-colors">
+        <button aria-label="Turn Left" onclick="handleWalk('left')" class="absolute left-1 top-1/2 -translate-y-1/2 w-7 h-7 rounded-lg bg-sapphire hover:bg-gold-500 hover:text-midnight text-gold-400 flex items-center justify-center transition-colors">
           <span class="material-symbols-outlined text-base">keyboard_arrow_left</span>
         </button>
-        <button aria-label="Turn Right" onclick="window.handleWalk('right')" class="absolute right-1 top-1/2 -translate-y-1/2 w-7 h-7 rounded-lg bg-sapphire hover:bg-gold-500 hover:text-midnight text-gold-400 flex items-center justify-center transition-colors">
+        <button aria-label="Turn Right" onclick="handleWalk('right')" class="absolute right-1 top-1/2 -translate-y-1/2 w-7 h-7 rounded-lg bg-sapphire hover:bg-gold-500 hover:text-midnight text-gold-400 flex items-center justify-center transition-colors">
           <span class="material-symbols-outlined text-base">keyboard_arrow_right</span>
         </button>
-        <button onclick="window.handleWalk('center')" class="w-8 h-8 rounded-full bg-gold-400 text-midnight flex items-center justify-center shadow-lg font-bold">
+        <button onclick="handleWalk('center')" class="w-8 h-8 rounded-full bg-gold-400 text-midnight flex items-center justify-center shadow-lg font-bold">
           <span class="material-symbols-outlined text-base font-bold">radio_button_checked</span>
         </button>
       </div>
 
       <!-- Center Navigation Glass Dock -->
       <nav class="pointer-events-auto flex items-center gap-1 sm:gap-2 px-4 py-2 rounded-full palace-glass shadow-2xl mx-auto">
-        <button onclick="window.KHM_MASTER_MALL.returnToAtrium()" class="flex items-center gap-1.5 px-4 py-2 rounded-full bg-sapphire text-gold-300 font-outfit text-xs font-bold shadow-inner">
+        <button onclick="returnToAtrium()" class="flex items-center gap-1.5 px-4 py-2 rounded-full bg-sapphire text-gold-300 font-outfit text-xs font-bold shadow-inner">
           <span class="material-symbols-outlined text-base">store</span>
           <span>Mall</span>
         </button>
-        <button onclick="window.enterStorefront('khm-bedsheets')" class="flex items-center gap-1.5 px-4 py-2 rounded-full hover:bg-sapphire/60 text-ivory/70 hover:text-ivory font-outfit text-xs font-medium transition-all">
+        <button onclick="enterStorefront('khm-bedsheets')" class="flex items-center gap-1.5 px-4 py-2 rounded-full hover:bg-sapphire/60 text-ivory/70 hover:text-ivory font-outfit text-xs font-medium transition-all">
           <span class="material-symbols-outlined text-base">category</span>
           <span>Collections</span>
         </button>
-        <button onclick="window.openProductStudio('1000TC Sateen Suite', 14500, 'Imperial 360 Mode')" class="flex items-center gap-1.5 px-4 py-2 rounded-full hover:bg-sapphire/60 text-ivory/70 hover:text-ivory font-outfit text-xs font-medium transition-all">
+        <button onclick="openProductStudio('1000TC Sateen Suite', 14500, 'Imperial 360 Mode')" class="flex items-center gap-1.5 px-4 py-2 rounded-full hover:bg-sapphire/60 text-ivory/70 hover:text-ivory font-outfit text-xs font-medium transition-all">
           <span class="material-symbols-outlined text-base">360</span>
           <span>360° View</span>
         </button>
@@ -383,9 +396,9 @@
         </a>
       </nav>
 
-      <!-- Audio Indicator (Bottom-Right) -->
+      <!-- Audio Indicator -->
       <div class="pointer-events-auto hidden md:flex items-center gap-3 p-2 px-4 rounded-full palace-glass shadow-xl">
-        <button onclick="window.toggleMallMusic()" class="w-8 h-8 rounded-full bg-sapphire flex items-center justify-center text-gold-400 hover:bg-gold-500 hover:text-midnight transition-colors">
+        <button onclick="toggleMallMusic()" class="w-8 h-8 rounded-full bg-sapphire flex items-center justify-center text-gold-400 hover:bg-gold-500 hover:text-midnight transition-colors">
           <span class="material-symbols-outlined text-base">volume_up</span>
         </button>
         <div class="flex flex-col">
@@ -396,9 +409,7 @@
     </div>
   </div>
 
-  <!-- ==========================================
-       SIDE DRAWER: STORE SHOWROOM & PRODUCTS
-       ========================================== -->
+  <!-- STORE SHOWROOM & PRODUCTS DRAWER -->
   <aside id="storefrontDrawer" class="fixed top-0 right-0 bottom-0 w-full max-w-md bg-midnight-deep/95 border-l border-gold-500/30 z-50 shadow-2xl translate-x-full transition-transform duration-500 flex flex-col font-sans">
     <div class="p-5 border-b border-gold-500/20 flex items-center justify-between bg-midnight">
       <div class="flex items-center gap-3">
@@ -410,7 +421,7 @@
           <h3 class="font-serif font-bold text-lg text-ivory" id="store-title">KHM Luxury Bedsheets</h3>
         </div>
       </div>
-      <button onclick="window.closeStorefront()" class="w-8 h-8 rounded-full palace-glass hover:bg-gold-500 hover:text-midnight text-ivory/70 flex items-center justify-center font-bold text-sm transition-colors">✕</button>
+      <button onclick="closeStorefront()" class="w-8 h-8 rounded-full palace-glass hover:bg-gold-500 hover:text-midnight text-ivory/70 flex items-center justify-center font-bold text-sm transition-colors">✕</button>
     </div>
 
     <div class="bg-gradient-to-r from-sapphire to-midnight px-5 py-2.5 border-b border-gold-500/15 flex items-center justify-between text-xs text-ivory/80">
@@ -422,19 +433,17 @@
     <div id="store-catalog-list" class="flex-1 overflow-y-auto p-5 space-y-4"></div>
 
     <div class="p-4 border-t border-gold-500/20 bg-midnight flex items-center justify-between text-xs font-mono">
-      <button onclick="window.closeStorefront()" class="text-gold-400 hover:text-ivory flex items-center gap-1.5">
+      <button onclick="closeStorefront()" class="text-gold-400 hover:text-ivory flex items-center gap-1.5">
         <i class="fa-solid fa-arrow-left"></i> <span>Return to 3D Concourse</span>
       </button>
       <a href="https://wa.me/923049141244" target="_blank" class="text-emerald-400 hover:underline">WhatsApp (+92 304 9141244)</a>
     </div>
   </aside>
 
-  <!-- ==========================================
-       3D PRODUCT INSPECTION STUDIO MODAL
-       ========================================== -->
+  <!-- 360 PRODUCT TURNTABLE STUDIO MODAL -->
   <div id="product-studio-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-midnight-deep/90 backdrop-blur-xl">
     <div class="palace-glass-heavy rounded-3xl border border-gold-500/40 p-6 sm:p-8 max-w-xl w-full space-y-5 text-center relative shadow-2xl">
-      <button onclick="window.closeProductStudio()" class="absolute top-4 right-4 text-ivory/60 hover:text-gold-300 text-xl font-bold">✕</button>
+      <button onclick="closeProductStudio()" class="absolute top-4 right-4 text-ivory/60 hover:text-gold-300 text-xl font-bold">✕</button>
       
       <span class="px-3 py-1 rounded-full bg-sapphire text-gold-300 text-[10px] uppercase tracking-widest font-bold">Imperial Specimen Chamber</span>
       <h3 class="text-2xl font-serif font-bold text-ivory" id="studio-title">Imperial Gold Sateen Duvet</h3>
@@ -447,10 +456,10 @@
         </div>
       </div>
 
-      <!-- Turntable Range Slider -->
+      <!-- Turntable Slider -->
       <div class="flex items-center gap-3 bg-midnight px-4 py-2 rounded-full border border-gold-500/30">
         <span class="material-symbols-outlined text-gold-400 text-sm">rotate_left</span>
-        <input type="range" min="0" max="360" value="0" id="turntable-slider" oninput="window.rotateStudio(this.value)" class="w-full accent-gold-400 cursor-pointer" />
+        <input type="range" min="0" max="360" value="0" id="turntable-slider" oninput="rotateStudio(this.value)" class="w-full accent-gold-400 cursor-pointer" />
         <span class="material-symbols-outlined text-gold-400 text-sm">rotate_right</span>
         <span id="studio-deg" class="text-xs font-mono text-gold-300 min-w-[35px]">0°</span>
       </div>
@@ -462,16 +471,14 @@
         <button class="px-3 py-1 rounded-lg bg-sapphire text-ivory/80 hover:bg-sapphire/80">Custom</button>
       </div>
 
-      <button onclick="window.quickBuy(document.getElementById('studio-title').innerText, parseInt(document.getElementById('studio-price').innerText.replace(/[^0-9]/g,'')))" class="w-full py-3.5 gold-btn rounded-xl text-xs uppercase tracking-widest shadow-xl flex items-center justify-center gap-2">
+      <button onclick="quickBuy(document.getElementById('studio-title').innerText, parseInt(document.getElementById('studio-price').innerText.replace(/[^0-9]/g,'')))" class="w-full py-3.5 gold-btn rounded-xl text-xs uppercase tracking-widest shadow-xl flex items-center justify-center gap-2">
         <span class="material-symbols-outlined text-lg">shopping_bag</span>
         <span>Add To Imperial Bag</span>
       </button>
     </div>
   </div>
 
-  <!-- ==========================================
-       SHOPPING BAG & RS. 350 COD CHECKOUT DRAWER
-       ========================================== -->
+  <!-- SHOPPING BAG & RS. 350 COD DRAWER -->
   <div id="bagBackdrop" class="hidden fixed inset-0 bg-midnight-deep/80 backdrop-blur-md z-50" onclick="toggleBagDrawer(false)"></div>
   <aside id="bagDrawer" class="fixed top-0 right-0 bottom-0 w-full max-w-md bg-midnight-deep/95 border-l border-gold-500/30 z-50 shadow-2xl translate-x-full transition-transform duration-300 flex flex-col font-sans">
     <div class="p-5 border-b border-gold-500/20 flex items-center justify-between bg-midnight">
@@ -517,11 +524,9 @@
     </div>
   </aside>
 
-  <!-- ==========================================
-       THREE.JS MASTER 3D MALL SCRIPT ENGINE
-       ========================================== -->
+  <!-- JAVASCRIPT LOGIC ENGINE -->
   <script>
-    // 1. SUPABASE CLIENT & LIVE DATA
+    // 1. SUPABASE CLIENT & LIVE PRODUCTS
     const SUPABASE_URL = "https://yyapzlhdnyduonrekiwe.supabase.co";
     const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5YXB6bGhkbnlkdW9ucmVraXdlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQzODA3MDYsImV4cCI6MjEwOTk1NjcwNn0.YMdQBz0h9sekPQV-crgmRHrGl96RfNj0xymXD6r4rBE";
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -554,475 +559,30 @@
       } catch (err) {}
     }
 
-    // 2. THREE.JS MASTER 3D MALL IMPLEMENTATION (FAITHFUL TO MASTER REFERENCE IMAGE)
-    (function initMasterMall() {
-      const container = document.getElementById('threejs-mall-viewport');
-      if (!container) return;
+    // 2. PARALLAX ROTUNDA ENGINE
+    const backdrop = document.getElementById('backdrop');
+    window.addEventListener('mousemove', (e) => {
+      const xPercent = (e.clientX / window.innerWidth - 0.5) * 20;
+      const yPercent = (e.clientY / window.innerHeight - 0.5) * 15;
+      backdrop.style.transform = `scale(1.05) translate(${xPercent * -1}px, ${yPercent * -1}px)`;
+    });
 
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-
-      // 1. SCENE & ATMOSPHERE
-      const scene = new THREE.Scene();
-      scene.background = new THREE.Color(0x050e1c);
-      scene.fog = new THREE.FogExp2(0x050e1c, 0.007);
-
-      // 2. CAMERA SETUP
-      const camera = new THREE.PerspectiveCamera(54, width / height, 0.1, 1000);
-      camera.position.set(0, 5.5, 38);
-      let lookTarget = new THREE.Vector3(0, 5.0, 0);
-
-      // 3. RENDERER
-      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: 'high-performance' });
-      renderer.setSize(width, height);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 1.65;
-      renderer.shadowMap.enabled = true;
-      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-      container.appendChild(renderer.domElement);
-
-      // 4. BALANCED MULTI-TIER ILLUMINATION (Eliminates any black screen defect)
-      const hemiLight = new THREE.HemisphereLight(0xfff5e6, 0x071426, 2.4);
-      scene.add(hemiLight);
-
-      const sunLight = new THREE.DirectionalLight(0xffecd2, 2.8);
-      sunLight.position.set(20, 60, 30);
-      sunLight.castShadow = true;
-      sunLight.shadow.mapSize.width = 2048;
-      sunLight.shadow.mapSize.height = 2048;
-      sunLight.shadow.bias = -0.001;
-      scene.add(sunLight);
-
-      const chandelierLight = new THREE.PointLight(0xffdf9e, 5.5, 95, 1.2);
-      chandelierLight.position.set(0, 28, 0);
-      scene.add(chandelierLight);
-
-      // 5. MASTER ARCHITECTURAL MATERIALS
-      const marbleFloorMat = new THREE.MeshStandardMaterial({
-        color: 0x091424,
-        roughness: 0.16,
-        metalness: 0.8,
-        emissive: 0x030812,
-        emissiveIntensity: 0.2
-      });
-
-      const champagneGoldMat = new THREE.MeshStandardMaterial({
-        color: 0xd6a75c,
-        roughness: 0.22,
-        metalness: 0.88,
-        emissive: 0x4a3411,
-        emissiveIntensity: 0.3
-      });
-
-      const glowingGoldNeon = new THREE.MeshBasicMaterial({ color: 0xffdf9e });
-      const luxuryGlassMat = new THREE.MeshStandardMaterial({
-        color: 0xa8d5ff,
-        transparent: true,
-        opacity: 0.45,
-        roughness: 0.08,
-        metalness: 0.9
-      });
-
-      // 6. GRAND CIRCULAR MARBLE FLOOR & GOLD CONCENTRIC INLAYS
-      const floorRadius = 72;
-      const floorGeo = new THREE.CylinderGeometry(floorRadius, floorRadius, 1.5, 64);
-      const floorMesh = new THREE.Mesh(floorGeo, marbleFloorMat);
-      floorMesh.position.y = -0.75;
-      floorMesh.receiveShadow = true;
-      scene.add(floorMesh);
-
-      // Concentric Golden Rings
-      [10, 22, 34, 48, 62, 71].forEach(r => {
-        const ringGeo = new THREE.RingGeometry(r - 0.35, r + 0.35, 64);
-        const ringMesh = new THREE.Mesh(ringGeo, champagneGoldMat);
-        ringMesh.rotation.x = -Math.PI / 2;
-        ringMesh.position.y = 0.02;
-        scene.add(ringMesh);
-      });
-
-      // Radial rays
-      for (let a = 0; a < 16; a++) {
-        const ang = (a / 16) * Math.PI * 2;
-        const rayGeo = new THREE.PlaneGeometry(0.28, floorRadius);
-        const ray = new THREE.Mesh(rayGeo, champagneGoldMat);
-        ray.rotation.x = -Math.PI / 2;
-        ray.rotation.z = ang;
-        ray.position.set(Math.sin(ang) * (floorRadius / 2), 0.025, Math.cos(ang) * (floorRadius / 2));
-        scene.add(ray);
-      }
-
-      // Directional Chevron (From Image)
-      const chevronGroup = new THREE.Group();
-      chevronGroup.position.set(0, 0.03, 16);
-      for (let c = 0; c < 2; c++) {
-        const chevGeo = new THREE.RingGeometry(3.5 + c * 1.5, 4.2 + c * 1.5, 3, 1, 0, Math.PI);
-        const chevMesh = new THREE.Mesh(chevGeo, glowingGoldNeon);
-        chevMesh.rotation.x = -Math.PI / 2;
-        chevMesh.rotation.z = Math.PI / 2;
-        chevMesh.position.z = -c * 2.2;
-        chevronGroup.add(chevMesh);
-      }
-      scene.add(chevronGroup);
-
-      // 7. CENTRAL ROTUNDA WITH ORBITING PLANETARIUM GLOBE & KHM SIGN
-      const centerPlinthGeo = new THREE.CylinderGeometry(9.5, 10.5, 1.6, 48);
-      const centerPlinth = new THREE.Mesh(centerPlinthGeo, champagneGoldMat);
-      centerPlinth.position.y = 0.8;
-      scene.add(centerPlinth);
-
-      const globeGroup = new THREE.Group();
-      globeGroup.position.set(0, 4.8, 0);
-      const innerOrb = new THREE.Mesh(new THREE.SphereGeometry(2.2, 32, 32), glowingGoldNeon);
-      globeGroup.add(innerOrb);
-
-      [3.6, 4.5, 5.4].forEach((rad, idx) => {
-        const ringMesh = new THREE.Mesh(new THREE.TorusGeometry(rad, 0.18, 16, 64), champagneGoldMat);
-        ringMesh.rotation.x = 0.4 + idx * 0.5;
-        ringMesh.rotation.y = idx * 0.8;
-        globeGroup.add(ringMesh);
-      });
-      scene.add(globeGroup);
-
-      // Back tower with KHM Bedding Sign
-      const towerGeo = new THREE.CylinderGeometry(11, 11, 24, 48, 1, true, -Math.PI * 0.6, Math.PI * 1.2);
-      const towerMat = new THREE.MeshStandardMaterial({ color: 0x050e1c, roughness: 0.3, metalness: 0.8, side: THREE.DoubleSide });
-      const tower = new THREE.Mesh(towerGeo, towerMat);
-      tower.position.set(0, 12, -8);
-      scene.add(tower);
-
-      // 8. FOUR PHYSICAL CONNECTED STOREFRONTS
-      const storeConfigs = [
-        { id: 'kids-footwear', title: "Baby & Kids Footwear", x: -30, z: 12, rotY: Math.PI * 0.35, color: 0xffd166, interiorType: 'shelves' },
-        { id: 'cotton-garments', title: "Cotton Garments & Apparel", x: -14, z: -18, rotY: Math.PI * 0.15, color: 0x64b5f6, interiorType: 'racks' },
-        { id: 'khm-bedsheets', title: "Luxury Bedsheets (KHM)", x: 14, z: -18, rotY: -Math.PI * 0.15, color: 0xd6a75c, interiorType: 'bed' },
-        { id: 'home-living', title: "Home Living", x: 30, z: 12, rotY: -Math.PI * 0.35, color: 0xffb74d, interiorType: 'sofa' }
-      ];
-
-      const interactiveStores = [];
-
-      storeConfigs.forEach((cfg) => {
-        const sGroup = new THREE.Group();
-        sGroup.position.set(cfg.x, 0, cfg.z);
-        sGroup.rotation.y = cfg.rotY;
-
-        const baseGeo = new THREE.CylinderGeometry(12, 13, 1.4, 32);
-        const baseMesh = new THREE.Mesh(baseGeo, marbleFloorMat);
-        baseMesh.position.y = 0.7;
-        sGroup.add(baseMesh);
-
-        const archMat = new THREE.MeshStandardMaterial({
-          color: cfg.color,
-          roughness: 0.2,
-          metalness: 0.85,
-          emissive: cfg.color,
-          emissiveIntensity: 0.25
-        });
-
-        const archMesh = new THREE.Mesh(new THREE.TorusGeometry(8.5, 0.65, 16, 32, Math.PI), archMat);
-        archMesh.position.set(0, 8.5, 0);
-        sGroup.add(archMesh);
-
-        [-6.2, 6.2].forEach(px => {
-          const pCol = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.6, 9, 16), archMat);
-          pCol.position.set(px, 4.5, 0);
-          sGroup.add(pCol);
-        });
-
-        // 3D Physical Sliding Doors
-        const doorGeo = new THREE.BoxGeometry(3.2, 7.8, 0.25);
-        const doorLeft = new THREE.Mesh(doorGeo, luxuryGlassMat);
-        const doorRight = new THREE.Mesh(doorGeo, luxuryGlassMat);
-        doorLeft.position.set(-1.7, 3.9, 0);
-        doorRight.position.set(1.7, 3.9, 0);
-        sGroup.add(doorLeft);
-        sGroup.add(doorRight);
-
-        // Signboard
-        const signBoard = new THREE.Mesh(new THREE.BoxGeometry(9.2, 1.5, 0.4), champagneGoldMat);
-        signBoard.position.set(0, 10.2, 0.4);
-        sGroup.add(signBoard);
-
-        // Interior 3D Physical Stall
-        const stallBase = new THREE.Mesh(new THREE.CylinderGeometry(2.8, 3.2, 2.2, 24), champagneGoldMat);
-        stallBase.position.set(0, 1.5, -4.5);
-        sGroup.add(stallBase);
-
-        let displayItem;
-        if (cfg.interiorType === 'shelves') {
-          const shoeGroup = new THREE.Group();
-          const sole = new THREE.Mesh(new THREE.BoxGeometry(2.4, 0.6, 1.2), new THREE.MeshStandardMaterial({ color: 0xffffff }));
-          const upper = new THREE.Mesh(new THREE.BoxGeometry(2.0, 1.0, 1.1), new THREE.MeshStandardMaterial({ color: 0x4cc9f0, roughness: 0.3 }));
-          upper.position.set(-0.2, 0.7, 0);
-          shoeGroup.add(sole);
-          shoeGroup.add(upper);
-          displayItem = shoeGroup;
-        } else if (cfg.interiorType === 'racks') {
-          const rackGroup = new THREE.Group();
-          const bar = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 3.5), champagneGoldMat);
-          bar.rotation.z = Math.PI / 2;
-          bar.position.y = 1.8;
-          const cloth = new THREE.Mesh(new THREE.BoxGeometry(1.6, 2.2, 0.5), new THREE.MeshStandardMaterial({ color: 0x3a86ff }));
-          cloth.position.y = 0.8;
-          rackGroup.add(bar);
-          rackGroup.add(cloth);
-          displayItem = rackGroup;
-        } else if (cfg.interiorType === 'bed') {
-          const bedGroup = new THREE.Group();
-          const mattress = new THREE.Mesh(new THREE.BoxGeometry(3.4, 1.0, 3.8), new THREE.MeshStandardMaterial({ color: 0x071426, metalness: 0.3 }));
-          const headboard = new THREE.Mesh(new THREE.BoxGeometry(3.6, 2.4, 0.5), champagneGoldMat);
-          headboard.position.set(0, 1.2, -1.8);
-          const pillow = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.4, 0.8), new THREE.MeshStandardMaterial({ color: 0xd6a75c }));
-          pillow.position.set(-0.7, 0.7, -1.1);
-          const pillow2 = pillow.clone();
-          pillow2.position.x = 0.7;
-          bedGroup.add(mattress);
-          bedGroup.add(headboard);
-          bedGroup.add(pillow);
-          bedGroup.add(pillow2);
-          displayItem = bedGroup;
-        } else {
-          const sofaGroup = new THREE.Group();
-          const seat = new THREE.Mesh(new THREE.BoxGeometry(3.2, 0.8, 1.6), new THREE.MeshStandardMaterial({ color: 0x8a6224 }));
-          const back = new THREE.Mesh(new THREE.BoxGeometry(3.2, 1.4, 0.5), new THREE.MeshStandardMaterial({ color: 0x5a3e10 }));
-          back.position.set(0, 0.9, -0.6);
-          sofaGroup.add(seat);
-          sofaGroup.add(back);
-          displayItem = sofaGroup;
-        }
-        displayItem.position.set(0, 3.2, -4.5);
-        sGroup.add(displayItem);
-
-        // Raycast Hitbox
-        const hitBox = new THREE.Mesh(new THREE.BoxGeometry(15, 12, 10), new THREE.MeshBasicMaterial({ visible: false }));
-        hitBox.position.set(0, 6, 0);
-        hitBox.userData = { id: cfg.id, config: cfg };
-        sGroup.add(hitBox);
-
-        scene.add(sGroup);
-        interactiveStores.push({ id: cfg.id, config: cfg, group: sGroup, doorLeft, doorRight, hitBox });
-      });
-
-      // 9. ANIMATED SHOPPERS (Walking Characters with Leg Strides)
-      const shoppers = [];
-      const shopperColors = [0x3a86ff, 0xff006e, 0x8338ec, 0xfb5607, 0x06d6a0, 0xd6a75c];
-
-      for (let s = 0; s < 12; s++) {
-        const sGroup = new THREE.Group();
-        const color = shopperColors[s % shopperColors.length];
-        const sMat = new THREE.MeshStandardMaterial({ color: color, roughness: 0.5 });
-        const skinMat = new THREE.MeshStandardMaterial({ color: 0xffdbac, roughness: 0.6 });
-
-        const leftLeg = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.16, 1.6), sMat);
-        const rightLeg = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.16, 1.6), sMat);
-        leftLeg.position.set(-0.25, 0.8, 0);
-        rightLeg.position.set(0.25, 0.8, 0);
-        sGroup.add(leftLeg);
-        sGroup.add(rightLeg);
-
-        const torso = new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.38, 1.8), sMat);
-        torso.position.y = 2.4;
-        sGroup.add(torso);
-
-        const head = new THREE.Mesh(new THREE.SphereGeometry(0.35, 16, 16), skinMat);
-        head.position.y = 3.6;
-        sGroup.add(head);
-
-        const angle = (s / 12) * Math.PI * 2;
-        const rad = 18 + (s % 3) * 8;
-        sGroup.position.set(Math.sin(angle) * rad, 0, Math.cos(angle) * rad);
-
-        scene.add(sGroup);
-        shoppers.push({ group: sGroup, leftLeg, rightLeg, angle, radius: rad, speed: 0.004 + (s % 4) * 0.002, phase: Math.random() * Math.PI * 2 });
-      }
-
-      // 10. WASD & MOUSE CONTROLS
-      const keys = { w: false, a: false, s: false, d: false, arrowup: false, arrowdown: false, arrowleft: false, arrowright: false };
-      let isNavigating = false;
-      let yaw = 0, pitch = 0;
-      let isMouseDown = false;
-      let prevMouseX = 0, prevMouseY = 0;
-
-      window.addEventListener('keydown', (e) => {
-        const k = e.key.toLowerCase();
-        if (keys.hasOwnProperty(k)) keys[k] = true;
-      });
-      window.addEventListener('keyup', (e) => {
-        const k = e.key.toLowerCase();
-        if (keys.hasOwnProperty(k)) keys[k] = false;
-      });
-
-      container.addEventListener('mousedown', (e) => {
-        isMouseDown = true;
-        prevMouseX = e.clientX;
-        prevMouseY = e.clientY;
-      });
-      window.addEventListener('mouseup', () => { isMouseDown = false; });
-      window.addEventListener('mousemove', (e) => {
-        if (!isMouseDown || isNavigating) return;
-        const dx = e.clientX - prevMouseX;
-        const dy = e.clientY - prevMouseY;
-        yaw -= dx * 0.004;
-        pitch = Math.max(-0.6, Math.min(0.6, pitch - dy * 0.003));
-        prevMouseX = e.clientX;
-        prevMouseY = e.clientY;
-      });
-
-      // Global Master Controller API
-      window.KHM_MASTER_MALL = {
-        navigateToStore: function(storeId) {
-          const store = interactiveStores.find(s => s.id === storeId);
-          if (!store) return;
-          isNavigating = true;
-
-          const targetX = store.config.x + Math.sin(store.config.rotY) * 6;
-          const targetZ = store.config.z + Math.cos(store.config.rotY) * 6;
-
-          if (typeof gsap !== 'undefined') {
-            const tl = gsap.timeline({
-              onComplete: () => {
-                isNavigating = false;
-                window.enterStorefront(storeId);
-              }
-            });
-
-            tl.to(camera.position, {
-              x: targetX,
-              y: 4.8,
-              z: targetZ,
-              duration: 2.2,
-              ease: "power2.inOut"
-            });
-
-            tl.to(store.doorLeft.position, { x: -4.5, duration: 1.2, ease: "power2.out" }, "-=0.8");
-            tl.to(store.doorRight.position, { x: 4.5, duration: 1.2, ease: "power2.out" }, "<");
-          }
-        },
-
-        returnToAtrium: function() {
-          interactiveStores.forEach(s => {
-            if (typeof gsap !== 'undefined') {
-              gsap.to(s.doorLeft.position, { x: -1.7, duration: 1.0 });
-              gsap.to(s.doorRight.position, { x: 1.7, duration: 1.0 });
-            }
-          });
-
-          isNavigating = false;
-          yaw = 0;
-          pitch = 0;
-
-          if (typeof gsap !== 'undefined') {
-            gsap.to(camera.position, {
-              x: 0,
-              y: 5.5,
-              z: 38,
-              duration: 2.4,
-              ease: "power2.inOut"
-            });
-          }
-          window.closeStorefront();
-        }
-      };
-
-      // Raycast Storefront Click
-      const raycaster = new THREE.Raycaster();
-      const mouse = new THREE.Vector2();
-      window.addEventListener('click', (e) => {
-        if (isNavigating) return;
-        if (e.target.closest('header') || e.target.closest('button') || e.target.closest('aside') || e.target.closest('#product-studio-modal') || e.target.closest('#dpad-controller')) return;
-
-        mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-        mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
-        raycaster.setFromCamera(mouse, camera);
-
-        const hitBoxes = interactiveStores.map(s => s.hitBox);
-        const hits = raycaster.intersectObjects(hitBoxes);
-        if (hits.length > 0) {
-          const storeId = hits[0].object.userData.id;
-          window.KHM_MASTER_MALL.navigateToStore(storeId);
-        }
-      });
-
-      // 60FPS Game Loop
-      const clock = new THREE.Clock();
-      function animate() {
-        requestAnimationFrame(animate);
-        const t = clock.getElapsedTime();
-
-        globeGroup.rotation.y = t * 0.35;
-        innerOrb.rotation.y = -t * 0.5;
-
-        shoppers.forEach(s => {
-          s.angle += s.speed;
-          s.group.position.x = Math.sin(s.angle) * s.radius;
-          s.group.position.z = Math.cos(s.angle) * s.radius;
-          s.group.rotation.y = s.angle + Math.PI / 2;
-
-          const swing = Math.sin(t * 8 + s.phase) * 0.45;
-          s.leftLeg.rotation.x = swing;
-          s.rightLeg.rotation.x = -swing;
-        });
-
-        if (!isNavigating) {
-          const moveSpeed = 0.28;
-          const forwardX = -Math.sin(yaw);
-          const forwardZ = -Math.cos(yaw);
-          const rightX = Math.cos(yaw);
-          const rightZ = -Math.sin(yaw);
-
-          if (keys.w || keys.arrowup) {
-            camera.position.x += forwardX * moveSpeed;
-            camera.position.z += forwardZ * moveSpeed;
-          }
-          if (keys.s || keys.arrowdown) {
-            camera.position.x -= forwardX * moveSpeed;
-            camera.position.z -= forwardZ * moveSpeed;
-          }
-          if (keys.a || keys.arrowleft) {
-            camera.position.x -= rightX * moveSpeed;
-            camera.position.z -= rightZ * moveSpeed;
-          }
-          if (keys.d || keys.arrowright) {
-            camera.position.x += rightX * moveSpeed;
-            camera.position.z += rightZ * moveSpeed;
-          }
-
-          const dist = Math.hypot(camera.position.x, camera.position.z);
-          if (dist > floorRadius - 8) {
-            camera.position.x = (camera.position.x / dist) * (floorRadius - 8);
-            camera.position.z = (camera.position.z / dist) * (floorRadius - 8);
-          }
-
-          lookTarget.x = camera.position.x - Math.sin(yaw) * Math.cos(pitch) * 20;
-          lookTarget.y = camera.position.y + Math.sin(pitch) * 20;
-          lookTarget.z = camera.position.z - Math.cos(yaw) * Math.cos(pitch) * 20;
-          camera.lookAt(lookTarget);
-        }
-
-        renderer.render(scene, camera);
-      }
-      animate();
-
-      window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-      });
-    })();
-
-    // 3. UI, STOREFRONT & AUDIO CONTROLLERS
+    // 3. STORE SHOWROOM DRAWER LOGIC
     const storesConfig = {
-      'kids-footwear': { title: 'Baby & Kids Footwear', subtitle: 'Hand-Stitched Soft Moccasins', icon: 'child_care' },
-      'cotton-garments': { title: 'Cotton Garments & Apparel', subtitle: '100% Organic Pique Knit', icon: 'checkroom' },
-      'khm-bedsheets': { title: 'Luxury Bedsheets (KHM)', subtitle: '1000TC Sateen Imperial Linen', icon: 'bed' },
-      'home-living': { title: 'Home Living Showcase', subtitle: 'Curated Palatial Accents & Decor', icon: 'chair' }
+      'kids-footwear': { title: 'Baby & Kids Footwear', subtitle: 'Hand-Stitched Soft Moccasins', icon: 'child_care', zoomX: 15, zoomY: 5 },
+      'cotton-garments': { title: 'Cotton Garments & Apparel', subtitle: '100% Organic Pique Knit', icon: 'checkroom', zoomX: 8, zoomY: -5 },
+      'khm-bedsheets': { title: 'Luxury Bedsheets (KHM)', subtitle: '1000TC Sateen Imperial Linen', icon: 'bed', zoomX: -8, zoomY: -5 },
+      'home-living': { title: 'Home Living Showcase', subtitle: 'Curated Palatial Accents & Decor', icon: 'chair', zoomX: -15, zoomY: 5 }
     };
 
-    window.enterStorefront = function(storeKey) {
+    function enterStorefront(storeKey) {
       const cfg = storesConfig[storeKey] || storesConfig['khm-bedsheets'];
       document.getElementById('store-title').innerText = cfg.title;
       document.getElementById('store-subtitle').innerText = cfg.subtitle;
       document.getElementById('store-icon').innerText = cfg.icon;
+
+      // Parallax Zoom into Department
+      backdrop.style.transform = `scale(1.15) translate(${cfg.zoomX}%, ${cfg.zoomY}%)`;
 
       const filtered = liveProducts.filter(p => p.category === storeKey);
       const list = document.getElementById('store-catalog-list');
@@ -1041,8 +601,8 @@
             <div class="flex items-center justify-between mt-3">
               <span class="font-bold text-gold-300 text-sm">Rs. ${item.price.toLocaleString()}</span>
               <div class="flex items-center gap-2">
-                <button onclick="window.openProductStudio('${item.title}', ${item.price}, 'Imperial Standard')" class="px-3 py-1 rounded-full palace-glass text-[10px] uppercase font-bold text-ivory hover:text-gold-300">360° View</button>
-                <button onclick="window.quickBuy('${item.title}', ${item.price})" class="px-3.5 py-1 rounded-full gold-btn text-[10px] uppercase font-bold">Add to Bag</button>
+                <button onclick="openProductStudio('${item.title}', ${item.price}, 'Imperial Standard')" class="px-3 py-1 rounded-full palace-glass text-[10px] uppercase font-bold text-ivory hover:text-gold-300">360° View</button>
+                <button onclick="quickBuy('${item.title}', ${item.price})" class="px-3.5 py-1 rounded-full gold-btn text-[10px] uppercase font-bold">Add to Bag</button>
               </div>
             </div>
           </div>
@@ -1050,29 +610,36 @@
       `).join('');
 
       document.getElementById('storefrontDrawer').classList.remove('translate-x-full');
-    };
+    }
 
-    window.closeStorefront = function() {
+    function closeStorefront() {
       document.getElementById('storefrontDrawer').classList.add('translate-x-full');
-    };
+      backdrop.style.transform = `scale(1.05) translate(0px, 0px)`;
+    }
 
-    // 4. 360 PRODUCT STUDIO TURNTABLE MODAL
-    window.openProductStudio = function(name, price, variant) {
+    function returnToAtrium() {
+      closeStorefront();
+      closeProductStudio();
+      toggleBagDrawer(false);
+    }
+
+    // 4. 360 PRODUCT STUDIO TURNTABLE
+    function openProductStudio(name, price, variant) {
       document.getElementById('studio-title').innerText = name;
       document.getElementById('studio-price').innerText = 'Rs. ' + price.toLocaleString();
       document.getElementById('product-studio-modal').classList.remove('hidden');
-    };
+    }
 
-    window.closeProductStudio = function() {
+    function closeProductStudio() {
       document.getElementById('product-studio-modal').classList.add('hidden');
-    };
+    }
 
-    window.rotateStudio = function(val) {
+    function rotateStudio(val) {
       document.getElementById('studio-product-display').style.transform = `rotateY(${val}deg)`;
       document.getElementById('studio-deg').innerText = `${val}°`;
-    };
+    }
 
-    // 5. SHOPPING BAG & NATIONWIDE RS. 350 COD CHECKOUT
+    // 5. SHOPPING BAG & RS. 350 COD CHECKOUT
     const SHIPPING_FEE = 350;
     const STORE_WHATSAPP = "923049141244";
     const STORE_EMAIL = "easicarts@gmail.com";
@@ -1082,11 +649,11 @@
       { id: "c2", title: "Royal Heir Soft Moccasins", price: 4200, size: "6-12M", qty: 2, image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=500&auto=format&fit=crop&q=80" }
     ];
 
-    window.quickBuy = function(title, price) {
+    function quickBuy(title, price) {
       bag.push({ id: `item_${Date.now()}`, title, price: Number(price), size: "King", qty: 1, image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=500&auto=format&fit=crop&q=80" });
       updateBagUI();
       toggleBagDrawer(true);
-    };
+    }
 
     function updateBagUI() {
       const totalQty = bag.reduce((sum, i) => sum + i.qty, 0);
@@ -1161,7 +728,7 @@
         }]);
       } catch (err) {}
 
-      const waText = `👑 *NEW COD ORDER — KHM BEDDING MASTER 3D MALL*\n━━━━━━━━━━━━━━━━━━━━\n*Order ID:* ${orderId}\n*Customer:* ${name}\n*WhatsApp:* ${phone}\n*Address:* ${city}\n\n📦 *ITEMS ORDERED:*\n${itemsSummary}\n\n💰 *PAYMENT:*\n• Subtotal: Rs. ${subtotal.toLocaleString()}\n• Shipping: Rs. ${SHIPPING_FEE} Flat Nationwide COD\n*Grand Total: Rs. ${grandTotal.toLocaleString()}*\n━━━━━━━━━━━━━━━━━━━━\nDispatched to: ${STORE_EMAIL}`;
+      const waText = `👑 *NEW COD ORDER — KHM BEDDING MASTER LUXURY MALL*\n━━━━━━━━━━━━━━━━━━━━\n*Order ID:* ${orderId}\n*Customer:* ${name}\n*WhatsApp:* ${phone}\n*Address:* ${city}\n\n📦 *ITEMS ORDERED:*\n${itemsSummary}\n\n💰 *PAYMENT:*\n• Subtotal: Rs. ${subtotal.toLocaleString()}\n• Shipping: Rs. ${SHIPPING_FEE} Flat Nationwide COD\n*Grand Total: Rs. ${grandTotal.toLocaleString()}*\n━━━━━━━━━━━━━━━━━━━━\nDispatched to: ${STORE_EMAIL}`;
 
       bag = [];
       updateBagUI();
@@ -1174,20 +741,28 @@
       btn.innerHTML = `<i class="fa-solid fa-paper-plane mr-1.5"></i> Place Order (Email + WhatsApp)`;
     }
 
-    // 6. WALKING & AUDIO HELPERS
-    window.handleWalk = function(direction) {
+    // 6. WALKING CONTROLS & AUDIO FX
+    function handleWalk(direction) {
       const needle = document.getElementById('radar-needle');
       if (needle) {
-        if (direction === 'left') needle.style.transform = `rotate(-45deg)`;
-        if (direction === 'right') needle.style.transform = `rotate(45deg)`;
-        if (direction === 'up' || direction === 'center') needle.style.transform = `rotate(0deg)`;
+        if (direction === 'left') {
+          needle.style.transform = `rotate(-45deg)`;
+          backdrop.style.transform = `scale(1.08) translate(20px, 0px)`;
+        } else if (direction === 'right') {
+          needle.style.transform = `rotate(45deg)`;
+          backdrop.style.transform = `scale(1.08) translate(-20px, 0px)`;
+        } else if (direction === 'up' || direction === 'center') {
+          needle.style.transform = `rotate(0deg)`;
+          backdrop.style.transform = `scale(1.12) translate(0px, -10px)`;
+          setTimeout(() => { backdrop.style.transform = `scale(1.05) translate(0px, 0px)`; }, 1000);
+        }
       }
-    };
-    window.triggerWalkForward = function() { window.handleWalk('up'); };
+    }
+    function triggerWalkForward() { handleWalk('up'); }
 
     const audio = document.getElementById('mall-ambience-audio');
     let isAudioPlaying = false;
-    window.toggleMallMusic = function() {
+    function toggleMallMusic() {
       if (!audio) return;
       if (!isAudioPlaying) {
         audio.play().then(() => { isAudioPlaying = true; }).catch(() => {});
@@ -1195,7 +770,7 @@
         audio.pause();
         isAudioPlaying = false;
       }
-    };
+    }
 
     window.addEventListener('DOMContentLoaded', () => {
       loadSupabaseData();
