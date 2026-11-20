@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KHM Bedding | Master 3D Virtual Luxury Mall</title>
-  <meta name="description" content="KHM Bedding - Master 3D Virtual Luxury Shopping Mall, 360° Playable Experience, Real Supabase Products, Interactive Inspection Studio, and Flat Rs. 350 COD across Pakistan." />
+  <title>KHM Bedding | Master 3D Playable Virtual Luxury Mall</title>
+  <meta name="description" content="KHM Bedding - Master 3D Virtual Luxury Shopping Mall, Playable 360° Experience, Real Supabase Cloud Products, Interactive Inspection Studio, and Flat Rs. 350 COD across Pakistan." />
 
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -214,7 +214,7 @@
       </div>
     </div>
 
-    <!-- MID STAGE: 4 STORE PORTAL HOTSPOTS (Direct 90° Storefront Portals) -->
+    <!-- MID STAGE: 4 STORE PORTAL HOTSPOTS -->
     <div class="w-full grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-5 my-auto max-w-7xl mx-auto pointer-events-auto">
       <!-- Store 1: Kids Footwear -->
       <button onclick="window.enterStorefront('kids-footwear')" class="text-left relative p-4 rounded-2xl palace-glass shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-sapphire/80 group">
@@ -289,7 +289,7 @@
       </button>
     </div>
 
-    <!-- LOWER FLOATING CARDS (Reference Image Layout: Left Sneakers, Right Bed) -->
+    <!-- LOWER FLOATING CARDS -->
     <div class="w-full flex flex-col md:flex-row items-end md:items-center justify-between gap-4 pointer-events-none mt-auto">
       
       <!-- Left Floating Product: Kids Sneakers -->
@@ -342,4 +342,865 @@
       
       <!-- Virtual D-Pad Controller (Bottom-Left) -->
       <div id="dpad-controller" class="pointer-events-auto relative w-28 h-28 rounded-full palace-glass shadow-2xl p-2 flex items-center justify-center">
-        <button aria-label="
+        <button aria-label="Walk Forward" onclick="window.handleWalk('up')" class="absolute top-1 left-1/2 -translate-x-1/2 w-7 h-7 rounded-lg bg-sapphire hover:bg-gold-500 hover:text-midnight text-gold-400 flex items-center justify-center transition-colors">
+          <span class="material-symbols-outlined text-base">keyboard_arrow_up</span>
+        </button>
+        <button aria-label="Walk Backward" onclick="window.handleWalk('down')" class="absolute bottom-1 left-1/2 -translate-x-1/2 w-7 h-7 rounded-lg bg-sapphire hover:bg-gold-500 hover:text-midnight text-gold-400 flex items-center justify-center transition-colors">
+          <span class="material-symbols-outlined text-base">keyboard_arrow_down</span>
+        </button>
+        <button aria-label="Turn Left" onclick="window.handleWalk('left')" class="absolute left-1 top-1/2 -translate-y-1/2 w-7 h-7 rounded-lg bg-sapphire hover:bg-gold-500 hover:text-midnight text-gold-400 flex items-center justify-center transition-colors">
+          <span class="material-symbols-outlined text-base">keyboard_arrow_left</span>
+        </button>
+        <button aria-label="Turn Right" onclick="window.handleWalk('right')" class="absolute right-1 top-1/2 -translate-y-1/2 w-7 h-7 rounded-lg bg-sapphire hover:bg-gold-500 hover:text-midnight text-gold-400 flex items-center justify-center transition-colors">
+          <span class="material-symbols-outlined text-base">keyboard_arrow_right</span>
+        </button>
+        <button onclick="window.handleWalk('center')" class="w-8 h-8 rounded-full bg-gold-400 text-midnight flex items-center justify-center shadow-lg font-bold">
+          <span class="material-symbols-outlined text-base font-bold">radio_button_checked</span>
+        </button>
+      </div>
+
+      <!-- Center Navigation Glass Dock -->
+      <nav class="pointer-events-auto flex items-center gap-1 sm:gap-2 px-4 py-2 rounded-full palace-glass shadow-2xl mx-auto">
+        <button onclick="window.KHM_MASTER_MALL.returnToAtrium()" class="flex items-center gap-1.5 px-4 py-2 rounded-full bg-sapphire text-gold-300 font-outfit text-xs font-bold shadow-inner">
+          <span class="material-symbols-outlined text-base">store</span>
+          <span>Mall</span>
+        </button>
+        <button onclick="window.enterStorefront('khm-bedsheets')" class="flex items-center gap-1.5 px-4 py-2 rounded-full hover:bg-sapphire/60 text-ivory/70 hover:text-ivory font-outfit text-xs font-medium transition-all">
+          <span class="material-symbols-outlined text-base">category</span>
+          <span>Collections</span>
+        </button>
+        <button onclick="window.openProductStudio('1000TC Sateen Suite', 14500, 'Imperial 360 Mode')" class="flex items-center gap-1.5 px-4 py-2 rounded-full hover:bg-sapphire/60 text-ivory/70 hover:text-ivory font-outfit text-xs font-medium transition-all">
+          <span class="material-symbols-outlined text-base">360</span>
+          <span>360° View</span>
+        </button>
+        <button onclick="toggleBagDrawer(true)" class="flex items-center gap-1.5 px-4 py-2 rounded-full hover:bg-sapphire/60 text-ivory/70 hover:text-ivory font-outfit text-xs font-medium transition-all">
+          <span class="material-symbols-outlined text-base">shopping_bag</span>
+          <span>Cart</span>
+        </button>
+        <a href="https://wa.me/923049141244" target="_blank" class="flex items-center gap-1.5 px-4 py-2 rounded-full hover:bg-sapphire/60 text-ivory/70 hover:text-ivory font-outfit text-xs font-medium transition-all">
+          <span class="material-symbols-outlined text-base">person</span>
+          <span>Account</span>
+        </a>
+      </nav>
+
+      <!-- Audio Indicator (Bottom-Right) -->
+      <div class="pointer-events-auto hidden md:flex items-center gap-3 p-2 px-4 rounded-full palace-glass shadow-xl">
+        <button onclick="window.toggleMallMusic()" class="w-8 h-8 rounded-full bg-sapphire flex items-center justify-center text-gold-400 hover:bg-gold-500 hover:text-midnight transition-colors">
+          <span class="material-symbols-outlined text-base">volume_up</span>
+        </button>
+        <div class="flex flex-col">
+          <span class="text-[10px] uppercase tracking-wider text-ivory font-bold">Royal Palace Oud</span>
+          <span class="text-[10px] text-ivory/50">Live 432Hz Soundstage</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       SIDE DRAWER: STORE SHOWROOM & PRODUCTS
+       ========================================== -->
+  <aside id="storefrontDrawer" class="fixed top-0 right-0 bottom-0 w-full max-w-md bg-midnight-deep/95 border-l border-gold-500/30 z-50 shadow-2xl translate-x-full transition-transform duration-500 flex flex-col font-sans">
+    <div class="p-5 border-b border-gold-500/20 flex items-center justify-between bg-midnight">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-sapphire text-gold-400 border border-gold-500/30 flex items-center justify-center text-lg">
+          <span class="material-symbols-outlined" id="store-icon">storefront</span>
+        </div>
+        <div>
+          <span class="text-[9px] font-mono text-gold-400 uppercase tracking-widest block" id="store-subtitle">1000TC Sateen Imperial Linen</span>
+          <h3 class="font-serif font-bold text-lg text-ivory" id="store-title">KHM Luxury Bedsheets</h3>
+        </div>
+      </div>
+      <button onclick="window.closeStorefront()" class="w-8 h-8 rounded-full palace-glass hover:bg-gold-500 hover:text-midnight text-ivory/70 flex items-center justify-center font-bold text-sm transition-colors">✕</button>
+    </div>
+
+    <div class="bg-gradient-to-r from-sapphire to-midnight px-5 py-2.5 border-b border-gold-500/15 flex items-center justify-between text-xs text-ivory/80">
+      <span><i class="fa-solid fa-truck-fast text-gold-400 mr-1.5"></i> Flat Rs. 350 COD Nationwide</span>
+      <span class="text-emerald-400 font-bold">100% Certified Egyptian Cotton</span>
+    </div>
+
+    <!-- Product Showcase Cards List -->
+    <div id="store-catalog-list" class="flex-1 overflow-y-auto p-5 space-y-4"></div>
+
+    <div class="p-4 border-t border-gold-500/20 bg-midnight flex items-center justify-between text-xs font-mono">
+      <button onclick="window.closeStorefront()" class="text-gold-400 hover:text-ivory flex items-center gap-1.5">
+        <i class="fa-solid fa-arrow-left"></i> <span>Return to 3D Concourse</span>
+      </button>
+      <a href="https://wa.me/923049141244" target="_blank" class="text-emerald-400 hover:underline">WhatsApp (+92 304 9141244)</a>
+    </div>
+  </aside>
+
+  <!-- ==========================================
+       3D PRODUCT INSPECTION STUDIO MODAL
+       ========================================== -->
+  <div id="product-studio-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-midnight-deep/90 backdrop-blur-xl">
+    <div class="palace-glass-heavy rounded-3xl border border-gold-500/40 p-6 sm:p-8 max-w-xl w-full space-y-5 text-center relative shadow-2xl">
+      <button onclick="window.closeProductStudio()" class="absolute top-4 right-4 text-ivory/60 hover:text-gold-300 text-xl font-bold">✕</button>
+      
+      <span class="px-3 py-1 rounded-full bg-sapphire text-gold-300 text-[10px] uppercase tracking-widest font-bold">Imperial Specimen Chamber</span>
+      <h3 class="text-2xl font-serif font-bold text-ivory" id="studio-title">Imperial Gold Sateen Duvet</h3>
+      <p class="text-lg text-gold-400 font-bold" id="studio-price">Rs. 16,800</p>
+      
+      <!-- Turntable Rotating Container -->
+      <div class="w-64 h-64 mx-auto rounded-full border-2 border-gold-500/60 relative flex items-center justify-center bg-midnight/90 shadow-[0_0_60px_rgba(214,167,92,0.3)] overflow-hidden">
+        <div id="studio-product-display" class="transition-transform duration-200 w-48 h-48 flex items-center justify-center">
+          <img id="studio-img" src="https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=500&auto=format&fit=crop&q=80" alt="Inspected Product" class="max-h-40 object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.9)]" />
+        </div>
+      </div>
+
+      <!-- Turntable Range Slider -->
+      <div class="flex items-center gap-3 bg-midnight px-4 py-2 rounded-full border border-gold-500/30">
+        <span class="material-symbols-outlined text-gold-400 text-sm">rotate_left</span>
+        <input type="range" min="0" max="360" value="0" id="turntable-slider" oninput="window.rotateStudio(this.value)" class="w-full accent-gold-400 cursor-pointer" />
+        <span class="material-symbols-outlined text-gold-400 text-sm">rotate_right</span>
+        <span id="studio-deg" class="text-xs font-mono text-gold-300 min-w-[35px]">0°</span>
+      </div>
+
+      <div class="flex items-center justify-center gap-2 text-xs">
+        <span class="text-ivory/60 mr-1">Chamber Size:</span>
+        <button class="px-3 py-1 rounded-lg bg-gold-400 text-midnight font-bold">King 6x6.5</button>
+        <button class="px-3 py-1 rounded-lg bg-sapphire text-ivory/80 hover:bg-sapphire/80">Queen</button>
+        <button class="px-3 py-1 rounded-lg bg-sapphire text-ivory/80 hover:bg-sapphire/80">Custom</button>
+      </div>
+
+      <button onclick="window.quickBuy(document.getElementById('studio-title').innerText, parseInt(document.getElementById('studio-price').innerText.replace(/[^0-9]/g,'')))" class="w-full py-3.5 gold-btn rounded-xl text-xs uppercase tracking-widest shadow-xl flex items-center justify-center gap-2">
+        <span class="material-symbols-outlined text-lg">shopping_bag</span>
+        <span>Add To Imperial Bag</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       SHOPPING BAG & RS. 350 COD CHECKOUT DRAWER
+       ========================================== -->
+  <div id="bagBackdrop" class="hidden fixed inset-0 bg-midnight-deep/80 backdrop-blur-md z-50" onclick="toggleBagDrawer(false)"></div>
+  <aside id="bagDrawer" class="fixed top-0 right-0 bottom-0 w-full max-w-md bg-midnight-deep/95 border-l border-gold-500/30 z-50 shadow-2xl translate-x-full transition-transform duration-300 flex flex-col font-sans">
+    <div class="p-5 border-b border-gold-500/20 flex items-center justify-between bg-midnight">
+      <div class="flex items-center gap-2.5">
+        <span class="material-symbols-outlined text-gold-400 text-2xl">hotel_class</span>
+        <div>
+          <h3 class="font-serif font-bold text-base text-ivory uppercase tracking-wider">Imperial Bag</h3>
+          <span class="text-[10px] text-ivory/60 uppercase tracking-widest">3 Curated Artifacts</span>
+        </div>
+      </div>
+      <button onclick="toggleBagDrawer(false)" class="w-8 h-8 rounded-full palace-glass hover:bg-gold-500 hover:text-midnight text-ivory/70 flex items-center justify-center font-bold">×</button>
+    </div>
+
+    <div id="bagItemList" class="flex-1 overflow-y-auto p-5 space-y-3 text-xs"></div>
+
+    <div class="p-5 border-t border-gold-500/20 bg-midnight space-y-3 text-xs shrink-0">
+      <div class="flex justify-between">
+        <span>Items Subtotal:</span>
+        <span id="bagSubtotal" class="font-bold text-ivory">Rs. 0</span>
+      </div>
+      <div class="flex justify-between">
+        <span>Nationwide COD Shipping:</span>
+        <span class="font-bold text-emerald-400">Rs. 350</span>
+      </div>
+      <div class="flex justify-between text-sm font-bold text-gold-300 pt-2 border-t border-gold-500/20 font-serif">
+        <span>Total Payable (COD):</span>
+        <span id="bagGrandTotal">Rs. 350</span>
+      </div>
+
+      <div class="space-y-2 pt-2">
+        <div class="flex items-center justify-between text-[11px] text-ivory/70">
+          <span><i class="fa-solid fa-user mr-1"></i> Shipping Dossier</span>
+          <span class="text-[10px] text-gold-400">easicarts@gmail.com</span>
+        </div>
+        <input type="text" id="custName" placeholder="Your Full Name *" class="w-full px-3 py-2 rounded-lg bg-midnight-deep border border-gold-500/30 text-ivory outline-none text-xs" />
+        <input type="tel" id="custPhone" placeholder="WhatsApp / Phone Number *" class="w-full px-3 py-2 rounded-lg bg-midnight-deep border border-gold-500/30 text-ivory outline-none text-xs" />
+        <textarea id="custCity" rows="2" placeholder="Delivery Address &amp; Landmark *" class="w-full px-3 py-2 rounded-lg bg-midnight-deep border border-gold-500/30 text-ivory outline-none text-xs resize-none"></textarea>
+      </div>
+
+      <button id="btnCheckout" onclick="submitOrder()" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold text-xs uppercase tracking-widest shadow-xl flex items-center justify-center gap-2 transition-colors">
+        <i class="fa-solid fa-paper-plane"></i> Place Order (Email + WhatsApp)
+      </button>
+    </div>
+  </aside>
+
+  <!-- ==========================================
+       THREE.JS MASTER 3D MALL SCRIPT ENGINE
+       ========================================== -->
+  <script>
+    // 1. SUPABASE CLIENT & LIVE DATA
+    const SUPABASE_URL = "https://yyapzlhdnyduonrekiwe.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5YXB6bGhkbnlkdW9ucmVraXdlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQzODA3MDYsImV4cCI6MjEwOTk1NjcwNn0.YMdQBz0h9sekPQV-crgmRHrGl96RfNj0xymXD6r4rBE";
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    let liveProducts = [
+      { id: "sp_1", title: "Kids Royal Sneaker Shoes", category: "kids-footwear", price: 2499, tag: "Best Seller", image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=500&auto=format&fit=crop&q=80" },
+      { id: "sp_2", title: "Handmade Sheep Soft Moccasins", category: "kids-footwear", price: 1850, tag: "Artisanal", image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=500&auto=format&fit=crop&q=80" },
+      { id: "sp_3", title: "Royal Pique Cotton Polo", category: "cotton-garments", price: 1499, tag: "100% Organic", image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500&auto=format&fit=crop&q=80" },
+      { id: "sp_4", title: "Bio-Washed Combed Cotton Tee", category: "cotton-garments", price: 1399, tag: "Bio-Washed", image: "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=500&auto=format&fit=crop&q=80" },
+      { id: "sp_5", title: "Imperial Gold 1000TC Sateen Duvet Set", category: "khm-bedsheets", price: 16800, tag: "KHM Signature", image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=500&auto=format&fit=crop&q=80" },
+      { id: "sp_6", title: "Crown Jewel Ivory Fitted Sheet Set", category: "khm-bedsheets", price: 12500, tag: "Super King", image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=500&auto=format&fit=crop&q=80" },
+      { id: "sp_7", title: "Imperial Living Room Suite", category: "home-living", price: 34500, tag: "Palatial Accent", image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=500&auto=format&fit=crop&q=80" }
+    ];
+
+    async function loadSupabaseData() {
+      try {
+        const { data, error } = await supabaseClient.from('products').select('*');
+        if (!error && data && data.length > 0) {
+          liveProducts = data.map((item, idx) => ({
+            id: item.id || `sp_${idx}`,
+            title: item.title || item.name || 'Palatial Artifact',
+            category: (item.category || '').toLowerCase().includes('baby') ? 'kids-footwear' :
+                      (item.category || '').toLowerCase().includes('garment') ? 'cotton-garments' :
+                      (item.category || '').toLowerCase().includes('bed') ? 'khm-bedsheets' : 'home-living',
+            price: Number(item.price) || 2499,
+            tag: item.tag || 'Certified Luxury',
+            image: item.image || item.image_url || liveProducts[idx % liveProducts.length].image
+          }));
+        }
+      } catch (err) {}
+    }
+
+    // 2. THREE.JS MASTER 3D MALL IMPLEMENTATION (FAITHFUL TO MASTER REFERENCE IMAGE)
+    (function initMasterMall() {
+      const container = document.getElementById('threejs-mall-viewport');
+      if (!container) return;
+
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+
+      // 1. SCENE & ATMOSPHERE
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x050e1c);
+      scene.fog = new THREE.FogExp2(0x050e1c, 0.007);
+
+      // 2. CAMERA SETUP
+      const camera = new THREE.PerspectiveCamera(54, width / height, 0.1, 1000);
+      camera.position.set(0, 5.5, 38);
+      let lookTarget = new THREE.Vector3(0, 5.0, 0);
+
+      // 3. RENDERER
+      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: 'high-performance' });
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.65;
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      container.appendChild(renderer.domElement);
+
+      // 4. BALANCED MULTI-TIER ILLUMINATION (Eliminates any black screen defect)
+      const hemiLight = new THREE.HemisphereLight(0xfff5e6, 0x071426, 2.4);
+      scene.add(hemiLight);
+
+      const sunLight = new THREE.DirectionalLight(0xffecd2, 2.8);
+      sunLight.position.set(20, 60, 30);
+      sunLight.castShadow = true;
+      sunLight.shadow.mapSize.width = 2048;
+      sunLight.shadow.mapSize.height = 2048;
+      sunLight.shadow.bias = -0.001;
+      scene.add(sunLight);
+
+      const chandelierLight = new THREE.PointLight(0xffdf9e, 5.5, 95, 1.2);
+      chandelierLight.position.set(0, 28, 0);
+      scene.add(chandelierLight);
+
+      // 5. MASTER ARCHITECTURAL MATERIALS
+      const marbleFloorMat = new THREE.MeshStandardMaterial({
+        color: 0x091424,
+        roughness: 0.16,
+        metalness: 0.8,
+        emissive: 0x030812,
+        emissiveIntensity: 0.2
+      });
+
+      const champagneGoldMat = new THREE.MeshStandardMaterial({
+        color: 0xd6a75c,
+        roughness: 0.22,
+        metalness: 0.88,
+        emissive: 0x4a3411,
+        emissiveIntensity: 0.3
+      });
+
+      const glowingGoldNeon = new THREE.MeshBasicMaterial({ color: 0xffdf9e });
+      const luxuryGlassMat = new THREE.MeshStandardMaterial({
+        color: 0xa8d5ff,
+        transparent: true,
+        opacity: 0.45,
+        roughness: 0.08,
+        metalness: 0.9
+      });
+
+      // 6. GRAND CIRCULAR MARBLE FLOOR & GOLD CONCENTRIC INLAYS
+      const floorRadius = 72;
+      const floorGeo = new THREE.CylinderGeometry(floorRadius, floorRadius, 1.5, 64);
+      const floorMesh = new THREE.Mesh(floorGeo, marbleFloorMat);
+      floorMesh.position.y = -0.75;
+      floorMesh.receiveShadow = true;
+      scene.add(floorMesh);
+
+      // Concentric Golden Rings
+      [10, 22, 34, 48, 62, 71].forEach(r => {
+        const ringGeo = new THREE.RingGeometry(r - 0.35, r + 0.35, 64);
+        const ringMesh = new THREE.Mesh(ringGeo, champagneGoldMat);
+        ringMesh.rotation.x = -Math.PI / 2;
+        ringMesh.position.y = 0.02;
+        scene.add(ringMesh);
+      });
+
+      // Radial rays
+      for (let a = 0; a < 16; a++) {
+        const ang = (a / 16) * Math.PI * 2;
+        const rayGeo = new THREE.PlaneGeometry(0.28, floorRadius);
+        const ray = new THREE.Mesh(rayGeo, champagneGoldMat);
+        ray.rotation.x = -Math.PI / 2;
+        ray.rotation.z = ang;
+        ray.position.set(Math.sin(ang) * (floorRadius / 2), 0.025, Math.cos(ang) * (floorRadius / 2));
+        scene.add(ray);
+      }
+
+      // Directional Chevron (From Image)
+      const chevronGroup = new THREE.Group();
+      chevronGroup.position.set(0, 0.03, 16);
+      for (let c = 0; c < 2; c++) {
+        const chevGeo = new THREE.RingGeometry(3.5 + c * 1.5, 4.2 + c * 1.5, 3, 1, 0, Math.PI);
+        const chevMesh = new THREE.Mesh(chevGeo, glowingGoldNeon);
+        chevMesh.rotation.x = -Math.PI / 2;
+        chevMesh.rotation.z = Math.PI / 2;
+        chevMesh.position.z = -c * 2.2;
+        chevronGroup.add(chevMesh);
+      }
+      scene.add(chevronGroup);
+
+      // 7. CENTRAL ROTUNDA WITH ORBITING PLANETARIUM GLOBE & KHM SIGN
+      const centerPlinthGeo = new THREE.CylinderGeometry(9.5, 10.5, 1.6, 48);
+      const centerPlinth = new THREE.Mesh(centerPlinthGeo, champagneGoldMat);
+      centerPlinth.position.y = 0.8;
+      scene.add(centerPlinth);
+
+      const globeGroup = new THREE.Group();
+      globeGroup.position.set(0, 4.8, 0);
+      const innerOrb = new THREE.Mesh(new THREE.SphereGeometry(2.2, 32, 32), glowingGoldNeon);
+      globeGroup.add(innerOrb);
+
+      [3.6, 4.5, 5.4].forEach((rad, idx) => {
+        const ringMesh = new THREE.Mesh(new THREE.TorusGeometry(rad, 0.18, 16, 64), champagneGoldMat);
+        ringMesh.rotation.x = 0.4 + idx * 0.5;
+        ringMesh.rotation.y = idx * 0.8;
+        globeGroup.add(ringMesh);
+      });
+      scene.add(globeGroup);
+
+      // Back tower with KHM Bedding Sign
+      const towerGeo = new THREE.CylinderGeometry(11, 11, 24, 48, 1, true, -Math.PI * 0.6, Math.PI * 1.2);
+      const towerMat = new THREE.MeshStandardMaterial({ color: 0x050e1c, roughness: 0.3, metalness: 0.8, side: THREE.DoubleSide });
+      const tower = new THREE.Mesh(towerGeo, towerMat);
+      tower.position.set(0, 12, -8);
+      scene.add(tower);
+
+      // 8. FOUR PHYSICAL CONNECTED STOREFRONTS
+      const storeConfigs = [
+        { id: 'kids-footwear', title: "Baby & Kids Footwear", x: -30, z: 12, rotY: Math.PI * 0.35, color: 0xffd166, interiorType: 'shelves' },
+        { id: 'cotton-garments', title: "Cotton Garments & Apparel", x: -14, z: -18, rotY: Math.PI * 0.15, color: 0x64b5f6, interiorType: 'racks' },
+        { id: 'khm-bedsheets', title: "Luxury Bedsheets (KHM)", x: 14, z: -18, rotY: -Math.PI * 0.15, color: 0xd6a75c, interiorType: 'bed' },
+        { id: 'home-living', title: "Home Living", x: 30, z: 12, rotY: -Math.PI * 0.35, color: 0xffb74d, interiorType: 'sofa' }
+      ];
+
+      const interactiveStores = [];
+
+      storeConfigs.forEach((cfg) => {
+        const sGroup = new THREE.Group();
+        sGroup.position.set(cfg.x, 0, cfg.z);
+        sGroup.rotation.y = cfg.rotY;
+
+        const baseGeo = new THREE.CylinderGeometry(12, 13, 1.4, 32);
+        const baseMesh = new THREE.Mesh(baseGeo, marbleFloorMat);
+        baseMesh.position.y = 0.7;
+        sGroup.add(baseMesh);
+
+        const archMat = new THREE.MeshStandardMaterial({
+          color: cfg.color,
+          roughness: 0.2,
+          metalness: 0.85,
+          emissive: cfg.color,
+          emissiveIntensity: 0.25
+        });
+
+        const archMesh = new THREE.Mesh(new THREE.TorusGeometry(8.5, 0.65, 16, 32, Math.PI), archMat);
+        archMesh.position.set(0, 8.5, 0);
+        sGroup.add(archMesh);
+
+        [-6.2, 6.2].forEach(px => {
+          const pCol = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.6, 9, 16), archMat);
+          pCol.position.set(px, 4.5, 0);
+          sGroup.add(pCol);
+        });
+
+        // 3D Physical Sliding Doors
+        const doorGeo = new THREE.BoxGeometry(3.2, 7.8, 0.25);
+        const doorLeft = new THREE.Mesh(doorGeo, luxuryGlassMat);
+        const doorRight = new THREE.Mesh(doorGeo, luxuryGlassMat);
+        doorLeft.position.set(-1.7, 3.9, 0);
+        doorRight.position.set(1.7, 3.9, 0);
+        sGroup.add(doorLeft);
+        sGroup.add(doorRight);
+
+        // Signboard
+        const signBoard = new THREE.Mesh(new THREE.BoxGeometry(9.2, 1.5, 0.4), champagneGoldMat);
+        signBoard.position.set(0, 10.2, 0.4);
+        sGroup.add(signBoard);
+
+        // Interior 3D Physical Stall
+        const stallBase = new THREE.Mesh(new THREE.CylinderGeometry(2.8, 3.2, 2.2, 24), champagneGoldMat);
+        stallBase.position.set(0, 1.5, -4.5);
+        sGroup.add(stallBase);
+
+        let displayItem;
+        if (cfg.interiorType === 'shelves') {
+          const shoeGroup = new THREE.Group();
+          const sole = new THREE.Mesh(new THREE.BoxGeometry(2.4, 0.6, 1.2), new THREE.MeshStandardMaterial({ color: 0xffffff }));
+          const upper = new THREE.Mesh(new THREE.BoxGeometry(2.0, 1.0, 1.1), new THREE.MeshStandardMaterial({ color: 0x4cc9f0, roughness: 0.3 }));
+          upper.position.set(-0.2, 0.7, 0);
+          shoeGroup.add(sole);
+          shoeGroup.add(upper);
+          displayItem = shoeGroup;
+        } else if (cfg.interiorType === 'racks') {
+          const rackGroup = new THREE.Group();
+          const bar = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 3.5), champagneGoldMat);
+          bar.rotation.z = Math.PI / 2;
+          bar.position.y = 1.8;
+          const cloth = new THREE.Mesh(new THREE.BoxGeometry(1.6, 2.2, 0.5), new THREE.MeshStandardMaterial({ color: 0x3a86ff }));
+          cloth.position.y = 0.8;
+          rackGroup.add(bar);
+          rackGroup.add(cloth);
+          displayItem = rackGroup;
+        } else if (cfg.interiorType === 'bed') {
+          const bedGroup = new THREE.Group();
+          const mattress = new THREE.Mesh(new THREE.BoxGeometry(3.4, 1.0, 3.8), new THREE.MeshStandardMaterial({ color: 0x071426, metalness: 0.3 }));
+          const headboard = new THREE.Mesh(new THREE.BoxGeometry(3.6, 2.4, 0.5), champagneGoldMat);
+          headboard.position.set(0, 1.2, -1.8);
+          const pillow = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.4, 0.8), new THREE.MeshStandardMaterial({ color: 0xd6a75c }));
+          pillow.position.set(-0.7, 0.7, -1.1);
+          const pillow2 = pillow.clone();
+          pillow2.position.x = 0.7;
+          bedGroup.add(mattress);
+          bedGroup.add(headboard);
+          bedGroup.add(pillow);
+          bedGroup.add(pillow2);
+          displayItem = bedGroup;
+        } else {
+          const sofaGroup = new THREE.Group();
+          const seat = new THREE.Mesh(new THREE.BoxGeometry(3.2, 0.8, 1.6), new THREE.MeshStandardMaterial({ color: 0x8a6224 }));
+          const back = new THREE.Mesh(new THREE.BoxGeometry(3.2, 1.4, 0.5), new THREE.MeshStandardMaterial({ color: 0x5a3e10 }));
+          back.position.set(0, 0.9, -0.6);
+          sofaGroup.add(seat);
+          sofaGroup.add(back);
+          displayItem = sofaGroup;
+        }
+        displayItem.position.set(0, 3.2, -4.5);
+        sGroup.add(displayItem);
+
+        // Raycast Hitbox
+        const hitBox = new THREE.Mesh(new THREE.BoxGeometry(15, 12, 10), new THREE.MeshBasicMaterial({ visible: false }));
+        hitBox.position.set(0, 6, 0);
+        hitBox.userData = { id: cfg.id, config: cfg };
+        sGroup.add(hitBox);
+
+        scene.add(sGroup);
+        interactiveStores.push({ id: cfg.id, config: cfg, group: sGroup, doorLeft, doorRight, hitBox });
+      });
+
+      // 9. ANIMATED SHOPPERS (Walking Characters with Leg Strides)
+      const shoppers = [];
+      const shopperColors = [0x3a86ff, 0xff006e, 0x8338ec, 0xfb5607, 0x06d6a0, 0xd6a75c];
+
+      for (let s = 0; s < 12; s++) {
+        const sGroup = new THREE.Group();
+        const color = shopperColors[s % shopperColors.length];
+        const sMat = new THREE.MeshStandardMaterial({ color: color, roughness: 0.5 });
+        const skinMat = new THREE.MeshStandardMaterial({ color: 0xffdbac, roughness: 0.6 });
+
+        const leftLeg = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.16, 1.6), sMat);
+        const rightLeg = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.16, 1.6), sMat);
+        leftLeg.position.set(-0.25, 0.8, 0);
+        rightLeg.position.set(0.25, 0.8, 0);
+        sGroup.add(leftLeg);
+        sGroup.add(rightLeg);
+
+        const torso = new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.38, 1.8), sMat);
+        torso.position.y = 2.4;
+        sGroup.add(torso);
+
+        const head = new THREE.Mesh(new THREE.SphereGeometry(0.35, 16, 16), skinMat);
+        head.position.y = 3.6;
+        sGroup.add(head);
+
+        const angle = (s / 12) * Math.PI * 2;
+        const rad = 18 + (s % 3) * 8;
+        sGroup.position.set(Math.sin(angle) * rad, 0, Math.cos(angle) * rad);
+
+        scene.add(sGroup);
+        shoppers.push({ group: sGroup, leftLeg, rightLeg, angle, radius: rad, speed: 0.004 + (s % 4) * 0.002, phase: Math.random() * Math.PI * 2 });
+      }
+
+      // 10. WASD & MOUSE CONTROLS
+      const keys = { w: false, a: false, s: false, d: false, arrowup: false, arrowdown: false, arrowleft: false, arrowright: false };
+      let isNavigating = false;
+      let yaw = 0, pitch = 0;
+      let isMouseDown = false;
+      let prevMouseX = 0, prevMouseY = 0;
+
+      window.addEventListener('keydown', (e) => {
+        const k = e.key.toLowerCase();
+        if (keys.hasOwnProperty(k)) keys[k] = true;
+      });
+      window.addEventListener('keyup', (e) => {
+        const k = e.key.toLowerCase();
+        if (keys.hasOwnProperty(k)) keys[k] = false;
+      });
+
+      container.addEventListener('mousedown', (e) => {
+        isMouseDown = true;
+        prevMouseX = e.clientX;
+        prevMouseY = e.clientY;
+      });
+      window.addEventListener('mouseup', () => { isMouseDown = false; });
+      window.addEventListener('mousemove', (e) => {
+        if (!isMouseDown || isNavigating) return;
+        const dx = e.clientX - prevMouseX;
+        const dy = e.clientY - prevMouseY;
+        yaw -= dx * 0.004;
+        pitch = Math.max(-0.6, Math.min(0.6, pitch - dy * 0.003));
+        prevMouseX = e.clientX;
+        prevMouseY = e.clientY;
+      });
+
+      // Global Master Controller API
+      window.KHM_MASTER_MALL = {
+        navigateToStore: function(storeId) {
+          const store = interactiveStores.find(s => s.id === storeId);
+          if (!store) return;
+          isNavigating = true;
+
+          const targetX = store.config.x + Math.sin(store.config.rotY) * 6;
+          const targetZ = store.config.z + Math.cos(store.config.rotY) * 6;
+
+          if (typeof gsap !== 'undefined') {
+            const tl = gsap.timeline({
+              onComplete: () => {
+                isNavigating = false;
+                window.enterStorefront(storeId);
+              }
+            });
+
+            tl.to(camera.position, {
+              x: targetX,
+              y: 4.8,
+              z: targetZ,
+              duration: 2.2,
+              ease: "power2.inOut"
+            });
+
+            tl.to(store.doorLeft.position, { x: -4.5, duration: 1.2, ease: "power2.out" }, "-=0.8");
+            tl.to(store.doorRight.position, { x: 4.5, duration: 1.2, ease: "power2.out" }, "<");
+          }
+        },
+
+        returnToAtrium: function() {
+          interactiveStores.forEach(s => {
+            if (typeof gsap !== 'undefined') {
+              gsap.to(s.doorLeft.position, { x: -1.7, duration: 1.0 });
+              gsap.to(s.doorRight.position, { x: 1.7, duration: 1.0 });
+            }
+          });
+
+          isNavigating = false;
+          yaw = 0;
+          pitch = 0;
+
+          if (typeof gsap !== 'undefined') {
+            gsap.to(camera.position, {
+              x: 0,
+              y: 5.5,
+              z: 38,
+              duration: 2.4,
+              ease: "power2.inOut"
+            });
+          }
+          window.closeStorefront();
+        }
+      };
+
+      // Raycast Storefront Click
+      const raycaster = new THREE.Raycaster();
+      const mouse = new THREE.Vector2();
+      window.addEventListener('click', (e) => {
+        if (isNavigating) return;
+        if (e.target.closest('header') || e.target.closest('button') || e.target.closest('aside') || e.target.closest('#product-studio-modal') || e.target.closest('#dpad-controller')) return;
+
+        mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+        raycaster.setFromCamera(mouse, camera);
+
+        const hitBoxes = interactiveStores.map(s => s.hitBox);
+        const hits = raycaster.intersectObjects(hitBoxes);
+        if (hits.length > 0) {
+          const storeId = hits[0].object.userData.id;
+          window.KHM_MASTER_MALL.navigateToStore(storeId);
+        }
+      });
+
+      // 60FPS Game Loop
+      const clock = new THREE.Clock();
+      function animate() {
+        requestAnimationFrame(animate);
+        const t = clock.getElapsedTime();
+
+        globeGroup.rotation.y = t * 0.35;
+        innerOrb.rotation.y = -t * 0.5;
+
+        shoppers.forEach(s => {
+          s.angle += s.speed;
+          s.group.position.x = Math.sin(s.angle) * s.radius;
+          s.group.position.z = Math.cos(s.angle) * s.radius;
+          s.group.rotation.y = s.angle + Math.PI / 2;
+
+          const swing = Math.sin(t * 8 + s.phase) * 0.45;
+          s.leftLeg.rotation.x = swing;
+          s.rightLeg.rotation.x = -swing;
+        });
+
+        if (!isNavigating) {
+          const moveSpeed = 0.28;
+          const forwardX = -Math.sin(yaw);
+          const forwardZ = -Math.cos(yaw);
+          const rightX = Math.cos(yaw);
+          const rightZ = -Math.sin(yaw);
+
+          if (keys.w || keys.arrowup) {
+            camera.position.x += forwardX * moveSpeed;
+            camera.position.z += forwardZ * moveSpeed;
+          }
+          if (keys.s || keys.arrowdown) {
+            camera.position.x -= forwardX * moveSpeed;
+            camera.position.z -= forwardZ * moveSpeed;
+          }
+          if (keys.a || keys.arrowleft) {
+            camera.position.x -= rightX * moveSpeed;
+            camera.position.z -= rightZ * moveSpeed;
+          }
+          if (keys.d || keys.arrowright) {
+            camera.position.x += rightX * moveSpeed;
+            camera.position.z += rightZ * moveSpeed;
+          }
+
+          const dist = Math.hypot(camera.position.x, camera.position.z);
+          if (dist > floorRadius - 8) {
+            camera.position.x = (camera.position.x / dist) * (floorRadius - 8);
+            camera.position.z = (camera.position.z / dist) * (floorRadius - 8);
+          }
+
+          lookTarget.x = camera.position.x - Math.sin(yaw) * Math.cos(pitch) * 20;
+          lookTarget.y = camera.position.y + Math.sin(pitch) * 20;
+          lookTarget.z = camera.position.z - Math.cos(yaw) * Math.cos(pitch) * 20;
+          camera.lookAt(lookTarget);
+        }
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    })();
+
+    // 3. UI, STOREFRONT & AUDIO CONTROLLERS
+    const storesConfig = {
+      'kids-footwear': { title: 'Baby & Kids Footwear', subtitle: 'Hand-Stitched Soft Moccasins', icon: 'child_care' },
+      'cotton-garments': { title: 'Cotton Garments & Apparel', subtitle: '100% Organic Pique Knit', icon: 'checkroom' },
+      'khm-bedsheets': { title: 'Luxury Bedsheets (KHM)', subtitle: '1000TC Sateen Imperial Linen', icon: 'bed' },
+      'home-living': { title: 'Home Living Showcase', subtitle: 'Curated Palatial Accents & Decor', icon: 'chair' }
+    };
+
+    window.enterStorefront = function(storeKey) {
+      const cfg = storesConfig[storeKey] || storesConfig['khm-bedsheets'];
+      document.getElementById('store-title').innerText = cfg.title;
+      document.getElementById('store-subtitle').innerText = cfg.subtitle;
+      document.getElementById('store-icon').innerText = cfg.icon;
+
+      const filtered = liveProducts.filter(p => p.category === storeKey);
+      const list = document.getElementById('store-catalog-list');
+
+      list.innerHTML = filtered.map(item => `
+        <div class="p-4 rounded-2xl palace-glass border border-gold-500/25 flex flex-col sm:flex-row items-center gap-4 hover:bg-sapphire/60 transition-colors">
+          <div class="w-full sm:w-28 h-28 rounded-xl bg-midnight overflow-hidden flex items-center justify-center border border-gold-500/30">
+            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover" />
+          </div>
+          <div class="flex-1 w-full">
+            <div class="flex items-center justify-between">
+              <span class="text-[9px] uppercase tracking-wider text-gold-400 font-bold">${item.tag}</span>
+              <span class="text-[10px] text-ivory/60">In Stock: Lahore Hub</span>
+            </div>
+            <h4 class="font-serif font-bold text-sm text-ivory mt-0.5">${item.title}</h4>
+            <div class="flex items-center justify-between mt-3">
+              <span class="font-bold text-gold-300 text-sm">Rs. ${item.price.toLocaleString()}</span>
+              <div class="flex items-center gap-2">
+                <button onclick="window.openProductStudio('${item.title}', ${item.price}, 'Imperial Standard')" class="px-3 py-1 rounded-full palace-glass text-[10px] uppercase font-bold text-ivory hover:text-gold-300">360° View</button>
+                <button onclick="window.quickBuy('${item.title}', ${item.price})" class="px-3.5 py-1 rounded-full gold-btn text-[10px] uppercase font-bold">Add to Bag</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      document.getElementById('storefrontDrawer').classList.remove('translate-x-full');
+    };
+
+    window.closeStorefront = function() {
+      document.getElementById('storefrontDrawer').classList.add('translate-x-full');
+    };
+
+    // 4. 360 PRODUCT STUDIO TURNTABLE MODAL
+    window.openProductStudio = function(name, price, variant) {
+      document.getElementById('studio-title').innerText = name;
+      document.getElementById('studio-price').innerText = 'Rs. ' + price.toLocaleString();
+      document.getElementById('product-studio-modal').classList.remove('hidden');
+    };
+
+    window.closeProductStudio = function() {
+      document.getElementById('product-studio-modal').classList.add('hidden');
+    };
+
+    window.rotateStudio = function(val) {
+      document.getElementById('studio-product-display').style.transform = `rotateY(${val}deg)`;
+      document.getElementById('studio-deg').innerText = `${val}°`;
+    };
+
+    // 5. SHOPPING BAG & NATIONWIDE RS. 350 COD CHECKOUT
+    const SHIPPING_FEE = 350;
+    const STORE_WHATSAPP = "923049141244";
+    const STORE_EMAIL = "easicarts@gmail.com";
+
+    let bag = [
+      { id: "c1", title: "1000TC Sateen Imperial Sheet", price: 14500, size: "King", qty: 1, image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=500&auto=format&fit=crop&q=80" },
+      { id: "c2", title: "Royal Heir Soft Moccasins", price: 4200, size: "6-12M", qty: 2, image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=500&auto=format&fit=crop&q=80" }
+    ];
+
+    window.quickBuy = function(title, price) {
+      bag.push({ id: `item_${Date.now()}`, title, price: Number(price), size: "King", qty: 1, image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=500&auto=format&fit=crop&q=80" });
+      updateBagUI();
+      toggleBagDrawer(true);
+    };
+
+    function updateBagUI() {
+      const totalQty = bag.reduce((sum, i) => sum + i.qty, 0);
+      document.getElementById('cartBadge').innerText = totalQty;
+
+      const subtotal = bag.reduce((sum, i) => sum + (i.price * i.qty), 0);
+      const grandTotal = subtotal + (bag.length > 0 ? SHIPPING_FEE : 0);
+
+      const list = document.getElementById('bagItemList');
+      if (bag.length === 0) {
+        list.innerHTML = `<div class="py-12 text-center text-ivory/50">Your shopping bag is empty</div>`;
+      } else {
+        list.innerHTML = bag.map((item, idx) => `
+          <div class="flex items-center gap-3 p-3 rounded-xl palace-glass border border-gold-500/20">
+            <img src="${item.image}" alt="${item.title}" class="w-12 h-12 rounded-lg object-cover bg-midnight border border-gold-500/30" />
+            <div class="flex-1 min-w-0">
+              <div class="font-serif font-bold text-ivory truncate text-xs">${item.title}</div>
+              <div class="text-[10px] text-ivory/60">Variant: ${item.size}</div>
+              <div class="text-gold-300 font-bold text-xs">Rs. ${(item.price * item.qty).toLocaleString()}</div>
+            </div>
+            <button onclick="bag.splice(${idx}, 1); updateBagUI();" class="text-ivory/40 hover:text-rose-400 p-1 text-xs">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </div>
+        `).join('');
+      }
+
+      document.getElementById('bagSubtotal').innerText = `Rs. ${subtotal.toLocaleString()}`;
+      document.getElementById('bagGrandTotal').innerText = `Rs. ${grandTotal.toLocaleString()}`;
+    }
+
+    function toggleBagDrawer(open) {
+      const drawer = document.getElementById('bagDrawer');
+      const backdrop = document.getElementById('bagBackdrop');
+      if (open) {
+        backdrop.classList.remove('hidden');
+        setTimeout(() => drawer.classList.remove('translate-x-full'), 10);
+      } else {
+        drawer.classList.add('translate-x-full');
+        setTimeout(() => backdrop.classList.add('hidden'), 300);
+      }
+    }
+
+    async function submitOrder() {
+      if (bag.length === 0) return alert("Bag is empty!");
+      const name = document.getElementById('custName').value.trim();
+      const phone = document.getElementById('custPhone').value.trim();
+      const city = document.getElementById('custCity').value.trim();
+
+      if (!name || !phone || !city) return alert("Please enter Name, WhatsApp Number and Delivery Address.");
+
+      const btn = document.getElementById('btnCheckout');
+      btn.disabled = true;
+      btn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin mr-1.5"></i> Transmitting Order...`;
+
+      const subtotal = bag.reduce((sum, i) => sum + (i.price * i.qty), 0);
+      const grandTotal = subtotal + SHIPPING_FEE;
+      const orderId = "KHM-" + Math.floor(100000 + Math.random() * 900000);
+      const itemsSummary = bag.map(i => `• ${i.title} (${i.size}) x${i.qty} = Rs. ${(i.price * i.qty).toLocaleString()}`).join("\n");
+
+      try {
+        await supabaseClient.from('orders').insert([{
+          id: orderId,
+          customer_name: name,
+          customer_phone: phone,
+          customer_address: city,
+          ordered_items: itemsSummary,
+          subtotal: subtotal,
+          shipping_fee: SHIPPING_FEE,
+          grand_total: grandTotal,
+          status: 'Pending'
+        }]);
+      } catch (err) {}
+
+      const waText = `👑 *NEW COD ORDER — KHM BEDDING MASTER 3D MALL*\n━━━━━━━━━━━━━━━━━━━━\n*Order ID:* ${orderId}\n*Customer:* ${name}\n*WhatsApp:* ${phone}\n*Address:* ${city}\n\n📦 *ITEMS ORDERED:*\n${itemsSummary}\n\n💰 *PAYMENT:*\n• Subtotal: Rs. ${subtotal.toLocaleString()}\n• Shipping: Rs. ${SHIPPING_FEE} Flat Nationwide COD\n*Grand Total: Rs. ${grandTotal.toLocaleString()}*\n━━━━━━━━━━━━━━━━━━━━\nDispatched to: ${STORE_EMAIL}`;
+
+      bag = [];
+      updateBagUI();
+      toggleBagDrawer(false);
+
+      alert(`Shukriya ${name}! Order (#${orderId}) receive ho gaya hai.`);
+      window.open(`https://wa.me/${STORE_WHATSAPP}?text=${encodeURIComponent(waText)}`, '_blank');
+
+      btn.disabled = false;
+      btn.innerHTML = `<i class="fa-solid fa-paper-plane mr-1.5"></i> Place Order (Email + WhatsApp)`;
+    }
+
+    // 6. WALKING & AUDIO HELPERS
+    window.handleWalk = function(direction) {
+      const needle = document.getElementById('radar-needle');
+      if (needle) {
+        if (direction === 'left') needle.style.transform = `rotate(-45deg)`;
+        if (direction === 'right') needle.style.transform = `rotate(45deg)`;
+        if (direction === 'up' || direction === 'center') needle.style.transform = `rotate(0deg)`;
+      }
+    };
+    window.triggerWalkForward = function() { window.handleWalk('up'); };
+
+    const audio = document.getElementById('mall-ambience-audio');
+    let isAudioPlaying = false;
+    window.toggleMallMusic = function() {
+      if (!audio) return;
+      if (!isAudioPlaying) {
+        audio.play().then(() => { isAudioPlaying = true; }).catch(() => {});
+      } else {
+        audio.pause();
+        isAudioPlaying = false;
+      }
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      loadSupabaseData();
+      updateBagUI();
+    });
+  </script>
+</body>
+</html>
